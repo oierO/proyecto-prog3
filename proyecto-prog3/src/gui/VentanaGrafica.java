@@ -54,9 +54,4 @@ public class VentanaGrafica extends JFrame {
 		setIconImage(new ImageIcon(getClass().getResource("/res/app-icon.png")).getImage());
 		setVisible(true);
 	}
-
-	public static void main(String[] args) {
-		new VentanaGrafica();
-	}
-
 }
