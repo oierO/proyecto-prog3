@@ -17,7 +17,7 @@ public class PanelSesion extends JPanel{
 		JLabel tSesion = new JLabel(String.format("Ultimo inicio de sesión: %s", DeustoTaller.getSesion().getfUltimaSesion()));
 		add(tSesion,BorderLayout.NORTH);
 		JButton bAdminSesion= new JButton("Acceder al gestor de sesión");
-		bAdminSesion.addActionListener(e-> DeustoTaller.getVSesion().openGestor());
+		//bAdminSesion.addActionListener(e-> DeustoTaller.getVSesion().openGestor());
 		add(bAdminSesion,BorderLayout.CENTER);
 		
 	}
