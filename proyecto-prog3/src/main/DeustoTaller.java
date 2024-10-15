@@ -1,9 +1,9 @@
 package main;
 
-import gui.VentanaGrafica;
+import gui.VentanaInicioSesion;
 
 public class DeustoTaller {
 	public static void main(String[] args) {
-		new VentanaGrafica();
+		new VentanaInicioSesion();
 	}
 }
