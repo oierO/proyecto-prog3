@@ -12,12 +12,15 @@ import javax.swing.*;
 public class VentanaGrafica extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	private JFrame vActual,vAnterior;
 
 	public VentanaGrafica() {
 		setSize(600, 400);
 		setLocationRelativeTo(null);
 		setTitle("DeustoTaller");
 		JTabbedPane menuPestanas = new JTabbedPane();
+		vActual=this;
+		this.vAnterior=vAnterior;
 
 		// Pestaña Servicios
 		String[] lServicios = new String[] { "Taller", "Piezas", "Diagnóstico" };

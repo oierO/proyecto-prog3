@@ -21,6 +21,7 @@ public class VentanaInicioSesion extends JFrame{
 	private JLabel lblTitulo, lblUsuario, lblContrasenia;
 	private JTextField textUsuario;
 	private JPasswordField textContrasenia;
+	private JFrame vActual;
 
 	public VentanaInicioSesion() {
 
@@ -31,6 +32,7 @@ public class VentanaInicioSesion extends JFrame{
 		pOeste = new JPanel();
 		ptextUsuario = new JPanel(new GridLayout(2,1));
 		pTextContrasenia = new JPanel(new GridLayout(2,2));
+		vActual= this;//Lo que hacemos es decirle a la ventana cual es la actual y que haga desde ahi
 		
 		lblTitulo= new JLabel("DEUSTO TALLER");
 		lblUsuario = new JLabel("Usuario:");
@@ -67,6 +69,7 @@ public class VentanaInicioSesion extends JFrame{
 			String contrasenia=textContrasenia.getText();
 			if (usuario.equals("deustotaller") && contrasenia.equals("deustotaller")) {
 				JOptionPane.showMessageDialog(null, "Has iniciado sesión correctamente");
+				vActual.dispose();
 				new VentanaGrafica();
 				
 			}else {
