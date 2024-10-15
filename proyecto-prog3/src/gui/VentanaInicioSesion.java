@@ -24,7 +24,7 @@ public class VentanaInicioSesion extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel pCentro, pSur, pNorte, pEste, pOeste, ptextUsuario, pTextContrasenia;
-	private JButton btnIniciarSesion, btnCerrarSesion;
+	private JButton btnIniciarSesion, btnCerrarSesion, btnRegistrarse;
 	private JLabel lblTitulo, lblUsuario, lblContrasenia;
 	private JTextField textUsuario;
 	private JPasswordField textContrasenia;
@@ -45,6 +45,7 @@ public class VentanaInicioSesion extends JFrame {
 
 		btnCerrarSesion = new JButton("Cerrar sesion");
 		btnIniciarSesion = new JButton("Iniciar sesion");
+		btnRegistrarse = new JButton("Registrarse");
 
 		textUsuario = new JTextField();
 		textContrasenia = new JPasswordField();
@@ -98,6 +99,12 @@ public class VentanaInicioSesion extends JFrame {
 		pSur.add(btnCerrarSesion);
 		btnCerrarSesion.addActionListener((e) -> {
 			logout();
+
+		});
+		
+		pSur.add(btnRegistrarse);
+		btnRegistrarse.addActionListener((e) -> {
+			new VentanaRegistrarse();
 
 		});
 
