@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,13 +46,24 @@ public class VentanaGrafica extends JFrame {
 
 		// Pestaña Preferencias
 		JPanel pSettings = new JPanel();
+		
+		JPanel pUsuario = new PanelSesion();
 
 		menuPestanas.add("Servicios", pServicios);
 		menuPestanas.add("Almacen", pAlmacen);
 		menuPestanas.add("Parking", pParking);
 		menuPestanas.add("Preferencias", pSettings);
+		menuPestanas.add("Sesión",pUsuario);
 		add(menuPestanas);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+
+			@Override
+			public void windowClosing(WindowEvent e) {
+				VentanaInicioSesion.logout();
+			}
+			
+		});
 		setIconImage(new ImageIcon(getClass().getResource("/res/app-icon.png")).getImage());
 		setVisible(true);
 	}
