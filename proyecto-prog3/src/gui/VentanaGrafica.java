@@ -3,9 +3,16 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.lang.invoke.StringConcatFactory;
+import java.rmi.server.Operation;
+import java.util.ArrayList;
+
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
 public class VentanaGrafica extends JFrame {
@@ -28,7 +35,82 @@ public class VentanaGrafica extends JFrame {
 		pServicios.add(botones, BorderLayout.WEST);
 		for (int i = 0; i < lServicios.length; i++) {
 			JButton boton = new JButton(lServicios[i]);
-			boton.addActionListener(e -> System.out.println(boton.getText() + " Ha sido pulsado")); // TODO ~
+			boton.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					String operacion =  boton.getText();
+					if(operacion.equals("Diagnóstico")) {
+						JCheckBox checkBox1 = new JCheckBox("Motor");
+						JCheckBox checkBox2 = new JCheckBox("Chapa");
+						JCheckBox checkBox3 = new JCheckBox("Retrovisor");
+						JCheckBox checkBox4 = new JCheckBox("Otros");
+						
+						JPanel panelDiagnostico = new JPanel();
+						Border panelDiagnosticoBorder = BorderFactory.createTitledBorder("¿Qué problema tiene?");
+						panelDiagnostico.setBorder(panelDiagnosticoBorder);
+						panelDiagnostico.add(checkBox1);
+						panelDiagnostico.add(checkBox2);
+						panelDiagnostico.add(checkBox3);
+						panelDiagnostico.add(checkBox4);
+						      
+						JButton botonReservar = new JButton("RESERVAR CITA");
+						botonReservar.addActionListener(new ActionListener() {
+							
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								ArrayList<String> listaDiagnosticoSeleccionado = new ArrayList<String>();
+								if(checkBox1.isSelected()) {
+									listaDiagnosticoSeleccionado.add(checkBox1.getText());
+								}
+								if(checkBox2.isSelected()) {
+									listaDiagnosticoSeleccionado.add(checkBox2.getText());
+								}
+								if(checkBox3.isSelected()) {
+									listaDiagnosticoSeleccionado.add(checkBox3.getText());
+								}
+								if(checkBox4.isSelected()) {
+									listaDiagnosticoSeleccionado.add(checkBox4.getText());
+								}
+								
+								if( !listaDiagnosticoSeleccionado.isEmpty()) {
+									System.out.println("El usuario ha seleccionado estos diagnósticos: " );
+									for(String diagnostico:listaDiagnosticoSeleccionado) {
+										System.out.println(diagnostico);
+									}
+								} else {
+									System.out.println("El usuario no ha seleccionado ningun diagnóstico");
+								}
+								
+								
+								
+								
+							}
+						});
+						
+						
+						
+						JPanel panelReservar = new JPanel();
+						
+				        panelReservar.add(botonReservar);
+						
+						pServicios.add(panelDiagnostico,BorderLayout.CENTER);
+						pServicios.add(panelReservar,BorderLayout.EAST);
+						
+						
+					}
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+				}
+			}); // TODO ~
 																									// implementar
 																									// lógica
 			botones.add(boton);
