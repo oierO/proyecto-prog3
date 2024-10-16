@@ -40,6 +40,7 @@ public class VentanaGrafica extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					String operacion =  boton.getText();
+					repaint(); //Vuelve a renderizar el panel cuando un boton es pulsado.
 					if(operacion.equals("Diagnóstico")) {
 						JCheckBox checkBox1 = new JCheckBox("Motor");
 						JCheckBox checkBox2 = new JCheckBox("Chapa");
