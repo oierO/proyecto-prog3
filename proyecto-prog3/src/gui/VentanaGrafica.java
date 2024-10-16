@@ -1,9 +1,12 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 
 public class VentanaGrafica extends JFrame {
 
@@ -18,20 +21,19 @@ public class VentanaGrafica extends JFrame {
 		// Pestaña Servicios
 		String[] lServicios = new String[] { "Taller", "Piezas", "Diagnóstico" };
 		JPanel pServicios = new JPanel();
-		JPanel pSelServicios = new JPanel();
-
-		pSelServicios.setLayout(new BoxLayout(pSelServicios, BoxLayout.Y_AXIS));
-		pServicios.add(pSelServicios, FlowLayout.LEFT); // FIXME ~ pSelServicios (botones), no alineados a la izquierda.
+		pServicios.setLayout(new BorderLayout());
+		JPanel botones = new JPanel();
+		botones.setLayout(new GridLayout(lServicios.length,1));
+		botones.setBorder(new TitledBorder("Operaciones"));
+		pServicios.add(botones, BorderLayout.WEST);
 		for (int i = 0; i < lServicios.length; i++) {
 			JButton boton = new JButton(lServicios[i]);
-			boton.setAlignmentX(CENTER_ALIGNMENT);
-			boton.addActionListener(e -> System.out.println(boton.getText() + " Ha sido pulsado")); // FIXME ~
+			boton.addActionListener(e -> System.out.println(boton.getText() + " Ha sido pulsado")); // TODO ~
 																									// implementar
 																									// lógica
-			pSelServicios.add(boton);
+			botones.add(boton);
 
 		}
-
 		// Pestaña Almacen
 		JPanel pAlmacen = new JPanel();
 
