@@ -37,7 +37,7 @@ public class VentanaInicioSesion extends JFrame {
 		pEste = new JPanel();
 		pOeste = new JPanel();
 		ptextUsuario = new JPanel(new GridLayout(2, 1));
-		pTextContrasenia = new JPanel(new GridLayout(2, 2));
+		pTextContrasenia = new JPanel(new GridLayout(2,1));
 
 		lblTitulo = new JLabel("DEUSTO TALLER");
 		lblUsuario = new JLabel("Usuario:");
@@ -61,6 +61,7 @@ public class VentanaInicioSesion extends JFrame {
 		btnCerrarSesion.setFont(fuentebtn);
 		btnCerrarSesion.setEnabled(false);
 		btnIniciarSesion.setFont(fuentebtn);
+		btnRegistrarse.setFont(fuentebtn);
 
 		getContentPane().add(pCentro, BorderLayout.CENTER);
 		getContentPane().add(pSur, BorderLayout.SOUTH);
@@ -94,6 +95,7 @@ public class VentanaInicioSesion extends JFrame {
 			} else {
 				JOptionPane.showMessageDialog(null, "Incorrecto", "ERROR", JOptionPane.WARNING_MESSAGE);
 			}
+			dispose();
 		});
 
 		pSur.add(btnCerrarSesion);
@@ -105,6 +107,7 @@ public class VentanaInicioSesion extends JFrame {
 		pSur.add(btnRegistrarse);
 		btnRegistrarse.addActionListener((e) -> {
 			new VentanaRegistrarse();
+			dispose();
 
 		});
 
