@@ -64,6 +64,8 @@ public class VentanaRegistrarse extends JFrame {
 		getContentPane().add(pEste, BorderLayout.WEST);
 		getContentPane().add(pOeste, BorderLayout.EAST);
 		
+		
+		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(600, 400);
 		setLocationRelativeTo(null);

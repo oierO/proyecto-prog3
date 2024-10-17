@@ -71,7 +71,7 @@ public class VentanaInicioSesion extends JFrame {
 		pSur.add(btnIniciarSesion);
 		btnIniciarSesion.addActionListener((e) -> {
 			String usuario = textUsuario.getText();
-			String contrasenia = textContrasenia.getText();
+			String contrasenia =   String.valueOf(textContrasenia.getPassword());
 			if (DeustoTaller.login(usuario, contrasenia)) {
 				JOptionPane.showMessageDialog(null,
 						String.format("%s, Has iniciado sesión correctamente", DeustoTaller.getSesion().getNombre()));
