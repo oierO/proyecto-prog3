@@ -18,7 +18,7 @@ public class VentanaRegistrarse extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel pCentro, pSur, pNorte, pEste, pOeste, pTextNombre, pTextApellido, ptextUsuario, pTextContrasenia;
+	private JPanel pCentro, pSur, pNorte, pEste, pOeste, pTextNombre, pTextApellido, ptextDni, ptextUsuario, pTextContrasenia;
 	private JButton btnRegistrar, btnCancelar;
 	private JLabel lblTitulo, lblNombre, lblApellido, lblUsuario, lblContrasenia;
 	private JTextField textNombre, textApellido, textUsuario;
