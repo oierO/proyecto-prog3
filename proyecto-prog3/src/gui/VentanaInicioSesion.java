@@ -47,8 +47,8 @@ public class VentanaInicioSesion extends JFrame {
 		btnIniciarSesion = new JButton("Iniciar sesion");
 		btnRegistrarse = new JButton("Registrarse");
 
-		textUsuario = new JTextField();
-		textContrasenia = new JPasswordField();
+		textUsuario = new JTextField("deustotaller", 20);
+		textContrasenia = new JPasswordField("deustotaller");
 
 		pNorte.add(lblTitulo);
 
