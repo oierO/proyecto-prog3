@@ -15,6 +15,7 @@ import javax.swing.border.TitledBorder;
 public class VentanaGrafica extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	
 
 	public VentanaGrafica() {
 		setSize(600, 400);
@@ -38,18 +39,52 @@ public class VentanaGrafica extends JFrame {
 					String operacion = boton.getText();
 					repaint(); // Vuelve a renderizar el panel cuando un boton es pulsado.
 					if (operacion.equals("Diagnóstico")) {
-						JCheckBox checkBox1 = new JCheckBox("Motor");
-						JCheckBox checkBox2 = new JCheckBox("Chapa");
-						JCheckBox checkBox3 = new JCheckBox("Retrovisor");
-						JCheckBox checkBox4 = new JCheckBox("Otros");
+						JCheckBox checkBox1 = new JCheckBox("Motor",false);
+						JCheckBox checkBox2 = new JCheckBox("Chapa",false);
+						JCheckBox checkBox3 = new JCheckBox("Retrovisor",false);
+						JCheckBox checkBox4 = new JCheckBox("Otros",false);
 
 						JPanel panelDiagnostico = new JPanel();
+						JPanel panelNorte = new JPanel();
+						
+						JTextArea textoOtros = new JTextArea();
+						textoOtros.setRows(30);
+						textoOtros.setColumns(60);
+						textoOtros.setLineWrap(true);
+						textoOtros.setVisible(false);
+						
+						JScrollPane panelTexto = new JScrollPane(textoOtros);
+						panelTexto.setVisible(false);
+						
+						panelDiagnostico.setLayout(new BorderLayout());
 						Border panelDiagnosticoBorder = BorderFactory.createTitledBorder("¿Qué problema tiene?");
 						panelDiagnostico.setBorder(panelDiagnosticoBorder);
-						panelDiagnostico.add(checkBox1);
-						panelDiagnostico.add(checkBox2);
-						panelDiagnostico.add(checkBox3);
-						panelDiagnostico.add(checkBox4);
+						panelDiagnostico.add(panelNorte,BorderLayout.NORTH);
+						panelDiagnostico.add(panelTexto);
+						
+						panelNorte.add(checkBox1);
+						panelNorte.add(checkBox2);
+						panelNorte.add(checkBox3);
+						panelNorte.add(checkBox4);
+						
+						checkBox4.addActionListener(new ActionListener() {
+							
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								JToggleButton boton  = (JToggleButton) e.getSource();
+								if(boton.isSelected()) {
+									panelTexto.setVisible(true);
+									textoOtros.setVisible(true);
+									repaint();
+								} else if (!boton.isSelected()){
+									panelTexto.setVisible(false);
+									textoOtros.setVisible(false);
+									repaint();
+								}
+							}
+						});
+						
+						
 
 						JButton botonReservar = new JButton("RESERVAR CITA");
 						botonReservar.addActionListener(new ActionListener() {
@@ -67,6 +102,7 @@ public class VentanaGrafica extends JFrame {
 								}
 								if (checkBox4.isSelected()) {
 									listaDiagnosticoSeleccionado.add(checkBox4.getText());
+									
 								}
 
 								if (!listaDiagnosticoSeleccionado.isEmpty()) {
