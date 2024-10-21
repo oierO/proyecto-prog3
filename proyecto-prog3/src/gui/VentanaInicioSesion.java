@@ -24,7 +24,7 @@ public class VentanaInicioSesion extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel pCentro, pSur, pNorte, pEste, pOeste, ptextUsuario, pTextContrasenia;
-	private JButton btnIniciarSesion, btnCerrarSesion;
+	private JButton btnIniciarSesion, btnCerrarSesion, btnRegistrarse;
 	private JLabel lblTitulo, lblUsuario, lblContrasenia;
 	private JTextField textUsuario;
 	private JPasswordField textContrasenia;
@@ -37,7 +37,7 @@ public class VentanaInicioSesion extends JFrame {
 		pEste = new JPanel();
 		pOeste = new JPanel();
 		ptextUsuario = new JPanel(new GridLayout(2, 1));
-		pTextContrasenia = new JPanel(new GridLayout(2, 2));
+		pTextContrasenia = new JPanel(new GridLayout(2,1));
 
 		lblTitulo = new JLabel("DEUSTO TALLER");
 		lblUsuario = new JLabel("Usuario:");
@@ -45,9 +45,10 @@ public class VentanaInicioSesion extends JFrame {
 
 		btnCerrarSesion = new JButton("Cerrar sesion");
 		btnIniciarSesion = new JButton("Iniciar sesion");
+		btnRegistrarse = new JButton("Registrarse");
 
-		textUsuario = new JTextField();
-		textContrasenia = new JPasswordField();
+		textUsuario = new JTextField("deustotaller", 20);
+		textContrasenia = new JPasswordField("deustotaller");
 
 		pNorte.add(lblTitulo);
 
@@ -60,6 +61,7 @@ public class VentanaInicioSesion extends JFrame {
 		btnCerrarSesion.setFont(fuentebtn);
 		btnCerrarSesion.setEnabled(false);
 		btnIniciarSesion.setFont(fuentebtn);
+		btnRegistrarse.setFont(fuentebtn);
 
 		getContentPane().add(pCentro, BorderLayout.CENTER);
 		getContentPane().add(pSur, BorderLayout.SOUTH);
@@ -70,7 +72,7 @@ public class VentanaInicioSesion extends JFrame {
 		pSur.add(btnIniciarSesion);
 		btnIniciarSesion.addActionListener((e) -> {
 			String usuario = textUsuario.getText();
-			String contrasenia = textContrasenia.getText();
+			String contrasenia =   String.valueOf(textContrasenia.getPassword());
 			if (DeustoTaller.login(usuario, contrasenia)) {
 				JOptionPane.showMessageDialog(null,
 						String.format("%s, Has iniciado sesión correctamente", DeustoTaller.getSesion().getNombre()));
@@ -93,11 +95,19 @@ public class VentanaInicioSesion extends JFrame {
 			} else {
 				JOptionPane.showMessageDialog(null, "Incorrecto", "ERROR", JOptionPane.WARNING_MESSAGE);
 			}
+			dispose();
 		});
 
 		pSur.add(btnCerrarSesion);
 		btnCerrarSesion.addActionListener((e) -> {
 			logout();
+
+		});
+		
+		pSur.add(btnRegistrarse);
+		btnRegistrarse.addActionListener((e) -> {
+			new VentanaRegistrarse();
+			dispose();
 
 		});
 
