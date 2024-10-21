@@ -22,6 +22,8 @@ import domain.Pieza;
 public class VentanaGrafica extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	private ModeloAlmacen modeloTabla;
+	private JTable tabla;
 	
 
 	public VentanaGrafica() {
@@ -135,10 +137,12 @@ public class VentanaGrafica extends JFrame {
 		}
 
 		JPanel pAlmacen = new JPanel();
-		ModeloAlmacen modeloTabla= new ModeloAlmacen(null);
-		JTable tabla= new JTable(modeloTabla);
+		modeloTabla= new ModeloAlmacen(null);
+		tabla= new JTable(modeloTabla);
 		JScrollPane scroll= new JScrollPane(tabla);
 		pAlmacen.add(scroll);
+		cargarTabla();
+		
 
 
 		// Pestaña Parking
@@ -181,6 +185,9 @@ public class VentanaGrafica extends JFrame {
 				int cantidad= Integer.parseInt(datos[5]);
 				Pieza p= new Pieza(id, linea, nombre, descripcion, fabricante, precio, cantidad);
 				lp.add(p);
+				
+				modeloTabla= new ModeloAlmacen(lp);
+				tabla.setModel(modeloTabla);
 				
 				
 				
