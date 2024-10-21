@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class VentanaGrafica extends JFrame {
 
@@ -40,6 +41,13 @@ public class VentanaGrafica extends JFrame {
 
 		// Pestaña Almacen
 		JPanel pAlmacen = new JPanel();
+		ModeloTablaAlmacen modeloTabla= new ModeloTablaAlmacen();
+		JTable tabla= new JTable(modeloTabla);
+		JScrollPane scroll = new JScrollPane(tabla);
+		pAlmacen.add(scroll);
+		
+		
+		
 
 		// Pestaña Parking
 		JPanel pParking = new JPanel();
