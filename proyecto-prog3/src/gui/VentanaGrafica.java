@@ -6,12 +6,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 import javax.swing.*;
 
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
+
+import domain.Pieza;
 
 public class VentanaGrafica extends JFrame {
 
@@ -129,10 +135,11 @@ public class VentanaGrafica extends JFrame {
 		}
 
 		JPanel pAlmacen = new JPanel();
+		ModeloAlmacen modeloTabla= new ModeloAlmacen(null);
+		JTable tabla= new JTable(modeloTabla);
+		JScrollPane scroll= new JScrollPane(tabla);
+		pAlmacen.add(scroll);
 
-		
-		
-		
 
 		// Pestaña Parking
 
@@ -157,5 +164,33 @@ public class VentanaGrafica extends JFrame {
 		
 		setIconImage(new ImageIcon(getClass().getResource("/res/app-icon.png")).getImage());
 		setVisible(true);
+	}
+	private void cargarTabla() {
+		File f= new File("piezas_coche_almacen_1000.xlsx");
+		List<Pieza>lp= new ArrayList<Pieza>();
+		try {
+			Scanner sc= new Scanner(f);
+			while(sc.hasNextLine()) {
+				String linea= sc.nextLine();
+				String[] datos= linea.split(";");
+				int id= Integer.parseInt(datos[0]);
+				String nombre= datos[1];
+				String descripcion= datos[2];
+				String fabricante= datos[3];
+				float precio=Float.parseFloat(datos[4]);
+				int cantidad= Integer.parseInt(datos[5]);
+				Pieza p= new Pieza(id, linea, nombre, descripcion, fabricante, precio, cantidad);
+				lp.add(p);
+				
+				
+				
+				
+				
+			}
+			sc.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
