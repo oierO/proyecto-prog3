@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -146,6 +148,12 @@ public class VentanaGrafica extends JFrame {
 		add(menuPestanas);
 
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				VentanaInicioSesion.logout();
+			}
+		});
 		
 		setIconImage(new ImageIcon(getClass().getResource("/res/app-icon.png")).getImage());
 		setVisible(true);
