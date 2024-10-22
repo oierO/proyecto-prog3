@@ -1,0 +1,1001 @@
+﻿ID;Código de Pieza;Nombre de Pieza;Descripción;Fabricante;Precio (€);Cantidad en Almacén
+1;CP0001;Bujía;Batería de 12V para coche eléctrico;Mahle;337,69;247
+2;CP0002;Filtro de aire;Batería de 12V para coche eléctrico;Varta;160,03;170
+3;CP0003;Batería;Turbocompresor para motores diésel;Monroe;123,09;121
+4;CP0004;Amortiguador;Turbocompresor para motores diésel;Mahle;62,89;2
+5;CP0005;Amortiguador;Alternador de 120A para vehículos ligeros;Valeo;189,79;7
+6;CP0006;Pastillas de freno;Pastillas de freno para automóviles compactos;Mahle;74,97;344
+7;CP0007;Bujía;Alternador de 120A para vehículos ligeros;Bosch;197,29;46
+8;CP0008;Disco de freno;Disco de freno ventilado;Delphi;300,23;465
+9;CP0009;Bujía;Alternador de 120A para vehículos ligeros;Magneti Marelli;289,53;57
+10;CP0010;Turbocompresor;Radiador para sistema de enfriamiento;Varta;214,4;428
+11;CP0011;Correa de distribución;Radiador para sistema de enfriamiento;Varta;245,9;294
+12;CP0012;Filtro de aire;Disco de freno ventilado;Delphi;271;343
+13;CP0013;Filtro de aire;Disco de freno ventilado;Monroe;459,98;253
+14;CP0014;Bujía;Correa de distribución de alta resistencia;Valeo;465,69;77
+15;CP0015;Amortiguador;Alternador de 120A para vehículos ligeros;Varta;90,75;487
+16;CP0016;Amortiguador;Radiador para sistema de enfriamiento;Delphi;87,6;47
+17;CP0017;Disco de freno;Amortiguador hidráulico para suspensión delantera;NGK;147,97;400
+18;CP0018;Turbocompresor;Amortiguador hidráulico para suspensión delantera;Bosch;97,61;262
+19;CP0019;Filtro de aire;Turbocompresor para motores diésel;Brembo;421,78;39
+20;CP0020;Disco de freno;Correa de distribución de alta resistencia;Delphi;311,61;371
+21;CP0021;Amortiguador;Amortiguador hidráulico para suspensión delantera;Valeo;433,43;371
+22;CP0022;Disco de freno;Correa de distribución de alta resistencia;Delphi;476,16;52
+23;CP0023;Correa de distribución;Filtro de aire para motor de gasolina;Delphi;244,88;464
+24;CP0024;Amortiguador;Radiador para sistema de enfriamiento;Monroe;101,59;132
+25;CP0025;Alternador;Alternador de 120A para vehículos ligeros;Denso;195,05;330
+26;CP0026;Turbocompresor;Correa de distribución de alta resistencia;Mahle;282,98;119
+27;CP0027;Batería;Correa de distribución de alta resistencia;Brembo;328,27;234
+28;CP0028;Filtro de aire;Pastillas de freno para automóviles compactos;Denso;207,52;152
+29;CP0029;Pastillas de freno;Alternador de 120A para vehículos ligeros;Denso;248,4;136
+30;CP0030;Correa de distribución;Filtro de aire para motor de gasolina;Denso;356,52;238
+31;CP0031;Radiador;Pastillas de freno para automóviles compactos;Valeo;224,71;26
+32;CP0032;Batería;Disco de freno ventilado;Brembo;87,79;52
+33;CP0033;Pastillas de freno;Turbocompresor para motores diésel;Denso;284,87;417
+34;CP0034;Amortiguador;Radiador para sistema de enfriamiento;Magneti Marelli;398,96;90
+35;CP0035;Radiador;Bujía para motores de combustión interna;Magneti Marelli;114,16;448
+36;CP0036;Bujía;Alternador de 120A para vehículos ligeros;NGK;21,18;21
+37;CP0037;Bujía;Bujía para motores de combustión interna;Denso;116,3;437
+38;CP0038;Correa de distribución;Disco de freno ventilado;Monroe;147,89;149
+39;CP0039;Bujía;Alternador de 120A para vehículos ligeros;Delphi;391,47;185
+40;CP0040;Radiador;Filtro de aire para motor de gasolina;NGK;285;411
+41;CP0041;Radiador;Pastillas de freno para automóviles compactos;Varta;387,41;347
+42;CP0042;Turbocompresor;Correa de distribución de alta resistencia;Delphi;250,18;161
+43;CP0043;Batería;Pastillas de freno para automóviles compactos;Monroe;257,85;219
+44;CP0044;Filtro de aire;Bujía para motores de combustión interna;Brembo;288,49;379
+45;CP0045;Alternador;Alternador de 120A para vehículos ligeros;NGK;137,61;60
+46;CP0046;Disco de freno;Batería de 12V para coche eléctrico;Bosch;273,84;49
+47;CP0047;Bujía;Radiador para sistema de enfriamiento;Varta;495,49;436
+48;CP0048;Correa de distribución;Turbocompresor para motores diésel;Valeo;273,31;389
+49;CP0049;Bujía;Correa de distribución de alta resistencia;Mahle;379,61;456
+50;CP0050;Disco de freno;Bujía para motores de combustión interna;Valeo;381,2;24
+51;CP0051;Batería;Radiador para sistema de enfriamiento;Monroe;223,48;5
+52;CP0052;Turbocompresor;Disco de freno ventilado;Brembo;113,18;437
+53;CP0053;Radiador;Correa de distribución de alta resistencia;Denso;215,45;71
+54;CP0054;Turbocompresor;Radiador para sistema de enfriamiento;Mahle;369,31;340
+55;CP0055;Amortiguador;Alternador de 120A para vehículos ligeros;Denso;328,57;332
+56;CP0056;Bujía;Disco de freno ventilado;Monroe;127,53;88
+57;CP0057;Filtro de aire;Filtro de aire para motor de gasolina;Brembo;438,03;169
+58;CP0058;Amortiguador;Turbocompresor para motores diésel;Delphi;20,95;184
+59;CP0059;Batería;Bujía para motores de combustión interna;Magneti Marelli;135,09;458
+60;CP0060;Bujía;Amortiguador hidráulico para suspensión delantera;Delphi;431,79;225
+61;CP0061;Amortiguador;Batería de 12V para coche eléctrico;Delphi;48,06;490
+62;CP0062;Bujía;Amortiguador hidráulico para suspensión delantera;Varta;433,32;319
+63;CP0063;Correa de distribución;Bujía para motores de combustión interna;Delphi;63,11;138
+64;CP0064;Batería;Correa de distribución de alta resistencia;Bosch;406,89;450
+65;CP0065;Alternador;Bujía para motores de combustión interna;NGK;108,89;376
+66;CP0066;Radiador;Bujía para motores de combustión interna;Valeo;370,12;48
+67;CP0067;Pastillas de freno;Alternador de 120A para vehículos ligeros;Magneti Marelli;346,12;191
+68;CP0068;Radiador;Pastillas de freno para automóviles compactos;Delphi;431,22;418
+69;CP0069;Radiador;Batería de 12V para coche eléctrico;Monroe;307,08;176
+70;CP0070;Amortiguador;Filtro de aire para motor de gasolina;Monroe;216,94;94
+71;CP0071;Batería;Filtro de aire para motor de gasolina;Mahle;309,99;59
+72;CP0072;Bujía;Radiador para sistema de enfriamiento;Denso;393,5;206
+73;CP0073;Turbocompresor;Filtro de aire para motor de gasolina;Bosch;407,7;205
+74;CP0074;Pastillas de freno;Batería de 12V para coche eléctrico;Bosch;403,69;493
+75;CP0075;Disco de freno;Radiador para sistema de enfriamiento;Varta;287,19;234
+76;CP0076;Amortiguador;Radiador para sistema de enfriamiento;Delphi;268,48;140
+77;CP0077;Pastillas de freno;Correa de distribución de alta resistencia;Mahle;300,44;428
+78;CP0078;Alternador;Pastillas de freno para automóviles compactos;Delphi;88,35;198
+79;CP0079;Correa de distribución;Amortiguador hidráulico para suspensión delantera;Varta;489,61;354
+80;CP0080;Batería;Disco de freno ventilado;Magneti Marelli;149,85;436
+81;CP0081;Disco de freno;Correa de distribución de alta resistencia;Bosch;288,5;245
+82;CP0082;Amortiguador;Turbocompresor para motores diésel;NGK;476,44;410
+83;CP0083;Radiador;Pastillas de freno para automóviles compactos;Valeo;259,64;216
+84;CP0084;Filtro de aire;Pastillas de freno para automóviles compactos;Brembo;450,58;333
+85;CP0085;Amortiguador;Pastillas de freno para automóviles compactos;Varta;408,51;454
+86;CP0086;Filtro de aire;Bujía para motores de combustión interna;Denso;72,12;409
+87;CP0087;Radiador;Turbocompresor para motores diésel;Valeo;376,3;86
+88;CP0088;Correa de distribución;Correa de distribución de alta resistencia;Denso;208,74;58
+89;CP0089;Batería;Turbocompresor para motores diésel;Bosch;34,35;68
+90;CP0090;Bujía;Amortiguador hidráulico para suspensión delantera;Valeo;142,28;357
+91;CP0091;Amortiguador;Alternador de 120A para vehículos ligeros;Bosch;329,67;372
+92;CP0092;Turbocompresor;Turbocompresor para motores diésel;Mahle;352,21;31
+93;CP0093;Radiador;Pastillas de freno para automóviles compactos;Magneti Marelli;70,68;483
+94;CP0094;Amortiguador;Amortiguador hidráulico para suspensión delantera;Monroe;77,39;433
+95;CP0095;Alternador;Alternador de 120A para vehículos ligeros;Denso;164,44;82
+96;CP0096;Correa de distribución;Batería de 12V para coche eléctrico;Magneti Marelli;127,54;54
+97;CP0097;Alternador;Alternador de 120A para vehículos ligeros;Varta;422,56;214
+98;CP0098;Pastillas de freno;Batería de 12V para coche eléctrico;NGK;199,39;467
+99;CP0099;Batería;Filtro de aire para motor de gasolina;Valeo;75,37;303
+100;CP0100;Pastillas de freno;Alternador de 120A para vehículos ligeros;Magneti Marelli;318,04;248
+101;CP0101;Amortiguador;Batería de 12V para coche eléctrico;Delphi;315,77;411
+102;CP0102;Disco de freno;Disco de freno ventilado;Magneti Marelli;190,71;292
+103;CP0103;Disco de freno;Pastillas de freno para automóviles compactos;Varta;42,38;348
+104;CP0104;Batería;Bujía para motores de combustión interna;Mahle;398,33;225
+105;CP0105;Turbocompresor;Alternador de 120A para vehículos ligeros;Mahle;385,6;93
+106;CP0106;Correa de distribución;Radiador para sistema de enfriamiento;NGK;204,41;313
+107;CP0107;Turbocompresor;Turbocompresor para motores diésel;Brembo;376,15;195
+108;CP0108;Correa de distribución;Batería de 12V para coche eléctrico;NGK;348,88;399
+109;CP0109;Radiador;Correa de distribución de alta resistencia;Valeo;439,27;184
+110;CP0110;Amortiguador;Batería de 12V para coche eléctrico;Denso;230,07;314
+111;CP0111;Pastillas de freno;Alternador de 120A para vehículos ligeros;Denso;246,58;15
+112;CP0112;Disco de freno;Batería de 12V para coche eléctrico;Magneti Marelli;293,07;442
+113;CP0113;Alternador;Amortiguador hidráulico para suspensión delantera;Denso;435,11;351
+114;CP0114;Bujía;Correa de distribución de alta resistencia;Brembo;424,35;451
+115;CP0115;Filtro de aire;Alternador de 120A para vehículos ligeros;Monroe;51,11;430
+116;CP0116;Bujía;Bujía para motores de combustión interna;Mahle;486,21;373
+117;CP0117;Pastillas de freno;Amortiguador hidráulico para suspensión delantera;Magneti Marelli;319,25;499
+118;CP0118;Pastillas de freno;Correa de distribución de alta resistencia;Valeo;350,16;457
+119;CP0119;Correa de distribución;Turbocompresor para motores diésel;Magneti Marelli;425,8;67
+120;CP0120;Turbocompresor;Radiador para sistema de enfriamiento;Bosch;398,86;248
+121;CP0121;Bujía;Turbocompresor para motores diésel;Bosch;201,87;472
+122;CP0122;Correa de distribución;Batería de 12V para coche eléctrico;Bosch;484,22;250
+123;CP0123;Correa de distribución;Batería de 12V para coche eléctrico;Brembo;413,3;58
+124;CP0124;Turbocompresor;Filtro de aire para motor de gasolina;Denso;249,88;455
+125;CP0125;Alternador;Correa de distribución de alta resistencia;Delphi;164,82;211
+126;CP0126;Disco de freno;Batería de 12V para coche eléctrico;Magneti Marelli;145,38;226
+127;CP0127;Batería;Filtro de aire para motor de gasolina;Delphi;275,92;24
+128;CP0128;Disco de freno;Turbocompresor para motores diésel;Brembo;69,64;33
+129;CP0129;Filtro de aire;Filtro de aire para motor de gasolina;Mahle;426,95;134
+130;CP0130;Bujía;Turbocompresor para motores diésel;Magneti Marelli;395,21;336
+131;CP0131;Disco de freno;Alternador de 120A para vehículos ligeros;Brembo;447,61;161
+132;CP0132;Batería;Batería de 12V para coche eléctrico;Denso;382,32;7
+133;CP0133;Radiador;Amortiguador hidráulico para suspensión delantera;Mahle;27,74;361
+134;CP0134;Bujía;Turbocompresor para motores diésel;Denso;314,96;445
+135;CP0135;Batería;Radiador para sistema de enfriamiento;Brembo;419,17;348
+136;CP0136;Correa de distribución;Amortiguador hidráulico para suspensión delantera;Valeo;13,06;269
+137;CP0137;Pastillas de freno;Amortiguador hidráulico para suspensión delantera;Mahle;465,07;393
+138;CP0138;Alternador;Turbocompresor para motores diésel;Varta;83,2;381
+139;CP0139;Filtro de aire;Batería de 12V para coche eléctrico;Mahle;230,98;296
+140;CP0140;Batería;Pastillas de freno para automóviles compactos;Denso;495,96;371
+141;CP0141;Disco de freno;Bujía para motores de combustión interna;Magneti Marelli;216,76;290
+142;CP0142;Pastillas de freno;Filtro de aire para motor de gasolina;Magneti Marelli;497,87;115
+143;CP0143;Disco de freno;Batería de 12V para coche eléctrico;Magneti Marelli;455,16;490
+144;CP0144;Bujía;Alternador de 120A para vehículos ligeros;Delphi;441,66;343
+145;CP0145;Batería;Filtro de aire para motor de gasolina;Mahle;154,42;448
+146;CP0146;Disco de freno;Turbocompresor para motores diésel;Varta;437,84;174
+147;CP0147;Turbocompresor;Radiador para sistema de enfriamiento;Delphi;438,91;266
+148;CP0148;Amortiguador;Pastillas de freno para automóviles compactos;Bosch;51,2;268
+149;CP0149;Pastillas de freno;Bujía para motores de combustión interna;Denso;183,42;353
+150;CP0150;Radiador;Batería de 12V para coche eléctrico;Denso;45,8;359
+151;CP0151;Pastillas de freno;Radiador para sistema de enfriamiento;NGK;333,93;317
+152;CP0152;Disco de freno;Correa de distribución de alta resistencia;Valeo;326,21;49
+153;CP0153;Disco de freno;Pastillas de freno para automóviles compactos;Mahle;30,63;222
+154;CP0154;Filtro de aire;Amortiguador hidráulico para suspensión delantera;Varta;314,67;339
+155;CP0155;Turbocompresor;Pastillas de freno para automóviles compactos;Bosch;364,36;373
+156;CP0156;Radiador;Disco de freno ventilado;Mahle;378,84;128
+157;CP0157;Alternador;Radiador para sistema de enfriamiento;Delphi;217,47;247
+158;CP0158;Filtro de aire;Disco de freno ventilado;Varta;50,14;178
+159;CP0159;Bujía;Disco de freno ventilado;Mahle;52,12;340
+160;CP0160;Radiador;Batería de 12V para coche eléctrico;Mahle;110,64;347
+161;CP0161;Batería;Pastillas de freno para automóviles compactos;Monroe;43,58;329
+162;CP0162;Amortiguador;Batería de 12V para coche eléctrico;Bosch;298,87;198
+163;CP0163;Filtro de aire;Alternador de 120A para vehículos ligeros;Mahle;262,12;77
+164;CP0164;Amortiguador;Batería de 12V para coche eléctrico;Delphi;225,31;430
+165;CP0165;Turbocompresor;Radiador para sistema de enfriamiento;Brembo;8,99;424
+166;CP0166;Bujía;Bujía para motores de combustión interna;Magneti Marelli;175,07;286
+167;CP0167;Bujía;Alternador de 120A para vehículos ligeros;Mahle;64,69;457
+168;CP0168;Alternador;Bujía para motores de combustión interna;Valeo;430,87;314
+169;CP0169;Bujía;Pastillas de freno para automóviles compactos;Brembo;348,55;28
+170;CP0170;Disco de freno;Amortiguador hidráulico para suspensión delantera;Monroe;241,46;6
+171;CP0171;Pastillas de freno;Correa de distribución de alta resistencia;Bosch;118,33;330
+172;CP0172;Pastillas de freno;Disco de freno ventilado;Mahle;49,22;479
+173;CP0173;Alternador;Radiador para sistema de enfriamiento;NGK;403,95;81
+174;CP0174;Disco de freno;Bujía para motores de combustión interna;Monroe;56,08;259
+175;CP0175;Pastillas de freno;Correa de distribución de alta resistencia;Bosch;186,94;435
+176;CP0176;Batería;Filtro de aire para motor de gasolina;Delphi;153,13;241
+177;CP0177;Disco de freno;Batería de 12V para coche eléctrico;Denso;194,45;437
+178;CP0178;Turbocompresor;Disco de freno ventilado;Valeo;407,62;254
+179;CP0179;Correa de distribución;Bujía para motores de combustión interna;Brembo;437,88;446
+180;CP0180;Amortiguador;Alternador de 120A para vehículos ligeros;Valeo;322,58;85
+181;CP0181;Disco de freno;Radiador para sistema de enfriamiento;Monroe;340,18;39
+182;CP0182;Amortiguador;Batería de 12V para coche eléctrico;Valeo;38,86;385
+183;CP0183;Batería;Turbocompresor para motores diésel;Magneti Marelli;283,83;252
+184;CP0184;Correa de distribución;Correa de distribución de alta resistencia;Mahle;307,11;165
+185;CP0185;Radiador;Radiador para sistema de enfriamiento;Delphi;86,24;124
+186;CP0186;Alternador;Bujía para motores de combustión interna;Bosch;178,84;170
+187;CP0187;Disco de freno;Amortiguador hidráulico para suspensión delantera;Brembo;110,46;497
+188;CP0188;Alternador;Alternador de 120A para vehículos ligeros;Magneti Marelli;375,39;143
+189;CP0189;Bujía;Filtro de aire para motor de gasolina;Monroe;460,35;26
+190;CP0190;Amortiguador;Turbocompresor para motores diésel;Magneti Marelli;309,96;260
+191;CP0191;Amortiguador;Disco de freno ventilado;Denso;223,98;115
+192;CP0192;Bujía;Radiador para sistema de enfriamiento;Delphi;112,54;282
+193;CP0193;Radiador;Turbocompresor para motores diésel;Magneti Marelli;448,81;330
+194;CP0194;Filtro de aire;Amortiguador hidráulico para suspensión delantera;Valeo;74,31;194
+195;CP0195;Turbocompresor;Bujía para motores de combustión interna;Denso;65,96;207
+196;CP0196;Disco de freno;Alternador de 120A para vehículos ligeros;Brembo;366,35;419
+197;CP0197;Amortiguador;Batería de 12V para coche eléctrico;Delphi;179,01;121
+198;CP0198;Turbocompresor;Correa de distribución de alta resistencia;Magneti Marelli;217,55;41
+199;CP0199;Amortiguador;Bujía para motores de combustión interna;Denso;396,58;236
+200;CP0200;Filtro de aire;Pastillas de freno para automóviles compactos;Magneti Marelli;127,65;228
+201;CP0201;Bujía;Filtro de aire para motor de gasolina;Denso;324,09;411
+202;CP0202;Filtro de aire;Filtro de aire para motor de gasolina;Varta;127,84;294
+203;CP0203;Amortiguador;Batería de 12V para coche eléctrico;Mahle;302,49;230
+204;CP0204;Bujía;Alternador de 120A para vehículos ligeros;Delphi;361,98;46
+205;CP0205;Filtro de aire;Bujía para motores de combustión interna;Monroe;146,04;439
+206;CP0206;Radiador;Bujía para motores de combustión interna;Monroe;470,93;256
+207;CP0207;Bujía;Amortiguador hidráulico para suspensión delantera;Varta;18,28;229
+208;CP0208;Disco de freno;Disco de freno ventilado;Magneti Marelli;424,3;162
+209;CP0209;Amortiguador;Pastillas de freno para automóviles compactos;Varta;438,53;61
+210;CP0210;Batería;Correa de distribución de alta resistencia;Monroe;106,7;255
+211;CP0211;Alternador;Alternador de 120A para vehículos ligeros;Varta;305,43;382
+212;CP0212;Amortiguador;Radiador para sistema de enfriamiento;Varta;98,38;335
+213;CP0213;Disco de freno;Disco de freno ventilado;Monroe;198,92;10
+214;CP0214;Pastillas de freno;Correa de distribución de alta resistencia;Delphi;324,85;53
+215;CP0215;Turbocompresor;Turbocompresor para motores diésel;Denso;392,98;207
+216;CP0216;Turbocompresor;Pastillas de freno para automóviles compactos;Delphi;397,92;212
+217;CP0217;Alternador;Correa de distribución de alta resistencia;Denso;123,47;19
+218;CP0218;Amortiguador;Bujía para motores de combustión interna;Magneti Marelli;196,01;286
+219;CP0219;Alternador;Alternador de 120A para vehículos ligeros;Varta;124,34;282
+220;CP0220;Correa de distribución;Turbocompresor para motores diésel;Varta;320,85;1
+221;CP0221;Amortiguador;Correa de distribución de alta resistencia;NGK;40,15;423
+222;CP0222;Bujía;Batería de 12V para coche eléctrico;Mahle;444,92;47
+223;CP0223;Bujía;Filtro de aire para motor de gasolina;Magneti Marelli;10,97;406
+224;CP0224;Correa de distribución;Radiador para sistema de enfriamiento;Valeo;183,74;310
+225;CP0225;Radiador;Amortiguador hidráulico para suspensión delantera;Valeo;161,65;494
+226;CP0226;Correa de distribución;Alternador de 120A para vehículos ligeros;Denso;196,48;317
+227;CP0227;Correa de distribución;Alternador de 120A para vehículos ligeros;Brembo;420,29;327
+228;CP0228;Alternador;Amortiguador hidráulico para suspensión delantera;Varta;213,33;156
+229;CP0229;Filtro de aire;Radiador para sistema de enfriamiento;Bosch;275,45;456
+230;CP0230;Bujía;Bujía para motores de combustión interna;Varta;90,52;261
+231;CP0231;Filtro de aire;Radiador para sistema de enfriamiento;NGK;238,15;288
+232;CP0232;Correa de distribución;Disco de freno ventilado;Denso;493,75;106
+233;CP0233;Radiador;Radiador para sistema de enfriamiento;Delphi;41,13;336
+234;CP0234;Bujía;Filtro de aire para motor de gasolina;Varta;295,74;344
+235;CP0235;Amortiguador;Correa de distribución de alta resistencia;Delphi;11,83;234
+236;CP0236;Amortiguador;Batería de 12V para coche eléctrico;Monroe;111,79;487
+237;CP0237;Amortiguador;Amortiguador hidráulico para suspensión delantera;Monroe;461,68;175
+238;CP0238;Disco de freno;Bujía para motores de combustión interna;Magneti Marelli;474,6;187
+239;CP0239;Alternador;Alternador de 120A para vehículos ligeros;Varta;202;423
+240;CP0240;Pastillas de freno;Bujía para motores de combustión interna;Magneti Marelli;146,81;28
+241;CP0241;Correa de distribución;Amortiguador hidráulico para suspensión delantera;Varta;357,75;419
+242;CP0242;Pastillas de freno;Turbocompresor para motores diésel;Brembo;384,72;115
+243;CP0243;Batería;Filtro de aire para motor de gasolina;NGK;214,67;433
+244;CP0244;Alternador;Filtro de aire para motor de gasolina;Mahle;204,13;233
+245;CP0245;Amortiguador;Radiador para sistema de enfriamiento;Mahle;322,07;170
+246;CP0246;Bujía;Amortiguador hidráulico para suspensión delantera;Monroe;271,14;287
+247;CP0247;Alternador;Pastillas de freno para automóviles compactos;Monroe;80,58;393
+248;CP0248;Disco de freno;Turbocompresor para motores diésel;Bosch;46,38;318
+249;CP0249;Bujía;Amortiguador hidráulico para suspensión delantera;Magneti Marelli;44,12;308
+250;CP0250;Filtro de aire;Bujía para motores de combustión interna;Monroe;460,86;243
+251;CP0251;Disco de freno;Disco de freno ventilado;Monroe;487,29;367
+252;CP0252;Filtro de aire;Amortiguador hidráulico para suspensión delantera;Bosch;81,91;337
+253;CP0253;Bujía;Turbocompresor para motores diésel;NGK;166,74;187
+254;CP0254;Amortiguador;Amortiguador hidráulico para suspensión delantera;Valeo;295,29;367
+255;CP0255;Pastillas de freno;Amortiguador hidráulico para suspensión delantera;Denso;382,8;232
+256;CP0256;Correa de distribución;Radiador para sistema de enfriamiento;Delphi;326,67;59
+257;CP0257;Alternador;Pastillas de freno para automóviles compactos;NGK;323,36;50
+258;CP0258;Alternador;Turbocompresor para motores diésel;Brembo;158,53;389
+259;CP0259;Amortiguador;Filtro de aire para motor de gasolina;Bosch;221,56;338
+260;CP0260;Correa de distribución;Batería de 12V para coche eléctrico;Magneti Marelli;476,95;114
+261;CP0261;Filtro de aire;Pastillas de freno para automóviles compactos;Brembo;123,13;2
+262;CP0262;Pastillas de freno;Pastillas de freno para automóviles compactos;Valeo;126,02;175
+263;CP0263;Correa de distribución;Disco de freno ventilado;Delphi;462,69;182
+264;CP0264;Filtro de aire;Batería de 12V para coche eléctrico;Delphi;62,41;425
+265;CP0265;Correa de distribución;Pastillas de freno para automóviles compactos;Monroe;308,09;325
+266;CP0266;Batería;Bujía para motores de combustión interna;Varta;32,24;494
+267;CP0267;Alternador;Filtro de aire para motor de gasolina;Denso;334,71;410
+268;CP0268;Batería;Pastillas de freno para automóviles compactos;Varta;330,74;150
+269;CP0269;Correa de distribución;Filtro de aire para motor de gasolina;Bosch;91,94;281
+270;CP0270;Disco de freno;Radiador para sistema de enfriamiento;NGK;11,27;268
+271;CP0271;Alternador;Amortiguador hidráulico para suspensión delantera;Mahle;72,92;192
+272;CP0272;Pastillas de freno;Turbocompresor para motores diésel;Monroe;10,62;360
+273;CP0273;Amortiguador;Radiador para sistema de enfriamiento;Magneti Marelli;250,72;55
+274;CP0274;Batería;Filtro de aire para motor de gasolina;Bosch;176,62;24
+275;CP0275;Amortiguador;Pastillas de freno para automóviles compactos;Brembo;261,03;460
+276;CP0276;Filtro de aire;Batería de 12V para coche eléctrico;Valeo;412,14;85
+277;CP0277;Turbocompresor;Filtro de aire para motor de gasolina;Brembo;133,33;253
+278;CP0278;Disco de freno;Pastillas de freno para automóviles compactos;Bosch;189,08;72
+279;CP0279;Filtro de aire;Correa de distribución de alta resistencia;Valeo;376,14;421
+280;CP0280;Radiador;Disco de freno ventilado;Delphi;437,36;368
+281;CP0281;Filtro de aire;Bujía para motores de combustión interna;Brembo;367,8;381
+282;CP0282;Filtro de aire;Bujía para motores de combustión interna;Varta;63,44;370
+283;CP0283;Turbocompresor;Alternador de 120A para vehículos ligeros;Bosch;450,45;210
+284;CP0284;Alternador;Alternador de 120A para vehículos ligeros;Bosch;170,83;55
+285;CP0285;Disco de freno;Radiador para sistema de enfriamiento;Varta;217,52;131
+286;CP0286;Disco de freno;Disco de freno ventilado;Mahle;264,31;313
+287;CP0287;Pastillas de freno;Turbocompresor para motores diésel;Mahle;135,16;101
+288;CP0288;Filtro de aire;Bujía para motores de combustión interna;NGK;487,65;97
+289;CP0289;Disco de freno;Alternador de 120A para vehículos ligeros;Denso;315,63;62
+290;CP0290;Bujía;Disco de freno ventilado;Varta;250,59;477
+291;CP0291;Pastillas de freno;Amortiguador hidráulico para suspensión delantera;Delphi;257,84;437
+292;CP0292;Bujía;Turbocompresor para motores diésel;Magneti Marelli;32,44;202
+293;CP0293;Turbocompresor;Filtro de aire para motor de gasolina;Magneti Marelli;430,38;111
+294;CP0294;Bujía;Disco de freno ventilado;Delphi;87,61;235
+295;CP0295;Amortiguador;Batería de 12V para coche eléctrico;Brembo;82,87;423
+296;CP0296;Correa de distribución;Alternador de 120A para vehículos ligeros;Magneti Marelli;387,8;401
+297;CP0297;Bujía;Filtro de aire para motor de gasolina;Delphi;447,66;98
+298;CP0298;Turbocompresor;Filtro de aire para motor de gasolina;Varta;338,69;367
+299;CP0299;Amortiguador;Alternador de 120A para vehículos ligeros;Monroe;62,09;174
+300;CP0300;Turbocompresor;Correa de distribución de alta resistencia;NGK;371,69;56
+301;CP0301;Turbocompresor;Correa de distribución de alta resistencia;Denso;6,27;388
+302;CP0302;Filtro de aire;Bujía para motores de combustión interna;Brembo;430,05;213
+303;CP0303;Turbocompresor;Alternador de 120A para vehículos ligeros;Delphi;11,08;24
+304;CP0304;Bujía;Alternador de 120A para vehículos ligeros;Varta;27,76;475
+305;CP0305;Correa de distribución;Bujía para motores de combustión interna;Brembo;185,17;325
+306;CP0306;Turbocompresor;Bujía para motores de combustión interna;Bosch;460,51;429
+307;CP0307;Turbocompresor;Radiador para sistema de enfriamiento;Denso;93,59;345
+308;CP0308;Disco de freno;Turbocompresor para motores diésel;Varta;480,37;302
+309;CP0309;Radiador;Pastillas de freno para automóviles compactos;Mahle;22,5;64
+310;CP0310;Batería;Bujía para motores de combustión interna;Monroe;402,54;396
+311;CP0311;Amortiguador;Pastillas de freno para automóviles compactos;Brembo;358,44;457
+312;CP0312;Radiador;Batería de 12V para coche eléctrico;Mahle;329,57;231
+313;CP0313;Amortiguador;Turbocompresor para motores diésel;Valeo;116,14;235
+314;CP0314;Batería;Turbocompresor para motores diésel;Valeo;127,89;338
+315;CP0315;Correa de distribución;Disco de freno ventilado;Magneti Marelli;458,35;302
+316;CP0316;Pastillas de freno;Radiador para sistema de enfriamiento;Denso;163,37;490
+317;CP0317;Batería;Correa de distribución de alta resistencia;NGK;413,87;259
+318;CP0318;Alternador;Turbocompresor para motores diésel;Valeo;287,91;69
+319;CP0319;Radiador;Disco de freno ventilado;NGK;64,1;494
+320;CP0320;Bujía;Batería de 12V para coche eléctrico;Brembo;338,3;256
+321;CP0321;Filtro de aire;Alternador de 120A para vehículos ligeros;Brembo;31,07;3
+322;CP0322;Alternador;Disco de freno ventilado;Delphi;115,48;272
+323;CP0323;Turbocompresor;Turbocompresor para motores diésel;Denso;260,31;377
+324;CP0324;Turbocompresor;Correa de distribución de alta resistencia;Monroe;27,73;25
+325;CP0325;Bujía;Bujía para motores de combustión interna;Bosch;203,46;284
+326;CP0326;Bujía;Bujía para motores de combustión interna;Varta;439,11;479
+327;CP0327;Disco de freno;Disco de freno ventilado;Valeo;433,69;222
+328;CP0328;Amortiguador;Amortiguador hidráulico para suspensión delantera;Monroe;387,9;430
+329;CP0329;Disco de freno;Correa de distribución de alta resistencia;Delphi;158,8;300
+330;CP0330;Batería;Alternador de 120A para vehículos ligeros;Varta;47,76;248
+331;CP0331;Pastillas de freno;Amortiguador hidráulico para suspensión delantera;Denso;231,09;474
+332;CP0332;Radiador;Correa de distribución de alta resistencia;Varta;187,62;261
+333;CP0333;Bujía;Radiador para sistema de enfriamiento;Mahle;149,34;400
+334;CP0334;Amortiguador;Alternador de 120A para vehículos ligeros;Mahle;393,33;472
+335;CP0335;Radiador;Correa de distribución de alta resistencia;Bosch;371,09;467
+336;CP0336;Batería;Correa de distribución de alta resistencia;Varta;125,08;91
+337;CP0337;Pastillas de freno;Bujía para motores de combustión interna;Denso;187,3;355
+338;CP0338;Alternador;Radiador para sistema de enfriamiento;Monroe;486,07;297
+339;CP0339;Disco de freno;Correa de distribución de alta resistencia;Bosch;498,9;89
+340;CP0340;Batería;Radiador para sistema de enfriamiento;NGK;389,06;375
+341;CP0341;Turbocompresor;Batería de 12V para coche eléctrico;Delphi;367,57;418
+342;CP0342;Disco de freno;Radiador para sistema de enfriamiento;Varta;275,55;66
+343;CP0343;Filtro de aire;Pastillas de freno para automóviles compactos;Brembo;399,01;54
+344;CP0344;Disco de freno;Alternador de 120A para vehículos ligeros;Valeo;79,53;199
+345;CP0345;Batería;Bujía para motores de combustión interna;Magneti Marelli;466,54;337
+346;CP0346;Bujía;Bujía para motores de combustión interna;Varta;16,84;308
+347;CP0347;Pastillas de freno;Bujía para motores de combustión interna;NGK;273,06;311
+348;CP0348;Batería;Bujía para motores de combustión interna;Varta;319,79;452
+349;CP0349;Bujía;Correa de distribución de alta resistencia;Denso;348,26;165
+350;CP0350;Bujía;Bujía para motores de combustión interna;Mahle;9,75;259
+351;CP0351;Disco de freno;Radiador para sistema de enfriamiento;Monroe;170,83;452
+352;CP0352;Pastillas de freno;Pastillas de freno para automóviles compactos;Monroe;380,67;197
+353;CP0353;Batería;Disco de freno ventilado;Brembo;191,26;215
+354;CP0354;Batería;Filtro de aire para motor de gasolina;Delphi;370,35;312
+355;CP0355;Turbocompresor;Turbocompresor para motores diésel;Brembo;157,22;469
+356;CP0356;Amortiguador;Disco de freno ventilado;Delphi;106,57;355
+357;CP0357;Radiador;Disco de freno ventilado;Mahle;491,64;391
+358;CP0358;Amortiguador;Radiador para sistema de enfriamiento;Denso;212,81;128
+359;CP0359;Batería;Bujía para motores de combustión interna;Valeo;480,79;141
+360;CP0360;Disco de freno;Correa de distribución de alta resistencia;Magneti Marelli;486,42;204
+361;CP0361;Alternador;Radiador para sistema de enfriamiento;Delphi;75,47;494
+362;CP0362;Batería;Correa de distribución de alta resistencia;Magneti Marelli;143,51;176
+363;CP0363;Filtro de aire;Filtro de aire para motor de gasolina;Monroe;26,73;497
+364;CP0364;Bujía;Batería de 12V para coche eléctrico;Monroe;119,58;151
+365;CP0365;Correa de distribución;Turbocompresor para motores diésel;Mahle;423,52;232
+366;CP0366;Batería;Batería de 12V para coche eléctrico;NGK;209,46;413
+367;CP0367;Filtro de aire;Radiador para sistema de enfriamiento;Magneti Marelli;448,31;69
+368;CP0368;Filtro de aire;Bujía para motores de combustión interna;Delphi;231,94;71
+369;CP0369;Radiador;Turbocompresor para motores diésel;Magneti Marelli;375,21;212
+370;CP0370;Pastillas de freno;Disco de freno ventilado;Denso;292,48;309
+371;CP0371;Batería;Amortiguador hidráulico para suspensión delantera;NGK;255,19;359
+372;CP0372;Pastillas de freno;Pastillas de freno para automóviles compactos;Mahle;320,42;454
+373;CP0373;Alternador;Alternador de 120A para vehículos ligeros;NGK;200,2;384
+374;CP0374;Disco de freno;Amortiguador hidráulico para suspensión delantera;Bosch;297,99;263
+375;CP0375;Correa de distribución;Bujía para motores de combustión interna;Magneti Marelli;35,83;154
+376;CP0376;Disco de freno;Radiador para sistema de enfriamiento;Magneti Marelli;332,91;432
+377;CP0377;Filtro de aire;Disco de freno ventilado;Monroe;69,7;360
+378;CP0378;Bujía;Radiador para sistema de enfriamiento;Mahle;149,38;281
+379;CP0379;Bujía;Bujía para motores de combustión interna;Magneti Marelli;426,2;441
+380;CP0380;Pastillas de freno;Batería de 12V para coche eléctrico;Brembo;463,39;161
+381;CP0381;Disco de freno;Turbocompresor para motores diésel;Brembo;199,51;365
+382;CP0382;Filtro de aire;Amortiguador hidráulico para suspensión delantera;Denso;416,79;378
+383;CP0383;Radiador;Correa de distribución de alta resistencia;Magneti Marelli;166,49;479
+384;CP0384;Turbocompresor;Disco de freno ventilado;Delphi;229,12;284
+385;CP0385;Disco de freno;Turbocompresor para motores diésel;NGK;120,64;324
+386;CP0386;Pastillas de freno;Turbocompresor para motores diésel;Monroe;472,06;112
+387;CP0387;Correa de distribución;Disco de freno ventilado;Mahle;72,38;103
+388;CP0388;Pastillas de freno;Filtro de aire para motor de gasolina;Delphi;386,22;108
+389;CP0389;Filtro de aire;Turbocompresor para motores diésel;NGK;58,94;320
+390;CP0390;Batería;Batería de 12V para coche eléctrico;Magneti Marelli;57,3;366
+391;CP0391;Radiador;Filtro de aire para motor de gasolina;Delphi;227,54;149
+392;CP0392;Filtro de aire;Pastillas de freno para automóviles compactos;Bosch;160,45;352
+393;CP0393;Radiador;Batería de 12V para coche eléctrico;Delphi;64,76;177
+394;CP0394;Amortiguador;Batería de 12V para coche eléctrico;Brembo;182,35;472
+395;CP0395;Amortiguador;Radiador para sistema de enfriamiento;Magneti Marelli;386,32;345
+396;CP0396;Bujía;Radiador para sistema de enfriamiento;Valeo;228,7;68
+397;CP0397;Radiador;Filtro de aire para motor de gasolina;Delphi;234,36;364
+398;CP0398;Disco de freno;Pastillas de freno para automóviles compactos;Mahle;426,98;333
+399;CP0399;Correa de distribución;Pastillas de freno para automóviles compactos;Bosch;49,76;500
+400;CP0400;Turbocompresor;Turbocompresor para motores diésel;Magneti Marelli;404,76;491
+401;CP0401;Pastillas de freno;Correa de distribución de alta resistencia;Delphi;155,59;92
+402;CP0402;Amortiguador;Bujía para motores de combustión interna;Varta;353,83;258
+403;CP0403;Pastillas de freno;Pastillas de freno para automóviles compactos;Bosch;303,63;278
+404;CP0404;Pastillas de freno;Filtro de aire para motor de gasolina;Valeo;111,44;356
+405;CP0405;Correa de distribución;Bujía para motores de combustión interna;Varta;429;327
+406;CP0406;Filtro de aire;Disco de freno ventilado;Bosch;78,42;166
+407;CP0407;Pastillas de freno;Amortiguador hidráulico para suspensión delantera;Monroe;357,02;364
+408;CP0408;Radiador;Correa de distribución de alta resistencia;Mahle;484,36;60
+409;CP0409;Correa de distribución;Correa de distribución de alta resistencia;NGK;201,14;390
+410;CP0410;Amortiguador;Alternador de 120A para vehículos ligeros;Bosch;29,23;181
+411;CP0411;Batería;Radiador para sistema de enfriamiento;Valeo;152,93;288
+412;CP0412;Pastillas de freno;Pastillas de freno para automóviles compactos;Denso;410,94;246
+413;CP0413;Bujía;Radiador para sistema de enfriamiento;NGK;91,06;299
+414;CP0414;Correa de distribución;Batería de 12V para coche eléctrico;Magneti Marelli;476,29;293
+415;CP0415;Filtro de aire;Radiador para sistema de enfriamiento;Bosch;428,03;483
+416;CP0416;Alternador;Turbocompresor para motores diésel;NGK;280,2;342
+417;CP0417;Amortiguador;Turbocompresor para motores diésel;Delphi;277,31;364
+418;CP0418;Amortiguador;Bujía para motores de combustión interna;Bosch;51,89;214
+419;CP0419;Alternador;Filtro de aire para motor de gasolina;Varta;55,44;346
+420;CP0420;Radiador;Pastillas de freno para automóviles compactos;Valeo;397,94;383
+421;CP0421;Batería;Pastillas de freno para automóviles compactos;Brembo;65,12;458
+422;CP0422;Amortiguador;Turbocompresor para motores diésel;Brembo;35,53;431
+423;CP0423;Amortiguador;Filtro de aire para motor de gasolina;Valeo;391,58;274
+424;CP0424;Filtro de aire;Bujía para motores de combustión interna;Denso;115,03;147
+425;CP0425;Amortiguador;Batería de 12V para coche eléctrico;Valeo;103,08;450
+426;CP0426;Correa de distribución;Alternador de 120A para vehículos ligeros;Delphi;203,29;434
+427;CP0427;Radiador;Correa de distribución de alta resistencia;Valeo;344,71;217
+428;CP0428;Batería;Alternador de 120A para vehículos ligeros;Valeo;469,1;414
+429;CP0429;Bujía;Turbocompresor para motores diésel;NGK;46,6;7
+430;CP0430;Batería;Alternador de 120A para vehículos ligeros;Magneti Marelli;295,13;268
+431;CP0431;Radiador;Correa de distribución de alta resistencia;Brembo;459,13;55
+432;CP0432;Disco de freno;Batería de 12V para coche eléctrico;Denso;42,12;13
+433;CP0433;Correa de distribución;Amortiguador hidráulico para suspensión delantera;NGK;498,59;196
+434;CP0434;Disco de freno;Disco de freno ventilado;Brembo;102,89;75
+435;CP0435;Radiador;Bujía para motores de combustión interna;Magneti Marelli;324,76;28
+436;CP0436;Filtro de aire;Radiador para sistema de enfriamiento;Valeo;405,6;344
+437;CP0437;Bujía;Correa de distribución de alta resistencia;Magneti Marelli;50,53;29
+438;CP0438;Batería;Bujía para motores de combustión interna;Brembo;424,4;103
+439;CP0439;Pastillas de freno;Batería de 12V para coche eléctrico;Monroe;405,4;137
+440;CP0440;Turbocompresor;Turbocompresor para motores diésel;Bosch;65,65;385
+441;CP0441;Batería;Alternador de 120A para vehículos ligeros;Bosch;471,43;403
+442;CP0442;Filtro de aire;Disco de freno ventilado;Varta;30,07;83
+443;CP0443;Bujía;Batería de 12V para coche eléctrico;Delphi;462,45;147
+444;CP0444;Turbocompresor;Filtro de aire para motor de gasolina;Magneti Marelli;219,41;350
+445;CP0445;Correa de distribución;Amortiguador hidráulico para suspensión delantera;Valeo;363,59;129
+446;CP0446;Radiador;Correa de distribución de alta resistencia;Magneti Marelli;250,58;75
+447;CP0447;Radiador;Turbocompresor para motores diésel;Valeo;194,45;430
+448;CP0448;Correa de distribución;Filtro de aire para motor de gasolina;Monroe;216,2;32
+449;CP0449;Turbocompresor;Filtro de aire para motor de gasolina;Monroe;180,2;354
+450;CP0450;Disco de freno;Amortiguador hidráulico para suspensión delantera;Delphi;454,61;402
+451;CP0451;Bujía;Batería de 12V para coche eléctrico;Denso;141,12;152
+452;CP0452;Correa de distribución;Amortiguador hidráulico para suspensión delantera;Brembo;225,78;105
+453;CP0453;Turbocompresor;Pastillas de freno para automóviles compactos;Varta;78,57;386
+454;CP0454;Amortiguador;Batería de 12V para coche eléctrico;Monroe;308,98;278
+455;CP0455;Batería;Batería de 12V para coche eléctrico;NGK;310,4;17
+456;CP0456;Filtro de aire;Radiador para sistema de enfriamiento;Bosch;325,4;184
+457;CP0457;Correa de distribución;Bujía para motores de combustión interna;Valeo;251,95;417
+458;CP0458;Filtro de aire;Filtro de aire para motor de gasolina;Mahle;441,98;232
+459;CP0459;Disco de freno;Alternador de 120A para vehículos ligeros;Bosch;242,12;53
+460;CP0460;Disco de freno;Correa de distribución de alta resistencia;Monroe;48,42;316
+461;CP0461;Amortiguador;Pastillas de freno para automóviles compactos;Monroe;194,59;445
+462;CP0462;Radiador;Pastillas de freno para automóviles compactos;NGK;212,52;346
+463;CP0463;Correa de distribución;Correa de distribución de alta resistencia;NGK;323,11;379
+464;CP0464;Bujía;Disco de freno ventilado;Mahle;399,61;288
+465;CP0465;Radiador;Amortiguador hidráulico para suspensión delantera;Bosch;128,33;443
+466;CP0466;Turbocompresor;Disco de freno ventilado;Delphi;497,07;115
+467;CP0467;Radiador;Disco de freno ventilado;Mahle;274,11;381
+468;CP0468;Bujía;Radiador para sistema de enfriamiento;Bosch;14,67;332
+469;CP0469;Batería;Bujía para motores de combustión interna;Monroe;194,34;288
+470;CP0470;Disco de freno;Correa de distribución de alta resistencia;Bosch;358,12;200
+471;CP0471;Batería;Filtro de aire para motor de gasolina;Valeo;242,44;122
+472;CP0472;Correa de distribución;Correa de distribución de alta resistencia;Delphi;391,81;262
+473;CP0473;Radiador;Filtro de aire para motor de gasolina;Monroe;175,3;402
+474;CP0474;Correa de distribución;Alternador de 120A para vehículos ligeros;Magneti Marelli;285;408
+475;CP0475;Batería;Bujía para motores de combustión interna;Monroe;164,19;409
+476;CP0476;Disco de freno;Radiador para sistema de enfriamiento;Bosch;138,87;357
+477;CP0477;Pastillas de freno;Turbocompresor para motores diésel;Brembo;17,9;148
+478;CP0478;Amortiguador;Correa de distribución de alta resistencia;Magneti Marelli;300,57;355
+479;CP0479;Correa de distribución;Turbocompresor para motores diésel;Varta;19,51;341
+480;CP0480;Correa de distribución;Correa de distribución de alta resistencia;Monroe;406,29;25
+481;CP0481;Pastillas de freno;Correa de distribución de alta resistencia;Mahle;144,06;475
+482;CP0482;Turbocompresor;Batería de 12V para coche eléctrico;Denso;405,28;196
+483;CP0483;Turbocompresor;Bujía para motores de combustión interna;Mahle;238,48;199
+484;CP0484;Batería;Correa de distribución de alta resistencia;Mahle;181,93;214
+485;CP0485;Correa de distribución;Filtro de aire para motor de gasolina;Denso;294,07;490
+486;CP0486;Disco de freno;Radiador para sistema de enfriamiento;Monroe;120,22;404
+487;CP0487;Filtro de aire;Pastillas de freno para automóviles compactos;Varta;84,01;500
+488;CP0488;Batería;Turbocompresor para motores diésel;Brembo;127,69;351
+489;CP0489;Batería;Alternador de 120A para vehículos ligeros;Magneti Marelli;124,37;161
+490;CP0490;Amortiguador;Radiador para sistema de enfriamiento;Monroe;269,18;495
+491;CP0491;Correa de distribución;Bujía para motores de combustión interna;Valeo;396,66;283
+492;CP0492;Turbocompresor;Correa de distribución de alta resistencia;Varta;369,84;28
+493;CP0493;Turbocompresor;Bujía para motores de combustión interna;Varta;383,2;7
+494;CP0494;Radiador;Amortiguador hidráulico para suspensión delantera;Bosch;474,16;381
+495;CP0495;Alternador;Correa de distribución de alta resistencia;Magneti Marelli;289,97;129
+496;CP0496;Alternador;Turbocompresor para motores diésel;Mahle;491,42;104
+497;CP0497;Alternador;Correa de distribución de alta resistencia;Brembo;197,27;318
+498;CP0498;Amortiguador;Disco de freno ventilado;Valeo;467,93;445
+499;CP0499;Disco de freno;Bujía para motores de combustión interna;Magneti Marelli;495,81;400
+500;CP0500;Alternador;Correa de distribución de alta resistencia;Delphi;90,99;441
+501;CP0501;Pastillas de freno;Batería de 12V para coche eléctrico;Bosch;122,09;446
+502;CP0502;Bujía;Radiador para sistema de enfriamiento;Denso;162,41;227
+503;CP0503;Batería;Amortiguador hidráulico para suspensión delantera;Valeo;370,36;425
+504;CP0504;Disco de freno;Radiador para sistema de enfriamiento;Magneti Marelli;182,6;116
+505;CP0505;Turbocompresor;Pastillas de freno para automóviles compactos;Denso;297,82;467
+506;CP0506;Radiador;Bujía para motores de combustión interna;Valeo;353,21;325
+507;CP0507;Bujía;Disco de freno ventilado;Valeo;179,08;361
+508;CP0508;Amortiguador;Bujía para motores de combustión interna;Brembo;285,99;364
+509;CP0509;Batería;Disco de freno ventilado;Varta;75,34;332
+510;CP0510;Amortiguador;Disco de freno ventilado;Valeo;474,44;189
+511;CP0511;Amortiguador;Amortiguador hidráulico para suspensión delantera;Brembo;419,16;387
+512;CP0512;Pastillas de freno;Radiador para sistema de enfriamiento;Magneti Marelli;406,15;302
+513;CP0513;Filtro de aire;Radiador para sistema de enfriamiento;Delphi;485,34;280
+514;CP0514;Filtro de aire;Pastillas de freno para automóviles compactos;Monroe;273,35;379
+515;CP0515;Amortiguador;Amortiguador hidráulico para suspensión delantera;Monroe;91,9;309
+516;CP0516;Alternador;Bujía para motores de combustión interna;Varta;23,79;101
+517;CP0517;Turbocompresor;Pastillas de freno para automóviles compactos;Brembo;32,8;398
+518;CP0518;Bujía;Batería de 12V para coche eléctrico;Delphi;302,82;372
+519;CP0519;Alternador;Amortiguador hidráulico para suspensión delantera;Bosch;14,86;494
+520;CP0520;Correa de distribución;Pastillas de freno para automóviles compactos;Magneti Marelli;241,6;100
+521;CP0521;Turbocompresor;Turbocompresor para motores diésel;Valeo;169,21;151
+522;CP0522;Amortiguador;Pastillas de freno para automóviles compactos;Valeo;309;230
+523;CP0523;Correa de distribución;Bujía para motores de combustión interna;Magneti Marelli;404,19;91
+524;CP0524;Alternador;Pastillas de freno para automóviles compactos;Magneti Marelli;173,68;350
+525;CP0525;Correa de distribución;Alternador de 120A para vehículos ligeros;Brembo;92,84;39
+526;CP0526;Amortiguador;Alternador de 120A para vehículos ligeros;Valeo;402,2;96
+527;CP0527;Pastillas de freno;Turbocompresor para motores diésel;Monroe;434,77;493
+528;CP0528;Filtro de aire;Turbocompresor para motores diésel;Varta;34,48;89
+529;CP0529;Bujía;Alternador de 120A para vehículos ligeros;Monroe;78,12;377
+530;CP0530;Correa de distribución;Turbocompresor para motores diésel;Denso;353,82;264
+531;CP0531;Amortiguador;Turbocompresor para motores diésel;NGK;75,12;62
+532;CP0532;Pastillas de freno;Radiador para sistema de enfriamiento;Delphi;59,91;194
+533;CP0533;Disco de freno;Radiador para sistema de enfriamiento;Denso;265,52;21
+534;CP0534;Alternador;Pastillas de freno para automóviles compactos;NGK;185,62;220
+535;CP0535;Filtro de aire;Alternador de 120A para vehículos ligeros;Magneti Marelli;40,9;143
+536;CP0536;Disco de freno;Bujía para motores de combustión interna;Monroe;353,75;285
+537;CP0537;Amortiguador;Alternador de 120A para vehículos ligeros;Bosch;332,76;136
+538;CP0538;Bujía;Alternador de 120A para vehículos ligeros;Varta;295,08;67
+539;CP0539;Alternador;Batería de 12V para coche eléctrico;Valeo;171,6;83
+540;CP0540;Pastillas de freno;Batería de 12V para coche eléctrico;Mahle;164,69;300
+541;CP0541;Alternador;Turbocompresor para motores diésel;Mahle;488,05;434
+542;CP0542;Disco de freno;Filtro de aire para motor de gasolina;Bosch;367,51;131
+543;CP0543;Disco de freno;Radiador para sistema de enfriamiento;NGK;221,25;3
+544;CP0544;Turbocompresor;Disco de freno ventilado;Monroe;321,44;170
+545;CP0545;Radiador;Bujía para motores de combustión interna;Mahle;246,16;239
+546;CP0546;Alternador;Batería de 12V para coche eléctrico;Magneti Marelli;162,06;364
+547;CP0547;Turbocompresor;Alternador de 120A para vehículos ligeros;Monroe;355,06;480
+548;CP0548;Disco de freno;Alternador de 120A para vehículos ligeros;Delphi;283,18;80
+549;CP0549;Correa de distribución;Filtro de aire para motor de gasolina;Monroe;445,35;21
+550;CP0550;Disco de freno;Filtro de aire para motor de gasolina;Denso;308,79;79
+551;CP0551;Alternador;Radiador para sistema de enfriamiento;Varta;181,63;476
+552;CP0552;Pastillas de freno;Batería de 12V para coche eléctrico;Bosch;334,44;166
+553;CP0553;Alternador;Bujía para motores de combustión interna;Monroe;408,15;306
+554;CP0554;Alternador;Bujía para motores de combustión interna;Monroe;192,3;27
+555;CP0555;Batería;Turbocompresor para motores diésel;NGK;368,33;397
+556;CP0556;Amortiguador;Turbocompresor para motores diésel;Delphi;150,79;478
+557;CP0557;Batería;Disco de freno ventilado;Monroe;92,97;321
+558;CP0558;Disco de freno;Correa de distribución de alta resistencia;Mahle;5,89;316
+559;CP0559;Alternador;Alternador de 120A para vehículos ligeros;Monroe;352,49;432
+560;CP0560;Amortiguador;Turbocompresor para motores diésel;Valeo;288,55;339
+561;CP0561;Batería;Disco de freno ventilado;Monroe;426,12;155
+562;CP0562;Alternador;Filtro de aire para motor de gasolina;Magneti Marelli;386,56;252
+563;CP0563;Bujía;Alternador de 120A para vehículos ligeros;Denso;285,9;405
+564;CP0564;Batería;Turbocompresor para motores diésel;Varta;95,13;294
+565;CP0565;Amortiguador;Amortiguador hidráulico para suspensión delantera;Valeo;162,52;282
+566;CP0566;Batería;Radiador para sistema de enfriamiento;Delphi;405,36;184
+567;CP0567;Radiador;Turbocompresor para motores diésel;Magneti Marelli;307,63;38
+568;CP0568;Radiador;Alternador de 120A para vehículos ligeros;Denso;321,63;402
+569;CP0569;Disco de freno;Disco de freno ventilado;Varta;56,53;363
+570;CP0570;Bujía;Pastillas de freno para automóviles compactos;Varta;250,61;163
+571;CP0571;Pastillas de freno;Filtro de aire para motor de gasolina;Denso;168,93;270
+572;CP0572;Pastillas de freno;Alternador de 120A para vehículos ligeros;Magneti Marelli;43,51;113
+573;CP0573;Amortiguador;Bujía para motores de combustión interna;Delphi;176,67;490
+574;CP0574;Correa de distribución;Radiador para sistema de enfriamiento;Delphi;163,16;95
+575;CP0575;Pastillas de freno;Bujía para motores de combustión interna;NGK;319,91;267
+576;CP0576;Amortiguador;Disco de freno ventilado;Delphi;481,72;35
+577;CP0577;Bujía;Pastillas de freno para automóviles compactos;Denso;411,72;403
+578;CP0578;Correa de distribución;Filtro de aire para motor de gasolina;Monroe;336,66;259
+579;CP0579;Correa de distribución;Amortiguador hidráulico para suspensión delantera;Denso;366;82
+580;CP0580;Radiador;Alternador de 120A para vehículos ligeros;Denso;171,2;213
+581;CP0581;Disco de freno;Alternador de 120A para vehículos ligeros;Valeo;10,64;279
+582;CP0582;Alternador;Disco de freno ventilado;Bosch;108,79;275
+583;CP0583;Correa de distribución;Disco de freno ventilado;Mahle;348,12;207
+584;CP0584;Filtro de aire;Turbocompresor para motores diésel;Monroe;178,49;48
+585;CP0585;Amortiguador;Pastillas de freno para automóviles compactos;Brembo;394,57;179
+586;CP0586;Correa de distribución;Radiador para sistema de enfriamiento;Bosch;361,6;114
+587;CP0587;Correa de distribución;Radiador para sistema de enfriamiento;Varta;28,83;453
+588;CP0588;Turbocompresor;Batería de 12V para coche eléctrico;Magneti Marelli;221,92;110
+589;CP0589;Filtro de aire;Correa de distribución de alta resistencia;Mahle;212,73;340
+590;CP0590;Turbocompresor;Correa de distribución de alta resistencia;Mahle;87,34;170
+591;CP0591;Correa de distribución;Radiador para sistema de enfriamiento;Valeo;209,94;170
+592;CP0592;Alternador;Turbocompresor para motores diésel;Varta;441,48;185
+593;CP0593;Filtro de aire;Filtro de aire para motor de gasolina;Brembo;178,86;151
+594;CP0594;Radiador;Radiador para sistema de enfriamiento;Monroe;190,8;112
+595;CP0595;Batería;Bujía para motores de combustión interna;Denso;415,26;487
+596;CP0596;Correa de distribución;Radiador para sistema de enfriamiento;Monroe;395,42;386
+597;CP0597;Correa de distribución;Bujía para motores de combustión interna;Valeo;291,14;317
+598;CP0598;Disco de freno;Disco de freno ventilado;Mahle;380,33;272
+599;CP0599;Disco de freno;Correa de distribución de alta resistencia;Monroe;116,66;244
+600;CP0600;Turbocompresor;Batería de 12V para coche eléctrico;Delphi;228,39;288
+601;CP0601;Amortiguador;Batería de 12V para coche eléctrico;Magneti Marelli;400,6;422
+602;CP0602;Alternador;Turbocompresor para motores diésel;Denso;21,54;386
+603;CP0603;Amortiguador;Pastillas de freno para automóviles compactos;Varta;14,94;333
+604;CP0604;Batería;Radiador para sistema de enfriamiento;Delphi;134,26;5
+605;CP0605;Correa de distribución;Bujía para motores de combustión interna;Delphi;56,84;59
+606;CP0606;Alternador;Turbocompresor para motores diésel;Delphi;174,2;343
+607;CP0607;Filtro de aire;Pastillas de freno para automóviles compactos;Brembo;444,53;178
+608;CP0608;Correa de distribución;Radiador para sistema de enfriamiento;Denso;84,65;229
+609;CP0609;Radiador;Batería de 12V para coche eléctrico;Brembo;42,13;124
+610;CP0610;Correa de distribución;Correa de distribución de alta resistencia;Brembo;471,21;464
+611;CP0611;Pastillas de freno;Pastillas de freno para automóviles compactos;Magneti Marelli;489,13;329
+612;CP0612;Alternador;Turbocompresor para motores diésel;Delphi;172,29;315
+613;CP0613;Pastillas de freno;Bujía para motores de combustión interna;Brembo;492,71;471
+614;CP0614;Turbocompresor;Batería de 12V para coche eléctrico;Magneti Marelli;447,15;319
+615;CP0615;Disco de freno;Disco de freno ventilado;Bosch;353,73;125
+616;CP0616;Filtro de aire;Correa de distribución de alta resistencia;Magneti Marelli;218,51;491
+617;CP0617;Correa de distribución;Radiador para sistema de enfriamiento;Bosch;328,55;21
+618;CP0618;Turbocompresor;Pastillas de freno para automóviles compactos;NGK;305,62;350
+619;CP0619;Turbocompresor;Disco de freno ventilado;Bosch;219,93;454
+620;CP0620;Filtro de aire;Bujía para motores de combustión interna;Bosch;31,51;165
+621;CP0621;Bujía;Correa de distribución de alta resistencia;Valeo;168,89;196
+622;CP0622;Correa de distribución;Disco de freno ventilado;Brembo;487,33;469
+623;CP0623;Pastillas de freno;Radiador para sistema de enfriamiento;Monroe;207,59;408
+624;CP0624;Alternador;Filtro de aire para motor de gasolina;NGK;279,29;484
+625;CP0625;Pastillas de freno;Radiador para sistema de enfriamiento;Brembo;463,16;59
+626;CP0626;Filtro de aire;Batería de 12V para coche eléctrico;Bosch;272,36;198
+627;CP0627;Batería;Pastillas de freno para automóviles compactos;Monroe;332;132
+628;CP0628;Correa de distribución;Amortiguador hidráulico para suspensión delantera;Magneti Marelli;152,21;277
+629;CP0629;Radiador;Radiador para sistema de enfriamiento;Delphi;52,48;371
+630;CP0630;Amortiguador;Alternador de 120A para vehículos ligeros;Denso;199,49;145
+631;CP0631;Alternador;Amortiguador hidráulico para suspensión delantera;Bosch;277,08;13
+632;CP0632;Radiador;Amortiguador hidráulico para suspensión delantera;Mahle;248,02;467
+633;CP0633;Radiador;Pastillas de freno para automóviles compactos;Mahle;31,98;265
+634;CP0634;Correa de distribución;Pastillas de freno para automóviles compactos;Delphi;6,89;421
+635;CP0635;Batería;Bujía para motores de combustión interna;Delphi;48,38;395
+636;CP0636;Correa de distribución;Batería de 12V para coche eléctrico;Bosch;412,83;192
+637;CP0637;Batería;Bujía para motores de combustión interna;Bosch;314,42;264
+638;CP0638;Bujía;Disco de freno ventilado;Magneti Marelli;242,76;412
+639;CP0639;Alternador;Disco de freno ventilado;Magneti Marelli;53,01;261
+640;CP0640;Filtro de aire;Disco de freno ventilado;Valeo;107,44;229
+641;CP0641;Disco de freno;Filtro de aire para motor de gasolina;Bosch;320,9;250
+642;CP0642;Filtro de aire;Radiador para sistema de enfriamiento;Bosch;488,64;23
+643;CP0643;Radiador;Turbocompresor para motores diésel;Magneti Marelli;239,42;152
+644;CP0644;Amortiguador;Pastillas de freno para automóviles compactos;Varta;62,18;460
+645;CP0645;Bujía;Turbocompresor para motores diésel;Magneti Marelli;393,51;334
+646;CP0646;Filtro de aire;Correa de distribución de alta resistencia;Varta;238,12;99
+647;CP0647;Filtro de aire;Pastillas de freno para automóviles compactos;Bosch;447,96;165
+648;CP0648;Amortiguador;Pastillas de freno para automóviles compactos;Magneti Marelli;136,18;264
+649;CP0649;Amortiguador;Pastillas de freno para automóviles compactos;Valeo;322,72;43
+650;CP0650;Filtro de aire;Turbocompresor para motores diésel;Brembo;196,83;486
+651;CP0651;Turbocompresor;Pastillas de freno para automóviles compactos;NGK;188,66;50
+652;CP0652;Pastillas de freno;Alternador de 120A para vehículos ligeros;NGK;193,82;86
+653;CP0653;Amortiguador;Filtro de aire para motor de gasolina;Magneti Marelli;97,36;498
+654;CP0654;Pastillas de freno;Correa de distribución de alta resistencia;Brembo;27,09;490
+655;CP0655;Alternador;Radiador para sistema de enfriamiento;Monroe;222,67;396
+656;CP0656;Bujía;Amortiguador hidráulico para suspensión delantera;Monroe;135,38;276
+657;CP0657;Turbocompresor;Alternador de 120A para vehículos ligeros;Mahle;419,35;274
+658;CP0658;Amortiguador;Turbocompresor para motores diésel;Magneti Marelli;284,3;4
+659;CP0659;Alternador;Batería de 12V para coche eléctrico;Varta;79,81;321
+660;CP0660;Batería;Alternador de 120A para vehículos ligeros;Denso;349,75;34
+661;CP0661;Radiador;Amortiguador hidráulico para suspensión delantera;Varta;52,87;108
+662;CP0662;Pastillas de freno;Disco de freno ventilado;Valeo;335,73;344
+663;CP0663;Turbocompresor;Amortiguador hidráulico para suspensión delantera;NGK;405,05;323
+664;CP0664;Turbocompresor;Batería de 12V para coche eléctrico;Denso;209,92;397
+665;CP0665;Bujía;Alternador de 120A para vehículos ligeros;Valeo;379,45;110
+666;CP0666;Pastillas de freno;Amortiguador hidráulico para suspensión delantera;Delphi;117,62;443
+667;CP0667;Batería;Radiador para sistema de enfriamiento;Mahle;35,19;351
+668;CP0668;Bujía;Turbocompresor para motores diésel;Monroe;196,62;218
+669;CP0669;Turbocompresor;Alternador de 120A para vehículos ligeros;Monroe;263,68;428
+670;CP0670;Filtro de aire;Alternador de 120A para vehículos ligeros;Varta;482,99;54
+671;CP0671;Batería;Batería de 12V para coche eléctrico;NGK;345,1;106
+672;CP0672;Turbocompresor;Correa de distribución de alta resistencia;Bosch;468,5;276
+673;CP0673;Correa de distribución;Disco de freno ventilado;NGK;288,49;425
+674;CP0674;Correa de distribución;Disco de freno ventilado;Valeo;121,64;360
+675;CP0675;Amortiguador;Correa de distribución de alta resistencia;Valeo;152,93;450
+676;CP0676;Bujía;Pastillas de freno para automóviles compactos;Valeo;200,43;500
+677;CP0677;Turbocompresor;Amortiguador hidráulico para suspensión delantera;Magneti Marelli;427,7;380
+678;CP0678;Amortiguador;Turbocompresor para motores diésel;Delphi;22,19;397
+679;CP0679;Bujía;Pastillas de freno para automóviles compactos;Bosch;287,75;223
+680;CP0680;Batería;Batería de 12V para coche eléctrico;Bosch;260,82;332
+681;CP0681;Turbocompresor;Filtro de aire para motor de gasolina;Brembo;287,89;419
+682;CP0682;Bujía;Alternador de 120A para vehículos ligeros;NGK;491,46;482
+683;CP0683;Turbocompresor;Radiador para sistema de enfriamiento;Delphi;77,99;37
+684;CP0684;Filtro de aire;Disco de freno ventilado;Valeo;474,88;383
+685;CP0685;Radiador;Bujía para motores de combustión interna;Denso;227,27;352
+686;CP0686;Disco de freno;Disco de freno ventilado;Mahle;474,79;79
+687;CP0687;Correa de distribución;Bujía para motores de combustión interna;NGK;87,75;13
+688;CP0688;Radiador;Batería de 12V para coche eléctrico;Magneti Marelli;109,89;236
+689;CP0689;Bujía;Bujía para motores de combustión interna;Bosch;100,4;368
+690;CP0690;Disco de freno;Pastillas de freno para automóviles compactos;Monroe;26,12;170
+691;CP0691;Radiador;Batería de 12V para coche eléctrico;Monroe;43,79;20
+692;CP0692;Filtro de aire;Alternador de 120A para vehículos ligeros;Mahle;343,15;45
+693;CP0693;Correa de distribución;Disco de freno ventilado;Delphi;104,95;38
+694;CP0694;Alternador;Pastillas de freno para automóviles compactos;Varta;412,17;28
+695;CP0695;Bujía;Correa de distribución de alta resistencia;Bosch;78,2;92
+696;CP0696;Correa de distribución;Bujía para motores de combustión interna;NGK;299,55;407
+697;CP0697;Radiador;Amortiguador hidráulico para suspensión delantera;Varta;163,28;129
+698;CP0698;Alternador;Alternador de 120A para vehículos ligeros;Magneti Marelli;364,92;286
+699;CP0699;Pastillas de freno;Radiador para sistema de enfriamiento;Mahle;404,64;37
+700;CP0700;Correa de distribución;Filtro de aire para motor de gasolina;Bosch;48,08;295
+701;CP0701;Pastillas de freno;Correa de distribución de alta resistencia;Brembo;280,4;421
+702;CP0702;Disco de freno;Filtro de aire para motor de gasolina;Denso;278,27;117
+703;CP0703;Batería;Correa de distribución de alta resistencia;Bosch;429,03;467
+704;CP0704;Turbocompresor;Disco de freno ventilado;Monroe;262,25;133
+705;CP0705;Disco de freno;Radiador para sistema de enfriamiento;Mahle;459;209
+706;CP0706;Alternador;Amortiguador hidráulico para suspensión delantera;Brembo;11,12;199
+707;CP0707;Alternador;Correa de distribución de alta resistencia;Valeo;351,7;231
+708;CP0708;Correa de distribución;Bujía para motores de combustión interna;NGK;295,85;323
+709;CP0709;Turbocompresor;Radiador para sistema de enfriamiento;Varta;391,93;208
+710;CP0710;Batería;Amortiguador hidráulico para suspensión delantera;Brembo;60,7;222
+711;CP0711;Radiador;Filtro de aire para motor de gasolina;Mahle;79,07;162
+712;CP0712;Amortiguador;Radiador para sistema de enfriamiento;Monroe;285,46;9
+713;CP0713;Bujía;Bujía para motores de combustión interna;Mahle;293,43;200
+714;CP0714;Batería;Radiador para sistema de enfriamiento;Valeo;482,59;345
+715;CP0715;Alternador;Pastillas de freno para automóviles compactos;Magneti Marelli;54,6;61
+716;CP0716;Amortiguador;Pastillas de freno para automóviles compactos;Denso;57,29;274
+717;CP0717;Alternador;Filtro de aire para motor de gasolina;Valeo;390,87;4
+718;CP0718;Turbocompresor;Batería de 12V para coche eléctrico;Brembo;393,94;329
+719;CP0719;Turbocompresor;Alternador de 120A para vehículos ligeros;NGK;434,4;369
+720;CP0720;Correa de distribución;Pastillas de freno para automóviles compactos;Magneti Marelli;440,67;317
+721;CP0721;Radiador;Alternador de 120A para vehículos ligeros;Denso;439,56;33
+722;CP0722;Filtro de aire;Alternador de 120A para vehículos ligeros;Bosch;135,75;388
+723;CP0723;Alternador;Turbocompresor para motores diésel;NGK;329,12;382
+724;CP0724;Radiador;Filtro de aire para motor de gasolina;Valeo;288,15;300
+725;CP0725;Pastillas de freno;Bujía para motores de combustión interna;Monroe;239,16;24
+726;CP0726;Alternador;Filtro de aire para motor de gasolina;NGK;90,24;359
+727;CP0727;Amortiguador;Batería de 12V para coche eléctrico;Denso;204,47;435
+728;CP0728;Radiador;Amortiguador hidráulico para suspensión delantera;Mahle;311,03;38
+729;CP0729;Batería;Pastillas de freno para automóviles compactos;Mahle;342;184
+730;CP0730;Radiador;Disco de freno ventilado;Mahle;203,85;476
+731;CP0731;Batería;Turbocompresor para motores diésel;Valeo;200,92;258
+732;CP0732;Turbocompresor;Disco de freno ventilado;Denso;440,08;55
+733;CP0733;Batería;Correa de distribución de alta resistencia;Bosch;346,8;149
+734;CP0734;Disco de freno;Bujía para motores de combustión interna;Varta;29,4;403
+735;CP0735;Filtro de aire;Batería de 12V para coche eléctrico;Delphi;240,23;352
+736;CP0736;Disco de freno;Amortiguador hidráulico para suspensión delantera;Delphi;137,95;155
+737;CP0737;Amortiguador;Batería de 12V para coche eléctrico;Monroe;189,36;311
+738;CP0738;Bujía;Bujía para motores de combustión interna;Denso;172,24;45
+739;CP0739;Amortiguador;Filtro de aire para motor de gasolina;Magneti Marelli;397,86;145
+740;CP0740;Correa de distribución;Amortiguador hidráulico para suspensión delantera;Valeo;158,92;392
+741;CP0741;Alternador;Correa de distribución de alta resistencia;Valeo;422,21;475
+742;CP0742;Disco de freno;Turbocompresor para motores diésel;Brembo;429,83;225
+743;CP0743;Amortiguador;Alternador de 120A para vehículos ligeros;Mahle;344;196
+744;CP0744;Alternador;Bujía para motores de combustión interna;Valeo;486,39;203
+745;CP0745;Alternador;Bujía para motores de combustión interna;NGK;117,84;421
+746;CP0746;Alternador;Alternador de 120A para vehículos ligeros;Mahle;153,74;339
+747;CP0747;Filtro de aire;Turbocompresor para motores diésel;Varta;373,14;16
+748;CP0748;Bujía;Disco de freno ventilado;Monroe;388,15;243
+749;CP0749;Batería;Filtro de aire para motor de gasolina;NGK;163,83;81
+750;CP0750;Amortiguador;Disco de freno ventilado;NGK;365,76;274
+751;CP0751;Correa de distribución;Turbocompresor para motores diésel;Varta;304,46;113
+752;CP0752;Amortiguador;Amortiguador hidráulico para suspensión delantera;Brembo;49,2;70
+753;CP0753;Batería;Pastillas de freno para automóviles compactos;Valeo;223,65;383
+754;CP0754;Turbocompresor;Batería de 12V para coche eléctrico;Brembo;457,15;201
+755;CP0755;Radiador;Correa de distribución de alta resistencia;Valeo;206,55;408
+756;CP0756;Alternador;Filtro de aire para motor de gasolina;Denso;244,81;409
+757;CP0757;Disco de freno;Turbocompresor para motores diésel;Denso;260,67;435
+758;CP0758;Disco de freno;Radiador para sistema de enfriamiento;NGK;190,09;280
+759;CP0759;Radiador;Amortiguador hidráulico para suspensión delantera;NGK;32,82;152
+760;CP0760;Correa de distribución;Turbocompresor para motores diésel;Bosch;396,79;492
+761;CP0761;Disco de freno;Correa de distribución de alta resistencia;Varta;37,48;325
+762;CP0762;Radiador;Pastillas de freno para automóviles compactos;Delphi;356,24;74
+763;CP0763;Radiador;Bujía para motores de combustión interna;Denso;204,68;153
+764;CP0764;Alternador;Disco de freno ventilado;Varta;391,36;347
+765;CP0765;Batería;Radiador para sistema de enfriamiento;NGK;264,52;455
+766;CP0766;Batería;Bujía para motores de combustión interna;Brembo;286,49;469
+767;CP0767;Batería;Disco de freno ventilado;NGK;91;495
+768;CP0768;Amortiguador;Disco de freno ventilado;Brembo;438,21;408
+769;CP0769;Bujía;Disco de freno ventilado;Valeo;104,36;444
+770;CP0770;Amortiguador;Disco de freno ventilado;Delphi;33,53;374
+771;CP0771;Radiador;Disco de freno ventilado;Magneti Marelli;21,37;332
+772;CP0772;Bujía;Filtro de aire para motor de gasolina;Magneti Marelli;30,03;192
+773;CP0773;Disco de freno;Correa de distribución de alta resistencia;Magneti Marelli;183,39;491
+774;CP0774;Pastillas de freno;Alternador de 120A para vehículos ligeros;Valeo;103,56;487
+775;CP0775;Amortiguador;Filtro de aire para motor de gasolina;NGK;187,33;6
+776;CP0776;Amortiguador;Correa de distribución de alta resistencia;Bosch;234,79;284
+777;CP0777;Alternador;Radiador para sistema de enfriamiento;NGK;201,49;448
+778;CP0778;Batería;Batería de 12V para coche eléctrico;Denso;461,92;285
+779;CP0779;Turbocompresor;Filtro de aire para motor de gasolina;Magneti Marelli;342,18;73
+780;CP0780;Disco de freno;Radiador para sistema de enfriamiento;NGK;124,76;64
+781;CP0781;Turbocompresor;Bujía para motores de combustión interna;Mahle;246,95;22
+782;CP0782;Batería;Radiador para sistema de enfriamiento;Mahle;225,82;3
+783;CP0783;Bujía;Amortiguador hidráulico para suspensión delantera;Denso;480,46;294
+784;CP0784;Amortiguador;Bujía para motores de combustión interna;Valeo;239,92;306
+785;CP0785;Batería;Turbocompresor para motores diésel;Bosch;277,91;202
+786;CP0786;Amortiguador;Radiador para sistema de enfriamiento;Varta;175,4;276
+787;CP0787;Radiador;Pastillas de freno para automóviles compactos;Valeo;419,64;281
+788;CP0788;Pastillas de freno;Filtro de aire para motor de gasolina;Valeo;133,04;485
+789;CP0789;Batería;Radiador para sistema de enfriamiento;NGK;416,28;44
+790;CP0790;Filtro de aire;Disco de freno ventilado;Magneti Marelli;49,74;157
+791;CP0791;Disco de freno;Radiador para sistema de enfriamiento;Monroe;18,59;108
+792;CP0792;Pastillas de freno;Pastillas de freno para automóviles compactos;Mahle;29,58;384
+793;CP0793;Batería;Alternador de 120A para vehículos ligeros;Magneti Marelli;427,64;380
+794;CP0794;Filtro de aire;Alternador de 120A para vehículos ligeros;Brembo;391,02;463
+795;CP0795;Filtro de aire;Pastillas de freno para automóviles compactos;Valeo;111,09;372
+796;CP0796;Disco de freno;Pastillas de freno para automóviles compactos;Brembo;114,57;177
+797;CP0797;Batería;Bujía para motores de combustión interna;Brembo;116,43;109
+798;CP0798;Pastillas de freno;Alternador de 120A para vehículos ligeros;Varta;107,33;212
+799;CP0799;Alternador;Filtro de aire para motor de gasolina;Varta;327,54;464
+800;CP0800;Bujía;Batería de 12V para coche eléctrico;Varta;259,07;331
+801;CP0801;Filtro de aire;Amortiguador hidráulico para suspensión delantera;Delphi;432,99;436
+802;CP0802;Turbocompresor;Filtro de aire para motor de gasolina;Brembo;483,73;263
+803;CP0803;Batería;Amortiguador hidráulico para suspensión delantera;NGK;342,69;73
+804;CP0804;Alternador;Filtro de aire para motor de gasolina;Brembo;239,68;83
+805;CP0805;Alternador;Radiador para sistema de enfriamiento;Valeo;70,5;95
+806;CP0806;Alternador;Batería de 12V para coche eléctrico;Varta;90,73;114
+807;CP0807;Radiador;Disco de freno ventilado;Valeo;401,43;316
+808;CP0808;Pastillas de freno;Correa de distribución de alta resistencia;Varta;115,77;428
+809;CP0809;Filtro de aire;Disco de freno ventilado;Delphi;306,13;130
+810;CP0810;Batería;Alternador de 120A para vehículos ligeros;NGK;471,79;100
+811;CP0811;Alternador;Batería de 12V para coche eléctrico;Denso;357,81;59
+812;CP0812;Bujía;Filtro de aire para motor de gasolina;Varta;356,14;93
+813;CP0813;Bujía;Amortiguador hidráulico para suspensión delantera;Monroe;141,31;344
+814;CP0814;Correa de distribución;Batería de 12V para coche eléctrico;Delphi;448,26;410
+815;CP0815;Alternador;Radiador para sistema de enfriamiento;Mahle;426,54;291
+816;CP0816;Bujía;Filtro de aire para motor de gasolina;Mahle;232,2;437
+817;CP0817;Turbocompresor;Radiador para sistema de enfriamiento;Monroe;113,01;28
+818;CP0818;Filtro de aire;Batería de 12V para coche eléctrico;Delphi;154,56;436
+819;CP0819;Pastillas de freno;Bujía para motores de combustión interna;NGK;262,72;385
+820;CP0820;Pastillas de freno;Radiador para sistema de enfriamiento;Brembo;313,69;478
+821;CP0821;Turbocompresor;Correa de distribución de alta resistencia;Varta;294,32;282
+822;CP0822;Batería;Correa de distribución de alta resistencia;Bosch;8,64;237
+823;CP0823;Bujía;Alternador de 120A para vehículos ligeros;Valeo;499,72;331
+824;CP0824;Amortiguador;Correa de distribución de alta resistencia;Denso;483,41;282
+825;CP0825;Bujía;Radiador para sistema de enfriamiento;Mahle;420,49;38
+826;CP0826;Disco de freno;Pastillas de freno para automóviles compactos;Valeo;282,92;149
+827;CP0827;Correa de distribución;Alternador de 120A para vehículos ligeros;Denso;298,92;344
+828;CP0828;Turbocompresor;Alternador de 120A para vehículos ligeros;Delphi;144,93;35
+829;CP0829;Turbocompresor;Radiador para sistema de enfriamiento;Denso;343,78;129
+830;CP0830;Turbocompresor;Disco de freno ventilado;Valeo;243,46;51
+831;CP0831;Amortiguador;Batería de 12V para coche eléctrico;Mahle;171,46;102
+832;CP0832;Disco de freno;Bujía para motores de combustión interna;Brembo;141,86;372
+833;CP0833;Correa de distribución;Correa de distribución de alta resistencia;Varta;165,94;298
+834;CP0834;Alternador;Bujía para motores de combustión interna;Denso;142,06;250
+835;CP0835;Alternador;Correa de distribución de alta resistencia;Mahle;329,78;488
+836;CP0836;Batería;Turbocompresor para motores diésel;Monroe;476,33;170
+837;CP0837;Turbocompresor;Pastillas de freno para automóviles compactos;Delphi;327,48;183
+838;CP0838;Correa de distribución;Disco de freno ventilado;Denso;98,24;66
+839;CP0839;Batería;Batería de 12V para coche eléctrico;Brembo;261,06;344
+840;CP0840;Turbocompresor;Radiador para sistema de enfriamiento;Valeo;123,95;336
+841;CP0841;Turbocompresor;Bujía para motores de combustión interna;Denso;33,1;121
+842;CP0842;Filtro de aire;Bujía para motores de combustión interna;Varta;429,37;52
+843;CP0843;Turbocompresor;Radiador para sistema de enfriamiento;Delphi;405,96;146
+844;CP0844;Bujía;Batería de 12V para coche eléctrico;Mahle;205,03;318
+845;CP0845;Amortiguador;Batería de 12V para coche eléctrico;Monroe;163,19;36
+846;CP0846;Amortiguador;Alternador de 120A para vehículos ligeros;Denso;74,27;461
+847;CP0847;Batería;Turbocompresor para motores diésel;Valeo;17,6;100
+848;CP0848;Bujía;Correa de distribución de alta resistencia;Varta;251,2;163
+849;CP0849;Pastillas de freno;Pastillas de freno para automóviles compactos;Valeo;151,32;249
+850;CP0850;Amortiguador;Alternador de 120A para vehículos ligeros;Denso;453,92;231
+851;CP0851;Pastillas de freno;Radiador para sistema de enfriamiento;NGK;205,28;169
+852;CP0852;Disco de freno;Alternador de 120A para vehículos ligeros;Mahle;369,68;316
+853;CP0853;Bujía;Filtro de aire para motor de gasolina;Monroe;293,6;338
+854;CP0854;Pastillas de freno;Radiador para sistema de enfriamiento;Mahle;497,4;157
+855;CP0855;Filtro de aire;Turbocompresor para motores diésel;Magneti Marelli;408,93;356
+856;CP0856;Correa de distribución;Correa de distribución de alta resistencia;Brembo;174,87;300
+857;CP0857;Alternador;Batería de 12V para coche eléctrico;Magneti Marelli;358,12;79
+858;CP0858;Turbocompresor;Filtro de aire para motor de gasolina;Bosch;344,73;290
+859;CP0859;Alternador;Bujía para motores de combustión interna;Delphi;320,97;291
+860;CP0860;Batería;Correa de distribución de alta resistencia;Monroe;240,49;187
+861;CP0861;Filtro de aire;Radiador para sistema de enfriamiento;Delphi;470,63;414
+862;CP0862;Amortiguador;Disco de freno ventilado;Varta;182,46;162
+863;CP0863;Batería;Pastillas de freno para automóviles compactos;NGK;153,6;491
+864;CP0864;Batería;Filtro de aire para motor de gasolina;Valeo;89,14;220
+865;CP0865;Alternador;Pastillas de freno para automóviles compactos;Delphi;330,52;87
+866;CP0866;Bujía;Turbocompresor para motores diésel;Brembo;281,33;3
+867;CP0867;Amortiguador;Alternador de 120A para vehículos ligeros;Varta;150,42;161
+868;CP0868;Batería;Filtro de aire para motor de gasolina;Monroe;238,04;127
+869;CP0869;Turbocompresor;Pastillas de freno para automóviles compactos;Varta;371,75;403
+870;CP0870;Amortiguador;Bujía para motores de combustión interna;Brembo;363,97;114
+871;CP0871;Correa de distribución;Amortiguador hidráulico para suspensión delantera;Valeo;281,72;365
+872;CP0872;Bujía;Radiador para sistema de enfriamiento;Valeo;456,75;379
+873;CP0873;Disco de freno;Radiador para sistema de enfriamiento;NGK;473,73;329
+874;CP0874;Amortiguador;Correa de distribución de alta resistencia;Delphi;450,3;224
+875;CP0875;Pastillas de freno;Turbocompresor para motores diésel;Mahle;328,95;142
+876;CP0876;Batería;Filtro de aire para motor de gasolina;Delphi;115,02;431
+877;CP0877;Pastillas de freno;Turbocompresor para motores diésel;Mahle;115,55;185
+878;CP0878;Bujía;Pastillas de freno para automóviles compactos;Valeo;436,36;69
+879;CP0879;Filtro de aire;Alternador de 120A para vehículos ligeros;Magneti Marelli;213,13;348
+880;CP0880;Pastillas de freno;Radiador para sistema de enfriamiento;Magneti Marelli;443,99;376
+881;CP0881;Batería;Radiador para sistema de enfriamiento;Valeo;188,98;170
+882;CP0882;Turbocompresor;Alternador de 120A para vehículos ligeros;Magneti Marelli;294,86;450
+883;CP0883;Turbocompresor;Bujía para motores de combustión interna;Bosch;234,56;246
+884;CP0884;Batería;Turbocompresor para motores diésel;Denso;63,3;237
+885;CP0885;Alternador;Pastillas de freno para automóviles compactos;Magneti Marelli;31,57;229
+886;CP0886;Bujía;Disco de freno ventilado;Mahle;319,03;184
+887;CP0887;Alternador;Radiador para sistema de enfriamiento;NGK;292,25;397
+888;CP0888;Batería;Correa de distribución de alta resistencia;NGK;312,22;157
+889;CP0889;Correa de distribución;Radiador para sistema de enfriamiento;Monroe;238,75;250
+890;CP0890;Batería;Batería de 12V para coche eléctrico;Denso;101,3;283
+891;CP0891;Disco de freno;Amortiguador hidráulico para suspensión delantera;Brembo;64,31;56
+892;CP0892;Disco de freno;Bujía para motores de combustión interna;Mahle;341,95;90
+893;CP0893;Alternador;Filtro de aire para motor de gasolina;Bosch;267,27;331
+894;CP0894;Alternador;Pastillas de freno para automóviles compactos;Mahle;209,49;311
+895;CP0895;Bujía;Alternador de 120A para vehículos ligeros;Valeo;436,07;42
+896;CP0896;Turbocompresor;Disco de freno ventilado;Denso;79,64;431
+897;CP0897;Filtro de aire;Correa de distribución de alta resistencia;Valeo;496,21;144
+898;CP0898;Correa de distribución;Disco de freno ventilado;NGK;174,62;440
+899;CP0899;Radiador;Bujía para motores de combustión interna;Bosch;493,66;424
+900;CP0900;Turbocompresor;Batería de 12V para coche eléctrico;NGK;446,96;72
+901;CP0901;Batería;Batería de 12V para coche eléctrico;Varta;493,39;457
+902;CP0902;Filtro de aire;Alternador de 120A para vehículos ligeros;Monroe;75,9;276
+903;CP0903;Bujía;Amortiguador hidráulico para suspensión delantera;Magneti Marelli;431,89;101
+904;CP0904;Amortiguador;Turbocompresor para motores diésel;Magneti Marelli;94,28;135
+905;CP0905;Turbocompresor;Batería de 12V para coche eléctrico;Magneti Marelli;45;376
+906;CP0906;Turbocompresor;Alternador de 120A para vehículos ligeros;Mahle;169,65;454
+907;CP0907;Filtro de aire;Amortiguador hidráulico para suspensión delantera;Mahle;493,39;321
+908;CP0908;Batería;Bujía para motores de combustión interna;Monroe;160,14;40
+909;CP0909;Turbocompresor;Pastillas de freno para automóviles compactos;Delphi;33,72;373
+910;CP0910;Filtro de aire;Bujía para motores de combustión interna;Denso;228,77;39
+911;CP0911;Pastillas de freno;Alternador de 120A para vehículos ligeros;Valeo;108,64;457
+912;CP0912;Alternador;Pastillas de freno para automóviles compactos;Delphi;387,9;10
+913;CP0913;Disco de freno;Alternador de 120A para vehículos ligeros;Mahle;290,26;435
+914;CP0914;Alternador;Bujía para motores de combustión interna;Magneti Marelli;83,43;260
+915;CP0915;Batería;Radiador para sistema de enfriamiento;Brembo;393,68;324
+916;CP0916;Pastillas de freno;Radiador para sistema de enfriamiento;Denso;390,98;16
+917;CP0917;Turbocompresor;Bujía para motores de combustión interna;Bosch;69,06;417
+918;CP0918;Correa de distribución;Disco de freno ventilado;Delphi;219,69;298
+919;CP0919;Alternador;Disco de freno ventilado;NGK;217,56;297
+920;CP0920;Bujía;Batería de 12V para coche eléctrico;Varta;217,37;208
+921;CP0921;Alternador;Batería de 12V para coche eléctrico;Valeo;241,31;394
+922;CP0922;Radiador;Pastillas de freno para automóviles compactos;NGK;7,31;303
+923;CP0923;Correa de distribución;Pastillas de freno para automóviles compactos;NGK;269,22;109
+924;CP0924;Radiador;Radiador para sistema de enfriamiento;Brembo;366,68;465
+925;CP0925;Radiador;Disco de freno ventilado;Denso;475,28;19
+926;CP0926;Bujía;Amortiguador hidráulico para suspensión delantera;Varta;446,54;283
+927;CP0927;Pastillas de freno;Bujía para motores de combustión interna;Denso;379,64;134
+928;CP0928;Radiador;Amortiguador hidráulico para suspensión delantera;Delphi;267,86;279
+929;CP0929;Correa de distribución;Pastillas de freno para automóviles compactos;Monroe;13,87;458
+930;CP0930;Alternador;Amortiguador hidráulico para suspensión delantera;Magneti Marelli;7,04;277
+931;CP0931;Batería;Alternador de 120A para vehículos ligeros;Delphi;368,13;242
+932;CP0932;Correa de distribución;Filtro de aire para motor de gasolina;Denso;117;335
+933;CP0933;Disco de freno;Radiador para sistema de enfriamiento;Delphi;439,11;397
+934;CP0934;Filtro de aire;Disco de freno ventilado;NGK;159,49;77
+935;CP0935;Alternador;Turbocompresor para motores diésel;Delphi;55,84;188
+936;CP0936;Bujía;Radiador para sistema de enfriamiento;Delphi;254,15;201
+937;CP0937;Radiador;Alternador de 120A para vehículos ligeros;Denso;156,53;115
+938;CP0938;Batería;Disco de freno ventilado;NGK;37,32;457
+939;CP0939;Radiador;Pastillas de freno para automóviles compactos;Varta;27,63;396
+940;CP0940;Bujía;Turbocompresor para motores diésel;Bosch;474,49;302
+941;CP0941;Correa de distribución;Bujía para motores de combustión interna;NGK;230,68;376
+942;CP0942;Disco de freno;Bujía para motores de combustión interna;Bosch;262,54;439
+943;CP0943;Filtro de aire;Batería de 12V para coche eléctrico;Denso;264,44;149
+944;CP0944;Disco de freno;Correa de distribución de alta resistencia;NGK;219,66;69
+945;CP0945;Alternador;Alternador de 120A para vehículos ligeros;Brembo;344,96;238
+946;CP0946;Correa de distribución;Disco de freno ventilado;Monroe;71,23;257
+947;CP0947;Filtro de aire;Correa de distribución de alta resistencia;Magneti Marelli;498,09;262
+948;CP0948;Amortiguador;Correa de distribución de alta resistencia;Brembo;247,64;47
+949;CP0949;Disco de freno;Turbocompresor para motores diésel;Magneti Marelli;376,31;204
+950;CP0950;Radiador;Bujía para motores de combustión interna;Brembo;86,62;187
+951;CP0951;Turbocompresor;Pastillas de freno para automóviles compactos;Denso;453,91;258
+952;CP0952;Alternador;Radiador para sistema de enfriamiento;Magneti Marelli;406,94;6
+953;CP0953;Alternador;Bujía para motores de combustión interna;Valeo;14,47;340
+954;CP0954;Filtro de aire;Alternador de 120A para vehículos ligeros;Delphi;116,04;123
+955;CP0955;Amortiguador;Alternador de 120A para vehículos ligeros;Monroe;492,52;435
+956;CP0956;Batería;Disco de freno ventilado;Valeo;109,54;494
+957;CP0957;Disco de freno;Radiador para sistema de enfriamiento;Brembo;15,85;413
+958;CP0958;Pastillas de freno;Pastillas de freno para automóviles compactos;Brembo;254,79;315
+959;CP0959;Batería;Disco de freno ventilado;Valeo;65,97;351
+960;CP0960;Alternador;Turbocompresor para motores diésel;Valeo;357;85
+961;CP0961;Alternador;Pastillas de freno para automóviles compactos;Bosch;397,1;388
+962;CP0962;Bujía;Pastillas de freno para automóviles compactos;Mahle;190,72;264
+963;CP0963;Filtro de aire;Correa de distribución de alta resistencia;Monroe;321,96;72
+964;CP0964;Turbocompresor;Disco de freno ventilado;Delphi;386,77;229
+965;CP0965;Amortiguador;Filtro de aire para motor de gasolina;Mahle;313,45;82
+966;CP0966;Pastillas de freno;Bujía para motores de combustión interna;Valeo;298,99;92
+967;CP0967;Batería;Disco de freno ventilado;Valeo;28,74;290
+968;CP0968;Disco de freno;Pastillas de freno para automóviles compactos;Bosch;58,52;486
+969;CP0969;Filtro de aire;Batería de 12V para coche eléctrico;Monroe;418,88;290
+970;CP0970;Disco de freno;Pastillas de freno para automóviles compactos;Monroe;28,88;338
+971;CP0971;Correa de distribución;Pastillas de freno para automóviles compactos;Varta;62,32;447
+972;CP0972;Bujía;Radiador para sistema de enfriamiento;NGK;224,94;496
+973;CP0973;Amortiguador;Amortiguador hidráulico para suspensión delantera;Mahle;66,18;75
+974;CP0974;Bujía;Radiador para sistema de enfriamiento;NGK;130,11;377
+975;CP0975;Alternador;Disco de freno ventilado;Magneti Marelli;352,42;375
+976;CP0976;Bujía;Batería de 12V para coche eléctrico;Brembo;106,72;248
+977;CP0977;Pastillas de freno;Bujía para motores de combustión interna;Denso;344,44;481
+978;CP0978;Alternador;Batería de 12V para coche eléctrico;Denso;9,61;184
+979;CP0979;Batería;Amortiguador hidráulico para suspensión delantera;Monroe;213,33;21
+980;CP0980;Disco de freno;Disco de freno ventilado;Delphi;54,99;113
+981;CP0981;Batería;Batería de 12V para coche eléctrico;NGK;262,55;390
+982;CP0982;Correa de distribución;Pastillas de freno para automóviles compactos;Varta;313,28;250
+983;CP0983;Alternador;Batería de 12V para coche eléctrico;Delphi;351,86;119
+984;CP0984;Alternador;Turbocompresor para motores diésel;Magneti Marelli;212,32;33
+985;CP0985;Amortiguador;Disco de freno ventilado;Denso;449,82;136
+986;CP0986;Alternador;Bujía para motores de combustión interna;Mahle;258,23;190
+987;CP0987;Disco de freno;Disco de freno ventilado;Valeo;310,76;120
+988;CP0988;Pastillas de freno;Pastillas de freno para automóviles compactos;Mahle;144,94;22
+989;CP0989;Correa de distribución;Turbocompresor para motores diésel;Valeo;393,46;343
+990;CP0990;Amortiguador;Turbocompresor para motores diésel;Mahle;251,38;106
+991;CP0991;Turbocompresor;Pastillas de freno para automóviles compactos;NGK;306,46;266
+992;CP0992;Disco de freno;Pastillas de freno para automóviles compactos;Denso;390,09;465
+993;CP0993;Pastillas de freno;Turbocompresor para motores diésel;Denso;416,59;406
+994;CP0994;Bujía;Turbocompresor para motores diésel;Delphi;486,69;185
+995;CP0995;Batería;Radiador para sistema de enfriamiento;Mahle;182,17;199
+996;CP0996;Correa de distribución;Turbocompresor para motores diésel;Brembo;207,83;241
+997;CP0997;Radiador;Filtro de aire para motor de gasolina;Varta;84,38;470
+998;CP0998;Disco de freno;Filtro de aire para motor de gasolina;Mahle;276,33;233
+999;CP0999;Batería;Bujía para motores de combustión interna;Mahle;455,63;452
+1000;CP1000;Filtro de aire;Filtro de aire para motor de gasolina;NGK;345,66;24

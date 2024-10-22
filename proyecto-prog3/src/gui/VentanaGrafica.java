@@ -220,7 +220,7 @@ public class VentanaGrafica extends JFrame {
 		setVisible(true);
 	}
 	private void cargarTabla() {
-		File f= new File("piezas_coche_almacen_1000.xlsx");
+		File f= new File("piezas_coche_almacen_1000.csv");
 		List<Pieza>lp= new ArrayList<Pieza>();
 		try {
 			Scanner sc= new Scanner(f);
