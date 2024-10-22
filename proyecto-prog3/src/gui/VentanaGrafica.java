@@ -130,6 +130,8 @@ public class VentanaGrafica extends JFrame {
 
 						pServicios.add(panelDiagnostico, BorderLayout.CENTER);
 						pServicios.add(panelReservar, BorderLayout.EAST);
+					}else if (operacion.equals("Piezas")) {
+						
 					}
 				}
 			});
