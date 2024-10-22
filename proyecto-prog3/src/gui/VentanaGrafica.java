@@ -191,7 +191,7 @@ public class VentanaGrafica extends JFrame {
 		tabla= new JTable(modeloTabla);
 		JScrollPane scroll= new JScrollPane(tabla);
 		pAlmacen.add(scroll);
-		cargarTabla();
+		cargarTabla(); //FIXME
 		
 
 
