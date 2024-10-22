@@ -1,22 +1,22 @@
 package domain;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class Usuario {
 
-	public LocalDate getfUltimaSesion() {
-		return fUltimaSesion;
+	public LocalDateTime gethUltimaSesion() {
+		return hUltimaSesion;
 	}
 
-	public void setfUltimaSesion(LocalDate fUltimaSesion) {
-		this.fUltimaSesion = fUltimaSesion;
+	public void sethUltimaSesion(LocalDateTime hUltimaSesion) {
+		this.hUltimaSesion = hUltimaSesion;
 	}
 
 	protected String username;
 	protected String nombre;
 	protected String apellido;
-	protected LocalDate fUltimaSesion;
+	protected LocalDateTime hUltimaSesion;
 	protected ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();
 
 	public String getUsername() {

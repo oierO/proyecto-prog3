@@ -1,6 +1,7 @@
 package main;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import domain.Usuario;
@@ -38,15 +39,15 @@ public class DeustoTaller {
 	protected static Usuario getUsuarioSesion() {
 		return usuarioSesion;
 	}
-	
+
 	public static VentanaInicioSesion getVSesion() {
 		return VSesion;
 	}
 
 	protected static void setUsuarioSesion(Usuario usuarioSesion) {
 		DeustoTaller.usuarioSesion = usuarioSesion;
-		usuarioSesion.setfUltimaSesion(LocalDate.now());
-		
+		usuarioSesion.sethUltimaSesion(LocalDateTime.now());
+
 	}
 
 	protected static HashMap<String, String> getCredenciales() {

@@ -37,7 +37,7 @@ public class VentanaInicioSesion extends JFrame {
 		pEste = new JPanel();
 		pOeste = new JPanel();
 		ptextUsuario = new JPanel(new GridLayout(2, 1));
-		pTextContrasenia = new JPanel(new GridLayout(2,1));
+		pTextContrasenia = new JPanel(new GridLayout(2, 1));
 
 		lblTitulo = new JLabel("DEUSTO TALLER");
 		lblUsuario = new JLabel("Usuario:");
@@ -72,7 +72,7 @@ public class VentanaInicioSesion extends JFrame {
 		pSur.add(btnIniciarSesion);
 		btnIniciarSesion.addActionListener((e) -> {
 			String usuario = textUsuario.getText();
-			String contrasenia =   String.valueOf(textContrasenia.getPassword());
+			String contrasenia = String.valueOf(textContrasenia.getPassword());
 			if (DeustoTaller.login(usuario, contrasenia)) {
 				JOptionPane.showMessageDialog(null,
 						String.format("%s, Has iniciado sesión correctamente", DeustoTaller.getSesion().getNombre()));
@@ -103,7 +103,7 @@ public class VentanaInicioSesion extends JFrame {
 			logout();
 
 		});
-		
+
 		pSur.add(btnRegistrarse);
 		btnRegistrarse.addActionListener((e) -> {
 			new VentanaRegistrarse();
