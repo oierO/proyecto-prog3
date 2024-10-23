@@ -191,7 +191,7 @@ public class VentanaGrafica extends JFrame {
 		tabla= new JTable(modeloTabla);
 		JScrollPane scroll= new JScrollPane(tabla);
 		pAlmacen.add(scroll);
-		cargarTabla(); //FIXME
+		cargarTabla();
 		
 
 
@@ -226,6 +226,7 @@ public class VentanaGrafica extends JFrame {
 			Scanner sc= new Scanner(f);
 			while(sc.hasNextLine()) {
 				String linea= sc.nextLine();
+				System.out.println(linea);
 				String[] datos= linea.split(";");
 				int id= Integer.parseInt(datos[0]);
 				String nombre= datos[1];
