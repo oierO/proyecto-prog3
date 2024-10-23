@@ -3,6 +3,8 @@ package main;
 import java.time.LocalDateTime;
 import java.util.*;
 
+import javax.swing.SwingUtilities;
+
 import domain.Usuario;
 import gui.VentanaInicioSesion;
 
@@ -18,7 +20,8 @@ public class DeustoTaller {
 		usuarios.put("deustotaller", new Usuario("deustotaller", "Admin", "Taller"));
 		credenciales.put("manolito24", "manolito24");
 		usuarios.put("manolito24", (new Usuario("manolito24", "Manolo", "Lopez")));
-		VSesion = new VentanaInicioSesion();
+		SwingUtilities.invokeLater(() -> VSesion = new VentanaInicioSesion());
+		;
 	}
 
 	public static boolean login(String username, String password) {
