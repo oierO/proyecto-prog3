@@ -3,10 +3,16 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -51,6 +57,8 @@ public class VentanaRegistrarse extends JFrame {
 		textUsuario = new JTextField();
 		textContrasenia = new JPasswordField();
 		
+		String archivoCSV = "C:\\Users\\diaz.inigo\\git\\proyecto-prog3\\proyecto-prog3\\src\\usuarios.csv";
+		
 		pNorte.add(lblTitulo);
 		
 		Font fuente = new Font(getName(), Font.BOLD, 20);
@@ -94,9 +102,51 @@ public class VentanaRegistrarse extends JFrame {
 			dispose();
 		});
 		
-		btnRegistrar.addActionListener((e)->{
-			
+		btnRegistrar.addActionListener((e) -> {
+		    String nombre = textNombre.getText();
+		    String apellido = textApellido.getText();
+		    String dni = textDni.getText();
+		    String usuario = textUsuario.getText();
+		    String contrasenia = new String(textContrasenia.getPassword()); // Para obtener el texto del JPasswordField
+
+		    // Verificar que los campos no estén vacíos
+		    if (nombre.isEmpty() || apellido.isEmpty() || dni.isEmpty() || usuario.isEmpty() || contrasenia.isEmpty()) {
+		        JOptionPane.showMessageDialog(null, "Por favor, completa todos los campos.");
+		    } else {
+		    	if (usuarioExiste(archivoCSV, usuario)) {
+		    		// Falta que de un error si existe el usuario
+		    	} else {
+		    		try (FileWriter writer = new FileWriter(archivoCSV, true)) { // true para agregar, no sobrescribir
+		    			// Escribir los datos separados por comas
+		    			writer.append(nombre);
+		    			writer.append(",");
+		    			writer.append(apellido);
+		    			writer.append(",");
+		    			writer.append(dni);
+		    			writer.append(",");
+		    			writer.append(usuario);
+		            	writer.append(",");
+		            	writer.append(contrasenia);
+		            	writer.append("\n");
+
+		           		JOptionPane.showMessageDialog(null, "Datos guardados correctamente.");
+
+		           		// Limpiar los campos después de guardar
+		          		textNombre.setText("");
+		          		textApellido.setText("");
+		          		textDni.setText("");
+		          		textUsuario.setText("");
+		          		textContrasenia.setText("");
+
+		    		} catch (IOException ex) {
+		    			ex.printStackTrace();
+		    			JOptionPane.showMessageDialog(null, "Error al guardar los datos.");
+		    		}
+		    	}
+		    }
 		});
+		
+
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(600, 400);
@@ -104,4 +154,19 @@ public class VentanaRegistrarse extends JFrame {
 		setTitle("DeustoTaller - Gestor de Sesión");
 		setIconImage(new ImageIcon(getClass().getResource("/res/credential-icon.png")).getImage());
 		setVisible(true);
-	}}
+	}
+	private boolean usuarioExiste(String archivoCSV, String usuario) {
+	    try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
+	        String linea;
+	        while ((linea = br.readLine()) != null) {
+	            String[] datos = linea.split(","); // Dividir los datos por comas
+	            if (datos.length > 3 && datos[3].equals(usuario)) { // El usuario está en la cuarta columna
+	                return true; // Usuario encontrado
+	            }
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	    return false; // Usuario no encontrado
+	}
+}
