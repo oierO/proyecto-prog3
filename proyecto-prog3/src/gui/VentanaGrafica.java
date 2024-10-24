@@ -128,6 +128,7 @@ public class VentanaGrafica extends JFrame {
 		
 		
 		
+		
 		//Panel para piezas
 		JPanel panelPiezas = new JPanel();
 		JButton botonPieza = new JButton("Piezas");
