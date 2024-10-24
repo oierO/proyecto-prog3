@@ -127,6 +127,7 @@ public class VentanaGrafica extends JFrame {
 		//Los paneles de Diagnóstico son visibles por defecto
 		
 		
+		
 		//Panel para piezas
 		JPanel panelPiezas = new JPanel();
 		JButton botonPieza = new JButton("Piezas");
