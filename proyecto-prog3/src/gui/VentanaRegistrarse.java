@@ -117,7 +117,6 @@ public class VentanaRegistrarse extends JFrame {
 		    		// Falta que de un error si existe el usuario
 		    	} else {
 		    		try (FileWriter writer = new FileWriter(archivoCSV, true)) { // true para agregar, no sobrescribir
-		    			// Escribir los datos separados por comas
 		    			writer.append(nombre);
 		    			writer.append(",");
 		    			writer.append(apellido);
@@ -131,7 +130,6 @@ public class VentanaRegistrarse extends JFrame {
 
 		           		JOptionPane.showMessageDialog(null, "Datos guardados correctamente.");
 
-		           		// Limpiar los campos después de guardar
 		          		textNombre.setText("");
 		          		textApellido.setText("");
 		          		textDni.setText("");
@@ -159,9 +157,9 @@ public class VentanaRegistrarse extends JFrame {
 	    try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
 	        String linea;
 	        while ((linea = br.readLine()) != null) {
-	            String[] datos = linea.split(","); // Dividir los datos por comas
-	            if (datos.length > 3 && datos[3].equals(usuario)) { // El usuario está en la cuarta columna
-	                return true; // Usuario encontrado
+	            String[] datos = linea.split(",");
+	            if (datos.length > 3 && datos[3].equals(usuario)) { 
+	                return true;
 	            }
 	        }
 	    } catch (IOException e) {
