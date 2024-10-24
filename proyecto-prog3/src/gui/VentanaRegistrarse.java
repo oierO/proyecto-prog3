@@ -109,7 +109,7 @@ public class VentanaRegistrarse extends JFrame {
 		    String usuario = textUsuario.getText();
 		    String contrasenia = new String(textContrasenia.getPassword()); // Para obtener el texto del JPasswordField
 
-		    // Verificar que los campos no estén vacíos
+		    
 		    if (nombre.isEmpty() || apellido.isEmpty() || dni.isEmpty() || usuario.isEmpty() || contrasenia.isEmpty()) {
 		        JOptionPane.showMessageDialog(null, "Por favor, completa todos los campos.");
 		    } else {
