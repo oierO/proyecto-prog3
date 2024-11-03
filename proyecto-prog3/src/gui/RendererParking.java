@@ -1,13 +1,8 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.util.HashMap;
 
-import javax.swing.DefaultButtonModel;
-import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
+import java.util.HashMap;
 
 public class RendererParking {
 

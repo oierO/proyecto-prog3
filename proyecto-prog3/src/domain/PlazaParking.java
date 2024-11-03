@@ -3,7 +3,6 @@ package domain;
 import java.time.LocalDateTime;
 
 import gui.PanelParking;
-import gui.RendererParking;
 
 public class PlazaParking {
 

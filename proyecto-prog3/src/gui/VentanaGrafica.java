@@ -187,7 +187,7 @@ public class VentanaGrafica extends JFrame {
 
 		// Pestaña Parking
 
-		JPanel pParking = new JPanel();
+		JPanel pParking = new PanelParking();
 		JPanel pSettings = new JPanel();
 		JPanel pUsuario = new PanelSesion(this); // Pasamos la referencia de la ventana gráfica
 

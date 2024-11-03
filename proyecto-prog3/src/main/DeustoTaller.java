@@ -21,7 +21,6 @@ public class DeustoTaller {
 		credenciales.put("manolito24", "manolito24");
 		usuarios.put("manolito24", (new Usuario("manolito24", "Manolo", "Lopez")));
 		SwingUtilities.invokeLater(() -> VSesion = new VentanaInicioSesion());
-		;
 	}
 
 	public static boolean login(String username, String password) {
