@@ -8,6 +8,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,6 +19,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import domain.CitaDiagnostico;
 import domain.Pieza;
 
 public class VentanaGrafica extends JFrame {
@@ -24,7 +27,13 @@ public class VentanaGrafica extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private ModeloAlmacen modeloTabla;
 	private JTable tabla;
-
+	private String nombre;
+	private int telefono;
+	private LocalDate fechaDePedido;
+	private LocalDate fechaDeRealizacion;
+	private String diagnosticos;
+	private CitaDiagnostico citaDiagnostico;
+	
 	public VentanaGrafica() {
 		setSize(600, 400);
 		setLocationRelativeTo(null);
@@ -41,6 +50,7 @@ public class VentanaGrafica extends JFrame {
 		pServicios.add(botones, BorderLayout.WEST);
 
 		// Panel para diagnósticos
+		ArrayList<CitaDiagnostico> listaCitasDiagnosticos = new ArrayList<CitaDiagnostico>();
 		JCheckBox checkBox1 = new JCheckBox("Motor", false);
 		JCheckBox checkBox2 = new JCheckBox("Chapa", false);
 		JCheckBox checkBox3 = new JCheckBox("Retrovisor", false);
@@ -114,9 +124,25 @@ public class VentanaGrafica extends JFrame {
 				} else {
 					System.out.println("El usuario no ha seleccionado ningún diagnóstico");
 				}
+				
+				abrirVentanaCitaDiagnotico();
+				LocalDate fehcaActual = LocalDate.now();
+				DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				fehcaActual.format(formato);
+				fechaDeRealizacion = fehcaActual;
+				
+				citaDiagnostico = new CitaDiagnostico(nombre, telefono, fechaDePedido, fechaDeRealizacion, diagnosticos);
+				
+				System.out.println(citaDiagnostico);
+				
+				//Hay problema, no sé como hacer que se añada los datos después de que el usuario haya 
+				//rellenado el formulario
+				
 			}
 		});
-
+			
+		
+		
 		JPanel panelReservar = new JPanel();
 		panelReservar.add(botonReservar);
 		panelReservar.setVisible(true);
@@ -171,7 +197,7 @@ public class VentanaGrafica extends JFrame {
 						panelPiezas.setVisible(false);
 						panelDiagnostico.setVisible(false);
 						panelReservar.setVisible(false);
-
+						
 					}
 				}
 			});
@@ -190,7 +216,7 @@ public class VentanaGrafica extends JFrame {
 		JPanel pParking = new PanelParking();
 		JPanel pSettings = new JPanel();
 		JPanel pUsuario = new PanelSesion(this); // Pasamos la referencia de la ventana gráfica
-
+		
 		menuPestanas.add("Servicios", pServicios);
 		menuPestanas.add("Almacen", pAlmacen);
 		menuPestanas.add("Parking", pParking);
@@ -242,4 +268,35 @@ public class VentanaGrafica extends JFrame {
 			e.printStackTrace();
 		}
 	}
+	
+	//Para sacar lo datos del formualrio
+	
+	 private void abrirVentanaCitaDiagnotico() {
+	        VentanaCitaDiagnostico ventanaCitaDiagnostico = new VentanaCitaDiagnostico(this);
+	        ventanaCitaDiagnostico.setVisible(true);
+	    }
+	
+	public String setNombre(String nombreRecivido) {
+		nombre= nombreRecivido;
+		
+		return nombreRecivido;
+	}
+	
+	public int setTelefono(String telefonoRecivido) {
+		telefono = Integer.parseInt(telefonoRecivido);
+		return telefono;
+	} 
+	
+	public LocalDate setLocalDate(String fechaRecivido) {
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		fechaDeRealizacion = LocalDate.parse(fechaRecivido, formato);
+		return fechaDeRealizacion;
+	}
+	
+	public String setDiagnostico(String diagnosticoRecivido) {
+		diagnosticos = diagnosticoRecivido;
+		return diagnosticos;
+	}
+	
+	
 }
