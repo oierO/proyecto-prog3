@@ -7,21 +7,21 @@ public class Vehiculo {
 	protected String marca;
 
 	protected void setMatricula(String matricula) {
-		if (matricula!=null) {
+		if (matricula != null) {
 			this.matricula = matricula;
 		}
 
 	}
 
 	protected void setMarca(String marca) {
-		if (marca!=null) {
+		if (marca != null) {
 			this.marca = marca;
 		}
 
 	}
 
 	protected void setModelo(String modelo) {
-		if (modelo!=null) {
+		if (modelo != null) {
 			this.modelo = modelo;
 		}
 
