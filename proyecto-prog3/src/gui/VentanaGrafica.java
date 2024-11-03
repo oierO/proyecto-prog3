@@ -217,22 +217,22 @@ public class VentanaGrafica extends JFrame {
 			Scanner sc = new Scanner(f);
 			while (sc.hasNextLine()) {
 				String linea = sc.nextLine();
-				System.out.println(linea);
 				String[] datos = linea.split(";");
 				try {
 					int id = Integer.parseInt(datos[0]);
-					String nombre = datos[1];
-					String descripcion = datos[2];
-					String fabricante = datos[3];
-					float precio = Float.parseFloat(datos[4]);
-					int cantidad = Integer.parseInt(datos[5]);
-					Pieza p = new Pieza(id, linea, nombre, descripcion, fabricante, precio, cantidad);
+					String codigo= datos[1];
+					String nombre = datos[2];
+					String descripcion = datos[3];
+					String fabricante = datos[4];
+					float precio = Float.parseFloat(datos[5]);
+					int cantidad = Integer.parseInt(datos[6]);
+					Pieza p = new Pieza(id, codigo, nombre, descripcion, fabricante, precio, cantidad);
 					lp.add(p);
 
 					modeloTabla = new ModeloAlmacen(lp);
 					tabla.setModel(modeloTabla);
 				} catch (NumberFormatException e) {
-					System.out.println("Error procesando id: " + datos[0]);
+					e.printStackTrace();
 				}
 
 			}
