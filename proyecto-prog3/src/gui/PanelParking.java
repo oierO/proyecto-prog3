@@ -20,8 +20,7 @@ public class PanelParking extends JPanel {
 	private static final int FILAS_PARKING = 5;
 	protected static HashMap<String, HashMap<String, PlazaParking>> mapaParkings = new HashMap<String, HashMap<String, PlazaParking>>();
 	static ArrayList<JToggleButton> plazasGraficas = new ArrayList<>();
-	private static final List<String> plantasParking = List.of("Planta 1", "Planta 2",
-			"Planta 3");
+	private static final List<String> plantasParking = List.of("Planta 1", "Planta 2", "Planta 3");
 
 	public PanelParking() {
 		add(new JLabel("ESTADO DEL PARKING"), BorderLayout.LINE_START);
@@ -46,7 +45,7 @@ public class PanelParking extends JPanel {
 
 		// tabla.se
 		add(layout, BorderLayout.EAST);
-		add(plantas, BorderLayout.WEST);
+		add(plantas, BorderLayout.CENTER);
 
 	}
 

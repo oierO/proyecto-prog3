@@ -15,12 +15,12 @@ public class RendererParking {
 		String floor = PanelParking.getPlantasparking().get(planta);
 		PanelParking.getMapaParkings().put("Planta 1", new HashMap<>());
 		switch (PanelParking.getMapaParkings().get(floor).get(plaza)) {
-		case null: return Color.GREEN;
-		default: return Color.RED;
+		case null:
+			return Color.GREEN;
+		default:
+			return Color.RED;
 		}
-		
-		
-		
+
 	}
 
 }

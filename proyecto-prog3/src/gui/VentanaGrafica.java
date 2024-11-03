@@ -24,7 +24,6 @@ public class VentanaGrafica extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private ModeloAlmacen modeloTabla;
 	private JTable tabla;
-	
 
 	public VentanaGrafica() {
 		setSize(600, 400);
@@ -41,54 +40,52 @@ public class VentanaGrafica extends JFrame {
 		botones.setBorder(new TitledBorder("Operaciones"));
 		pServicios.add(botones, BorderLayout.WEST);
 
-		//Panel para diagnósticos
-		JCheckBox checkBox1 = new JCheckBox("Motor",false);
-		JCheckBox checkBox2 = new JCheckBox("Chapa",false);
-		JCheckBox checkBox3 = new JCheckBox("Retrovisor",false);
-		JCheckBox checkBox4 = new JCheckBox("Otros",false);
+		// Panel para diagnósticos
+		JCheckBox checkBox1 = new JCheckBox("Motor", false);
+		JCheckBox checkBox2 = new JCheckBox("Chapa", false);
+		JCheckBox checkBox3 = new JCheckBox("Retrovisor", false);
+		JCheckBox checkBox4 = new JCheckBox("Otros", false);
 
 		JPanel panelDiagnostico = new JPanel();
 		JPanel panelNorte = new JPanel();
-		
+
 		JTextArea textoOtros = new JTextArea();
 		textoOtros.setRows(30);
 		textoOtros.setColumns(60);
 		textoOtros.setLineWrap(true);
 		textoOtros.setVisible(false);
-		
+
 		JScrollPane panelTexto = new JScrollPane(textoOtros);
 		panelTexto.setVisible(false);
-		
+
 		panelDiagnostico.setLayout(new BorderLayout());
 		Border panelDiagnosticoBorder = BorderFactory.createTitledBorder("¿Qué problema tiene?");
 		panelDiagnostico.setBorder(panelDiagnosticoBorder);
-		panelDiagnostico.add(panelNorte,BorderLayout.NORTH);
+		panelDiagnostico.add(panelNorte, BorderLayout.NORTH);
 		panelDiagnostico.add(panelTexto);
-		
+
 		panelNorte.add(checkBox1);
 		panelNorte.add(checkBox2);
 		panelNorte.add(checkBox3);
 		panelNorte.add(checkBox4);
 		panelDiagnostico.setVisible(true);
-		
+
 		checkBox4.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JToggleButton boton  = (JToggleButton) e.getSource();
-				if(boton.isSelected()) {
+				JToggleButton boton = (JToggleButton) e.getSource();
+				if (boton.isSelected()) {
 					panelTexto.setVisible(true);
 					textoOtros.setVisible(true);
 					repaint();
-				} else if (!boton.isSelected()){
+				} else if (!boton.isSelected()) {
 					panelTexto.setVisible(false);
 					textoOtros.setVisible(false);
 					repaint();
 				}
 			}
 		});
-		
-		
 
 		JButton botonReservar = new JButton("RESERVAR CITA");
 		botonReservar.addActionListener(new ActionListener() {
@@ -106,7 +103,7 @@ public class VentanaGrafica extends JFrame {
 				}
 				if (checkBox4.isSelected()) {
 					listaDiagnosticoSeleccionado.add(checkBox4.getText());
-					
+
 				}
 
 				if (!listaDiagnosticoSeleccionado.isEmpty()) {
@@ -124,36 +121,30 @@ public class VentanaGrafica extends JFrame {
 		panelReservar.add(botonReservar);
 		panelReservar.setVisible(true);
 		pServicios.add(panelReservar, BorderLayout.EAST);
-		//Los paneles de Diagnóstico son visibles por defecto
-		
-		
-		
-		
-		//Panel para piezas
+		// Los paneles de Diagnóstico son visibles por defecto
+
+		// Panel para piezas
 		JPanel panelPiezas = new JPanel();
 		JButton botonPieza = new JButton("Piezas");
-		botonPieza.addActionListener(p-> System.out.println("Piezas"));
+		botonPieza.addActionListener(p -> System.out.println("Piezas"));
 		panelPiezas.add(botonPieza);
 		panelPiezas.setVisible(false);
 
-		
-		//Panel para Taller
+		// Panel para Taller
 		JPanel panelTaller = new JPanel();
 		JButton botonTaller = new JButton("Taller");
-		botonTaller.addActionListener(t-> System.out.println("Taller"));
+		botonTaller.addActionListener(t -> System.out.println("Taller"));
 		panelTaller.add(botonTaller);
 		panelTaller.setVisible(false);
-	
-		
-		//Panel centro
+
+		// Panel centro
 		JPanel panelCentroServicio = new JPanel();
 		panelCentroServicio.setLayout(new BorderLayout());
 		panelCentroServicio.add(panelDiagnostico);
-		panelCentroServicio.add(panelPiezas,BorderLayout.NORTH);
-		panelCentroServicio.add(panelTaller,BorderLayout.WEST);
+		panelCentroServicio.add(panelPiezas, BorderLayout.NORTH);
+		panelCentroServicio.add(panelTaller, BorderLayout.WEST);
 		pServicios.add(panelCentroServicio);
-		
-		
+
 		for (int i = 0; i < lServicios.length; i++) {
 			JButton boton = new JButton(lServicios[i]);
 			boton.addActionListener(new ActionListener() {
@@ -161,27 +152,26 @@ public class VentanaGrafica extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					String operacion = boton.getText();
 					repaint(); // Vuelve a renderizar el panel cuando un boton es pulsado.
-					
-					//Cuando un panel está activo los otros no serán  visibles
+
+					// Cuando un panel está activo los otros no serán visibles
 					if (operacion.equals("Diagnóstico")) {
 						panelDiagnostico.setVisible(true);
 						panelReservar.setVisible(true);
 						panelPiezas.setVisible(false);
 						panelTaller.setVisible(false);
-						
-						
-					}else if (operacion.equals("Piezas")) {
+
+					} else if (operacion.equals("Piezas")) {
 						panelPiezas.setVisible(true);
 						panelDiagnostico.setVisible(false);
 						panelReservar.setVisible(false);
 						panelTaller.setVisible(false);
-						
-					} else if(operacion.equals("Taller")) {
+
+					} else if (operacion.equals("Taller")) {
 						panelTaller.setVisible(true);
 						panelPiezas.setVisible(false);
 						panelDiagnostico.setVisible(false);
 						panelReservar.setVisible(false);
-						
+
 					}
 				}
 			});
@@ -189,13 +179,11 @@ public class VentanaGrafica extends JFrame {
 		}
 
 		JPanel pAlmacen = new JPanel();
-		modeloTabla= new ModeloAlmacen(null);
-		tabla= new JTable(modeloTabla);
-		JScrollPane scroll= new JScrollPane(tabla);
+		modeloTabla = new ModeloAlmacen(null);
+		tabla = new JTable(modeloTabla);
+		JScrollPane scroll = new JScrollPane(tabla);
 		pAlmacen.add(scroll);
 		cargarTabla();
-		
-
 
 		// Pestaña Parking
 
@@ -217,39 +205,36 @@ public class VentanaGrafica extends JFrame {
 				VentanaInicioSesion.logout();
 			}
 		});
-		
+
 		setIconImage(new ImageIcon(getClass().getResource("/res/app-icon.png")).getImage());
 		setVisible(true);
 	}
+
 	private void cargarTabla() {
-		File f= new File("piezas_coche_almacen_1000.csv");
-		List<Pieza>lp= new ArrayList<Pieza>();
+		File f = new File("piezas_coche_almacen_1000.csv");
+		List<Pieza> lp = new ArrayList<Pieza>();
 		try {
-			Scanner sc= new Scanner(f);
-			while(sc.hasNextLine()) {
-				String linea= sc.nextLine();
+			Scanner sc = new Scanner(f);
+			while (sc.hasNextLine()) {
+				String linea = sc.nextLine();
 				System.out.println(linea);
-				String[] datos= linea.split(";");
+				String[] datos = linea.split(";");
 				try {
-					int id= Integer.parseInt(datos[0]);
-					String nombre= datos[1];
-					String descripcion= datos[2];
-					String fabricante= datos[3];
-					float precio=Float.parseFloat(datos[4]);
-					int cantidad= Integer.parseInt(datos[5]);
-					Pieza p= new Pieza(id, linea, nombre, descripcion, fabricante, precio, cantidad);
+					int id = Integer.parseInt(datos[0]);
+					String nombre = datos[1];
+					String descripcion = datos[2];
+					String fabricante = datos[3];
+					float precio = Float.parseFloat(datos[4]);
+					int cantidad = Integer.parseInt(datos[5]);
+					Pieza p = new Pieza(id, linea, nombre, descripcion, fabricante, precio, cantidad);
 					lp.add(p);
-					
-					modeloTabla= new ModeloAlmacen(lp);
+
+					modeloTabla = new ModeloAlmacen(lp);
 					tabla.setModel(modeloTabla);
 				} catch (NumberFormatException e) {
 					System.out.println("Error procesando id: " + datos[0]);
 				}
-				
-				
-				
-				
-				
+
 			}
 			sc.close();
 		} catch (FileNotFoundException e) {
