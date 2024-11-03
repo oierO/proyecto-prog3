@@ -7,21 +7,21 @@ public class Vehiculo {
 	protected String marca;
 
 	protected void setMatricula(String matricula) {
-		while (!matricula.equals(null)) {
+		if (matricula != null) {
 			this.matricula = matricula;
 		}
 
 	}
 
 	protected void setMarca(String marca) {
-		while (!marca.equals(null)) {
+		if (marca != null) {
 			this.marca = marca;
 		}
 
 	}
 
 	protected void setModelo(String modelo) {
-		while (!modelo.equals(null)) {
+		if (modelo != null) {
 			this.modelo = modelo;
 		}
 
