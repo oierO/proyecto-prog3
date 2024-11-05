@@ -45,7 +45,7 @@ public class PanelParking extends JPanel {
 		plazas.setBackground(Color.WHITE);
 		informacion.setLayout(new BoxLayout(informacion, BoxLayout.Y_AXIS));
 		informacion.add(new JLabel("ESTADO DEL PARKING"));
-		String[] arrayPlantas = (String[]) getPlantasparking().toArray();
+		String[] arrayPlantas = getPlantasparking().toArray(new String[getPlantasparking().size()]);
 		ComboBoxModel<String> modeloPlantas = new DefaultComboBoxModel<>(arrayPlantas);
 		plantas = new JComboBox<>(modeloPlantas);
 		JPanel setplantaPanel = new JPanel();
