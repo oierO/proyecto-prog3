@@ -50,7 +50,7 @@ public class VentanaGrafica extends JFrame {
 		pServicios.add(botones, BorderLayout.WEST);
 
 		// Panel para diagnósticos
-		ArrayList<CitaDiagnostico> listaCitasDiagnosticos = new ArrayList<CitaDiagnostico>();
+		ArrayList<CitaDiagnostico> listaCitasDiagnosticos = new ArrayList<CitaDiagnostico>(); //No se usa??
 		JCheckBox checkBox1 = new JCheckBox("Motor", false);
 		JCheckBox checkBox2 = new JCheckBox("Chapa", false);
 		JCheckBox checkBox3 = new JCheckBox("Retrovisor", false);

@@ -1,8 +1,8 @@
 package gui;
 
 import java.awt.*;
+
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -33,7 +33,7 @@ public class PanelParking extends JPanel {
 	private static final List<String> plantasParking = List.of("Planta 1", "Planta 2", "Planta 3");
 
 	public PanelParking() {
-		for (String planta : plantasParking) {
+		for (String planta : getPlantasparking()) {
 			mapaParkings.put(planta, new HashMap<String, PlazaParking>());
 		}
 		;
@@ -45,8 +45,9 @@ public class PanelParking extends JPanel {
 		plazas.setBackground(Color.WHITE);
 		informacion.setLayout(new BoxLayout(informacion, BoxLayout.Y_AXIS));
 		informacion.add(new JLabel("ESTADO DEL PARKING"));
-
-		plantas = new JComboBox(plantasParking.toArray());
+		String[] arrayPlantas = (String[]) getPlantasparking().toArray();
+		ComboBoxModel<String> modeloPlantas = new DefaultComboBoxModel<>(arrayPlantas);
+		plantas = new JComboBox<>(modeloPlantas);
 		JPanel setplantaPanel = new JPanel();
 		setplantaPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		setplantaPanel.add(new JLabel("Planta: "));
