@@ -124,8 +124,8 @@ public class VentanaGrafica extends JFrame {
 				} else {
 					System.out.println("El usuario no ha seleccionado ningún diagnóstico");
 				}
-				
-				abrirVentanaCitaDiagnotico();
+				new VentanaCitaDiagnostico();
+//				abrirVentanaCitaDiagnotico();
 				LocalDate fehcaActual = LocalDate.now();
 				DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 				fehcaActual.format(formato);
@@ -271,10 +271,10 @@ public class VentanaGrafica extends JFrame {
 	
 	//Para sacar lo datos del formualrio
 	
-	 private void abrirVentanaCitaDiagnotico() {
-	        VentanaCitaDiagnostico ventanaCitaDiagnostico = new VentanaCitaDiagnostico(this);
-	        ventanaCitaDiagnostico.setVisible(true);
-	    }
+//	 private void abrirVentanaCitaDiagnotico() {
+//	        VentanaCitaDiagnostico ventanaCitaDiagnostico = new VentanaCitaDiagnostico(this);
+//	        ventanaCitaDiagnostico.setVisible(true);
+//	    }
 	
 	public String setNombre(String nombreRecivido) {
 		nombre= nombreRecivido;

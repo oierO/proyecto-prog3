@@ -27,11 +27,11 @@ public class VentanaCitaDiagnostico extends JFrame{
 	private VentanaGrafica ventanaGrafica;
 	
 	
-	public VentanaCitaDiagnostico(VentanaGrafica ventanaGrafica) {
-		this.ventanaGrafica = ventanaGrafica;
+	public VentanaCitaDiagnostico() {
+//		this.ventanaGrafica = ventanaGrafica;
 		
 		setTitle("Reservar cita");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(300,400);
 		setLocationRelativeTo(null);
 		
@@ -107,6 +107,8 @@ public class VentanaCitaDiagnostico extends JFrame{
 		
 		add(panel);
 		setVisible(true);
+		
+		
 	}
 	
 	private JFormattedTextField crearFechaFormateado(String fecha) {
@@ -131,16 +133,16 @@ public class VentanaCitaDiagnostico extends JFrame{
 		String diagnosticosString = diagnosticos.getText();
 		
 		
-		ventanaGrafica.setName(nombreString);
-		ventanaGrafica.setTelefono(telefonoString);
-		ventanaGrafica.setLocalDate(fechaString);
-		ventanaGrafica.setDiagnostico(diagnosticosString);
+//		ventanaGrafica.setName(nombreString);
+//		ventanaGrafica.setTelefono(telefonoString);
+//		ventanaGrafica.setLocalDate(fechaString);
+//		ventanaGrafica.setDiagnostico(diagnosticosString);
 		
 		dispose();
 	}
 	
 	public static void main(String[] args) {
-		new VentanaCitaDiagnostico(new VentanaGrafica());
+		new VentanaCitaDiagnostico();
 	}
 	
 
