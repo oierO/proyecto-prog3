@@ -3,7 +3,6 @@ package gui;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.JList;
 import javax.swing.table.DefaultTableModel;
 
 import domain.Pieza;
