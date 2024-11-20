@@ -91,6 +91,5 @@ public class ModeloAlmacen extends DefaultTableModel {
 		// TODO Auto-generated method stub
 
 	}
-	
 
 }

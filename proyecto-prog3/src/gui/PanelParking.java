@@ -1,7 +1,9 @@
 package gui;
 
 import java.awt.*;
-
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -28,6 +30,8 @@ public class PanelParking extends JPanel {
 	private JTextField tfin;
 	private JButton bReservar;
 	private JTextField trest;
+	private ButtonGroup grupoBotones;
+	private String plazaSel;
 	protected static HashMap<String, HashMap<String, PlazaParking>> mapaParkings = new HashMap<String, HashMap<String, PlazaParking>>();
 	static ArrayList<JToggleButton> plazasGraficas = new ArrayList<>();
 	private static final List<String> plantasParking = List.of("Planta 1", "Planta 2", "Planta 3");
@@ -71,8 +75,9 @@ public class PanelParking extends JPanel {
 		trestPanel.add(new JLabel("Tiempo restante: "));
 		trest = new JTextField("N/A");
 		bReservar = new JButton("Reservar");
-		bReservar.setIcon(new ImageIcon(getClass().getResource("/res/calendar-icon.png")));
+		bReservar.setIcon(new ImageIcon("resources/images/calendar-icon.png"));
 		bReservar.setEnabled(false);
+		bReservar.addActionListener(e -> new ReservaParking((String) plantas.getSelectedItem(), plazaSel));
 		trest.setEditable(false);
 		trestPanel.add(trest);
 		nomvehiculoPanel.add(matricula);
@@ -81,14 +86,46 @@ public class PanelParking extends JPanel {
 		informacion.add(trestPanel);
 		informacion.add(tfinPanel);
 		informacion.add(bReservar);
+		setFocusable(false);
+//		addKeyListener(new KeyAdapter() {
+//
+//			@Override
+//			public void keyTyped(KeyEvent e) {
+//				if (e.getKeyCode() == KeyEvent.VK_E) {
+//					System.out.println("e type");
+//				}
+//				super.keyTyped(e);
+//			}
+//
+//			@Override
+//			public void keyPressed(KeyEvent e) {
+//				if (e.getModifiersEx()==KeyEvent.CTRL_DOWN_MASK && e.getKeyCode() == KeyEvent.VK_E) {
+//					System.out.println("e");
+//				}
+//				super.keyPressed(e);
+//			}
+//
+//			@Override
+//			public void keyReleased(KeyEvent e) {
+//				if (e.equals(KeyEvent.VK_E)) {
+//					System.out.println("e rele");
+//				}
+//				super.keyReleased(e);
+//			}
+//			
+//		});
 
-		ButtonGroup grupoBotones = new ButtonGroup();
+		grupoBotones = new ButtonGroup();
 		plazas.setLayout(new GridLayout(FILAS_PARKING, COLUMNAS_PARKING, 10, 10));
 		plazas.setBorder(BorderFactory.createTitledBorder("PLAZAS"));
 		for (int i = 0; i <= FILAS_PARKING - 1; i++) {
 			for (int t = 0; t <= COLUMNAS_PARKING - 1; t++) {
 				JToggleButton boton = new JToggleButton(String.format("%s%s", (char) (t + 65), i));
-				boton.addActionListener(e -> cambioSeleccionPl(boton.getName()));
+				boton.setToolTipText(boton.getText());
+				boton.addActionListener(e -> {
+					cambioSeleccionPl(boton.getName());
+					plazaSel = ((JToggleButton) e.getSource()).getText();
+				});
 				plazasGraficas.add(boton);
 				grupoBotones.add(boton);
 				plazas.add(boton);

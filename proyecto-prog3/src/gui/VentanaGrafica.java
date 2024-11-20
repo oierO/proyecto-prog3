@@ -232,7 +232,7 @@ public class VentanaGrafica extends JFrame {
 			}
 		});
 
-		setIconImage(new ImageIcon(getClass().getResource("/res/app-icon.png")).getImage());
+		setIconImage(new ImageIcon("resources/images/app-icon.png").getImage());
 		setVisible(true);
 	}
 
