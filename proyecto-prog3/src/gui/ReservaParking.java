@@ -21,12 +21,12 @@ public class ReservaParking extends JDialog {
 	 */
 	private static final long serialVersionUID = 1L;
 	private LocalDate fReserva;
-
+	
 	public ReservaParking(String planta, String plaza) {
 		System.out.println(plaza);
 		setModal(true);
 		setTitle("Reservar plaza");
-		setIconImage(new ImageIcon("resources/calendar-icon.png").getImage());
+		this.setIconImage(new ImageIcon("resources/calendar-icon.png").getImage());
 		setSize(400, 400);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -53,7 +53,7 @@ public class ReservaParking extends JDialog {
 		pFecha.add(selector);
 		selector.addActionListener(e -> System.out.println(selector.getFormattedTextField().getText()));
 		JPanel pTitulo = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel titulo = new JLabel(String.format("Reservar plaza %s-%s...", plaza,planta));
+		JLabel titulo = new JLabel(String.format("Reservar plaza %s-%s...", plaza, planta));
 		Font fuente = new Font("Consolas", Font.BOLD, 15);
 		titulo.setFont(fuente);
 		pTitulo.add(titulo);
@@ -70,7 +70,7 @@ public class ReservaParking extends JDialog {
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				if (e.getModifiersEx()==KeyEvent.CTRL_DOWN_MASK && e.getKeyCode() == KeyEvent.VK_C) {
+				if (e.getModifiersEx() == KeyEvent.CTRL_DOWN_MASK && e.getKeyCode() == KeyEvent.VK_C) {
 					dispose();
 				}
 				super.keyPressed(e);
@@ -80,8 +80,3 @@ public class ReservaParking extends JDialog {
 
 	}
 }
-
-//	public static void main(String[] args) {
-//		new DeustoTaller();
-//	}
-//}

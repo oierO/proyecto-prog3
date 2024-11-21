@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -22,6 +23,7 @@ public class PanelParking extends JPanel {
 	private static final int COLUMNAS_PARKING = 5;
 	private static final int FILAS_PARKING = 5;
 	private JComboBox<String> plantas;
+	private JPanel plazas;
 	private JTextField matricula;
 	private JTextField estado;
 	private JTextField tfin;
@@ -41,7 +43,7 @@ public class PanelParking extends JPanel {
 		// mapaParkings.get("Planta 1").put("A0", new PlazaParking("Planta 1", "A0", new
 		// Vehiculo("3492BCC", "Citroen", "C4", LocalDate.of(2020, 01, 02),
 		// LocalDate.now()), LocalDateTime.now().plusWeeks(2)));
-		JPanel plazas = new JPanel();
+		plazas = new JPanel();
 		JPanel informacion = new JPanel();
 		plazas.setBackground(Color.WHITE);
 		informacion.setLayout(new BoxLayout(informacion, BoxLayout.Y_AXIS));
@@ -83,6 +85,16 @@ public class PanelParking extends JPanel {
 		informacion.add(trestPanel);
 		informacion.add(tfinPanel);
 		informacion.add(bReservar);
+		plantas.addActionListener(new AbstractAction() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getActionCommand().equals("comboBoxChanged")) {
+					plazas.repaint();
+				}
+
+			}
+		});
 		setFocusable(false);
 //		addKeyListener(new KeyAdapter() {
 //
@@ -126,7 +138,7 @@ public class PanelParking extends JPanel {
 				plazasGraficas.add(boton);
 				grupoBotones.add(boton);
 				plazas.add(boton);
-				boton.setBackground(RendererParking.getColor(boton.getName(), plantas.getSelectedIndex()));
+				boton.setBackground(RendererParking.getColor(boton.getName(), (String) plantas.getSelectedItem()));
 			}
 		}
 		// RendererParking pRenderer = new RendererParking();
