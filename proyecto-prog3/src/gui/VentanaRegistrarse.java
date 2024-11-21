@@ -145,7 +145,7 @@ public class VentanaRegistrarse extends JFrame {
 		setSize(600, 400);
 		setLocationRelativeTo(null);
 		setTitle("DeustoTaller - Gestor de Sesión");
-		setIconImage(new ImageIcon(getClass().getResource("/resources/credential-icon.png")).getImage());
+		setIconImage(new ImageIcon("resources/images/credential-icon.png").getImage());
 		setVisible(true);
 	}
 

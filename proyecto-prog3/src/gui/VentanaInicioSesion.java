@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -137,6 +138,12 @@ public class VentanaInicioSesion extends JFrame {
 				"Cerrar Sesión", JOptionPane.YES_NO_OPTION);
 		switch (confirmacion) {
 		case JOptionPane.YES_OPTION:
+			try {
+				DeustoTaller.getCon().close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			System.exit(0);
 		default:
 		}

@@ -5,6 +5,9 @@ import java.time.*;
 public class Vehiculo {
 	protected String matricula;
 	protected String marca;
+	protected String modelo;
+	protected Integer anoModelo;
+	protected LocalDate fMatricula;
 
 	protected void setMatricula(String matricula) {
 		if (matricula != null) {
@@ -27,17 +30,13 @@ public class Vehiculo {
 
 	}
 
-	protected void setAnoModelo(LocalDate anoModelo) {
+	protected void setAnoModelo(Integer anoModelo) {
 		this.anoModelo = anoModelo;
 	}
 
 	protected void setfMatricula(LocalDate fMatricula) {
 		this.fMatricula = fMatricula;
 	}
-
-	protected String modelo;
-	protected LocalDate anoModelo;
-	protected LocalDate fMatricula;
 
 	public String getMarca() {
 		return marca;
@@ -47,7 +46,7 @@ public class Vehiculo {
 		return modelo;
 	}
 
-	public LocalDate getAnoModelo() {
+	public Integer getAnoModelo() {
 		return anoModelo;
 	}
 
@@ -59,7 +58,7 @@ public class Vehiculo {
 		return matricula;
 	}
 
-	public Vehiculo(String matricula, String marca, String modelo, LocalDate anoModelo, LocalDate fMatricula) {
+	public Vehiculo(String matricula, String marca, String modelo, Integer anoModelo, LocalDate fMatricula) {
 		this.setMatricula(matricula);
 		this.setMarca(marca);
 		this.setModelo(modelo);
