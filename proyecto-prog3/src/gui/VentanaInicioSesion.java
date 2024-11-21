@@ -1,13 +1,21 @@
 package gui;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
-
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.RenderingHints.Key;
+import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,6 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
 
 import main.DeustoTaller;
 
@@ -40,27 +49,34 @@ public class VentanaInicioSesion extends JFrame {
 		ptextUsuario = new JPanel(new GridLayout(2, 1));
 		pTextContrasenia = new JPanel(new GridLayout(2, 1));
 
-		lblTitulo = new JLabel("DEUSTO TALLER");
-		lblUsuario = new JLabel("Usuario:");
-		lblContrasenia = new JLabel("Contraseña:");
+		lblTitulo = new JLabel("DeustoTaller");
+		lblTitulo.setIcon(new ImageIcon("resources/images/app-icon.png"));
+		lblUsuario = new JLabel("Usuario");
+		Image img = new ImageIcon("resources/images/user.png").getImage();
+		img = img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+		lblUsuario.setIcon(new ImageIcon(img));
+		lblContrasenia = new JLabel("Contraseña");
+		img = new ImageIcon("resources/images/pass.png").getImage();
+		img = img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+		lblContrasenia.setIcon(new ImageIcon(img));
 
 		btnCerrarSesion = new JButton("Cerrar sesion");
 		btnIniciarSesion = new JButton("Iniciar sesion");
 		btnRegistrarse = new JButton("Registrarse");
 
-		textUsuario = new JTextField("deustotaller", 20);
-		textContrasenia = new JPasswordField("deustotaller");
-
 		pNorte.add(lblTitulo);
 
-		Font fuente = new Font(getName(), Font.BOLD, 20);
+		Font fuente = new Font("Bahnschrift", Font.BOLD, 30);
 		lblTitulo.setFont(fuente);
+		lblTitulo.setOpaque(true);
+		lblTitulo.setBackground(new Color(136, 174, 208));
+		lblTitulo.setBorder(BorderFactory.createRaisedBevelBorder());
 
-		Font fuentebtn = new Font(getName(), Font.BOLD, 16);
+		Font fuentebtn = new Font("Bahnschrift", Font.BOLD, 16);
 		lblUsuario.setFont(fuentebtn);
 		lblContrasenia.setFont(fuentebtn);
 		btnCerrarSesion.setFont(fuentebtn);
-		btnCerrarSesion.setEnabled(false);
+		btnCerrarSesion.setVisible(false);
 		btnIniciarSesion.setFont(fuentebtn);
 		btnRegistrarse.setFont(fuentebtn);
 
@@ -81,8 +97,8 @@ public class VentanaInicioSesion extends JFrame {
 				setVisible(false);
 				textUsuario.setEditable(false);
 				textContrasenia.setEditable(false);
-				btnIniciarSesion.setEnabled(false);
-				btnCerrarSesion.setEnabled(true);
+				btnIniciarSesion.setVisible(false);
+				btnCerrarSesion.setVisible(true);
 				setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 				addWindowListener(new WindowAdapter() {
 
@@ -94,9 +110,13 @@ public class VentanaInicioSesion extends JFrame {
 				});
 
 			} else {
-				JOptionPane.showMessageDialog(null, "Incorrecto", "ERROR", JOptionPane.WARNING_MESSAGE);
+				Toolkit.getDefaultToolkit().beep();
+				JOptionPane.showMessageDialog(null,
+						"Los datos de inicio de sesión no son correctos\n Por favor, intentelo de nuevo.",
+						"Error al conectar con DeustoTaller", JOptionPane.WARNING_MESSAGE);
+
 			}
-			dispose();
+
 		});
 
 		pSur.add(btnCerrarSesion);
@@ -112,14 +132,38 @@ public class VentanaInicioSesion extends JFrame {
 
 		});
 
+		textUsuario = new JTextField(20);
+		textContrasenia = new JPasswordField();
 		ptextUsuario.add(textUsuario);
 		pTextContrasenia.add(textContrasenia);
-
+		if (DeustoTaller.debug == true) {
+			textContrasenia.setText("deustotaller");
+			textUsuario.setText("deustotaller");
+		}
 		pCentro.add(lblUsuario);
 		pCentro.add(ptextUsuario);
 		pCentro.add(lblContrasenia);
 		pCentro.add(pTextContrasenia);
 
+		KeyListener eventoEnter = new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					if (btnIniciarSesion.isVisible()) {
+						btnIniciarSesion.doClick();
+					} else {
+						btnCerrarSesion.doClick();
+					}
+				}
+				super.keyPressed(e);
+			}
+
+		};
+		this.addKeyListener(eventoEnter);
+		this.setFocusable(true);
+		textUsuario.addKeyListener(eventoEnter);
+		textContrasenia.addKeyListener(eventoEnter);
+		setBackground(Color.WHITE);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(600, 400);
 		setLocationRelativeTo(null);
@@ -141,8 +185,7 @@ public class VentanaInicioSesion extends JFrame {
 			try {
 				DeustoTaller.getCon().close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Error al conectarse a la base de datos" + e.getErrorCode());
 			}
 			System.exit(0);
 		default:

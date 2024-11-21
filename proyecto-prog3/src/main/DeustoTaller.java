@@ -3,6 +3,9 @@ package main;
 import java.time.LocalDateTime;
 
 import java.util.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.*;
 
 import javax.swing.JOptionPane;
@@ -14,7 +17,9 @@ import gui.VentanaInicioSesion;
 public class DeustoTaller {
 	private static Usuario usuarioSesion;
 	private static Connection con;
+	private static String locDB;
 	private static VentanaInicioSesion VSesion;
+	public static Boolean debug;
 	@Deprecated
 	private static HashMap<String, String> credenciales = new HashMap<String, String>();
 	@Deprecated
@@ -22,13 +27,23 @@ public class DeustoTaller {
 																						// credenciales (Temporal)
 
 	public static void main(String[] args) {
+		try {
+			FileInputStream fPropiedades = new FileInputStream(new File("config/deustotaller.properties"));
+			Properties propiedades = new Properties();
+			propiedades.load(fPropiedades);
+			debug = Boolean.parseBoolean(propiedades.getProperty("debug", "false"));
+			locDB = "jdbc:sqlite:"+propiedades.getProperty("ubicacionBD", "resources/db/database.db");
+			fPropiedades.close();
+		} catch (IOException e) {
+			System.out.println("Error al cargar el fichero de propiedades.");
+		}
 		conectarBD();
 		SwingUtilities.invokeLater(() -> VSesion = new VentanaInicioSesion());
 	}
 
 	private static void conectarBD() {
 		try {
-			con = DriverManager.getConnection("jdbc:sqlite:resources/db/database.db");
+			con = DriverManager.getConnection(locDB);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(VSesion, "Error al cargar la base de datos:\n" + e, "Error de Inicialización",
 					JOptionPane.ERROR_MESSAGE);
@@ -50,6 +65,8 @@ public class DeustoTaller {
 			}
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(VSesion, e);
+			return false;
+		} catch (NullPointerException e) {
 			return false;
 		}
 
