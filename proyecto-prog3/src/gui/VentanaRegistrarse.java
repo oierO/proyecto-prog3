@@ -7,6 +7,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,6 +20,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import domain.Usuario;
 
 public class VentanaRegistrarse extends JFrame {
 
@@ -29,6 +35,7 @@ public class VentanaRegistrarse extends JFrame {
 	private JLabel lblTitulo, lblNombre, lblApellido, lblDni, lblUsuario, lblContrasenia;
 	private JTextField textNombre, textApellido, textDni, textUsuario;
 	private JPasswordField textContrasenia;
+	private Connection con;
 
 	public VentanaRegistrarse() {
 		pCentro = new JPanel(new GridLayout(5, 1));
@@ -162,5 +169,22 @@ public class VentanaRegistrarse extends JFrame {
 			e.printStackTrace();
 		}
 		return false; // Usuario no encontrado
+	}
+	
+	public void guardarUsuario(Usuario usuario) {
+		String sql = "INSERT INTO usuario (username, nombre, apellido, hUltimaSesion) VALUES (?, ?, ?,?)";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, usuario.getUsername());
+			ps.setString(2, usuario.getNombre());
+			ps.setString(3, usuario.getApellido());
+			ps.setDate(4, Date.valueOf(usuario.gethUltimaSesion().toString()));
+			ps.execute();
+			ps.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }
