@@ -3,15 +3,11 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.time.LocalDateTime;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,8 +16,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
 import domain.Usuario;
+import main.DeustoTaller;
 
 public class VentanaRegistrarse extends JFrame {
 
@@ -35,7 +31,7 @@ public class VentanaRegistrarse extends JFrame {
 	private JLabel lblTitulo, lblNombre, lblApellido, lblDni, lblUsuario, lblContrasenia;
 	private JTextField textNombre, textApellido, textDni, textUsuario;
 	private JPasswordField textContrasenia;
-	private Connection con;
+	private Connection con = DeustoTaller.getCon();
 
 	public VentanaRegistrarse() {
 		pCentro = new JPanel(new GridLayout(5, 1));
@@ -65,7 +61,6 @@ public class VentanaRegistrarse extends JFrame {
 		textUsuario = new JTextField();
 		textContrasenia = new JPasswordField();
 
-		String archivoCSV = "C:\\Users\\diaz.inigo\\git\\proyecto-prog3\\proyecto-prog3\\src\\usuarios.csv";
 
 		pNorte.add(lblTitulo);
 
@@ -113,42 +108,24 @@ public class VentanaRegistrarse extends JFrame {
 			String dni = textDni.getText();
 			String usuario = textUsuario.getText();
 			String contrasenia = new String(textContrasenia.getPassword()); // Para obtener el texto del JPasswordField
+			
+			
 
 			if (nombre.isEmpty() || apellido.isEmpty() || dni.isEmpty() || usuario.isEmpty() || contrasenia.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Por favor, completa todos los campos.");
 			} else {
-				if (usuarioExiste(archivoCSV, usuario)) {
-					// Falta que de un error si existe el usuario
-				} else {
-					try (FileWriter writer = new FileWriter(archivoCSV, true)) { // true para agregar, no sobrescribir
-						writer.append(nombre);
-						writer.append(",");
-						writer.append(apellido);
-						writer.append(",");
-						writer.append(dni);
-						writer.append(",");
-						writer.append(usuario);
-						writer.append(",");
-						writer.append(contrasenia);
-						writer.append("\n");
-
-						JOptionPane.showMessageDialog(null, "Datos guardados correctamente.");
-
-						textNombre.setText("");
-						textApellido.setText("");
-						textDni.setText("");
-						textUsuario.setText("");
-						textContrasenia.setText("");
-
-					} catch (IOException ex) {
-						ex.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Error al guardar los datos.");
-					}
+				if (this.existeUsuario(usuario)==false) {
+					Usuario user = new Usuario(usuario, nombre, apellido,LocalDateTime.now());
+					guardarUsuario(user);
+					
+				}else {
+					JOptionPane.showMessageDialog(null, e);
+					
 				}
 			}
 		});
 
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(600, 400);
 		setLocationRelativeTo(null);
 		setTitle("DeustoTaller - Gestor de Sesión");
@@ -156,21 +133,6 @@ public class VentanaRegistrarse extends JFrame {
 		setVisible(true);
 	}
 
-	private boolean usuarioExiste(String archivoCSV, String usuario) {
-		try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
-			String linea;
-			while ((linea = br.readLine()) != null) {
-				String[] datos = linea.split(",");
-				if (datos.length > 3 && datos[3].equals(usuario)) {
-					return true;
-				}
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return false; // Usuario no encontrado
-	}
-	
 	public void guardarUsuario(Usuario usuario) {
 		String sql = "INSERT INTO usuario (username, nombre, apellido, hUltimaSesion) VALUES (?, ?, ?,?)";
 		try {
@@ -178,13 +140,34 @@ public class VentanaRegistrarse extends JFrame {
 			ps.setString(1, usuario.getUsername());
 			ps.setString(2, usuario.getNombre());
 			ps.setString(3, usuario.getApellido());
-			ps.setDate(4, Date.valueOf(usuario.gethUltimaSesion().toString()));
+			ps.setTimestamp(4, java.sql.Timestamp.valueOf(usuario.gethUltimaSesion()));
 			ps.execute();
 			ps.close();
+			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
+	}
+	
+	public boolean existeUsuario(String username) {
+		boolean existe = false;
+		String sql = "SELECT * FROM USUARIO WHERE username = ?";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, username);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				existe=true;
+			}
+			rs.close();
+			ps.close();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return existe;
 	}
 }
