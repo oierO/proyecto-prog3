@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +20,7 @@ import javax.swing.*;
 
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.TableCellRenderer;
 
 import domain.CitaDiagnostico;
 import domain.Pieza;
@@ -210,6 +213,65 @@ public class VentanaGrafica extends JFrame {
 		JScrollPane scroll = new JScrollPane(tabla);
 		pAlmacen.add(scroll);
 		cargarTabla();
+		tabla.getTableHeader().setReorderingAllowed(false);//Para que no se puedan mover las columnas
+		tabla.setDefaultRenderer(Object.class, new TableCellRenderer() {
+			
+			@Override
+			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+					int row, int column) {
+				//Component c= getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+				JLabel l= new JLabel(value.toString());
+				l.setOpaque(true);
+				if(column==6) {
+					if(Integer.parseInt(l.getText())<100) {
+						l.setBackground(Color.RED);
+						
+					}else if(Integer.parseInt(l.getText())<200) {
+						l.setBackground(Color.YELLOW);
+						
+					}else {
+						l.setBackground(Color.GREEN);
+					}
+				}
+				return l;
+			}
+		});
+		tabla.getTableHeader().setDefaultRenderer(new TableCellRenderer() {
+			
+			@Override
+			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+					int row, int column) {
+				JLabel l= new JLabel(value.toString());
+				l.setOpaque(true);
+				if(column==0) {
+					l.setHorizontalAlignment(JLabel.CENTER);
+					l.setBackground(Color.BLUE);	
+				}else if(column==1) {
+					l.setHorizontalAlignment(JLabel.CENTER);
+					l.setBackground(Color.LIGHT_GRAY);
+				}else if(column==2) {
+					l.setHorizontalAlignment(JLabel.CENTER);
+					l.setBackground(Color.CYAN);
+				}else if(column==3) {
+					l.setHorizontalAlignment(JLabel.CENTER);
+					l.setBackground(Color.MAGENTA);
+				}else if(column==4) {
+					l.setHorizontalAlignment(JLabel.CENTER);
+					l.setBackground(Color.ORANGE);
+				}else if(column==5) {
+					l.setHorizontalAlignment(JLabel.CENTER);
+					l.setBackground(Color.PINK);
+				}else {
+					l.setHorizontalAlignment(JLabel.CENTER);
+					l.setBackground(Color.WHITE);
+				}
+				
+				return l;
+			}
+		});
+		
+		
+		
 
 		// Pestaña Parking
 
