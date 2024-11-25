@@ -10,6 +10,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -276,8 +280,94 @@ public class VentanaGrafica extends JFrame {
 		// Pestaña Parking
 
 		JPanel pParking = new PanelParking();
-		JPanel pSettings = new JPanel();
 		JPanel pUsuario = new PanelSesion(this); // Pasamos la referencia de la ventana gráfica
+		
+		//Pestaña Preferencias
+		String[] lPreferencias = new String[] {"Notificaciones", "Historial", "Valoraciones", "Soporte"};
+		JPanel pSettings = new JPanel();
+		pSettings.setLayout(new BorderLayout());
+
+		// Panel de botones de la izquierda
+		JPanel botonesPrefer = new JPanel();
+		botonesPrefer.setLayout(new GridLayout(lPreferencias.length, 1));
+		botonesPrefer.setBorder(new TitledBorder("Operaciones"));
+		pSettings.add(botonesPrefer, BorderLayout.WEST);
+
+		// Panel derecho
+		JPanel panelDerechoPreferencias = new JPanel(new BorderLayout());
+		pSettings.add(panelDerechoPreferencias, BorderLayout.CENTER);
+
+		for (String pref : lPreferencias) {
+		    JButton botonPref = new JButton(pref);
+		    botonPref.addActionListener(new ActionListener() {
+		        @Override
+		        public void actionPerformed(ActionEvent e) {
+		            String operacion = botonPref.getText();
+		            panelDerechoPreferencias.removeAll();
+
+		            if (operacion.equals("Valoraciones")) {
+		                // Panel para la sección de Valoraciones
+		                JPanel panelValoraciones = new JPanel(new BorderLayout());
+
+		                // Panel de radio buttons de calificación
+		                JPanel panelCalificacion = new JPanel(new GridLayout(1, 5, 10, 10));
+		                ButtonGroup grupoCalificacion = new ButtonGroup();
+		                for (int i = 1; i <= 5; i++) {
+		                    JRadioButton radioCalificacion = new JRadioButton(String.valueOf(i));
+		                    grupoCalificacion.add(radioCalificacion);
+		                    panelCalificacion.add(radioCalificacion);
+		                }
+		                panelValoraciones.add(panelCalificacion, BorderLayout.NORTH);
+
+		                // Panel de comentario adicional
+		                JPanel panelComentario = new JPanel(new BorderLayout());
+		                panelComentario.setBorder(new TitledBorder("Comentario Adicional"));
+		                JTextArea campoComentario = new JTextArea(5, 20);
+		                campoComentario.setLineWrap(true);
+		                campoComentario.setWrapStyleWord(true);
+		                JScrollPane scrollComentario = new JScrollPane(campoComentario);
+		                panelComentario.add(scrollComentario, BorderLayout.CENTER);
+		                panelValoraciones.add(panelComentario, BorderLayout.CENTER);
+
+		                // Botón de enviar
+		                JButton botonEnviar = new JButton("Enviar");
+		                JPanel panelEnviar = new JPanel();
+		                panelEnviar.add(botonEnviar);
+		                panelValoraciones.add(panelEnviar, BorderLayout.SOUTH);
+		                
+		                //ActionListener del botón enviar
+
+		                // Agregar panel de Valoraciones al panel derecho de preferencias
+		                panelDerechoPreferencias.add(panelValoraciones, BorderLayout.CENTER);
+
+		            } else if (operacion.equals("Soporte")) {
+		                // Panel para la sección de Soporte
+		                JTabbedPane panelSoporte = new JTabbedPane();
+
+		                // Pestaña de Preguntas Frecuentes
+		                JPanel panelPF = new JPanel();
+		                JLabel textPF = new JLabel("Preguntas frecuentes");
+		                panelPF.add(new JScrollPane(textPF));
+
+		                // Pestaña de Contacto
+		                JPanel panelContacto = new JPanel(new BorderLayout());
+		                JLabel labelContacto = new JLabel("<html>Contacto: soporte@deustotaller.com<br>Tel: 123-456-789</html>");
+		                panelContacto.add(labelContacto, BorderLayout.NORTH);
+
+		                panelSoporte.addTab("Preguntas Frecuentes", panelPF);
+		                panelSoporte.addTab("Contacto", panelContacto);
+
+		                // Agregar panel de Soporte al panel derecho de preferencias
+		                panelDerechoPreferencias.add(panelSoporte, BorderLayout.CENTER);
+		            }
+
+		            // Refrescar el panel derecho
+		            panelDerechoPreferencias.revalidate();
+		            panelDerechoPreferencias.repaint();
+		        }
+		    });
+		    botonesPrefer.add(botonPref);
+		}
 		
 		menuPestanas.add("Servicios", pServicios);
 		menuPestanas.add("Almacen", pAlmacen);
@@ -337,6 +427,7 @@ public class VentanaGrafica extends JFrame {
 //	        VentanaCitaDiagnostico ventanaCitaDiagnostico = new VentanaCitaDiagnostico(this);
 //	        ventanaCitaDiagnostico.setVisible(true);
 //	    }
+	
 	
 	public String setNombre(String nombreRecivido) {
 		nombre= nombreRecivido;
