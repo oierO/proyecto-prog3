@@ -226,6 +226,9 @@ public class VentanaGrafica extends JFrame {
 				//Component c= getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 				JLabel l= new JLabel(value.toString());
 				l.setOpaque(true);
+				if(row%2==0) {
+					l.setBackground(Color.LIGHT_GRAY);	
+				}
 				if(column==6) {
 					if(Integer.parseInt(l.getText())<100) {
 						l.setBackground(Color.RED);
@@ -237,6 +240,7 @@ public class VentanaGrafica extends JFrame {
 						l.setBackground(Color.GREEN);
 					}
 				}
+				
 				return l;
 			}
 		});
