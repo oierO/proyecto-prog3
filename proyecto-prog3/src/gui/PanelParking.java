@@ -36,24 +36,10 @@ public class PanelParking extends JPanel {
 	private static final List<String> plantasParking = List.of("Planta 1", "Planta 2", "Planta 3");
 
 	public PanelParking() {
-		// @Deprecated
-		// Thread thread = new Thread(new Runnable() {
-//			
-//			@Override
-//			public void run() {
-//				while (true) {
-//					System.out.println("T"+plantas.getSelectedItem());
-//				}
-//				
-//			}
-//		});
 		for (String planta : getPlantasparking()) {
 			mapaParkings.put(planta, new HashMap<String, PlazaParking>());
-		}
-		;
-		// mapaParkings.get("Planta 1").put("A0", new PlazaParking("Planta 1", "A0", new
-		// Vehiculo("3492BCC", "Citroen", "C4", LocalDate.of(2020, 01, 02),
-		// LocalDate.now()), LocalDateTime.now().plusWeeks(2)));
+		};
+		
 		plazas = new JPanel();
 		JPanel informacion = new JPanel();
 		plazas.setBackground(Color.WHITE);
@@ -116,8 +102,7 @@ public class PanelParking extends JPanel {
 
 			}
 		});
-		setFocusable(false);
-//		addKeyListener(new KeyAdapter() {
+		setFocusable(false);// addKeyListener(new KeyAdapter() {
 //
 //			@Override
 //			public void keyTyped(KeyEvent e) {
@@ -145,6 +130,7 @@ public class PanelParking extends JPanel {
 //			
 //		});
 
+		// Creacion de grid de botones
 		grupoBotones = new ButtonGroup();
 		plazas.setLayout(new GridLayout(FILAS_PARKING, COLUMNAS_PARKING, 10, 10));
 		plazas.setBorder(BorderFactory.createTitledBorder("PLAZAS"));
@@ -162,16 +148,15 @@ public class PanelParking extends JPanel {
 				boton.setBackground(fondoBoton(boton.getText()));
 			}
 		}
-		// RendererParking pRenderer = new RendererParking();
 
-		// tabla.se
+		// Añadido informacion adicional en el panel
 		add(plazas, BorderLayout.CENTER);
 		add(informacion, BorderLayout.WEST);
 
 	}
 
 	private void cambioSeleccionPl(String codPlaza) {
-		PlazaParking plazaSel = getMapaParkings().get(plantas.getSelectedItem()).get(codPlaza);
+		PlazaParking plazaSel = RendererParking.plazafromBD(codPlaza, (String) plantas.getSelectedItem());
 		if (plazaSel != null) {
 			matricula.setText(plazaSel.getVehiculo().getMatricula());
 			estado.setText("Ocupado");
