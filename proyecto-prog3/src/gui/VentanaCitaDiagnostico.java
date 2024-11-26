@@ -3,6 +3,8 @@ package gui;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -14,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
+import javax.swing.text.NumberFormatter;
 
 public class VentanaCitaDiagnostico extends JFrame{
 	
@@ -22,7 +25,7 @@ public class VentanaCitaDiagnostico extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField nombre;
-	private JTextField telefono;
+	private JFormattedTextField telefono;
 	private JFormattedTextField fechaDePedido;
 	private JFormattedTextField fechaDeRealizacion;
 	private JTextArea diagnosticos;
@@ -50,11 +53,41 @@ public class VentanaCitaDiagnostico extends JFrame{
 		panel.add(nombre);
 		
 		//Para el telefono
-		telefono = new JTextField();
+		
 		JLabel telefonoJLabel = new JLabel();
 		telefonoJLabel.setText("Telefono: ");
 		panel.add(telefonoJLabel);
+		
+		   // que únicamente admite números enteros entre 0000 y 5000
+        DecimalFormat formatoVisual = new DecimalFormat("#########");
+        // la validación de la entrada se hace en el método stringToValue
+        // este método se llama cada vez que se introduce un carácter en el campo
+        NumberFormatter formatoEntrada = new NumberFormatter(formatoVisual) {
+            
+			private static final long serialVersionUID = 1L;
+
+			@Override
+            public Object stringToValue(String text) throws ParseException {
+
+                if (text == null || text.length() == 0) {
+                    return null;
+                }
+                // Validar que el texto que introduce el usuario tenga máximo 4 caracteres
+                if (text.length() > 9) {
+                    throw new ParseException("El telefono introducido no es correcto", 0);
+                }
+                return super.stringToValue(text);
+            }
+        };
+        
+        formatoEntrada.setValueClass(Integer.class); // el valor devuelto es un Integer
+        formatoEntrada.setAllowsInvalid(false); // no admite caracteres inválidos
+        formatoEntrada.setOverwriteMode(true); // sobreescribe el texto si es inválido
+        formatoEntrada.setCommitsOnValidEdit(true); // se confirma la edición al validar
+		telefono = new JFormattedTextField(formatoEntrada);
 		panel.add(telefono);
+		
+		
 		
 		//Para la fecha del pedido 
 		LocalDate fechaActual = LocalDate.now();
