@@ -20,11 +20,6 @@ public class DeustoTaller {
 	private static String locDB;
 	private static VentanaInicioSesion VSesion;
 	public static Boolean debug;
-	@Deprecated
-	private static HashMap<String, String> credenciales = new HashMap<String, String>();
-	@Deprecated
-	private static HashMap<String, Usuario> usuarios = new HashMap<String, Usuario>();// Almacen de usuarios y
-																						// credenciales (Temporal)
 
 	public static void main(String[] args) {
 		System.out.println(toTimeStamp(LocalDateTime.now()));
@@ -89,16 +84,6 @@ public class DeustoTaller {
 		DeustoTaller.usuarioSesion = usuarioSesion;
 		usuarioSesion.sethUltimaSesion(LocalDateTime.now());
 
-	}
-
-	@Deprecated
-	protected static HashMap<String, String> getCredenciales() {
-		return credenciales;
-	}
-
-	@Deprecated
-	protected static HashMap<String, Usuario> getUsuarios() {
-		return usuarios;
 	}
 
 	public static Usuario getSesion() {
