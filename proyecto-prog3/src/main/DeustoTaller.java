@@ -1,7 +1,7 @@
 package main;
 
 import java.time.LocalDateTime;
-
+import java.time.ZoneOffset;
 import java.util.*;
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,12 +27,13 @@ public class DeustoTaller {
 																						// credenciales (Temporal)
 
 	public static void main(String[] args) {
+		System.out.println(toTimeStamp(LocalDateTime.now()));
 		try {
 			FileInputStream fPropiedades = new FileInputStream(new File("config/deustotaller.properties"));
 			Properties propiedades = new Properties();
 			propiedades.load(fPropiedades);
 			debug = Boolean.parseBoolean(propiedades.getProperty("debug", "false"));
-			locDB = "jdbc:sqlite:"+propiedades.getProperty("ubicacionBD", "resources/db/database.db");
+			locDB = "jdbc:sqlite:" + propiedades.getProperty("ubicacionBD", "resources/db/database.db");
 			fPropiedades.close();
 		} catch (IOException e) {
 			System.out.println("Error al cargar el fichero de propiedades.");
@@ -102,5 +103,10 @@ public class DeustoTaller {
 
 	public static Usuario getSesion() {
 		return usuarioSesion;
+	}
+
+	//Devuelve 
+	public static Timestamp toTimeStamp(LocalDateTime fecha) {
+		return new Timestamp(fecha.toInstant(ZoneOffset.ofTotalSeconds(3600)).toEpochMilli()); 
 	}
 }
