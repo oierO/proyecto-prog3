@@ -447,7 +447,7 @@ public class VentanaGrafica extends JFrame {
 		setVisible(true);
 	}
 
-	private  void cargarTabla() {
+	private  List<Pieza> cargarTabla() {
 		File f = new File("piezas_coche_almacen_1000.csv");
 		List<Pieza> lp = new ArrayList<Pieza>();
 		try {
@@ -478,9 +478,17 @@ public class VentanaGrafica extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+		return lp;
+	} 
 	private void filtrarPiezas() {
 		modeloTabla.setRowCount(0);
+		
+		cargarTabla().forEach(c -> {
+			if (c.getNombrePieza().contains(this.txtFiltro.getText())) {
+				modeloTabla.addRow(
+					new Object[] {c.getId(), c.getCodigo(), c.getNombrePieza(), c.getDescripcion(),c.getFabricante(),c.getPrecio(),c.getCantidadAlmacen()} );
+			}
+		});
 		
 		
 		
