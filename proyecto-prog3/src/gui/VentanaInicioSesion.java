@@ -186,4 +186,6 @@ public class VentanaInicioSesion extends JFrame {
 		default:
 		}
 	}
+	
+	
 }

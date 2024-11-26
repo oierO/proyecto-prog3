@@ -3,7 +3,6 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import domain.Usuario;
-import main.DeustoTaller;
 
 public class VentanaRegistrarse extends JFrame {
 
@@ -31,9 +29,10 @@ public class VentanaRegistrarse extends JFrame {
 	private JLabel lblTitulo, lblNombre, lblApellido, lblDni, lblUsuario, lblContrasenia;
 	private JTextField textNombre, textApellido, textDni, textUsuario;
 	private JPasswordField textContrasenia;
-	private Connection con = DeustoTaller.getCon();
-
+	Conexion con;
 	public VentanaRegistrarse() {
+//		Conexion BD
+		con= new Conexion();
 		pCentro = new JPanel(new GridLayout(5, 1));
 		pSur = new JPanel();
 		pNorte = new JPanel();
@@ -101,6 +100,8 @@ public class VentanaRegistrarse extends JFrame {
 			new VentanaInicioSesion();
 			dispose();
 		});
+		
+		
 
 		btnRegistrar.addActionListener((e) -> {
 			String nombre = textNombre.getText();
@@ -114,12 +115,13 @@ public class VentanaRegistrarse extends JFrame {
 			if (nombre.isEmpty() || apellido.isEmpty() || dni.isEmpty() || usuario.isEmpty() || contrasenia.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Por favor, completa todos los campos.");
 			} else {
-				if (this.existeUsuario(usuario)==false) {
+				if (this.existeUsuario(usuario.toString())==false) {
 					Usuario user = new Usuario(usuario, nombre, apellido,LocalDateTime.now());
 					guardarUsuario(user);
+					guardarCredenciales(usuario, contrasenia);
 					
 				}else {
-					JOptionPane.showMessageDialog(null, e);
+					JOptionPane.showMessageDialog(null, "Usuario ya registrado");
 					
 				}
 			}
@@ -134,13 +136,13 @@ public class VentanaRegistrarse extends JFrame {
 	}
 
 	public void guardarUsuario(Usuario usuario) {
-		String sql = "INSERT INTO usuario (username, nombre, apellido, hUltimaSesion) VALUES (?, ?, ?,?)";
+		String sql = "INSERT INTO USUARIO (username, nombre, apellido, hUltimaSesion) VALUES (?, ?, ?,?)";
 		try {
-			PreparedStatement ps = con.prepareStatement(sql);
+			PreparedStatement ps = con.conectar().prepareStatement(sql);
 			ps.setString(1, usuario.getUsername());
 			ps.setString(2, usuario.getNombre());
 			ps.setString(3, usuario.getApellido());
-			ps.setTimestamp(4, java.sql.Timestamp.valueOf(usuario.gethUltimaSesion()));
+			ps.setString(4,usuario.gethUltimaSesion().toString());
 			ps.execute();
 			ps.close();
 			
@@ -154,8 +156,9 @@ public class VentanaRegistrarse extends JFrame {
 	public boolean existeUsuario(String username) {
 		boolean existe = false;
 		String sql = "SELECT * FROM USUARIO WHERE username = ?";
+		PreparedStatement ps = null;
 		try {
-			PreparedStatement ps = con.prepareStatement(sql);
+			ps = con.conectar().prepareStatement(sql);
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
@@ -169,5 +172,21 @@ public class VentanaRegistrarse extends JFrame {
 			e.printStackTrace();
 		}
 		return existe;
+	}
+	
+	public void guardarCredenciales(String username, String password) {
+		String sql = "INSERT INTO CREDENCIALES (username, password) VALUES (?, ?)";
+		try {
+			PreparedStatement ps = con.conectar().prepareStatement(sql);
+			ps.setString(1, username);
+			ps.setString(2, password);
+			ps.execute();
+			ps.close();
+			
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 }
