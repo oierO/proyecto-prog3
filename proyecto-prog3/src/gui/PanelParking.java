@@ -36,6 +36,17 @@ public class PanelParking extends JPanel {
 	private static final List<String> plantasParking = List.of("Planta 1", "Planta 2", "Planta 3");
 
 	public PanelParking() {
+		// @Deprecated
+		// Thread thread = new Thread(new Runnable() {
+//			
+//			@Override
+//			public void run() {
+//				while (true) {
+//					System.out.println("T"+plantas.getSelectedItem());
+//				}
+//				
+//			}
+//		});
 		for (String planta : getPlantasparking()) {
 			mapaParkings.put(planta, new HashMap<String, PlazaParking>());
 		}
@@ -87,10 +98,20 @@ public class PanelParking extends JPanel {
 		informacion.add(bReservar);
 		plantas.addActionListener(new AbstractAction() {
 
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getActionCommand().equals("comboBoxChanged")) {
-					plazas.repaint();
+					Enumeration<AbstractButton> eBotones = grupoBotones.getElements();
+					while (eBotones.hasMoreElements()) {
+						JToggleButton bTemp = (JToggleButton) eBotones.nextElement();
+						bTemp.setBackground(fondoBoton(bTemp.getText()));
+					}
+
 				}
 
 			}
@@ -132,13 +153,13 @@ public class PanelParking extends JPanel {
 				JToggleButton boton = new JToggleButton(String.format("%s%s", (char) (t + 65), i));
 				boton.setToolTipText(boton.getText());
 				boton.addActionListener(e -> {
-					cambioSeleccionPl(boton.getName());
+					cambioSeleccionPl(boton.getText());
 					plazaSel = ((JToggleButton) e.getSource()).getText();
 				});
 				plazasGraficas.add(boton);
 				grupoBotones.add(boton);
 				plazas.add(boton);
-				boton.setBackground(RendererParking.getColor(boton.getName(), (String) plantas.getSelectedItem()));
+				boton.setBackground(fondoBoton(boton.getText()));
 			}
 		}
 		// RendererParking pRenderer = new RendererParking();
@@ -172,20 +193,17 @@ public class PanelParking extends JPanel {
 		}
 	}
 
+	private Color fondoBoton(String plaza) {
+		System.out.println(plaza);
+		return RendererParking.getColor(plaza, (String) plantas.getSelectedItem());
+	}
+
 	public static HashMap<String, HashMap<String, PlazaParking>> getMapaParkings() {
 		return mapaParkings;
 	}
 
 	public static List<String> getPlantasparking() {
 		return plantasParking;
-	}
-
-	public static void main(String[] args) {
-		JFrame ventana = new JFrame();
-		ventana.setFont(Font.getFont("Segoe UI"));
-		ventana.add(new PanelParking());
-		ventana.setSize(600, 480);
-		ventana.setVisible(true);
 	}
 
 }
