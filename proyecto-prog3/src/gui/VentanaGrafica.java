@@ -24,6 +24,8 @@ import javax.swing.*;
 
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.TableCellRenderer;
 
 import domain.CitaDiagnostico;
@@ -40,6 +42,7 @@ public class VentanaGrafica extends JFrame {
 	private LocalDate fechaDeRealizacion;
 	private String diagnosticos;
 	private CitaDiagnostico citaDiagnostico;
+	private JTextField txtFiltro;
 	
 	public VentanaGrafica() {
 		setSize(600, 400);
@@ -235,10 +238,17 @@ public class VentanaGrafica extends JFrame {
 		
 
 		JPanel pAlmacen = new JPanel();
+		JPanel pTabla= new JPanel();
+		JPanel panelFiltro= new JPanel();
+		panelFiltro.add(new JLabel("Filtro por título: "));
+		txtFiltro= new JTextField(20);
+		panelFiltro.add(txtFiltro);
 		modeloTabla = new ModeloAlmacen(null);
 		tabla = new JTable(modeloTabla);
 		JScrollPane scroll = new JScrollPane(tabla);
-		pAlmacen.add(scroll);
+		pTabla.add(scroll);
+		pAlmacen.add(panelFiltro,BorderLayout.NORTH);
+		pAlmacen.add(pTabla,BorderLayout.CENTER);
 		cargarTabla();
 		tabla.getTableHeader().setReorderingAllowed(false);//Para que no se puedan mover las columnas
 		tabla.setDefaultRenderer(Object.class, new TableCellRenderer() {
@@ -298,6 +308,28 @@ public class VentanaGrafica extends JFrame {
 				}
 				
 				return l;
+			}
+		});
+		
+		txtFiltro.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				filtrarPiezas();
+				
+				
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				filtrarPiezas();
+				
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
 			}
 		});
 		
@@ -415,7 +447,7 @@ public class VentanaGrafica extends JFrame {
 		setVisible(true);
 	}
 
-	private void cargarTabla() {
+	private  void cargarTabla() {
 		File f = new File("piezas_coche_almacen_1000.csv");
 		List<Pieza> lp = new ArrayList<Pieza>();
 		try {
@@ -446,6 +478,13 @@ public class VentanaGrafica extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	private void filtrarPiezas() {
+		modeloTabla.setRowCount(0);
+		
+		
+		
+		
 	}
 	
 	//Para sacar lo datos del formualrio
