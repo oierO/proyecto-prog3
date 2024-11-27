@@ -1,7 +1,9 @@
 package gui;
 
 import java.awt.Color;
+
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,7 +44,6 @@ public class RendererParking {
 		try {
 			String sql = String.format("SELECT * FROM RESERVAS_VIGENTES WHERE planta='%s' AND identificador='%s'",
 					planta, plaza);
-			System.out.println(sql);
 			Connection con = DeustoTaller.getCon();
 			Statement stm = con.createStatement();
 			ResultSet resultado = stm.executeQuery(sql);
@@ -63,8 +64,9 @@ public class RendererParking {
 			ResultSet vResult = stmt.executeQuery();
 			Vehiculo vehicle;
 			try {
+				Date formateador = (new SimpleDateFormat("yyyy-MM-dd")).parse(vResult.getString("fmatricula"));
 				vehicle = new Vehiculo(vResult.getString("matricula"), vResult.getString("marca"),
-						vResult.getString("modelo"), vResult.getInt("ano"), LocalDate.ofEpochDay(new SimpleDateFormat("yyyy-MM-dd").parse(vResult.getString("fmatricula")).toInstant().getEpochSecond()/86400));
+						vResult.getString("modelo"), vResult.getInt("ano"), LocalDate.ofEpochDay(formateador.toInstant().getEpochSecond()/86400));
 			} catch (ParseException e) {
 				JOptionPane.showMessageDialog(DeustoTaller.getVSesion().getContentPane(),
 						"Ha ocurrido un error al tratar los datos\n" + e);

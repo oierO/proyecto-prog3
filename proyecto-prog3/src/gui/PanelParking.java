@@ -10,6 +10,7 @@ import java.util.*;
 import java.util.List;
 
 import javax.swing.*;
+import javax.swing.JToggleButton.ToggleButtonModel;
 
 import domain.*;
 
@@ -30,7 +31,7 @@ public class PanelParking extends JPanel {
 	private JButton bReservar;
 	private JTextField trest;
 	private ButtonGroup grupoBotones;
-	private String plazaSel;
+	private String splazaSeleccion;
 	protected static HashMap<String, HashMap<String, PlazaParking>> mapaParkings = new HashMap<String, HashMap<String, PlazaParking>>();
 	static ArrayList<JToggleButton> plazasGraficas = new ArrayList<>();
 	private static final List<String> plantasParking = List.of("Planta 1", "Planta 2", "Planta 3");
@@ -38,8 +39,9 @@ public class PanelParking extends JPanel {
 	public PanelParking() {
 		for (String planta : getPlantasparking()) {
 			mapaParkings.put(planta, new HashMap<String, PlazaParking>());
-		};
-		
+		}
+		;
+
 		plazas = new JPanel();
 		JPanel informacion = new JPanel();
 		plazas.setBackground(Color.WHITE);
@@ -73,7 +75,7 @@ public class PanelParking extends JPanel {
 		bReservar = new JButton("Reservar");
 		bReservar.setIcon(new ImageIcon("resources/images/calendar-icon.png"));
 		bReservar.setEnabled(false);
-		bReservar.addActionListener(e -> new ReservaParking((String) plantas.getSelectedItem(), plazaSel));
+		bReservar.addActionListener(e -> new ReservaParking((String) plantas.getSelectedItem(), splazaSeleccion));
 		trest.setEditable(false);
 		trestPanel.add(trest);
 		nomvehiculoPanel.add(matricula);
@@ -92,6 +94,7 @@ public class PanelParking extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getActionCommand().equals("comboBoxChanged")) {
+					cambioSeleccionPl(splazaSeleccion);
 					Enumeration<AbstractButton> eBotones = grupoBotones.getElements();
 					while (eBotones.hasMoreElements()) {
 						JToggleButton bTemp = (JToggleButton) eBotones.nextElement();
@@ -140,7 +143,7 @@ public class PanelParking extends JPanel {
 				boton.setToolTipText(boton.getText());
 				boton.addActionListener(e -> {
 					cambioSeleccionPl(boton.getText());
-					plazaSel = ((JToggleButton) e.getSource()).getText();
+					splazaSeleccion = ((JToggleButton) e.getSource()).getText();
 				});
 				plazasGraficas.add(boton);
 				grupoBotones.add(boton);
@@ -167,6 +170,7 @@ public class PanelParking extends JPanel {
 			trest.setText(String.format("%sD,%sH,%sM,%sS", segundos / 5184000, (segundos % 5184000) / 3600,
 					((segundos % 5184000) % 3600) / 60, ((segundos % 5184000) % 3600) % 60));
 			bReservar.setEnabled(false);
+			bReservar.setToolTipText("Plaza no disponible para la reserva");
 		} else {
 			matricula.setText("#########");
 			estado.setText("Libre");
@@ -174,12 +178,14 @@ public class PanelParking extends JPanel {
 			tfin.setText("N/A");
 			trest.setText("N/A");
 			bReservar.setEnabled(true);
+			bReservar.setToolTipText("Reservar plaza");
 
 		}
+		revalidate();
+		repaint();
 	}
 
 	private Color fondoBoton(String plaza) {
-		System.out.println(plaza);
 		return RendererParking.getColor(plaza, (String) plantas.getSelectedItem());
 	}
 
