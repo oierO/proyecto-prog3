@@ -83,35 +83,35 @@ public class VentanaInicioSesion extends JFrame {
 
 		pSur.add(btnIniciarSesion);
 		btnIniciarSesion.addActionListener((e) -> {
-			String usuario = textUsuario.getText();
-			String contrasenia = String.valueOf(textContrasenia.getPassword());
-			if (DeustoTaller.login(usuario, contrasenia)) {
-				JOptionPane.showMessageDialog(null,
-						String.format("%s, Has iniciado sesión correctamente", DeustoTaller.getSesion().getNombre()));
-				new VentanaGrafica();
-				setVisible(false);
-				textUsuario.setEditable(false);
-				textContrasenia.setEditable(false);
-				btnIniciarSesion.setVisible(false);
-				btnCerrarSesion.setVisible(true);
-				setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-				addWindowListener(new WindowAdapter() {
+		    String usuario = textUsuario.getText();
+		    String contrasenia = String.valueOf(textContrasenia.getPassword());
+		    if (DeustoTaller.login(usuario, contrasenia)) {
+		        JOptionPane.showMessageDialog(null,
+		                String.format("%s, Has iniciado sesión correctamente", DeustoTaller.getSesion().getNombre()));
+		        
+		        // Pasa el usuario a VentanaGrafica
+		        new VentanaGrafica(usuario); 
+		        setVisible(false);
+		        textUsuario.setEditable(false);
+		        textContrasenia.setEditable(false);
+		        btnIniciarSesion.setVisible(false);
+		        btnCerrarSesion.setVisible(true);
+		        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		        addWindowListener(new WindowAdapter() {
 
-					@Override
-					public void windowClosing(WindowEvent e) {
-						setVisible(false);
-					}
+		            @Override
+		            public void windowClosing(WindowEvent e) {
+		                setVisible(false);
+		            }
 
-				});
+		        });
 
-			} else {
-				Toolkit.getDefaultToolkit().beep();
-				JOptionPane.showMessageDialog(null,
-						"Los datos de inicio de sesión no son correctos\n Por favor, intentelo de nuevo.",
-						"Error al conectar con DeustoTaller", JOptionPane.WARNING_MESSAGE);
-
-			}
-
+		    } else {
+		        Toolkit.getDefaultToolkit().beep();
+		        JOptionPane.showMessageDialog(null,
+		                "Los datos de inicio de sesión no son correctos\n Por favor, intentelo de nuevo.",
+		                "Error al conectar con DeustoTaller", JOptionPane.WARNING_MESSAGE);
+		    }
 		});
 
 		pSur.add(btnCerrarSesion);
