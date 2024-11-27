@@ -416,7 +416,7 @@ public class VentanaGrafica extends JFrame {
 					                            return;
 					                        }
 					                        // Insertar la valoración y el comentario en la base de datos
-					                        String dbPath = "jdbc:sqlite:C:\\Users\\diaz.inigo\\git\\proyecto-prog3\\proyecto-prog3\\resources\\db\\Valoraciones.db";
+					                        String dbPath = "jdbc:sqlite:resources\\db\\Valoraciones.db";
 				                     
 				                        	try (Connection connection = DriverManager.getConnection(dbPath)) {
 				                        		String sql = "INSERT INTO Valoraciones (valoracion, comentario, usuario) VALUES (?, ?, ?)";
@@ -600,7 +600,7 @@ public class VentanaGrafica extends JFrame {
 					        }
 					        // Método para guardar la respuesta en la base de datos
 					        private void responderPregunta(String idPregunta, String respuesta) {
-					            try (Connection con = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\diaz.inigo\\git\\proyecto-prog3\\proyecto-prog3\\resources\\db\\Preguntas.db")) {
+					            try (Connection con = DriverManager.getConnection("jdbc:sqlite:resources\\db\\Preguntas.db")) {
 					                String sql = "UPDATE preguntas SET respuesta = ? WHERE id = ?";
 					                PreparedStatement ps = con.prepareStatement(sql);
 					                ps.setString(1, respuesta);
@@ -636,7 +636,7 @@ public class VentanaGrafica extends JFrame {
 		   public String[][] getValoracionesUsuarios() {
 		   	ArrayList<String[]> valoracionesList = new ArrayList<>();
 		      
-		       try (Connection con = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\diaz.inigo\\git\\proyecto-prog3\\proyecto-prog3\\resources\\db\\Valoraciones.db")) {
+		       try (Connection con = DriverManager.getConnection("jdbc:sqlite:resources\\db\\Valoraciones.db")) {
 		           String sql = "SELECT valoracion, comentario, usuario FROM Valoraciones";
 		          
 		           // Preparar el PreparedStatement para obtener un ResultSet con cursor de solo avance
@@ -699,7 +699,7 @@ public class VentanaGrafica extends JFrame {
 		   public String[][] getPreguntasUsuarios() {
 		       ArrayList<String[]> preguntasList = new ArrayList<>();
 		      
-		       try (Connection con = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\diaz.inigo\\git\\proyecto-prog3\\proyecto-prog3\\resources\\db\\Preguntas.db")) {
+		       try (Connection con = DriverManager.getConnection("jdbc:sqlite:resources\\db\\Preguntas.db")) {
 		           String sql = "SELECT id, pregunta, usuario FROM preguntas WHERE respuesta IS NULL";
 		          
 		           // Preparar el PreparedStatement para obtener un ResultSet con cursor de solo avance
