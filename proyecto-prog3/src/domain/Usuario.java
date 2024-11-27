@@ -24,7 +24,7 @@ public class Usuario {
 	public static Usuario fromDB(String username) {
 		try {
 			Connection con = DeustoTaller.getCon();
-			String sql = "SELECT * FROM USUARIO WHERE username=?;";
+			String sql = "SELECT * FROM USUARIO WHERE username=?";
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setString(1, username);
 			ResultSet resultado = st.executeQuery();
@@ -32,10 +32,22 @@ public class Usuario {
 			String usernom = resultado.getString("username");
 			String apellido = resultado.getString("apellido");
 			LocalDateTime hora = resultado.getTimestamp("hultimasesion").toLocalDateTime();
-			return new Usuario(nom, usernom, apellido, hora);
+			resultado.close();
+			sql = "SELECT * FROM VEHICULO WHERE propietario=?";
+			st = con.prepareStatement(sql);
+			st.setString(1, username);
+			resultado = st.executeQuery();
+			ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();
+			vehiculos.add(Vehiculo.fromResultSet(resultado));
+			resultado.next();
+			while (resultado.next()) {
+				vehiculos.add(Vehiculo.fromResultSet(resultado));
+			}
+			return new Usuario(nom, usernom, apellido, hora, vehiculos);
 
 		} catch (SQLException e) {
 			System.out.println("Error al obtener usuario" + e);
+			e.printStackTrace();
 			throw new ClassCastException();
 		}
 
@@ -46,7 +58,7 @@ public class Usuario {
 	}
 
 	public void setUsername(String usuario) {
-		if (!usuario.equals(null)) {
+		if (usuario != null) {
 			this.username = usuario;
 		} else {
 			throw new NullPointerException("Usuario establecido es vacio!");
@@ -58,7 +70,7 @@ public class Usuario {
 	}
 
 	public void setNombre(String name) {
-		if (!name.equals(null)) {
+		if (name != null) {
 			this.nombre = name;
 		} else {
 			this.nombre = "N/A";
@@ -71,7 +83,7 @@ public class Usuario {
 	}
 
 	public void setApellido(String surname) {
-		if (!surname.equals(null)) {
+		if (surname != null) {
 			this.apellido = surname;
 		} else {
 			this.apellido = "N/A";
@@ -83,6 +95,15 @@ public class Usuario {
 		this.setNombre(nombre);
 		this.setApellido(apellido);
 		this.sethUltimaSesion(hlastsession);
+	}
+
+	public Usuario(String username, String nombre, String apellido, LocalDateTime hUltimaSesion,
+			ArrayList<Vehiculo> vehiculos) {
+		this.setUsername(username);
+		this.setNombre(nombre);
+		this.setApellido(apellido);
+		this.sethUltimaSesion(hUltimaSesion);
+		this.vehiculos = vehiculos;
 	}
 
 	public ArrayList<Vehiculo> getVehiculos() {
