@@ -62,16 +62,7 @@ public class RendererParking {
 			PreparedStatement stmt = DeustoTaller.getCon().prepareStatement(sql1);
 			stmt.setString(1, resultado.getString("vehiculo"));
 			ResultSet vResult = stmt.executeQuery();
-			Vehiculo vehicle;
-			try {
-				Date formateador = (new SimpleDateFormat("yyyy-MM-dd")).parse(vResult.getString("fmatricula"));
-				vehicle = new Vehiculo(vResult.getString("matricula"), vResult.getString("marca"),
-						vResult.getString("modelo"), vResult.getInt("ano"), LocalDate.ofEpochDay(formateador.toInstant().getEpochSecond()/86400));
-			} catch (ParseException e) {
-				JOptionPane.showMessageDialog(DeustoTaller.getVSesion().getContentPane(),
-						"Ha ocurrido un error al tratar los datos\n" + e);
-				vehicle = null;
-			}
+			Vehiculo vehicle = Vehiculo.fromResultSet(vResult);
 			PlazaParking pParking = new PlazaParking(planta, plaza, vehicle,
 					resultado.getTimestamp("caducidad").toLocalDateTime());
 			resultado.getStatement().close();

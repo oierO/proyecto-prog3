@@ -1,6 +1,15 @@
 package domain;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.*;
+import java.util.Date;
+
+import javax.swing.JOptionPane;
+
+import main.DeustoTaller;
 
 public class Vehiculo {
 	protected String matricula;
@@ -57,6 +66,23 @@ public class Vehiculo {
 	public String getMatricula() {
 		return matricula;
 	}
+	
+	public static Vehiculo fromResultSet(ResultSet resultado) {
+		try {
+			Date formateador = (new SimpleDateFormat("yyyy-MM-dd")).parse(resultado.getString("fmatricula"));
+			Vehiculo vehicle = new Vehiculo(resultado.getString("matricula"), resultado.getString("marca"),
+					resultado.getString("modelo"), resultado.getInt("ano"), LocalDate.ofEpochDay(formateador.toInstant().getEpochSecond()/86400));
+			return vehicle;
+		} catch (ParseException e) {
+			JOptionPane.showMessageDialog(DeustoTaller.getVSesion().getContentPane(),
+					"Ha ocurrido un error al tratar los datos\n" + e);
+			return null;
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(DeustoTaller.getVSesion().getContentPane(),
+					"Ha ocurrido un error al tratar la base de datos\n" + e);
+			return null;
+		}
+	}
 
 	public Vehiculo(String matricula, String marca, String modelo, Integer anoModelo, LocalDate fMatricula) {
 		this.setMatricula(matricula);
@@ -65,5 +91,12 @@ public class Vehiculo {
 		this.setAnoModelo(anoModelo);
 		this.setfMatricula(fMatricula);
 	}
+
+	@Override
+	public String toString() {
+		return String.format("%s ~ %s %s", getMatricula(),getMarca(),getModelo());
+	}
+	
+	
 
 }
