@@ -764,12 +764,12 @@ public class VentanaGrafica extends JFrame {
 	private void filtrarPiezas() {
 		modeloTabla.setRowCount(0);
 
-		cargarTabla().forEach(c -> {
+		/*cargarTabla().forEach(c -> {
 			if (c.getNombrePieza().contains(this.txtFiltro.getText())) {
 				modeloTabla.addRow(new Object[] { c.getId(), c.getCodigo(), c.getNombrePieza(), c.getDescripcion(),
 						c.getFabricante(), c.getPrecio(), c.getCantidadAlmacen() });
 			}
-		});
+		});*/
 
 	}
 
