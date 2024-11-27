@@ -246,7 +246,14 @@ public class VentanaGrafica extends JFrame {
 		JScrollPane scroll = new JScrollPane(tabla);
 		pTabla.add(scroll);
 		
+		//Creando panel para que aparezca la informacion
+		JPanel pInfor= new JPanel();
+		
+		JTextArea texto= new JTextArea();
+		pInfor.add(texto);
+		
 		pAlmacen.add(panelFiltro, BorderLayout.NORTH);
+		pAlmacen.add(pInfor,BorderLayout.SOUTH);
 		pAlmacen.add(pTabla, BorderLayout.CENTER);
 		cargarTabla();
 		tabla.getTableHeader().setReorderingAllowed(false);// Para que no se puedan mover las columnas
@@ -272,6 +279,9 @@ public class VentanaGrafica extends JFrame {
 					} else {
 						l.setBackground(Color.GREEN);
 					}
+				}
+				if(isSelected) {
+					
 				}
 
 				return l;
