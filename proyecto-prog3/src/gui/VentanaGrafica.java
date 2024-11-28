@@ -230,14 +230,21 @@ public class VentanaGrafica extends JFrame {
 		lbltxtFiltro = new JLabel("Filtro por título: ");
 		panelFiltro.add(lbltxtFiltro);
 		txtFiltro = new JTextField(10);
-		panelFiltro.add(txtFiltro);
+				panelFiltro.add(txtFiltro);
 
 		lblcbTipo = new JLabel("Filtro por tipo: ");
 		panelFiltro.add(lblcbTipo);
 
 		// Creando combobox
 		cbTipo = new JComboBox<String>();
+		ArrayList<String>fabricantes = BD.getFabricantes();
 		cbFabricante = new JComboBox<String>();
+		for(String f: fabricantes) {
+			cbFabricante.addItem(f);
+		}
+		cbFabricante.addActionListener((e)->{
+			
+		});
 		panelFiltro.add(cbTipo);
 
 		lblcbFabricante = new JLabel("Filtro por fabricante: ");
@@ -837,15 +844,31 @@ public class VentanaGrafica extends JFrame {
 	}
 
 	private void filtrarPiezas() {
-		modeloTabla.setRowCount(0);
+		//modeloTabla.setRowCount(0);
 
-		/*
-		 * cargarTabla().forEach(c -> { if
-		 * (c.getNombrePieza().contains(this.txtFiltro.getText())) {
-		 * modeloTabla.addRow(new Object[] { c.getId(), c.getCodigo(),
-		 * c.getNombrePieza(), c.getDescripcion(), c.getFabricante(), c.getPrecio(),
-		 * c.getCantidadAlmacen() }); } });
-		 */
+		
+		  /*cargarTabla().forEach(c -> { if
+		  (c.getNombrePieza().contains(txtFiltro.getText())) {
+		  modeloTabla.addRow(new Object[] { c.getId(), c.getCodigo(),
+		  c.getNombrePieza(), c.getDescripcion(), c.getFabricante(), c.getPrecio(),
+		  c.getCantidadAlmacen() }); } });
+		 tabla.setModel(modeloTabla);*/
+		
+		ArrayList<Pieza> lp = (ArrayList<Pieza>) cargarTabla();
+		if(txtFiltro.getText().equals("")) {
+			modeloTabla = new ModeloAlmacen(lp);
+			
+		}else {
+		
+			ArrayList<Pieza> lpFiltradas = new ArrayList<Pieza>();
+			for(Pieza p: lp) {
+				if(p.getNombrePieza().contains(txtFiltro.getText())) {
+					lpFiltradas.add(p);
+				}
+			}
+			modeloTabla = new ModeloAlmacen(lpFiltradas);
+		}
+		tabla.setModel(modeloTabla);
 
 	}
 
