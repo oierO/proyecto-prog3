@@ -427,9 +427,8 @@ public class VentanaGrafica extends JFrame {
 									return;
 								}
 								// Insertar la valoración y el comentario en la base de datos
-								String dbPath = "jdbc:sqlite:resources\\db\\database.db";
 
-								try (Connection connection = DriverManager.getConnection(dbPath)) {
+								try (Connection connection = DeustoTaller.getCon()) {
 									String sql = "INSERT INTO VALORACIONES (valoracion, comentario, usuario) VALUES (?, ?, ?)";
 									try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 										stmt.setInt(1, valoracion);
@@ -617,7 +616,7 @@ public class VentanaGrafica extends JFrame {
 
 				// Método para guardar la respuesta en la base de datos
 				private void responderPregunta(String idPregunta, String respuesta) {
-					try (Connection con = DriverManager.getConnection("jdbc:sqlite:resources\\db\\database.db")) {
+					try (Connection con = DeustoTaller.getCon()) {
 						String sql = "UPDATE PREGUNTAS SET respuesta = ? WHERE id = ?";
 						PreparedStatement ps = con.prepareStatement(sql);
 						ps.setString(1, respuesta);
@@ -652,7 +651,7 @@ public class VentanaGrafica extends JFrame {
 	public String[][] getValoracionesUsuarios() {
 		ArrayList<String[]> valoracionesList = new ArrayList<>();
 
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:resources\\db\\database.db")) {
+		try (Connection con = DeustoTaller.getCon()) {
 			String sql = "SELECT valoracion, comentario, usuario FROM VALORACIONES";
 
 			// Preparar el PreparedStatement para obtener un ResultSet con cursor de solo
@@ -717,7 +716,7 @@ public class VentanaGrafica extends JFrame {
 	public String[][] getPreguntasUsuarios() {
 		ArrayList<String[]> preguntasList = new ArrayList<>();
 
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:resources\\db\\database.db")) {
+		try (Connection con = DeustoTaller.getCon()) {
 			String sql = "SELECT id, pregunta, usuario FROM PREGUNTAS WHERE respuesta IS NULL";
 
 			// Preparar el PreparedStatement para obtener un ResultSet con cursor de solo
