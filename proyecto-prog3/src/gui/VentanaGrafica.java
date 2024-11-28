@@ -55,6 +55,7 @@ public class VentanaGrafica extends JFrame {
 	private JLabel lbltxtFiltro, lblcbTipo, lblcbFabricante;
 	private String usuario;
 	protected JTable tablaPreguntas;
+	private ArrayList<String> serviciosDisponibleStrings;
 
 	public VentanaGrafica(String usuario) {
 		setSize(600, 400);
@@ -65,7 +66,7 @@ public class VentanaGrafica extends JFrame {
 		this.usuario = usuario;
 
 		// Pestaña Servicios
-		String[] lServicios = new String[] { "Taller", "Piezas", "Diagnóstico" };
+		String[] lServicios = new String[] { "Taller", "Comprar/Vender Piezas"};
 		JPanel pServicios = new JPanel();
 		pServicios.setLayout(new BorderLayout());
 		JPanel botones = new JPanel();
@@ -88,15 +89,14 @@ public class VentanaGrafica extends JFrame {
 					panelDerechoServicios.removeAll();
 
 					// Cuando un panel está activo los otros no serán visibles
-					if (operacion.equals("Diagnóstico")) {
+					if (operacion.equals("Taller")) {
 
 						// Panel para diagnósticos
 						ArrayList<CitaDiagnostico> listaCitasDiagnosticos = new ArrayList<CitaDiagnostico>(); // No se
 																												// usa??
 						JCheckBox checkBox1 = new JCheckBox("Motor", false);
 						JCheckBox checkBox2 = new JCheckBox("Chapa", false);
-						JCheckBox checkBox3 = new JCheckBox("Retrovisor", false);
-						JCheckBox checkBox4 = new JCheckBox("Otros", false);
+						JCheckBox checkBox3 = new JCheckBox("Otros", false);
 
 						JPanel panelDiagnostico = new JPanel();
 						JPanel panelNorte = new JPanel();
@@ -119,10 +119,9 @@ public class VentanaGrafica extends JFrame {
 						panelNorte.add(checkBox1);
 						panelNorte.add(checkBox2);
 						panelNorte.add(checkBox3);
-						panelNorte.add(checkBox4);
 						panelDiagnostico.setVisible(true);
 
-						checkBox4.addActionListener(new ActionListener() {
+						checkBox3.addActionListener(new ActionListener() {
 
 							@Override
 							public void actionPerformed(ActionEvent e) {
@@ -153,10 +152,6 @@ public class VentanaGrafica extends JFrame {
 								if (checkBox3.isSelected()) {
 									listaDiagnosticoSeleccionado.add(checkBox3.getText());
 								}
-								if (checkBox4.isSelected()) {
-									listaDiagnosticoSeleccionado.add(checkBox4.getText());
-
-								}
 
 								if (!listaDiagnosticoSeleccionado.isEmpty()) {
 									System.out.println("El usuario ha seleccionado estos diagnósticos: ");
@@ -174,7 +169,7 @@ public class VentanaGrafica extends JFrame {
 						panelDerechoServicios.add(panelDiagnostico, BorderLayout.CENTER);
 						panelDerechoServicios.add(botonReservar, BorderLayout.EAST);
 
-					} else if (operacion.equals("Piezas")) {
+					} else if (operacion.equals("Comprar/Vender Piezas")) {
 
 						// Panel para piezas
 						JPanel panelPiezas = new JPanel();
@@ -186,7 +181,7 @@ public class VentanaGrafica extends JFrame {
 						descripcion.setColumns(40);
 						descripcion.setLineWrap(true);
 						descripcion.setText("Hola ");
-						panelDescripcion.setEnabled(false);
+						descripcion.setEditable(false);
 
 						panelDescripcion.add(descripcion);
 						panelPiezas.add(panelDescripcion);
@@ -203,17 +198,7 @@ public class VentanaGrafica extends JFrame {
 
 						panelDerechoServicios.add(panelPiezas);
 
-					} else if (operacion.equals("Taller")) {
-
-						// Panel para Taller
-						JPanel panelTaller = new JPanel();
-						JButton botonTaller = new JButton("Taller");
-						botonTaller.addActionListener(t -> System.out.println("Taller"));
-						panelTaller.add(botonTaller);
-
-						panelDerechoServicios.add(panelTaller);
-
-					}
+					} 
 
 					// Refrescar el panel
 					panelDerechoServicios.revalidate();

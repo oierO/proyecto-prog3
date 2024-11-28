@@ -41,6 +41,7 @@ public class DeustoTaller {
 		try {
 			con = DriverManager.getConnection(locDB);
 		} catch (SQLException e) {
+			
 			JOptionPane.showMessageDialog(VSesion, "Error al cargar la base de datos:\n" + e, "Error de Inicialización",
 					JOptionPane.ERROR_MESSAGE);
 			System.exit(0);

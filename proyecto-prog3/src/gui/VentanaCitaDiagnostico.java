@@ -57,11 +57,9 @@ public class VentanaCitaDiagnostico extends JFrame{
 		JLabel telefonoJLabel = new JLabel();
 		telefonoJLabel.setText("Telefono: ");
 		panel.add(telefonoJLabel);
-		
-		   // que únicamente admite números enteros entre 0000 y 5000
+
         DecimalFormat formatoVisual = new DecimalFormat("#########");
-        // la validación de la entrada se hace en el método stringToValue
-        // este método se llama cada vez que se introduce un carácter en el campo
+        
         NumberFormatter formatoEntrada = new NumberFormatter(formatoVisual) {
             
 			private static final long serialVersionUID = 1L;
@@ -72,7 +70,7 @@ public class VentanaCitaDiagnostico extends JFrame{
                 if (text == null || text.length() == 0) {
                     return null;
                 }
-                // Validar que el texto que introduce el usuario tenga máximo 4 caracteres
+
                 if (text.length() > 9) {
                     throw new ParseException("El telefono introducido no es correcto", 0);
                 }
@@ -80,10 +78,10 @@ public class VentanaCitaDiagnostico extends JFrame{
             }
         };
         
-        formatoEntrada.setValueClass(Integer.class); // el valor devuelto es un Integer
-        formatoEntrada.setAllowsInvalid(false); // no admite caracteres inválidos
-        formatoEntrada.setOverwriteMode(true); // sobreescribe el texto si es inválido
-        formatoEntrada.setCommitsOnValidEdit(true); // se confirma la edición al validar
+        formatoEntrada.setValueClass(Integer.class); 
+        formatoEntrada.setAllowsInvalid(false); 
+        formatoEntrada.setOverwriteMode(true); 
+        formatoEntrada.setCommitsOnValidEdit(true); 
 		telefono = new JFormattedTextField(formatoEntrada);
 		panel.add(telefono);
 		
