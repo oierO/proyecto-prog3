@@ -750,7 +750,7 @@ public class VentanaGrafica extends JFrame {
 				+ " codigo TEXT NOT NULL," + " nombrePieza TEXT NOT NULL," + " descripcion TEXT,"
 				+ " fabricante TEXT NOT NULL," + " precio REAL NOT NULL," + " cantidadAlmacen INTEGER NOT NULL" + ");";
 		try (PreparedStatement ps = DeustoTaller.getCon().prepareStatement(sql)) {
-			ps.executeUpdate(); // Ejecuta la creación de la tabla
+			ps.executeUpdate(); 
 			System.out.println("Tabla 'Pieza' creada exitosamente.");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -768,7 +768,7 @@ public class VentanaGrafica extends JFrame {
 				ps.setString(4, pieza.getFabricante());
 				ps.setFloat(5, pieza.getPrecio());
 				ps.setInt(6, pieza.getCantidadAlmacen());
-				ps.executeUpdate(); // Inserta la pieza actual
+				ps.executeUpdate(); 
 			}
 			System.out.println("Datos insertados en la tabla 'Pieza'.");
 		} catch (SQLException e) {
