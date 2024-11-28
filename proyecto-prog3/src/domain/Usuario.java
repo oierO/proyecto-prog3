@@ -38,11 +38,16 @@ public class Usuario {
 			st.setString(1, username);
 			resultado = st.executeQuery();
 			ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();
-			vehiculos.add(Vehiculo.fromResultSet(resultado));
-			resultado.next();
-			while (resultado.next()) {
+			try {
 				vehiculos.add(Vehiculo.fromResultSet(resultado));
+				resultado.next();
+				while (resultado.next()) {
+					vehiculos.add(Vehiculo.fromResultSet(resultado));
+				}
+			} catch (NullPointerException e) {
+				//No hace nada
 			}
+			
 			return new Usuario(nom, usernom, apellido, hora, vehiculos);
 
 		} catch (SQLException e) {
