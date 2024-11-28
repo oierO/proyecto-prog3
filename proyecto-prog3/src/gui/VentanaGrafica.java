@@ -257,7 +257,8 @@ public class VentanaGrafica extends JFrame {
 		pAlmacen.add(pInfor, BorderLayout.SOUTH);
 		pAlmacen.add(pTabla, BorderLayout.CENTER);
 		cargarTabla();
-		creartablaPiezas(cargarTabla());
+		creartablaPiezas();
+		insertarPiezas(cargarTabla());
 		tabla.getTableHeader().setReorderingAllowed(false);// Para que no se puedan mover las columnas
 		tabla.setDefaultRenderer(Object.class, new TableCellRenderer() {
 
@@ -751,6 +752,25 @@ public class VentanaGrafica extends JFrame {
 		try (PreparedStatement ps = DeustoTaller.getCon().prepareStatement(sql)) {
 			ps.executeUpdate(); // Ejecuta la creación de la tabla
 			System.out.println("Tabla 'Pieza' creada exitosamente.");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void insertarPiezas(List<Pieza> listaPiezas) {
+		String sql = "INSERT INTO Pieza (codigo, nombrePieza, descripcion, fabricante, precio, cantidadAlmacen) "
+				+ "VALUES (?, ?, ?, ?, ?, ?)";
+		try (PreparedStatement ps = DeustoTaller.getCon().prepareStatement(sql)) {
+			for (Pieza pieza : listaPiezas) {
+				ps.setString(1, pieza.getCodigo());
+				ps.setString(2, pieza.getNombrePieza());
+				ps.setString(3, pieza.getDescripcion());
+				ps.setString(4, pieza.getFabricante());
+				ps.setFloat(5, pieza.getPrecio());
+				ps.setInt(6, pieza.getCantidadAlmacen());
+				ps.executeUpdate(); // Inserta la pieza actual
+			}
+			System.out.println("Datos insertados en la tabla 'Pieza'.");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
