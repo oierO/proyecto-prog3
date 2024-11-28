@@ -220,7 +220,7 @@ public class VentanaGrafica extends JFrame {
 			botones.add(boton);
 		}
 
-		JPanel pAlmacen = new JPanel();
+		JPanel pAlmacen = new JPanel(new BorderLayout());
 		JPanel pTabla = new JPanel();
 		JPanel panelFiltro = new JPanel(new FlowLayout());
 		
@@ -249,7 +249,7 @@ public class VentanaGrafica extends JFrame {
 		//Creando panel para que aparezca la informacion
 		JPanel pInfor= new JPanel();
 		
-		JTextArea texto= new JTextArea();
+		JTextArea texto= new JTextArea();//MouseListener
 		pInfor.add(texto);
 		
 		pAlmacen.add(panelFiltro, BorderLayout.NORTH);
@@ -280,9 +280,7 @@ public class VentanaGrafica extends JFrame {
 						l.setBackground(Color.GREEN);
 					}
 				}
-				if(isSelected) {
-					
-				}
+				
 
 				return l;
 			}
