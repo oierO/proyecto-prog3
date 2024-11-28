@@ -9,6 +9,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -251,6 +253,30 @@ public class VentanaGrafica extends JFrame {
 		JPanel pInfor = new JPanel();
 
 		JTextArea texto = new JTextArea();// MouseListener
+		tabla.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int selec= tabla.getSelectedRow();
+				if(selec!=-1) {
+					String id= tabla.getValueAt(selec, 0).toString();
+					String codigo=tabla.getValueAt(selec, 1).toString();
+					String nombrePieza=tabla.getValueAt(selec, 2).toString();
+					String descripcion=tabla.getValueAt(selec, 3).toString();
+					String fabricante=tabla.getValueAt(selec, 4).toString();
+					String precio=tabla.getValueAt(selec, 5).toString();
+					String cantidadAlmacen=tabla.getValueAt(selec, 6).toString();
+					
+					texto.setText( id + ","+ codigo +", "  + nombrePieza+ ","+ descripcion +","+ fabricante +","+precio+","+ cantidadAlmacen);
+					texto.setFont(new Font("ARIAL",Font.BOLD,14 ));
+					
+					
+					
+				}
+			}
+			
+		});
+		
 		pInfor.add(texto);
 
 		pAlmacen.add(panelFiltro, BorderLayout.NORTH);
@@ -751,6 +777,7 @@ public class VentanaGrafica extends JFrame {
 		try (PreparedStatement ps = DeustoTaller.getCon().prepareStatement(sql)) {
 			ps.executeUpdate(); 
 			System.out.println("Tabla 'Pieza' creada exitosamente.");
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
