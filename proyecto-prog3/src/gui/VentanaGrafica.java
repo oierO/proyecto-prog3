@@ -237,11 +237,12 @@ public class VentanaGrafica extends JFrame {
 
 		// Creando combobox
 		cbTipo = new JComboBox<String>();
-		ArrayList<String>fabricantes = BD.getFabricantes();
+		
 		cbFabricante = new JComboBox<String>();
-		for(String f: fabricantes) {
-			cbFabricante.addItem(f);
-		}
+
+//		for(String f: fabricantes) {
+//			cbFabricante.addItem(f);
+//		}
 		cbFabricante.addActionListener((e)->{
 			
 		});
@@ -837,7 +838,6 @@ public class VentanaGrafica extends JFrame {
 			}
 			sc.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return lp;
@@ -871,6 +871,26 @@ public class VentanaGrafica extends JFrame {
 		tabla.setModel(modeloTabla);
 
 	}
+	
+	
+    private static void cargarFabricantes(JComboBox<String> comboBox) {
+        String sql = "SELECT DISTINCT fabricante FROM Pieza"; // Consulta SQL
+
+        try (Connection conn = DeustoTaller.getCon(); // Obtenemos conexión
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) { // Ejecutamos la consulta
+
+            while (rs.next()) { // Iteramos por los resultados
+                String fabricante = rs.getString("fabricante"); // Obtenemos cada fabricante
+                comboBox.addItem(fabricante); // Lo añadimos al JComboBox
+            }
+
+            System.out.println("Fabricantes cargados exitosamente.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 	// Para sacar lo datos del formualrio
 
