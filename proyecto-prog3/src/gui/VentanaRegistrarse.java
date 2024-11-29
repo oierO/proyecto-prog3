@@ -1,12 +1,15 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -43,6 +46,11 @@ public class VentanaRegistrarse extends JFrame {
 		pTextContrasenia = new JPanel(new GridLayout(2, 1));
 
 		lblTitulo = new JLabel("DEUSTO TALLER");
+		lblTitulo.setIcon(new ImageIcon("resources/images/app-icon.png"));
+		lblTitulo.setFont(VentanaInicioSesion.fuenteTitulo);
+		lblTitulo.setOpaque(true);
+		lblTitulo.setBackground(new Color(136, 174, 208));
+		lblTitulo.setBorder(BorderFactory.createRaisedBevelBorder());
 		lblNombre = new JLabel("Nombre:");
 		lblApellido = new JLabel("Apellido:");
 		lblDni = new JLabel("Dni:");
