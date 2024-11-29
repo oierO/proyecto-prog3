@@ -15,11 +15,13 @@ import java.sql.SQLException;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import main.DeustoTaller;
 
@@ -34,6 +36,8 @@ public class VentanaInicioSesion extends JFrame {
 	public static Font fuenteTitulo = new Font("Bahnschrift", Font.BOLD, 30);
 	private JTextField textUsuario;
 	private JPasswordField textContrasenia;
+	private JProgressBar progressBar;
+	private JDialog progressDialog;
 
 	public VentanaInicioSesion() {
 
@@ -85,6 +89,7 @@ public class VentanaInicioSesion extends JFrame {
 			String usuario = textUsuario.getText();
 			String contrasenia = String.valueOf(textContrasenia.getPassword());
 			if (DeustoTaller.login(usuario, contrasenia)) {
+				mostrarBarraProgreso(usuario);
 				JOptionPane.showMessageDialog(null,
 						String.format("%s, Has iniciado sesión correctamente", DeustoTaller.getSesion().getNombre()));
 
@@ -186,4 +191,58 @@ public class VentanaInicioSesion extends JFrame {
 		}
 	}
 
+	private void mostrarBarraProgreso(String usuario) {
+
+		progressDialog = new JDialog(this, "Cargando información", true);
+		progressDialog.setSize(300, 100);
+		progressDialog.setLocationRelativeTo(this);
+		progressDialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+
+		progressBar = new JProgressBar(0, 100);
+		progressBar.setValue(0);
+		progressBar.setStringPainted(true);
+		progressBar.setForeground(new Color(85, 170, 255)); // Color de progreso
+		progressBar.setBackground(new Color(240, 240, 240)); // Color de fondo
+		progressBar.setFont(new Font("Bahnschrift", Font.BOLD, 14));
+		progressBar.setBorder(BorderFactory.createLineBorder(new Color(136, 174, 208), 2));
+		progressBar.setUI(new javax.swing.plaf.basic.BasicProgressBarUI() {
+			@Override
+			protected Color getSelectionForeground() {
+				return Color.BLACK;
+			}
+
+			@Override
+			protected Color getSelectionBackground() {
+				return Color.WHITE;
+			}
+		});
+
+		JLabel lblCargando = new JLabel("Cargando datos, por favor espere...");
+		lblCargando.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
+		lblCargando.setHorizontalAlignment(JLabel.CENTER);
+
+		JPanel panel = new JPanel(new BorderLayout());
+		panel.add(lblCargando, BorderLayout.NORTH);
+		panel.add(progressBar, BorderLayout.CENTER);
+		panel.setBackground(Color.WHITE);
+
+		progressDialog.add(panel);
+		Thread cargarHilo = new Thread(() -> {
+			for (int i = 0; i <= 100; i++) {
+				try {
+					Thread.sleep(50);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				progressBar.setValue(i);
+			}
+
+			progressDialog.dispose();
+			this.dispose();
+			new VentanaGrafica(usuario);
+		});
+
+		cargarHilo.start();
+		progressDialog.setVisible(true);
+	}
 }
