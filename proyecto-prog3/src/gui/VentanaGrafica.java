@@ -244,7 +244,7 @@ public class VentanaGrafica extends JFrame {
 
 		// Creando panel para que aparezca la informacion
 		JPanel pInfor = new JPanel();
-		//cargarFabricantes(cbFabricante);
+		cargarFabricantes(cbFabricante);
 
 		;// MouseListener
 		tabla.addMouseListener(new MouseAdapter() {
@@ -863,9 +863,9 @@ public class VentanaGrafica extends JFrame {
     private static void cargarFabricantes(JComboBox<String> comboBox) {
         String sql = "SELECT DISTINCT fabricante FROM Pieza"; // Consulta SQL
 
-        try (Connection conn = DeustoTaller.getCon(); // Obtenemos conexión
+        try {Connection conn = DeustoTaller.getCon(); // Obtenemos conexión
              PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) { // Ejecutamos la consulta
+             ResultSet rs = ps.executeQuery();  // Ejecutamos la consulta
 
             while (rs.next()) { // Iteramos por los resultados
                 String fabricante = rs.getString("fabricante"); // Obtenemos cada fabricante
