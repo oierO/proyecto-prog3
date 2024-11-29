@@ -23,12 +23,15 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+
 import main.DeustoTaller;
 
 public class VentanaInicioSesion extends JFrame {
 	/**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel pCentro, pSur, pNorte, pEste, pOeste, ptextUsuario, pTextContrasenia;
 	private JButton btnIniciarSesion, btnCerrarSesion, btnRegistrarse;
@@ -37,7 +40,9 @@ public class VentanaInicioSesion extends JFrame {
 	private JTextField textUsuario;
 	private JPasswordField textContrasenia;
 	private JProgressBar progressBar;
+	public static Thread cargarHilo;
 	private JDialog progressDialog;
+	private int progreso;
 
 	public VentanaInicioSesion() {
 
@@ -196,7 +201,7 @@ public class VentanaInicioSesion extends JFrame {
 		progressBar.setValue(0);
 		progressBar.setStringPainted(true);
 		progressBar.setForeground(new Color(85, 170, 255));
-		progressBar.setBackground(new Color(240, 240, 240)); 
+		progressBar.setBackground(new Color(240, 240, 240));
 		progressBar.setFont(new Font("Bahnschrift", Font.BOLD, 14));
 		progressBar.setBorder(BorderFactory.createLineBorder(new Color(136, 174, 208), 2));
 		progressBar.setUI(new javax.swing.plaf.basic.BasicProgressBarUI() {
@@ -221,25 +226,40 @@ public class VentanaInicioSesion extends JFrame {
 		panel.setBackground(Color.WHITE);
 
 		progressDialog.add(panel);
-		Thread cargarHilo = new Thread(() -> {
-			for (int i = 0; i <= 100; i++) {
+		cargarHilo = new Thread(() -> {
+			for (progreso = 0; progreso <= 100 && !Thread.currentThread().isInterrupted(); progreso++) {
 				try {
-					Thread.sleep(50);
+					Thread.sleep(55);
 				} catch (InterruptedException e) {
+					SwingUtilities.invokeLater(() -> progressBar.setValue(100));
+					Thread.currentThread().interrupt();
 					e.printStackTrace();
 				}
-				progressBar.setValue(i);
+				SwingUtilities.invokeLater(() -> progressBar.setValue(getProgreso()));
 			}
 
-			progressDialog.setVisible(false);
-			setVisible(false);
-			JOptionPane.showMessageDialog(null,
-					String.format("%s, Has iniciado sesión correctamente", DeustoTaller.getSesion().getNombre()));
+			SwingUtilities.invokeLater(() -> {
+				progressDialog.setVisible(false);
+				setVisible(false);
+			});
+			SwingUtilities.invokeLater(() -> {
+				JOptionPane.showMessageDialog(null,
+						String.format("%s, Has iniciado sesión correctamente", DeustoTaller.getSesion().getNombre()));
 
-			new VentanaGrafica(usuario);
+				new VentanaGrafica(usuario);
+			});
+			
 		});
 
 		cargarHilo.start();
 		progressDialog.setVisible(true);
+	}
+
+	public int getProgreso() {
+		return progreso;
+	}
+	
+	public static Thread getCargarHilo() {
+		return cargarHilo;
 	}
 }
