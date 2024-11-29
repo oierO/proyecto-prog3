@@ -244,6 +244,7 @@ public class VentanaGrafica extends JFrame {
 
 		// Creando panel para que aparezca la informacion
 		JPanel pInfor = new JPanel();
+		//cargarFabricantes(cbFabricante);
 
 		;// MouseListener
 		tabla.addMouseListener(new MouseAdapter() {
