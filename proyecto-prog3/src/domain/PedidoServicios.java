@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CitaDiagnostico {
+public class PedidoServicios {
 	
 private	String nombre;
 private	int telefono;
@@ -16,7 +16,7 @@ private String comentario;
 	
 	
 	
-	public CitaDiagnostico(String nombre,int telefono ,LocalDate fechaDePedido, LocalDate fechaDeRealizacion,
+	public PedidoServicios(String nombre,int telefono ,LocalDate fechaDePedido, LocalDate fechaDeRealizacion,
 			ArrayList<String> serviciosElegidos,String comentario) {
 		super();
 		this.nombre = nombre;

@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
 
-public class VentanaCitaDiagnostico extends JFrame{
+public class VentanaPedidoServicios extends JFrame{
 	
 	/**
 	 * 
@@ -33,7 +33,7 @@ public class VentanaCitaDiagnostico extends JFrame{
 	private VentanaGrafica ventanaGrafica;
 	
 	
-	public VentanaCitaDiagnostico() {
+	public VentanaPedidoServicios() {
 //		this.ventanaGrafica = ventanaGrafica;
 		
 		setTitle("Reservar cita");
@@ -176,7 +176,7 @@ public class VentanaCitaDiagnostico extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		new VentanaCitaDiagnostico();
+		new VentanaPedidoServicios();
 	}
 	
 

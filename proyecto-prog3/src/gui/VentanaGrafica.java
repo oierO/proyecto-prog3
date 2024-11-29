@@ -35,7 +35,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
-import domain.CitaDiagnostico;
+import domain.PedidoServicios;
 import domain.Pieza;
 import main.DeustoTaller;
 
@@ -49,7 +49,7 @@ public class VentanaGrafica extends JFrame {
 	private LocalDate fechaDePedido;
 	private LocalDate fechaDeRealizacion;
 	private String diagnosticos;
-	private CitaDiagnostico citaDiagnostico;
+	private PedidoServicios pedidoServicios;
 	private JTextField txtFiltro;
 	private JComboBox<String> cbTipo, cbFabricante;
 	private JLabel lbltxtFiltro, lblcbTipo, lblcbFabricante;
@@ -88,86 +88,74 @@ public class VentanaGrafica extends JFrame {
 					String operacion = boton.getText();
 					panelDerechoServicios.removeAll();
 
-					// Cuando un panel está activo los otros no serán visibles
 					if (operacion.equals("Taller")) {
 
-						// Panel para diagnósticos
-						ArrayList<CitaDiagnostico> listaCitasDiagnosticos = new ArrayList<CitaDiagnostico>(); // No se
-																												// usa??
-						JCheckBox checkBox1 = new JCheckBox("Motor", false);
-						JCheckBox checkBox2 = new JCheckBox("Chapa", false);
-						JCheckBox checkBox3 = new JCheckBox("Otros", false);
+						// Panel para servicios disponibles
+						
 
-						JPanel panelDiagnostico = new JPanel();
-						JPanel panelNorte = new JPanel();
+						JPanel PanelServiciosDisponibles = new JPanel();
+						JPanel panelCentro = new JPanel();
 
-						JTextArea textoOtros = new JTextArea();
-						textoOtros.setRows(30);
-						textoOtros.setColumns(60);
-						textoOtros.setLineWrap(true);
-						textoOtros.setVisible(false);
 
-						JScrollPane panelTexto = new JScrollPane(textoOtros);
-						panelTexto.setVisible(false);
+						PanelServiciosDisponibles.setLayout(new BorderLayout());
+						Border panelDiagnosticoBorder = BorderFactory.createTitledBorder("¿Qué necesitas?");
+						PanelServiciosDisponibles.setBorder(panelDiagnosticoBorder);
+						PanelServiciosDisponibles.add(panelCentro, BorderLayout.CENTER);
+				
+						//Servicios disponibles
+						ArrayList<String> listaServiciosDisponibles = new ArrayList<String>();
+						listaServiciosDisponibles.add("Cambio de aceite y filtro");
+						listaServiciosDisponibles.add("Revisión y reparación del sistema de frenos");
+						listaServiciosDisponibles.add("Reparación de sistemas de suspensión y dirección");
+						listaServiciosDisponibles.add("Reparación y mantenimiento del sistema de escape");
+						listaServiciosDisponibles.add("Servicio de diagnóstico electrónico");
+						listaServiciosDisponibles.add("Cambio de neumáticos y alineación");
+						listaServiciosDisponibles.add("Reparación y recarga de sistemas de aire acondicionado");
+						listaServiciosDisponibles.add("Reparación de sistemas de transmisión");
+						listaServiciosDisponibles.add("Reemplazo y reparación de sistemas de iluminación");
+						listaServiciosDisponibles.add("Servicio de mantenimiento preventivo");
 
-						panelDiagnostico.setLayout(new BorderLayout());
-						Border panelDiagnosticoBorder = BorderFactory.createTitledBorder("¿Qué problema tiene?");
-						panelDiagnostico.setBorder(panelDiagnosticoBorder);
-						panelDiagnostico.add(panelNorte, BorderLayout.NORTH);
-						panelDiagnostico.add(panelTexto);
+						
+						for(int i=0;i<listaServiciosDisponibles.size();i++) {
+							JCheckBox jcheckBox = new JCheckBox(listaServiciosDisponibles.get(i),false);
+							panelCentro.add(jcheckBox);
+							
+						}
+				
+						panelCentro.setVisible(true);
 
-						panelNorte.add(checkBox1);
-						panelNorte.add(checkBox2);
-						panelNorte.add(checkBox3);
-						panelDiagnostico.setVisible(true);
-
-						checkBox3.addActionListener(new ActionListener() {
-
-							@Override
-							public void actionPerformed(ActionEvent e) {
-								JToggleButton boton = (JToggleButton) e.getSource();
-								if (boton.isSelected()) {
-									panelTexto.setVisible(true);
-									textoOtros.setVisible(true);
-									repaint();
-								} else if (!boton.isSelected()) {
-									panelTexto.setVisible(false);
-									textoOtros.setVisible(false);
-									repaint();
-								}
-							}
-						});
+					
 
 						JButton botonReservar = new JButton("RESERVAR CITA");
 						botonReservar.addActionListener(new ActionListener() {
 							@Override
 							public void actionPerformed(ActionEvent e) {
-								ArrayList<String> listaDiagnosticoSeleccionado = new ArrayList<String>();
-								if (checkBox1.isSelected()) {
-									listaDiagnosticoSeleccionado.add(checkBox1.getText());
+								ArrayList<String> listaServiciosSeleccionado = new ArrayList<String>();
+								for(Component componente : panelCentro.getComponents()) {
+									if(componente instanceof JCheckBox) {
+										JCheckBox jCheckBox = (JCheckBox) componente;
+										if(jCheckBox.isSelected()) {
+											listaServiciosSeleccionado.add(jCheckBox.getText());
+										
+										}
+									}									
 								}
-								if (checkBox2.isSelected()) {
-									listaDiagnosticoSeleccionado.add(checkBox2.getText());
-								}
-								if (checkBox3.isSelected()) {
-									listaDiagnosticoSeleccionado.add(checkBox3.getText());
-								}
-
-								if (!listaDiagnosticoSeleccionado.isEmpty()) {
-									System.out.println("El usuario ha seleccionado estos diagnósticos: ");
-									for (String diagnostico : listaDiagnosticoSeleccionado) {
-										System.out.println(diagnostico);
+					
+								if (!listaServiciosSeleccionado.isEmpty()) {
+									System.out.println("El usuario " + usuario +" ha seleccionado estos servicios: ");
+									for (String diagnostico : listaServiciosSeleccionado) {
+										System.out.println("- "+diagnostico);
 									}
 								} else {
-									System.out.println("El usuario no ha seleccionado ningún diagnóstico");
+									System.out.println("El usuario " + usuario + " no ha seleccionado ningún servicio");
 								}
-								new VentanaCitaDiagnostico();
+								new VentanaPedidoServicios();
 
 							}
 						});
 
-						panelDerechoServicios.add(panelDiagnostico, BorderLayout.CENTER);
-						panelDerechoServicios.add(botonReservar, BorderLayout.EAST);
+						panelDerechoServicios.add(PanelServiciosDisponibles, BorderLayout.CENTER);
+						panelDerechoServicios.add(botonReservar, BorderLayout.SOUTH);
 
 					} else if (operacion.equals("Comprar/Vender Piezas")) {
 
@@ -879,33 +867,6 @@ public class VentanaGrafica extends JFrame {
         }
     }
 
-	// Para sacar lo datos del formualrio
 
-//	 private void abrirVentanaCitaDiagnotico() {
-//	        VentanaCitaDiagnostico ventanaCitaDiagnostico = new VentanaCitaDiagnostico(this);
-//	        ventanaCitaDiagnostico.setVisible(true);
-//	    }
-
-	public String setNombre(String nombreRecivido) {
-		nombre = nombreRecivido;
-
-		return nombreRecivido;
-	}
-
-	public int setTelefono(String telefonoRecivido) {
-		telefono = Integer.parseInt(telefonoRecivido);
-		return telefono;
-	}
-
-	public LocalDate setLocalDate(String fechaRecivido) {
-		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		fechaDeRealizacion = LocalDate.parse(fechaRecivido, formato);
-		return fechaDeRealizacion;
-	}
-
-	public String setDiagnostico(String diagnosticoRecivido) {
-		diagnosticos = diagnosticoRecivido;
-		return diagnosticos;
-	}
 
 }
