@@ -245,23 +245,23 @@ public class VentanaGrafica extends JFrame {
 		// Creando panel para que aparezca la informacion
 		JPanel pInfor = new JPanel();
 
-		JTextArea texto = new JTextArea();// MouseListener
+		;// MouseListener
 		tabla.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int selec= tabla.getSelectedRow();
 				if(selec!=-1) {
-					String id= tabla.getValueAt(selec, 0).toString();
+					int id= (int) tabla.getValueAt(selec, 0);
 					String codigo=tabla.getValueAt(selec, 1).toString();
 					String nombrePieza=tabla.getValueAt(selec, 2).toString();
 					String descripcion=tabla.getValueAt(selec, 3).toString();
 					String fabricante=tabla.getValueAt(selec, 4).toString();
-					String precio=tabla.getValueAt(selec, 5).toString();
-					String cantidadAlmacen=tabla.getValueAt(selec, 6).toString();
+					float precio=(float) tabla.getValueAt(selec, 5);
+					int cantidadAlmacen=(int) tabla.getValueAt(selec, 6);
 					
-					texto.setText( id + ","+ codigo +", "  + nombrePieza+ ","+ descripcion +","+ fabricante +","+precio+","+ cantidadAlmacen);
-					texto.setFont(new Font("ARIAL",Font.BOLD,14 ));
+					Pieza p= new Pieza(id, codigo, nombrePieza, descripcion, fabricante, precio, cantidadAlmacen);
+					new EspecificacionesPieza(p);
 					
 					
 					
@@ -270,7 +270,10 @@ public class VentanaGrafica extends JFrame {
 			
 		});
 		
-		pInfor.add(texto);
+		
+		
+	
+		
 
 		pAlmacen.add(panelFiltro, BorderLayout.NORTH);
 		pAlmacen.add(pInfor, BorderLayout.SOUTH);
