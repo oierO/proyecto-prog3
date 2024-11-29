@@ -769,7 +769,6 @@ public class VentanaGrafica extends JFrame {
 				+ " fabricante TEXT NOT NULL," + " precio REAL NOT NULL," + " cantidadAlmacen INTEGER NOT NULL" + ");";
 		try (PreparedStatement ps = DeustoTaller.getCon().prepareStatement(sql)) {
 			ps.executeUpdate(); 
-			System.out.println("Tabla 'Pieza' creada exitosamente.");
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -789,7 +788,6 @@ public class VentanaGrafica extends JFrame {
 				ps.setInt(6, pieza.getCantidadAlmacen());
 				ps.executeUpdate(); 
 			}
-			System.out.println("Datos insertados en la tabla 'Pieza'.");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

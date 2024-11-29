@@ -89,13 +89,7 @@ public class VentanaInicioSesion extends JFrame {
 			String usuario = textUsuario.getText();
 			String contrasenia = String.valueOf(textContrasenia.getPassword());
 			if (DeustoTaller.login(usuario, contrasenia)) {
-				mostrarBarraProgreso(usuario);
-				JOptionPane.showMessageDialog(null,
-						String.format("%s, Has iniciado sesión correctamente", DeustoTaller.getSesion().getNombre()));
-
-				// Pasa el usuario a VentanaGrafica
-				new VentanaGrafica(usuario);
-				setVisible(false);
+				cargaVentana(usuario);
 				textUsuario.setEditable(false);
 				textContrasenia.setEditable(false);
 				btnIniciarSesion.setVisible(false);
@@ -191,7 +185,7 @@ public class VentanaInicioSesion extends JFrame {
 		}
 	}
 
-	private void mostrarBarraProgreso(String usuario) {
+	private void cargaVentana(String usuario) {
 
 		progressDialog = new JDialog(this, "Cargando información", true);
 		progressDialog.setSize(300, 100);
@@ -201,8 +195,8 @@ public class VentanaInicioSesion extends JFrame {
 		progressBar = new JProgressBar(0, 100);
 		progressBar.setValue(0);
 		progressBar.setStringPainted(true);
-		progressBar.setForeground(new Color(85, 170, 255)); // Color de progreso
-		progressBar.setBackground(new Color(240, 240, 240)); // Color de fondo
+		progressBar.setForeground(new Color(85, 170, 255));
+		progressBar.setBackground(new Color(240, 240, 240)); 
 		progressBar.setFont(new Font("Bahnschrift", Font.BOLD, 14));
 		progressBar.setBorder(BorderFactory.createLineBorder(new Color(136, 174, 208), 2));
 		progressBar.setUI(new javax.swing.plaf.basic.BasicProgressBarUI() {
@@ -237,8 +231,11 @@ public class VentanaInicioSesion extends JFrame {
 				progressBar.setValue(i);
 			}
 
-			progressDialog.dispose();
-			this.dispose();
+			progressDialog.setVisible(false);
+			setVisible(false);
+			JOptionPane.showMessageDialog(null,
+					String.format("%s, Has iniciado sesión correctamente", DeustoTaller.getSesion().getNombre()));
+
 			new VentanaGrafica(usuario);
 		});
 
