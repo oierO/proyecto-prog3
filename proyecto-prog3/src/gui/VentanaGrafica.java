@@ -199,7 +199,11 @@ public class VentanaGrafica extends JFrame {
 								float precio= (float) tabla.getValueAt(fila, 5);
 								
 								
+								
 								compra.add(new Pieza(id, codigo, nombrePieza, descripcion, fabricante, precio, Integer.parseInt(cantidad)));
+								
+								
+								
 								
 								modeloPiezasUsuario= new ModeloAlmacen(compra);
 								tablaUsuario.setModel(modeloPiezasUsuario);
