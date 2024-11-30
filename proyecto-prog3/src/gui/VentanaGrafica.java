@@ -687,7 +687,9 @@ public class VentanaGrafica extends JFrame {
 							@Override
 							public void actionPerformed(ActionEvent e) {
 								// Abrir la ventana para enviar una pregunta
-								new VentanaPregunta(usuario);
+//								new VentanaPregunta(usuario);
+								System.out.println("\n---Esto es panel de preferencias---\n");
+								System.out.println("El usuario quiere enviar una pregunta");
 							}
 
 						});
