@@ -58,7 +58,7 @@ public class VentanaGrafica extends JFrame {
 	private ArrayList<String> serviciosDisponibleStrings;
 
 	public VentanaGrafica(String usuario) {
-		setSize(600, 400);
+		setSize(800, 500);
 		setLocationRelativeTo(null);
 		setTitle("DeustoTaller");
 		JTabbedPane menuPestanas = new JTabbedPane();
@@ -203,11 +203,13 @@ public class VentanaGrafica extends JFrame {
 
 		lbltxtFiltro = new JLabel("Filtro por título: ");
 		panelFiltro.add(lbltxtFiltro);
-		txtFiltro = new JTextField(10);
+		txtFiltro = new JTextField(5);
 				panelFiltro.add(txtFiltro);
 
 		lblcbTipo = new JLabel("Filtro por tipo: ");
 		panelFiltro.add(lblcbTipo);
+		
+		
 
 		// Creando combobox
 		cbTipo = new JComboBox<String>();
@@ -224,6 +226,8 @@ public class VentanaGrafica extends JFrame {
 		panelFiltro.add(lblcbFabricante);
 
 		panelFiltro.add(cbFabricante);
+		JButton botonBorrarFiltrado= new JButton("Borrar filtrado");
+		panelFiltro.add(botonBorrarFiltrado);
 		modeloTabla = new ModeloAlmacen(null);
 		tabla = new JTable(modeloTabla);
 		JScrollPane scroll = new JScrollPane(tabla);
@@ -232,7 +236,7 @@ public class VentanaGrafica extends JFrame {
 		// Creando panel para que aparezca la informacion
 		JPanel pInfor = new JPanel();
 		cargarFabricantes(cbFabricante);
-
+		cargarNombres(cbTipo);
 		;// MouseListener
 		tabla.addMouseListener(new MouseAdapter() {
 
@@ -361,6 +365,23 @@ public class VentanaGrafica extends JFrame {
 			modeloTabla= new ModeloAlmacen(lp);
 			tabla.setModel(modeloTabla);
 			
+			
+		});
+		cbTipo.addActionListener((e)->{
+			String tipoSeleccion= (String) cbTipo.getSelectedItem();
+			ArrayList<Pieza>lp= new ArrayList<Pieza>();
+			for(Pieza p:cargarTabla()) {
+				if(p.getNombrePieza().equals(tipoSeleccion)) {
+					lp.add(p);
+				}
+			}
+			modeloTabla= new ModeloAlmacen(lp);
+			tabla.setModel(modeloTabla);
+			
+		});
+		botonBorrarFiltrado.addActionListener((e)->{
+			modeloTabla= new ModeloAlmacen(cargarTabla());
+			tabla.setModel(modeloTabla);
 			
 		});
 
@@ -849,7 +870,7 @@ public class VentanaGrafica extends JFrame {
 		
 			ArrayList<Pieza> lpFiltradas = new ArrayList<Pieza>();
 			for(Pieza p: lp) {
-				if(p.getNombrePieza().contains(txtFiltro.getText())) {
+				if(p.getDescripcion().contains(txtFiltro.getText())) {
 					lpFiltradas.add(p);
 				}
 			}
@@ -878,8 +899,23 @@ public class VentanaGrafica extends JFrame {
             e.printStackTrace();
         }
     }
-    
-
-
+    private static void cargarNombres(JComboBox<String>combobox) {
+    	String sql = "SELECT DISTINCT nombrePieza FROM Pieza"; // Consulta SQL
+    	
+    	try {Connection conn= DeustoTaller.getCon();
+			PreparedStatement ps= conn.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			
+			while(rs.next()) {
+				String nombre= rs.getString("nombrePieza");
+				combobox.addItem(nombre);
+			}
+			System.out.println("Nombres cargados exitosamente ");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    }
 
 }
