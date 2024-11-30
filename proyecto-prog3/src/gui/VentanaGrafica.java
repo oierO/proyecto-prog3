@@ -42,7 +42,7 @@ import main.DeustoTaller;
 public class VentanaGrafica extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private ModeloAlmacen modeloTabla;
+	private ModeloAlmacen modeloTabla,modeloPiezasUsuario;
 	private JTable tabla;
 	private String nombre;
 	private int telefono;
@@ -66,7 +66,7 @@ public class VentanaGrafica extends JFrame {
 		this.usuario = usuario;
 
 		// Pestaña Servicios
-		String[] lServicios = new String[] { "Taller", "Comprar/Vender Piezas"};
+		String[] lServicios = new String[] { "Taller", "Comprar Piezas"};
 		JPanel pServicios = new JPanel();
 		pServicios.setLayout(new BorderLayout());
 		JPanel botones = new JPanel();
@@ -158,34 +158,59 @@ public class VentanaGrafica extends JFrame {
 						panelDerechoServicios.add(PanelServiciosDisponibles, BorderLayout.CENTER);
 						panelDerechoServicios.add(botonReservar, BorderLayout.SOUTH);
 
-					} else if (operacion.equals("Comprar/Vender Piezas")) {
+					} else if (operacion.equals("Comprar Piezas")) {
 
 						// Panel para piezas
 						JPanel panelPiezas = new JPanel();
 						panelPiezas.setLayout(new BorderLayout());
-
-						JPanel panelDescripcion = new JPanel();
-						JTextArea descripcion = new JTextArea();
-						descripcion.setRows(20);
-						descripcion.setColumns(40);
-						descripcion.setLineWrap(true);
-						descripcion.setText("Hola ");
-						descripcion.setEditable(false);
-
-						panelDescripcion.add(descripcion);
-						panelPiezas.add(panelDescripcion);
-
+						JPanel pCentro= new JPanel(new GridLayout(2, 1));
+						panelPiezas.add(pCentro,BorderLayout.CENTER);
+						
+						ArrayList<Pieza>compra= new ArrayList<Pieza>();
+						modeloPiezasUsuario= new ModeloAlmacen(compra);
+						JTable tablaUsuario= new JTable(modeloPiezasUsuario);
+						JScrollPane scrollUsuario= new JScrollPane(tablaUsuario);
+						JScrollPane scrollTotal= new JScrollPane(tabla);
+						pCentro.add(scrollTotal);
+						pCentro.add(scrollUsuario);
+						
 						JPanel panelBotones = new JPanel();
 						JButton botonComprar = new JButton("Comprar Piezas");
-						JButton botonVender = new JButton("Vender Piezas");
+						JButton botonQuitarProducto= new JButton("Quitar pieza");
+						
 						panelBotones.add(botonComprar);
-						panelBotones.add(botonVender);
+						
 
-						botonComprar.addActionListener(c -> System.out.println("El usuario quiere comprar piezas."));
-						botonVender.addActionListener(v -> System.out.println("El usuario quiere vender piezas."));
+						botonComprar.addActionListener(c ->{
+							int fila= tabla.getSelectedRow();
+							if(fila==-1) {
+								JOptionPane.showMessageDialog(null, "Primero debes seleccionado una fila", "ERROR EN SELECCIÓN", JOptionPane.ERROR_MESSAGE);
+								
+							}else {
+								String cantidad= JOptionPane.showInputDialog(null, "¿Cuantas piezas desea comprar?", "Cantidad piezas", JOptionPane.QUESTION_MESSAGE);
+								int id= (int) tabla.getValueAt(fila, 0);
+								String codigo= (String) tabla.getValueAt(fila, 1);
+								String nombrePieza= (String) tabla.getValueAt(fila, 2);
+								String descripcion= (String) tabla.getValueAt(fila, 3);
+								String fabricante= (String) tabla.getValueAt(fila, 4);
+								float precio= (float) tabla.getValueAt(fila, 5);
+								int cantidadAlmacen= (int) tabla.getValueAt(fila, 6);
+								
+								compra.add(new Pieza(id, codigo, nombrePieza, descripcion, fabricante, precio, Integer.parseInt(cantidad)));
+								
+								modeloPiezasUsuario= new ModeloAlmacen(compra);
+								tablaUsuario.setModel(modeloPiezasUsuario);
+										
+								
+							}
+							
+						});
+						
 						panelPiezas.add(panelBotones, BorderLayout.SOUTH);
 
 						panelDerechoServicios.add(panelPiezas);
+						
+						
 
 					} 
 
