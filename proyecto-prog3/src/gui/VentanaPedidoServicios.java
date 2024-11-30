@@ -33,12 +33,12 @@ public class VentanaPedidoServicios extends JFrame{
 	private JFormattedTextField fechaDeRealizacion;
 	private JTextArea informacionAdicional;
 	private JButton botonReservar;
-	private VentanaGrafica ventanaGrafica;
 	private JLabel nombreJLabel;
 	private JLabel telefonoJLabel;
 	private JLabel fechaDePedidoJLabel;
 	private JLabel fechaDeRealizacionJLabel;
 	private JLabel informacionAdicionalJLabel;
+	private JButton botonCancelar;
 	
 	
 	
@@ -142,22 +142,30 @@ public class VentanaPedidoServicios extends JFrame{
 			//Solo estoy sacando por consola lo que ha rellenado el usuario en el formulario
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("\n---Esto es de VentanaPedidoServicios---\n");
 				System.out.println("Nombre: " + nombre.getText());
 				System.out.println("Telefono: " + telefono.getText());
 				System.out.println("Fecha de pedido: " + fechaDePedido.getText());
 				System.out.println("Fecha de realización: " + fechaDeRealizacion.getText());
 				System.out.println("Información adicional: " + informacionAdicional.getText());
-				
-				PedidoServicios pedido = new PedidoServicios(nombre.getText(), Integer.parseInt(telefono.getText()), fechaActual, convertirTextoALocalDate(fechaDeRealizacion.getText(), "dd/MM/yyyy"), serviciosElegidos,informacionAdicional.getText() ); 
-				listaServiciosPedidos.add(pedido);
-				System.out.println(listaServiciosPedidos);
+				if(nombre.getText().isEmpty()||telefono.getText().isEmpty()||fechaDeRealizacion.getText().isEmpty()) {
+					System.out.println("Error: Datos incompletos");
+				} else {
+					PedidoServicios pedido = new PedidoServicios(nombre.getText(), Integer.parseInt(telefono.getText()), fechaActual, convertirTextoALocalDate(fechaDeRealizacion.getText(), "dd/MM/yyyy"), serviciosElegidos,informacionAdicional.getText() ); 
+					listaServiciosPedidos.add(pedido);
+					System.out.println(listaServiciosPedidos);
+				}
+				dispose();
 			}
 		});
 		
 		panel.add(botonReservar);
 		
+		//boton cancelar
+		botonCancelar = new JButton("Cancelar");
+		botonCancelar.addActionListener( e -> dispose());
 		
-		
+		panel.add(botonCancelar);
 		
 		add(panel);
 		setVisible(true);

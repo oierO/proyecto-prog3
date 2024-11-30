@@ -39,23 +39,20 @@ import domain.PedidoServicios;
 import domain.Pieza;
 import main.DeustoTaller;
 
+
 public class VentanaGrafica extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private ModeloAlmacen modeloTabla,modeloPiezasUsuario;
 	private JTable tabla;
-	private String nombre;
-	private int telefono;
-	private LocalDate fechaDePedido;
-	private LocalDate fechaDeRealizacion;
-	private String diagnosticos;
-	private PedidoServicios pedidoServicios;
 	private JTextField txtFiltro;
 	private JComboBox<String> cbTipo, cbFabricante;
 	private JLabel lbltxtFiltro, lblcbTipo, lblcbFabricante;
 	private String usuario;
 	protected JTable tablaPreguntas;
-	private ArrayList<String> serviciosDisponibleStrings;
+	private ArrayList<String> serviciosDisponibles;
+	private ArrayList<PedidoServicios> listaPedidoServicios;
+	private String idioma;
 
 	public VentanaGrafica(String usuario) {
 		setSize(800, 500);
@@ -76,6 +73,22 @@ public class VentanaGrafica extends JFrame {
 
 		// Para los servicios
 
+		//Lista de pedidos de servicios que ha hecho el cliente	en durante esta sesion					
+		listaPedidoServicios = new ArrayList<PedidoServicios>();
+				
+		//Servicios disponibles 
+		serviciosDisponibles = new ArrayList<String>();
+		serviciosDisponibles.add("Cambio de aceite y filtro");
+		serviciosDisponibles.add("Revisión y reparación del sistema de frenos");
+		serviciosDisponibles.add("Reparación de sistemas de suspensión y dirección");
+		serviciosDisponibles.add("Reparación y mantenimiento del sistema de escape");
+		serviciosDisponibles.add("Servicio de diagnóstico electrónico");
+		serviciosDisponibles.add("Cambio de neumáticos y alineación");
+		serviciosDisponibles.add("Reparación y recarga de sistemas de aire acondicionado");
+		serviciosDisponibles.add("Reparación de sistemas de transmisión");
+		serviciosDisponibles.add("Reemplazo y reparación de sistemas de iluminación");
+		serviciosDisponibles.add("Servicio de mantenimiento preventivo");
+				
 		JPanel panelDerechoServicios = new JPanel();
 		panelDerechoServicios.setLayout(new BorderLayout());
 		pServicios.add(panelDerechoServicios);
@@ -89,7 +102,7 @@ public class VentanaGrafica extends JFrame {
 					panelDerechoServicios.removeAll();
 
 					if (operacion.equals("Taller")) {
-
+				
 						// Panel para servicios disponibles
 						
 
@@ -101,62 +114,89 @@ public class VentanaGrafica extends JFrame {
 						Border panelDiagnosticoBorder = BorderFactory.createTitledBorder("¿Qué necesitas?");
 						PanelServiciosDisponibles.setBorder(panelDiagnosticoBorder);
 						PanelServiciosDisponibles.add(panelCentro, BorderLayout.CENTER);
-				
-						//Servicios disponibles
-						ArrayList<String> listaServiciosDisponibles = new ArrayList<String>();
-						listaServiciosDisponibles.add("Cambio de aceite y filtro");
-						listaServiciosDisponibles.add("Revisión y reparación del sistema de frenos");
-						listaServiciosDisponibles.add("Reparación de sistemas de suspensión y dirección");
-						listaServiciosDisponibles.add("Reparación y mantenimiento del sistema de escape");
-						listaServiciosDisponibles.add("Servicio de diagnóstico electrónico");
-						listaServiciosDisponibles.add("Cambio de neumáticos y alineación");
-						listaServiciosDisponibles.add("Reparación y recarga de sistemas de aire acondicionado");
-						listaServiciosDisponibles.add("Reparación de sistemas de transmisión");
-						listaServiciosDisponibles.add("Reemplazo y reparación de sistemas de iluminación");
-						listaServiciosDisponibles.add("Servicio de mantenimiento preventivo");
-
 						
-						for(int i=0;i<listaServiciosDisponibles.size();i++) {
-							JCheckBox jcheckBox = new JCheckBox(listaServiciosDisponibles.get(i),false);
+						
+						
+						panelCentro.setLayout(new GridLayout(serviciosDisponibles.size(),1));
+						
+						//Añadir los servicios disponibles al panel del centro
+						for(int i=0;i<serviciosDisponibles.size();i++) {
+							JCheckBox jcheckBox = new JCheckBox(serviciosDisponibles.get(i),false);
 							panelCentro.add(jcheckBox);
 							
 						}
 				
-						panelCentro.setVisible(true);
-
+						//Eligo un idioma 
+						idioma = "Español";
+						
+			
+						//Panel para los botones 
+						JPanel panelBotonesServicio = new JPanel();
 					
-
+						//Boton de reservar 
+						//Si el usuario pulsa este boton dependiendo de si ha elegido algún servicio o no
+						//aparece un formulario 
 						JButton botonReservar = new JButton("RESERVAR CITA");
 						botonReservar.addActionListener(new ActionListener() {
 							@Override
 							public void actionPerformed(ActionEvent e) {
-								ArrayList<String> listaServiciosSeleccionado = new ArrayList<String>();
+								ArrayList<String> listaServiciosSeleccionados = new ArrayList<String>();
 								for(Component componente : panelCentro.getComponents()) {
 									if(componente instanceof JCheckBox) {
 										JCheckBox jCheckBox = (JCheckBox) componente;
 										if(jCheckBox.isSelected()) {
-											listaServiciosSeleccionado.add(jCheckBox.getText());
+											listaServiciosSeleccionados.add(jCheckBox.getText());
 										
 										}
 									}									
 								}
 					
-								if (!listaServiciosSeleccionado.isEmpty()) {
+								if (!listaServiciosSeleccionados.isEmpty()) {
+									System.out.println("\n---Esto es de panel de servicios---\n");
 									System.out.println("El usuario " + usuario +" ha seleccionado estos servicios: ");
-									for (String diagnostico : listaServiciosSeleccionado) {
+									for (String diagnostico : listaServiciosSeleccionados) {
 										System.out.println("- "+diagnostico);
-//										new VentanaPedidoServicios();
 									}
+									new VentanaPedidoServicios(listaPedidoServicios,listaServiciosSeleccionados,idioma);
+									// Refrescar el panel
+									PanelServiciosDisponibles.revalidate();
+									PanelServiciosDisponibles.repaint();
 								} else {
+									System.out.println("\n---Esto es de panel de servicios---\n");
 									System.out.println("El usuario " + usuario + " no ha seleccionado ningún servicio");
 								}
 
 
 							}
 						});
+						
+						panelBotonesServicio.add(botonReservar);
+						
+						//Boton para visualizar pedidos del usuario
+						JButton botonVisualizarPedidos = new JButton("Visualizar Pedidos"); 
+						
+						botonVisualizarPedidos.addActionListener(new ActionListener() {
+							
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								if(listaPedidoServicios.isEmpty()) {
+									System.out.println("\n---Esto es de panel de servicios---\n");
+									System.out.println("El usuario "+ usuario + " no tiene ningún pedido.");
+								} else {
+									System.out.println("\n---Esto es de panel de servicios---\n");
+									System.out.println("El usuario " + usuario + "ha hecho estos pedidos: ");
+									for(PedidoServicios pedido : listaPedidoServicios ) {
+										System.out.println(pedido);										
+									}
+								}
+								
+							}
+						});
+						
+						panelBotonesServicio.add(botonVisualizarPedidos);
 
 						panelDerechoServicios.add(PanelServiciosDisponibles, BorderLayout.CENTER);
-						panelDerechoServicios.add(botonReservar, BorderLayout.SOUTH);
+						panelDerechoServicios.add(panelBotonesServicio, BorderLayout.SOUTH);
 
 					} else if (operacion.equals("Comprar Piezas")) {
 

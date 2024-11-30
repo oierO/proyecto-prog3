@@ -11,20 +11,20 @@ private	int telefono;
 private LocalDate fechaDePedido;
 private	LocalDate fechaDeRealizacion;
 private	ArrayList<String> serviciosElegidos;
-private String comentario;
+private String informacionAdicional;
  	
 	
 	
 	
 	public PedidoServicios(String nombre,int telefono ,LocalDate fechaDePedido, LocalDate fechaDeRealizacion,
-			ArrayList<String> serviciosElegidos,String comentario) {
+			ArrayList<String> serviciosElegidos,String informacionAdicional) {
 		super();
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.fechaDePedido = fechaDePedido;
 		this.fechaDeRealizacion = fechaDeRealizacion;
 		this.serviciosElegidos = serviciosElegidos;
-		this.comentario = comentario;
+		this.informacionAdicional = informacionAdicional;
 	}
 	
 	
@@ -73,21 +73,21 @@ private String comentario;
 	}
 
 
-	public String getComentario() {
-		return comentario;
+	public String getinformacionAdicional() {
+		return informacionAdicional;
 	}
 
 
-	public void setComentario(String comentario) {
-		this.comentario = comentario;
+	public void setinformacionAdicional(String informacionAdicional) {
+		this.informacionAdicional = informacionAdicional;
 	}
 
 
 	@Override
 	public String toString() {
-		return "CitaDiagnostico [nombre=" + nombre + ", telefono=" + telefono + ", fechaDePedido=" + fechaDePedido
+		return "[nombre=" + nombre + ", telefono=" + telefono + ", fechaDePedido=" + fechaDePedido
 				+ ", fechaDeRealizacion=" + fechaDeRealizacion + ", serviciosElegidos=" + serviciosElegidos
-				+ ", comentario=" + comentario + "]";
+				+ ", Información adicional=" + informacionAdicional + "]";
 	}
 
 
