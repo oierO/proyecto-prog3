@@ -145,11 +145,12 @@ public class VentanaGrafica extends JFrame {
 									System.out.println("El usuario " + usuario +" ha seleccionado estos servicios: ");
 									for (String diagnostico : listaServiciosSeleccionado) {
 										System.out.println("- "+diagnostico);
+//										new VentanaPedidoServicios();
 									}
 								} else {
 									System.out.println("El usuario " + usuario + " no ha seleccionado ningún servicio");
 								}
-								new VentanaPedidoServicios();
+
 
 							}
 						});
