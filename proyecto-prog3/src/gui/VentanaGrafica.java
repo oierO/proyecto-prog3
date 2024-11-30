@@ -179,6 +179,7 @@ public class VentanaGrafica extends JFrame {
 						JButton botonQuitarProducto= new JButton("Quitar pieza");
 						
 						panelBotones.add(botonComprar);
+						panelBotones.add(botonQuitarProducto);
 						
 
 						botonComprar.addActionListener(c ->{
@@ -203,6 +204,21 @@ public class VentanaGrafica extends JFrame {
 										
 								
 							}
+							
+						});
+						botonQuitarProducto.addActionListener(c->{
+							int fila= tablaUsuario.getSelectedRow();
+							if(fila==-1) {
+								JOptionPane.showMessageDialog(null, "Primero debes seleccionado una fila", "ERROR EN SELECCIÓN", JOptionPane.ERROR_MESSAGE);
+								
+							}else {
+								compra.remove(fila);
+								modeloPiezasUsuario= new ModeloAlmacen(compra);
+								tablaUsuario.setModel(modeloPiezasUsuario);
+								JOptionPane.showMessageDialog(null, "Producto eliminado de la compra", "COMPRA", JOptionPane.INFORMATION_MESSAGE);
+							}
+							
+							
 							
 						});
 						
