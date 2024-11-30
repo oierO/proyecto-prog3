@@ -177,9 +177,11 @@ public class VentanaGrafica extends JFrame {
 						JPanel panelBotones = new JPanel();
 						JButton botonComprar = new JButton("Comprar Piezas");
 						JButton botonQuitarProducto= new JButton("Quitar pieza");
+						JButton botonFinalizar= new JButton("Finalizar Compra");
 						
 						panelBotones.add(botonComprar);
 						panelBotones.add(botonQuitarProducto);
+						panelBotones.add(botonFinalizar);
 						
 
 						botonComprar.addActionListener(c ->{
@@ -195,7 +197,7 @@ public class VentanaGrafica extends JFrame {
 								String descripcion= (String) tabla.getValueAt(fila, 3);
 								String fabricante= (String) tabla.getValueAt(fila, 4);
 								float precio= (float) tabla.getValueAt(fila, 5);
-								int cantidadAlmacen= (int) tabla.getValueAt(fila, 6);
+								
 								
 								compra.add(new Pieza(id, codigo, nombrePieza, descripcion, fabricante, precio, Integer.parseInt(cantidad)));
 								
@@ -219,6 +221,20 @@ public class VentanaGrafica extends JFrame {
 							}
 							
 							
+							
+						});
+						botonFinalizar.addActionListener(c->{
+							int i=0;
+							float precioTotal=0;
+							while(i<compra.size()) {
+								Pieza p= compra.get(i);
+								precioTotal= precioTotal+(p.getPrecio()*p.getCantidadAlmacen());
+								compra.remove(i);
+								
+							}
+							modeloPiezasUsuario= new ModeloAlmacen(compra);
+							tablaUsuario.setModel(modeloPiezasUsuario);
+							JOptionPane.showMessageDialog(null, precioTotal+"€", "El precio total es", JOptionPane.INFORMATION_MESSAGE);
 							
 						});
 						
