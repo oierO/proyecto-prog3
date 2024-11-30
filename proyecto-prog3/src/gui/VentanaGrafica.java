@@ -157,7 +157,7 @@ public class VentanaGrafica extends JFrame {
 									for (String diagnostico : listaServiciosSeleccionados) {
 										System.out.println("- "+diagnostico);
 									}
-									new VentanaPedidoServicios(listaPedidoServicios,listaServiciosSeleccionados,idioma);
+									new VentanaPedidoServicios(usuario,listaPedidoServicios,listaServiciosSeleccionados,idioma);
 									// Refrescar el panel
 									PanelServiciosDisponibles.revalidate();
 									PanelServiciosDisponibles.repaint();
