@@ -217,9 +217,7 @@ public class VentanaGrafica extends JFrame {
 //		for(String f: fabricantes) {
 //			cbFabricante.addItem(f);
 //		}
-		cbFabricante.addActionListener((e)->{
-			
-		});
+		
 		panelFiltro.add(cbTipo);
 
 		lblcbFabricante = new JLabel("Filtro por fabricante: ");
@@ -351,6 +349,19 @@ public class VentanaGrafica extends JFrame {
 			public void changedUpdate(DocumentEvent e) {
 
 			}
+		});
+		cbFabricante.addActionListener((e)->{
+			String fabricanteSeleccion =(String) cbFabricante.getSelectedItem();
+			ArrayList<Pieza>lp= new ArrayList<Pieza>();
+			for(Pieza p: cargarTabla()) {
+				if(p.getFabricante().equals(fabricanteSeleccion)) {
+					lp.add(p);
+				}
+			}
+			modeloTabla= new ModeloAlmacen(lp);
+			tabla.setModel(modeloTabla);
+			
+			
 		});
 
 		// Pestaña Parking
@@ -867,6 +878,7 @@ public class VentanaGrafica extends JFrame {
             e.printStackTrace();
         }
     }
+    
 
 
 
