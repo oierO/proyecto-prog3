@@ -3,12 +3,10 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -648,61 +646,6 @@ public class VentanaGrafica extends JFrame {
 		menuPestanas.add("Parking", pParking);
 		menuPestanas.add("Preferencias", pSettings);
 		menuPestanas.add("Sesión", pUsuario);
-		
-		
-		
-        JPanel panelNorte = new JPanel(new BorderLayout());
-        panelNorte.setPreferredSize(new Dimension(600, 30));
-        panelNorte.setBackground(Color.WHITE);
-
-        // Crear el botón de opciones
-        JButton botonOpciones = new JButton();
-        botonOpciones.setPreferredSize(new Dimension(30, 30)); 
-
-        // Cargar la imagen del botón
-        String rutaImagen = "resources/images/Ajustes.png";
-        if (new File(rutaImagen).exists()) { // Verificar que el archivo existe
-            ImageIcon icono = new ImageIcon(rutaImagen);
-            Image imagenEscalada = icono.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH); // Escalar la imagen
-            botonOpciones.setIcon(new ImageIcon(imagenEscalada));
-        } else {
-            botonOpciones.setText("Opc"); // Texto de respaldo si no se encuentra la imagen
-        }
-        
-        // Logo
-        JLabel logoLabel = new JLabel();
-        String rutaLogo = "resources/images/app-icon.png";
-        if (new File(rutaLogo).exists()) { // Verificar si el archivo existe
-            ImageIcon logoIcono = new ImageIcon(rutaLogo);
-            Image logoEscalado = logoIcono.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-            logoLabel.setIcon(new ImageIcon(logoEscalado));
-        } else {
-            logoLabel.setText("Logo"); // Texto de respaldo si no se encuentra la imagen
-            logoLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        }
-        logoLabel.setPreferredSize(new Dimension(50, 50)); // Espacio reservado para el logo
-        panelNorte.add(logoLabel, BorderLayout.WEST);
-
-        // Nombre del usuario
-        JLabel usuarioLabel = new JLabel("Bienvenido, " + usuario, SwingConstants.CENTER);
-        usuarioLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
-        usuarioLabel.setForeground(Color.BLACK);
-        panelNorte.add(usuarioLabel, BorderLayout.CENTER);
-        
-     // *** Evento para abrir la ventana de opciones ***
-        botonOpciones.addActionListener(e -> {
-            VentanaOpciones ventanaOpciones = new VentanaOpciones(this, panelNorte, usuarioLabel);
-            ventanaOpciones.mostrar();
-        });
-        
-        
-        
-        // Agregar el botón al panel en la derecha
-        panelNorte.add(botonOpciones, BorderLayout.EAST);
-
-        // Agregar el panel a la ventana
-        add(panelNorte, BorderLayout.NORTH);
-		
 		add(menuPestanas);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
@@ -924,117 +867,6 @@ public class VentanaGrafica extends JFrame {
         }
     }
 
-    
-    
-    
- // Método para actualizar el estilo de una ventana
-    public static void actualizarEstilo(Component componente) {
-        // Si el componente es un botón dentro de la pestaña de parking, no cambiarlo
-        if (componente instanceof JButton) {
-            JButton boton = (JButton) componente;
-            if (boton.getParent() != null && boton.getParent() instanceof JTabbedPane) {
-                JTabbedPane parentTab = (JTabbedPane) boton.getParent();
-                if (parentTab.getSelectedComponent() != null && parentTab.getTitleAt(parentTab.getSelectedIndex()).equals("Parking")) {
-                    // Si está en la pestaña de Parking, no cambiar el color del botón
-                    return;
-                }
-            }
-            
-            // Establecer el color de los botones en el modo oscuro
-            if (modoOscuro) {
-                boton.setBackground(Color.GRAY); // Botones más claros que el fondo
-                boton.setForeground(Color.WHITE); // Texto blanco en los botones
-            } else {
-                boton.setBackground(Color.WHITE); // Botones con fondo blanco
-                boton.setForeground(Color.BLACK); // Texto negro en los botones
-            }
-        }
-
-        // Aplicar estilo a JTextFields
-        if (componente instanceof JTextField) {
-            JTextField textField = (JTextField) componente;
-            textField.setForeground(Color.WHITE); // Texto en blanco
-            if (modoOscuro) {
-                textField.setBackground(Color.DARK_GRAY); // Fondo oscuro en modo oscuro
-            } else {
-                textField.setBackground(Color.LIGHT_GRAY); // Fondo claro en modo claro
-            }
-        }
-
-        // Estilo para JComboBox (desplegables)
-        if (componente instanceof JComboBox) {
-            JComboBox comboBox = (JComboBox) componente;
-            comboBox.setForeground(Color.WHITE); // Texto en blanco
-            if (modoOscuro) {
-                comboBox.setBackground(Color.DARK_GRAY); // Fondo oscuro en modo oscuro
-            } else {
-                comboBox.setBackground(Color.LIGHT_GRAY); // Fondo claro en modo claro
-            }
-        }
-
-        // Estilo para JList (listas)
-        if (componente instanceof JList) {
-            JList list = (JList) componente;
-            list.setForeground(Color.WHITE); // Texto en blanco
-            if (modoOscuro) {
-                list.setBackground(Color.DARK_GRAY); // Fondo oscuro en modo oscuro
-            } else {
-                list.setBackground(Color.LIGHT_GRAY); // Fondo claro en modo claro
-            }
-        }
-
-        // Estilo para las pestañas del JTabbedPane
-        if (componente instanceof JTabbedPane) {
-            JTabbedPane tabs = (JTabbedPane) componente;
-            tabs.setForeground(Color.WHITE); // Texto blanco en las pestañas (modo oscuro)
-            tabs.setBackground(Color.GRAY); // Fondo gris para las pestañas
-        }
-        
-        if (componente instanceof JPanel) {
-            JPanel textField = (JPanel) componente;
-            textField.setForeground(Color.WHITE); // Texto en blanco
-            if (modoOscuro) {
-                textField.setBackground(Color.DARK_GRAY); // Fondo oscuro en modo oscuro
-            } else {
-                textField.setBackground(Color.LIGHT_GRAY); // Fondo claro en modo claro
-            }
-        }
-        
-        if (componente instanceof JLabel) {
-            JLabel textField = (JLabel) componente;
-            textField.setForeground(Color.WHITE); // Texto en blanco
-            if (modoOscuro) {
-                textField.setBackground(Color.DARK_GRAY); // Fondo oscuro en modo oscuro
-            } else {
-                textField.setBackground(Color.LIGHT_GRAY); // Fondo claro en modo claro
-            }
-        }
-
-        // Recursivamente actualizar todos los hijos del componente
-        if (componente instanceof Container) {
-            Container container = (Container) componente;
-            for (Component child : container.getComponents()) {
-                actualizarEstilo(child);
-            }
-        }
-    }
 
 
-
- // Variable para manejar el modo oscuro
-    private static boolean modoOscuro = false;
-
-    // Método para obtener el estado actual del modo oscuro
-    public static boolean isModoOscuro() {
-        return modoOscuro;
-    }
-
-    // Método para cambiar el estado del modo oscuro
-    public static void setModoOscuro(boolean oscuro) {
-        modoOscuro = oscuro;
-    }
-
-    public static void main(String[] args) {
-        new VentanaGrafica("Andrés");
-    }
 }
