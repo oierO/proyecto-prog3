@@ -14,7 +14,7 @@ public class ModeloVehiculos extends DefaultTableModel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private List<Vehiculo>lVehiculos;
-	private List<String>lTitulos= Arrays.asList("Matricula","Marca","Modelo","Año Modelo","Servicios Contratados");
+	private List<String>lTitulos= Arrays.asList("Matricula","Marca","Modelo","Año Modelo");
 	
 	public ModeloVehiculos(List<Vehiculo> lVehiculos) {
 		super();
