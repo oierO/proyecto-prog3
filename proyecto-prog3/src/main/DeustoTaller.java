@@ -34,6 +34,27 @@ public class DeustoTaller {
 			System.out.println("Error al cargar el fichero de propiedades.");
 		}
 		conectarBD();
+		Thread comprobarBD = new Thread() {
+
+			@Override
+			public void run() {
+				while (!Thread.interrupted()) {
+					try {
+						if (DeustoTaller.getCon().isClosed()) {
+							conectarBD();
+						}
+						System.out.println("A dormir");
+						Thread.sleep(30000);
+					} catch (SQLException e) {
+						JOptionPane.showMessageDialog(DeustoTaller.getVSesion(), "Error al intentar reconectarse a la base de datos.");
+					} catch (InterruptedException e) {
+						Thread.currentThread().interrupt();
+					}
+				}
+			}
+
+		};
+		comprobarBD.start();
 		SwingUtilities.invokeLater(() -> VSesion = new VentanaInicioSesion());
 	}
 
