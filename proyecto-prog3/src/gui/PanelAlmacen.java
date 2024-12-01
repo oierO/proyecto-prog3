@@ -77,7 +77,9 @@ public class PanelAlmacen extends JPanel {
 		// Creando panel para que aparezca la informacion
 		JPanel pInfor = new JPanel();
 		cargarFabricantes(cbFabricante);
+		cbFabricante.setSelectedIndex(-1);
 		cargarNombres(cbTipo);
+		cbTipo.setSelectedIndex(-1);
 		;// MouseListener
 		tabla.addMouseListener(new MouseAdapter() {
 
@@ -199,9 +201,10 @@ public class PanelAlmacen extends JPanel {
 		});
 		cbFabricante.addActionListener((e) -> {
 			String fabricanteSeleccion = (String) cbFabricante.getSelectedItem();
+			String tipoSeleccion = (String) cbFabricante.getSelectedItem();
 			ArrayList<Pieza> lp = new ArrayList<Pieza>();
 			for (Pieza p : cargarTabla()) {
-				if (p.getFabricante().equals(fabricanteSeleccion)) {
+				if (p.getFabricante().equals(fabricanteSeleccion)&& p.getNombrePieza().equals(tipoSeleccion)) {
 					lp.add(p);
 				}
 			}
@@ -211,9 +214,10 @@ public class PanelAlmacen extends JPanel {
 		});
 		cbTipo.addActionListener((e) -> {
 			String tipoSeleccion = (String) cbTipo.getSelectedItem();
+			String fabricanteSeleccion = (String) cbTipo.getSelectedItem();
 			ArrayList<Pieza> lp = new ArrayList<Pieza>();
 			for (Pieza p : cargarTabla()) {
-				if (p.getNombrePieza().equals(tipoSeleccion)) {
+				if (p.getNombrePieza().equals(tipoSeleccion)&&p.getFabricante().equals(fabricanteSeleccion)) {
 					lp.add(p);
 				}
 			}
@@ -224,6 +228,9 @@ public class PanelAlmacen extends JPanel {
 		botonBorrarFiltrado.addActionListener((e) -> {
 			modeloTabla = new ModeloAlmacen(cargarTabla());
 			tabla.setModel(modeloTabla);
+			cbTipo.setSelectedIndex(-1);
+			cbFabricante.setSelectedIndex(-1);
+			txtFiltro.setText("");
 
 		});
 	}
