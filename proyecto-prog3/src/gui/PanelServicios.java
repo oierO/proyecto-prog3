@@ -5,6 +5,11 @@ import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.nio.channels.NonWritableChannelException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -19,6 +24,8 @@ import javax.swing.border.TitledBorder;
 
 import domain.PedidoServicios;
 import domain.Pieza;
+import domain.ServicioDisponible;
+import main.DeustoTaller;
 
 public class PanelServicios extends JPanel {
 	/**
@@ -28,7 +35,8 @@ public class PanelServicios extends JPanel {
 	private ModeloAlmacen modeloPiezasUsuario;
 	private JTable tabla;
 	protected JTable tablaPreguntas;
-	private ArrayList<String> serviciosDisponibles;
+	private ArrayList<String> serviciosDisponiblesNombre;
+	private ArrayList<ServicioDisponible> listaDeServiciosDisponibles;
 	private ArrayList<PedidoServicios> listaPedidoServicios;
 	private String idioma;
 
@@ -41,22 +49,36 @@ public class PanelServicios extends JPanel {
 		this.add(botones, BorderLayout.WEST);
 
 		// Para los servicios
+		listaDeServiciosDisponibles = new ArrayList<ServicioDisponible>();
+		cargarServicios(listaDeServiciosDisponibles);
+		
+		System.out.println("\n--Visualizando las listas de servicios disponibles--\n");
+		System.out.println(listaDeServiciosDisponibles.size());
+		
 
 		// Lista de pedidos de servicios que ha hecho el cliente en durante esta sesion
 		listaPedidoServicios = new ArrayList<PedidoServicios>();
 
 		// Servicios disponibles
-		serviciosDisponibles = new ArrayList<String>();
-		serviciosDisponibles.add("Cambio de aceite y filtro");
-		serviciosDisponibles.add("Revisión y reparación del sistema de frenos");
-		serviciosDisponibles.add("Reparación de sistemas de suspensión y dirección");
-		serviciosDisponibles.add("Reparación y mantenimiento del sistema de escape");
-		serviciosDisponibles.add("Servicio de diagnóstico electrónico");
-		serviciosDisponibles.add("Cambio de neumáticos y alineación");
-		serviciosDisponibles.add("Reparación y recarga de sistemas de aire acondicionado");
-		serviciosDisponibles.add("Reparación de sistemas de transmisión");
-		serviciosDisponibles.add("Reemplazo y reparación de sistemas de iluminación");
-		serviciosDisponibles.add("Servicio de mantenimiento preventivo");
+		serviciosDisponiblesNombre = new ArrayList<String>();
+		
+		for(ServicioDisponible servicioDisponible : listaDeServiciosDisponibles) {
+			serviciosDisponiblesNombre.add(servicioDisponible.getNom_ser());	
+		}
+		
+		//Datos de prueba
+//		serviciosDisponiblesNombre.add("Cambio de aceite y filtro");
+//		serviciosDisponiblesNombre.add("Revisión y reparación del sistema de frenos");
+//		serviciosDisponiblesNombre.add("Reparación de sistemas de suspensión y dirección");
+//		serviciosDisponiblesNombre.add("Reparación y mantenimiento del sistema de escape");
+//		serviciosDisponiblesNombre.add("Servicio de diagnóstico electrónico");
+//		serviciosDisponiblesNombre.add("Cambio de neumáticos y alineación");
+//		serviciosDisponiblesNombre.add("Reparación y recarga de sistemas de aire acondicionado");
+//		serviciosDisponiblesNombre.add("Reparación de sistemas de transmisión");
+//		serviciosDisponiblesNombre.add("Reemplazo y reparación de sistemas de iluminación");
+//		serviciosDisponiblesNombre.add("Servicio de mantenimiento preventivo");
+		
+		
 
 		JPanel panelDerechoServicios = new JPanel();
 		panelDerechoServicios.setLayout(new BorderLayout());
@@ -82,11 +104,11 @@ public class PanelServicios extends JPanel {
 						PanelServiciosDisponibles.setBorder(panelDiagnosticoBorder);
 						PanelServiciosDisponibles.add(panelCentro, BorderLayout.CENTER);
 
-						panelCentro.setLayout(new GridLayout(serviciosDisponibles.size(), 1));
+						panelCentro.setLayout(new GridLayout(serviciosDisponiblesNombre.size(), 1));
 
 						// Añadir los servicios disponibles al panel del centro
-						for (int i = 0; i < serviciosDisponibles.size(); i++) {
-							JCheckBox jcheckBox = new JCheckBox(serviciosDisponibles.get(i), false);
+						for (int i = 0; i < serviciosDisponiblesNombre.size(); i++) {
+							JCheckBox jcheckBox = new JCheckBox(serviciosDisponiblesNombre.get(i), false);
 							panelCentro.add(jcheckBox);
 
 						}
@@ -264,4 +286,31 @@ public class PanelServicios extends JPanel {
 		}
 
 	}
+	
+	
+	private static void cargarServicios(ArrayList<ServicioDisponible> listaServiciosDisponibles){
+		String sql = "SELECT * FROM SERVICIOS_DISPONIBLES";
+		
+		try {
+			Connection conn = DeustoTaller.getCon();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String cod_ser = rs.getString("COD_SER");
+				String nomb_ser = rs.getString("NOM_SER");
+				String descripcion = rs.getString("DESCRIPCION");
+				listaServiciosDisponibles.add(new ServicioDisponible(cod_ser, nomb_ser, descripcion));
+			
+			}
+			System.out.println("\n--Esto es de panel de servicios--\n");
+			System.out.println("Servicios cargados exitosamente ");
+		} catch (SQLException e) {
+			System.out.println("\n--Esto es de panel de servicios--\n");
+			System.out.println("Error en cargar datos");
+			e.printStackTrace();
+		}
+		
+	}
+	
 }
