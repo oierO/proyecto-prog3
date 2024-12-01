@@ -43,7 +43,7 @@ public class VentanaPedidoServicios extends JFrame{
 	
 	
 	
-	public VentanaPedidoServicios(ArrayList<PedidoServicios> listaServiciosPedidos,ArrayList<String> serviciosElegidos,String idioma) {
+	public VentanaPedidoServicios(String usuario,ArrayList<PedidoServicios> listaServiciosPedidos,ArrayList<String> serviciosElegidos,String idioma) {
 
 		//Configuraciones de la ventana
 		setTitle("Reservar cita");
@@ -76,7 +76,8 @@ public class VentanaPedidoServicios extends JFrame{
 		
 		
 		//Para el nombre
-		nombre = new JTextField();
+		nombre = new JTextField(usuario);
+		nombre.setEditable(false);
 		panel.add(nombreJLabel);
 		panel.add(nombre);
 		
@@ -148,11 +149,37 @@ public class VentanaPedidoServicios extends JFrame{
 				System.out.println("Fecha de pedido: " + fechaDePedido.getText());
 				System.out.println("Fecha de realización: " + fechaDeRealizacion.getText());
 				System.out.println("Información adicional: " + informacionAdicional.getText());
+				
+				LocalDate fecha1= convertirTextoALocalDate(fechaDeRealizacion.getText(),"dd/MM/yyyy");
+		
+					//Compruebo si los campos importantes están rellenados
 				if(nombre.getText().isEmpty()||telefono.getText().isEmpty()||fechaDeRealizacion.getText().isEmpty()) {
+					System.out.println("\n--Mensaje de error--\n");
 					System.out.println("Error: Datos incompletos");
+					
+					//Compruebo si la fecha que mete el usuario es valida
+				} else if (fecha1.isBefore(fechaActual) && (telefono.getText().length()<9 || telefono.getText().charAt(0) != '6')) {
+					System.out.println("\n--Mensaje de error--\n");
+					System.out.println("Error: La fecha y el telefono introducidos no son correctos.");
+				
+					
+					//Compruebo si el telefono introducido es correcto
+				} else if (telefono.getText().length()<9 || telefono.getText().charAt(0) != '6') {
+					System.out.println("\n--Mensaje de error--\n");
+					System.out.println("Error: El telefono introducido no es válido.");
+					
+				
+					
+				} else if (fecha1.isBefore(fechaActual)) {
+					System.out.println("\n--Mensaje de error--\n");
+					System.out.println("Error: La fecha introducida no es válida.");
+					
+				
+				
 				} else {
-					PedidoServicios pedido = new PedidoServicios(nombre.getText(), Integer.parseInt(telefono.getText()), fechaActual, convertirTextoALocalDate(fechaDeRealizacion.getText(), "dd/MM/yyyy"), serviciosElegidos,informacionAdicional.getText() ); 
+					PedidoServicios pedido = new PedidoServicios(nombre.getText(), Integer.parseInt(telefono.getText()), fechaActual, fecha1, serviciosElegidos,informacionAdicional.getText() ); 
 					listaServiciosPedidos.add(pedido);
+					System.out.println("\n--Pedido añadido--\n");
 					System.out.println(listaServiciosPedidos);
 				}
 				dispose();
@@ -219,9 +246,9 @@ public class VentanaPedidoServicios extends JFrame{
 		System.out.println(pedidoServicios);
 		
 		//Probando con cada idioma
-		new VentanaPedidoServicios(pedidoServicios,servicios,idioma1);
-//		new VentanaPedidoServicios(pedidoServicios,servicios,idioma2);
-//		new VentanaPedidoServicios(pedidoServicios,servicios,idioma3);
+		new VentanaPedidoServicios("Usuario",pedidoServicios,servicios,idioma1);
+//		new VentanaPedidoServicios("Usuario",pedidoServicios,servicios,idioma2);
+//		new VentanaPedidoServicios("Usuario",pedidoServicios,servicios,idioma3);
 		
 		
 		

@@ -157,7 +157,7 @@ public class VentanaGrafica extends JFrame {
 									for (String diagnostico : listaServiciosSeleccionados) {
 										System.out.println("- "+diagnostico);
 									}
-									new VentanaPedidoServicios(listaPedidoServicios,listaServiciosSeleccionados,idioma);
+									new VentanaPedidoServicios(usuario,listaPedidoServicios,listaServiciosSeleccionados,idioma);
 									// Refrescar el panel
 									PanelServiciosDisponibles.revalidate();
 									PanelServiciosDisponibles.repaint();
@@ -687,7 +687,9 @@ public class VentanaGrafica extends JFrame {
 							@Override
 							public void actionPerformed(ActionEvent e) {
 								// Abrir la ventana para enviar una pregunta
-								new VentanaPregunta(usuario);
+//								new VentanaPregunta(usuario);
+								System.out.println("\n---Esto es panel de preferencias---\n");
+								System.out.println("El usuario quiere enviar una pregunta");
 							}
 
 						});
