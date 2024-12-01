@@ -39,16 +39,22 @@ import main.DeustoTaller;
 public class VentanaGrafica extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private ModeloAlmacen modeloTabla, modeloPiezasUsuario;
+	private ModeloAlmacen modeloTabla;
 	private JTable tabla;
 	private JTextField txtFiltro;
 	private JComboBox<String> cbTipo, cbFabricante;
 	private JLabel lbltxtFiltro, lblcbTipo, lblcbFabricante;
-	private String usuario;
+	private static String usuario;
+	
+	public static String getUsuario() {
+		return usuario;
+	}
+
+	private static void setUsuario(String usuario) {
+		VentanaGrafica.usuario = usuario;
+	}
+
 	protected JTable tablaPreguntas;
-	private ArrayList<String> serviciosDisponibles;
-	private ArrayList<PedidoServicios> listaPedidoServicios;
-	private String idioma;
 
 	public VentanaGrafica(String usuario) {
 		setSize(800, 500);
@@ -56,236 +62,7 @@ public class VentanaGrafica extends JFrame {
 		setTitle("DeustoTaller");
 		JTabbedPane menuPestanas = new JTabbedPane();
 
-		this.usuario = usuario;
-
-		// Pestaña Servicios
-		String[] lServicios = new String[] { "Taller", "Comprar Piezas" };
-		JPanel pServicios = new JPanel();
-		pServicios.setLayout(new BorderLayout());
-		JPanel botones = new JPanel();
-		botones.setLayout(new GridLayout(lServicios.length, 1));
-		botones.setBorder(new TitledBorder("Operaciones"));
-		pServicios.add(botones, BorderLayout.WEST);
-
-		// Para los servicios
-
-		// Lista de pedidos de servicios que ha hecho el cliente en durante esta sesion
-		listaPedidoServicios = new ArrayList<PedidoServicios>();
-
-		// Servicios disponibles
-		serviciosDisponibles = new ArrayList<String>();
-		serviciosDisponibles.add("Cambio de aceite y filtro");
-		serviciosDisponibles.add("Revisión y reparación del sistema de frenos");
-		serviciosDisponibles.add("Reparación de sistemas de suspensión y dirección");
-		serviciosDisponibles.add("Reparación y mantenimiento del sistema de escape");
-		serviciosDisponibles.add("Servicio de diagnóstico electrónico");
-		serviciosDisponibles.add("Cambio de neumáticos y alineación");
-		serviciosDisponibles.add("Reparación y recarga de sistemas de aire acondicionado");
-		serviciosDisponibles.add("Reparación de sistemas de transmisión");
-		serviciosDisponibles.add("Reemplazo y reparación de sistemas de iluminación");
-		serviciosDisponibles.add("Servicio de mantenimiento preventivo");
-
-		JPanel panelDerechoServicios = new JPanel();
-		panelDerechoServicios.setLayout(new BorderLayout());
-		pServicios.add(panelDerechoServicios);
-
-		for (int i = 0; i < lServicios.length; i++) {
-			JButton boton = new JButton(lServicios[i]);
-			boton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					String operacion = boton.getText();
-					panelDerechoServicios.removeAll();
-
-					if (operacion.equals("Taller")) {
-
-						// Panel para servicios disponibles
-
-						JPanel PanelServiciosDisponibles = new JPanel();
-						JPanel panelCentro = new JPanel();
-
-						PanelServiciosDisponibles.setLayout(new BorderLayout());
-						Border panelDiagnosticoBorder = BorderFactory.createTitledBorder("¿Qué necesitas?");
-						PanelServiciosDisponibles.setBorder(panelDiagnosticoBorder);
-						PanelServiciosDisponibles.add(panelCentro, BorderLayout.CENTER);
-
-						panelCentro.setLayout(new GridLayout(serviciosDisponibles.size(), 1));
-
-						// Añadir los servicios disponibles al panel del centro
-						for (int i = 0; i < serviciosDisponibles.size(); i++) {
-							JCheckBox jcheckBox = new JCheckBox(serviciosDisponibles.get(i), false);
-							panelCentro.add(jcheckBox);
-
-						}
-
-						// Eligo un idioma
-						idioma = "Español";
-
-						// Panel para los botones
-						JPanel panelBotonesServicio = new JPanel();
-
-						// Boton de reservar
-						// Si el usuario pulsa este boton dependiendo de si ha elegido algún servicio o
-						// no
-						// aparece un formulario
-						JButton botonReservar = new JButton("RESERVAR CITA");
-						botonReservar.addActionListener(new ActionListener() {
-							@Override
-							public void actionPerformed(ActionEvent e) {
-								ArrayList<String> listaServiciosSeleccionados = new ArrayList<String>();
-								for (Component componente : panelCentro.getComponents()) {
-									if (componente instanceof JCheckBox) {
-										JCheckBox jCheckBox = (JCheckBox) componente;
-										if (jCheckBox.isSelected()) {
-											listaServiciosSeleccionados.add(jCheckBox.getText());
-
-										}
-									}
-								}
-
-								if (!listaServiciosSeleccionados.isEmpty()) {
-									System.out.println("\n---Esto es de panel de servicios---\n");
-									System.out.println("El usuario " + usuario + " ha seleccionado estos servicios: ");
-									for (String diagnostico : listaServiciosSeleccionados) {
-										System.out.println("- " + diagnostico);
-									}
-									new VentanaPedidoServicios(usuario, listaPedidoServicios,
-											listaServiciosSeleccionados, idioma);
-									// Refrescar el panel
-									PanelServiciosDisponibles.revalidate();
-									PanelServiciosDisponibles.repaint();
-								} else {
-									System.out.println("\n---Esto es de panel de servicios---\n");
-									System.out.println("El usuario " + usuario + " no ha seleccionado ningún servicio");
-								}
-
-							}
-						});
-
-						panelBotonesServicio.add(botonReservar);
-
-						// Boton para visualizar pedidos del usuario
-						JButton botonVisualizarPedidos = new JButton("Visualizar Pedidos");
-
-						botonVisualizarPedidos.addActionListener(new ActionListener() {
-
-							@Override
-							public void actionPerformed(ActionEvent e) {
-								if (listaPedidoServicios.isEmpty()) {
-									System.out.println("\n---Esto es de panel de servicios---\n");
-									System.out.println("El usuario " + usuario + " no tiene ningún pedido.");
-								} else {
-									System.out.println("\n---Esto es de panel de servicios---\n");
-									System.out.println("El usuario " + usuario + "ha hecho estos pedidos: ");
-									for (PedidoServicios pedido : listaPedidoServicios) {
-										System.out.println(pedido);
-									}
-								}
-
-							}
-						});
-
-						panelBotonesServicio.add(botonVisualizarPedidos);
-
-						panelDerechoServicios.add(PanelServiciosDisponibles, BorderLayout.CENTER);
-						panelDerechoServicios.add(panelBotonesServicio, BorderLayout.SOUTH);
-
-					} else if (operacion.equals("Comprar Piezas")) {
-						JOptionPane.showMessageDialog(null, "Bienvenido a la ventana de compras de piezas",
-								"Venta de peizas", JOptionPane.INFORMATION_MESSAGE);
-
-						// Panel para piezas
-						JPanel panelPiezas = new JPanel();
-						panelPiezas.setLayout(new BorderLayout());
-						JPanel pCentro = new JPanel(new GridLayout(2, 1));
-						panelPiezas.add(pCentro, BorderLayout.CENTER);
-
-						ArrayList<Pieza> compra = new ArrayList<Pieza>();
-						modeloPiezasUsuario = new ModeloAlmacen(compra);
-						JTable tablaUsuario = new JTable(modeloPiezasUsuario);
-						JScrollPane scrollUsuario = new JScrollPane(tablaUsuario);
-						JScrollPane scrollTotal = new JScrollPane(tabla);
-						pCentro.add(scrollTotal);
-						pCentro.add(scrollUsuario);
-
-						JPanel panelBotones = new JPanel();
-						JButton botonComprar = new JButton("Comprar Piezas");
-						JButton botonQuitarProducto = new JButton("Quitar pieza");
-						JButton botonFinalizar = new JButton("Finalizar Compra");
-
-						panelBotones.add(botonComprar);
-						panelBotones.add(botonQuitarProducto);
-						panelBotones.add(botonFinalizar);
-
-						botonComprar.addActionListener(c -> {
-							int fila = tabla.getSelectedRow();
-							if (fila == -1) {
-								JOptionPane.showMessageDialog(null, "Primero debes seleccionado una fila",
-										"ERROR EN SELECCIÓN", JOptionPane.ERROR_MESSAGE);
-
-							} else {
-								String cantidad = JOptionPane.showInputDialog(null, "¿Cuantas piezas desea comprar?",
-										"Cantidad piezas", JOptionPane.QUESTION_MESSAGE);
-								int id = (int) tabla.getValueAt(fila, 0);
-								String codigo = (String) tabla.getValueAt(fila, 1);
-								String nombrePieza = (String) tabla.getValueAt(fila, 2);
-								String descripcion = (String) tabla.getValueAt(fila, 3);
-								String fabricante = (String) tabla.getValueAt(fila, 4);
-								float precio = (float) tabla.getValueAt(fila, 5);
-
-								compra.add(new Pieza(id, codigo, nombrePieza, descripcion, fabricante, precio,
-										Integer.parseInt(cantidad)));
-
-								modeloPiezasUsuario = new ModeloAlmacen(compra);
-								tablaUsuario.setModel(modeloPiezasUsuario);
-
-							}
-
-						});
-						botonQuitarProducto.addActionListener(c -> {
-							int fila = tablaUsuario.getSelectedRow();
-							if (fila == -1) {
-								JOptionPane.showMessageDialog(null, "Primero debes seleccionado una fila",
-										"ERROR EN SELECCIÓN", JOptionPane.ERROR_MESSAGE);
-
-							} else {
-								compra.remove(fila);
-								modeloPiezasUsuario = new ModeloAlmacen(compra);
-								tablaUsuario.setModel(modeloPiezasUsuario);
-								JOptionPane.showMessageDialog(null, "Producto eliminado de la compra", "COMPRA",
-										JOptionPane.INFORMATION_MESSAGE);
-							}
-
-						});
-						botonFinalizar.addActionListener(c -> {
-							int i = 0;
-							float precioTotal = 0;
-							while (i < compra.size()) {
-								Pieza p = compra.get(i);
-								precioTotal = precioTotal + (p.getPrecio() * p.getCantidadAlmacen());
-								compra.remove(i);
-
-							}
-							modeloPiezasUsuario = new ModeloAlmacen(compra);
-							tablaUsuario.setModel(modeloPiezasUsuario);
-							JOptionPane.showMessageDialog(null, precioTotal + "€", "El precio total es",
-									JOptionPane.INFORMATION_MESSAGE);
-
-						});
-
-						panelPiezas.add(panelBotones, BorderLayout.SOUTH);
-
-						panelDerechoServicios.add(panelPiezas);
-
-					}
-
-					// Refrescar el panel
-					panelDerechoServicios.revalidate();
-					panelDerechoServicios.repaint();
-				}
-			});
-			botones.add(boton);
-		}
+		setUsuario(usuario);
 
 		JPanel pAlmacen = new JPanel(new BorderLayout());
 		JPanel pTabla = new JPanel();
@@ -760,7 +537,7 @@ public class VentanaGrafica extends JFrame {
 			botonesPrefer.add(botonPref);
 		}
 
-		menuPestanas.add("Servicios", pServicios);
+		menuPestanas.add("Servicios", new PanelServicios());
 		menuPestanas.add("Almacen", pAlmacen);
 		menuPestanas.add("Parking", pParking);
 		menuPestanas.add("Preferencias", pSettings);
