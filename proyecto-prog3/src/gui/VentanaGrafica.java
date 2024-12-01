@@ -199,6 +199,7 @@ public class VentanaGrafica extends JFrame {
 						panelDerechoServicios.add(panelBotonesServicio, BorderLayout.SOUTH);
 
 					} else if (operacion.equals("Comprar Piezas")) {
+						JOptionPane.showMessageDialog(null, "Bienvenido a la ventana de compras de piezas", "Venta de peizas", JOptionPane.INFORMATION_MESSAGE);
 
 						// Panel para piezas
 						JPanel panelPiezas = new JPanel();
