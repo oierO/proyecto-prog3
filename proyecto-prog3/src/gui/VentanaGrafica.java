@@ -398,6 +398,11 @@ public class VentanaGrafica extends JFrame {
 		String[] columnNames = { "Calificación", "Comentario", "Usuario" };
 		// Crear el modelo de la tabla con los datos de las valoraciones
 		DefaultTableModel model = new DefaultTableModel(valoraciones, columnNames) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false; // Hacer que las celdas no sean editables
