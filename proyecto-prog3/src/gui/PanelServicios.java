@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -14,12 +15,14 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.TableCellRenderer;
 
 import domain.PedidoServicios;
 import domain.Pieza;
@@ -278,6 +281,54 @@ public class PanelServicios extends JPanel {
 							JOptionPane.showMessageDialog(null, precioTotal + "€", "El precio total es",
 									JOptionPane.INFORMATION_MESSAGE);
 
+						});
+						tablaUsuario.getTableHeader().setDefaultRenderer(new TableCellRenderer() {
+							
+							@Override
+							public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+									int row, int column) {
+								JLabel l= new JLabel(value.toString());
+								l.setOpaque(true);
+								if (column == 0) {
+									l.setHorizontalAlignment(JLabel.CENTER);
+									l.setBackground(Color.BLUE);
+								} else if (column == 1) {
+									l.setHorizontalAlignment(JLabel.CENTER);
+									l.setBackground(Color.LIGHT_GRAY);
+								} else if (column == 2) {
+									l.setHorizontalAlignment(JLabel.CENTER);
+									l.setBackground(Color.CYAN);
+								} else if (column == 3) {
+									l.setHorizontalAlignment(JLabel.CENTER);
+									l.setBackground(Color.MAGENTA);
+								} else if (column == 4) {
+									l.setHorizontalAlignment(JLabel.CENTER);
+									l.setBackground(Color.ORANGE);
+								} else if (column == 5) {
+									l.setHorizontalAlignment(JLabel.CENTER);
+									l.setBackground(Color.PINK);
+								} else {
+									l.setHorizontalAlignment(JLabel.CENTER);
+									l.setBackground(Color.WHITE);
+								}
+								return l;
+							}
+						});
+						tablaUsuario.setDefaultRenderer(Object.class, new TableCellRenderer() {
+							
+							@Override
+							public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+									int row, int column) {
+								JLabel l= new JLabel(value.toString());
+								l.setOpaque(true);
+								if(row%2==0) {
+									l.setBackground(Color.YELLOW);
+								}if(column==6) {
+									l.setBackground(Color.GREEN);
+								}
+								
+								return l;
+							}
 						});
 
 						panelPiezas.add(panelBotones, BorderLayout.SOUTH);
