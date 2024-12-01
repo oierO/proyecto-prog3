@@ -43,12 +43,12 @@ public class PanelAlmacen extends JPanel {
 		JPanel pTabla = new JPanel();
 		JPanel panelFiltro = new JPanel(new FlowLayout());
 
-		lbltxtFiltro = new JLabel("Filtro por título: ");
+		lbltxtFiltro = new JLabel("Descripción: ");
 		panelFiltro.add(lbltxtFiltro);
 		txtFiltro = new JTextField(5);
 		panelFiltro.add(txtFiltro);
 
-		lblcbTipo = new JLabel("Filtro por tipo: ");
+		lblcbTipo = new JLabel("Tipo: ");
 		panelFiltro.add(lblcbTipo);
 
 		// Creando combobox
@@ -62,7 +62,7 @@ public class PanelAlmacen extends JPanel {
 
 		panelFiltro.add(cbTipo);
 
-		lblcbFabricante = new JLabel("Filtro por fabricante: ");
+		lblcbFabricante = new JLabel("Fabricante: ");
 		panelFiltro.add(lblcbFabricante);
 
 		panelFiltro.add(cbFabricante);
@@ -304,7 +304,7 @@ public class PanelAlmacen extends JPanel {
 
 			ArrayList<Pieza> lpFiltradas = new ArrayList<Pieza>();
 			for (Pieza p : lp) {
-				if (p.getDescripcion().contains(txtFiltro.getText())) {
+				if ((p.getDescripcion().toLowerCase()).contains(txtFiltro.getText().toLowerCase())) {
 					lpFiltradas.add(p);
 				}
 			}
