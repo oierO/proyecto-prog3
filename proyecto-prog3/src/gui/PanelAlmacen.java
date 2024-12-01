@@ -201,9 +201,10 @@ public class PanelAlmacen extends JPanel {
 		});
 		cbFabricante.addActionListener((e) -> {
 			String fabricanteSeleccion = (String) cbFabricante.getSelectedItem();
+			String tipo= (String) cbTipo.getSelectedItem();
 			ArrayList<Pieza> lp = new ArrayList<Pieza>();
 			for (Pieza p : cargarTabla()) {
-				if (p.getFabricante().equals(fabricanteSeleccion)) {
+				if (p.getFabricante().equals(fabricanteSeleccion)&&p.getNombrePieza().equals(tipo)) {
 					lp.add(p);
 				}
 			}
@@ -213,9 +214,10 @@ public class PanelAlmacen extends JPanel {
 		});
 		cbTipo.addActionListener((e) -> {
 			String tipoSeleccion = (String) cbTipo.getSelectedItem();
+			String fabricante= (String) cbFabricante.getSelectedItem();
 			ArrayList<Pieza> lp = new ArrayList<Pieza>();
 			for (Pieza p : cargarTabla()) {
-				if (p.getNombrePieza().equals(tipoSeleccion)) {
+				if (p.getNombrePieza().equals(tipoSeleccion)&&p.getFabricante().equals(fabricante)) {
 					lp.add(p);
 				}
 			}
@@ -223,14 +225,25 @@ public class PanelAlmacen extends JPanel {
 			tabla.setModel(modeloTabla);
 
 		});
+		
+		
+		
 		botonBorrarFiltrado.addActionListener((e) -> {
-			modeloTabla = new ModeloAlmacen(cargarTabla());
-			tabla.setModel(modeloTabla);
 			cbTipo.setSelectedIndex(-1);
 			cbFabricante.setSelectedIndex(-1);
 			txtFiltro.setText("");
+			modeloTabla = new ModeloAlmacen(cargarTabla());
+			tabla.setModel(modeloTabla);
 
 		});
+	}
+
+	public JTable getTabla() {
+		return tabla;
+	}
+
+	public void setTabla(JTable tabla) {
+		this.tabla = tabla;
 	}
 
 	private void creartablaPiezas() {

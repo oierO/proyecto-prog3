@@ -202,8 +202,7 @@ public class PanelServicios extends JPanel {
 						modeloPiezasUsuario = new ModeloAlmacen(compra);
 						JTable tablaUsuario = new JTable(modeloPiezasUsuario);
 						JScrollPane scrollUsuario = new JScrollPane(tablaUsuario);
-						JScrollPane scrollTotal = new JScrollPane(tabla);
-						pCentro.add(scrollTotal);
+						pCentro.add(new PanelAlmacen());
 						pCentro.add(scrollUsuario);
 
 						JPanel panelBotones = new JPanel();
