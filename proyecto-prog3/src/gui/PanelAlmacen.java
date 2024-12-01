@@ -25,6 +25,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
 import domain.Pieza;
@@ -124,8 +125,10 @@ public class PanelAlmacen extends JPanel {
 					l.setBackground(Color.LIGHT_GRAY);
 				}
 				if (column == 6) {
-					if (Integer.parseInt(l.getText()) < 100) {
+					if (Integer.parseInt(l.getText()) == 0) {
 						l.setBackground(Color.RED);
+					} else if (Integer.parseInt(l.getText()) < 100) {
+						l.setBackground(Color.ORANGE);
 
 					} else if (Integer.parseInt(l.getText()) < 200) {
 						l.setBackground(Color.YELLOW);
@@ -133,8 +136,11 @@ public class PanelAlmacen extends JPanel {
 					} else {
 						l.setBackground(Color.GREEN);
 					}
-				}
 
+				}
+				if (isSelected) {
+					l.setBackground(new Color(184, 207, 229));
+				}
 				return l;
 			}
 		});
