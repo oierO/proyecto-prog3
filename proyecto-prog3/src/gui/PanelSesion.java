@@ -56,34 +56,75 @@ public class PanelSesion extends JPanel {
 		JPanel panelCentral = new JPanel();
 		panelCentral.setLayout(new BoxLayout(panelCentral, BoxLayout.Y_AXIS)); // Apilado vertical
 
-		JLabel username = new JLabel("Username: " + usuario.getUsername());
-		username.setFont(fuenteGrande);
-		panelCentral.add(username);
+		// Panel para "Username"
+		JPanel panelUsername = new JPanel();
+		panelUsername.setLayout(new BoxLayout(panelUsername, BoxLayout.X_AXIS)); // Diseño horizontal
 
-		JLabel nombre = new JLabel("Nombre: " + usuario.getNombre());
-		nombre.setFont(fuenteGrande);
-		panelCentral.add(nombre);
+		JLabel labelUsernameTitulo = new JLabel("Username: "); // Etiqueta del título
+		labelUsernameTitulo.setFont(new Font("Arial", Font.BOLD, 18)); // Fuente en negrita
 
-		JLabel apellido = new JLabel("Apellido: " + usuario.getApellido());
-		apellido.setFont(fuenteGrande);
-		panelCentral.add(apellido);
+		JLabel labelUsernameValor = new JLabel(usuario.getUsername()); // Etiqueta del valor
+		labelUsernameValor.setFont(new Font("Arial", Font.PLAIN, 18)); // Fuente normal
 
-		JLabel vehiculosTitulo = new JLabel("Vehículos:");
-		vehiculosTitulo.setFont(fuenteGrande);
-		panelCentral.add(vehiculosTitulo);
+		panelUsername.add(labelUsernameTitulo);
+		panelUsername.add(labelUsernameValor);
+		panelCentral.add(panelUsername);
 
-		List<Vehiculo> vehiculos = usuario.getVehiculos(); // Obtener la lista de vehículos
+		// Panel para "Nombre"
+		JPanel panelNombre = new JPanel();
+		panelNombre.setLayout(new BoxLayout(panelNombre, BoxLayout.X_AXIS));
+
+		JLabel labelNombreTitulo = new JLabel("Nombre: ");
+		labelNombreTitulo.setFont(new Font("Arial", Font.BOLD, 18));
+
+		JLabel labelNombreValor = new JLabel(usuario.getNombre());
+		labelNombreValor.setFont(new Font("Arial", Font.PLAIN, 18));
+
+		panelNombre.add(labelNombreTitulo);
+		panelNombre.add(labelNombreValor);
+		panelCentral.add(panelNombre);
+
+		// Panel para "Apellido"
+		JPanel panelApellido = new JPanel();
+		panelApellido.setLayout(new BoxLayout(panelApellido, BoxLayout.X_AXIS));
+
+		JLabel labelApellidoTitulo = new JLabel("Apellido: ");
+		labelApellidoTitulo.setFont(new Font("Arial", Font.BOLD, 18));
+
+		JLabel labelApellidoValor = new JLabel(usuario.getApellido());
+		labelApellidoValor.setFont(new Font("Arial", Font.PLAIN, 18));
+
+		panelApellido.add(labelApellidoTitulo);
+		panelApellido.add(labelApellidoValor);
+		panelCentral.add(panelApellido);
+
+		// Panel para "Vehículos"
+		JPanel panelVehiculosTitulo = new JPanel();
+		panelVehiculosTitulo.setLayout(new BoxLayout(panelVehiculosTitulo, BoxLayout.X_AXIS));
+
+		JLabel labelVehiculosTitulo = new JLabel("Vehículos: ");
+		labelVehiculosTitulo.setFont(new Font("Arial", Font.BOLD, 18));
+		panelVehiculosTitulo.add(labelVehiculosTitulo);
+		panelCentral.add(panelVehiculosTitulo);
+
+		// Listar los vehículos
+		List<Vehiculo> vehiculos = usuario.getVehiculos();
 		if (vehiculos.isEmpty()) {
-			JLabel sinVehiculos = new JLabel("No hay vehículos registrados.");
-			sinVehiculos.setFont(fuenteGrande);
-			panelCentral.add(sinVehiculos);
+		    JLabel sinVehiculos = new JLabel("No hay vehículos registrados.");
+		    sinVehiculos.setFont(new Font("Arial", Font.PLAIN, 18));
+		    panelCentral.add(sinVehiculos);
 		} else {
-			for (Vehiculo vehiculo : vehiculos) {
-				JLabel infoVehiculo = new JLabel("- " + vehiculo.getModelo() + " (" + vehiculo.getMarca() + ", "
-						+ vehiculo.getMatricula() + ")");
-				infoVehiculo.setFont(fuenteGrande);
-				panelCentral.add(infoVehiculo);
-			}
+		    for (Vehiculo vehiculo : vehiculos) {
+		        JPanel panelVehiculo = new JPanel();
+		        panelVehiculo.setLayout(new BoxLayout(panelVehiculo, BoxLayout.X_AXIS));
+
+		        JLabel labelVehiculoInfo = new JLabel("- " + vehiculo.getModelo() + " (" + vehiculo.getMarca() + ", "
+		                + vehiculo.getMatricula() + ")");
+		        labelVehiculoInfo.setFont(new Font("Arial", Font.PLAIN, 18));
+		        panelVehiculo.add(labelVehiculoInfo);
+
+		        panelCentral.add(panelVehiculo);
+		    }
 		}
 
 		// Agregar el panel central al área CENTER
