@@ -24,11 +24,6 @@ import main.DeustoTaller;
 public class VentanaGrafica extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private ModeloAlmacen modeloTabla;
-	private JTable tabla;
-	private JTextField txtFiltro;
-	private JComboBox<String> cbTipo, cbFabricante;
-	private JLabel lbltxtFiltro, lblcbTipo, lblcbFabricante;
 	private static String usuario;
 
 	public static String getUsuario() {
