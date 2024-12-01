@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,6 +20,7 @@ import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -34,6 +36,7 @@ public class PanelAlmacen extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private ModeloAlmacen modeloTabla;
 	private JTable tabla;
+	private static int cont = 0;
 	private JTextField txtFiltro;
 	private JComboBox<String> cbTipo, cbFabricante;
 	private JLabel lbltxtFiltro, lblcbTipo, lblcbFabricante;
@@ -109,9 +112,14 @@ public class PanelAlmacen extends JPanel {
 		this.add(panelFiltro, BorderLayout.NORTH);
 		this.add(pInfor, BorderLayout.SOUTH);
 		this.add(pTabla, BorderLayout.CENTER);
-		cargarTabla();
-		creartablaPiezas();
-		insertarPiezas(cargarTabla());
+		if (cont == 0) {
+			creartablaPiezas();
+			insertarPiezas(cargarTabla());
+			cont++;
+		} else {
+			ModeloAlmacen modeloTabla = new ModeloAlmacen(cargarBD());
+			tabla.setModel(modeloTabla);
+		}
 		tabla.getTableHeader().setReorderingAllowed(false);// Para que no se puedan mover las columnas
 		tabla.setDefaultRenderer(Object.class, new TableCellRenderer() {
 
@@ -200,10 +208,10 @@ public class PanelAlmacen extends JPanel {
 		});
 		cbFabricante.addActionListener((e) -> {
 			String fabricanteSeleccion = (String) cbFabricante.getSelectedItem();
-			String tipo= (String) cbTipo.getSelectedItem();
+			String tipo = (String) cbTipo.getSelectedItem();
 			ArrayList<Pieza> lp = new ArrayList<Pieza>();
-			for (Pieza p : cargarTabla()) {
-				if (p.getFabricante().equals(fabricanteSeleccion)&&p.getNombrePieza().equals(tipo)) {
+			for (Pieza p : cargarBD()) {
+				if (p.getFabricante().equals(fabricanteSeleccion) && p.getNombrePieza().equals(tipo)) {
 					lp.add(p);
 				}
 			}
@@ -213,10 +221,10 @@ public class PanelAlmacen extends JPanel {
 		});
 		cbTipo.addActionListener((e) -> {
 			String tipoSeleccion = (String) cbTipo.getSelectedItem();
-			String fabricante= (String) cbFabricante.getSelectedItem();
+			String fabricante = (String) cbFabricante.getSelectedItem();
 			ArrayList<Pieza> lp = new ArrayList<Pieza>();
-			for (Pieza p : cargarTabla()) {
-				if (p.getNombrePieza().equals(tipoSeleccion)&&p.getFabricante().equals(fabricante)) {
+			for (Pieza p : cargarBD()) {
+				if (p.getNombrePieza().equals(tipoSeleccion) && p.getFabricante().equals(fabricante)) {
 					lp.add(p);
 				}
 			}
@@ -224,14 +232,12 @@ public class PanelAlmacen extends JPanel {
 			tabla.setModel(modeloTabla);
 
 		});
-		
-		
-		
+
 		botonBorrarFiltrado.addActionListener((e) -> {
 			cbTipo.setSelectedIndex(-1);
 			cbFabricante.setSelectedIndex(-1);
 			txtFiltro.setText("");
-			modeloTabla = new ModeloAlmacen(cargarTabla());
+			modeloTabla = new ModeloAlmacen(cargarBD());
 			tabla.setModel(modeloTabla);
 
 		});
@@ -241,12 +247,9 @@ public class PanelAlmacen extends JPanel {
 		return tabla;
 	}
 
-	
-
 	public ModeloAlmacen getModeloTabla() {
 		return modeloTabla;
 	}
-
 
 	private void creartablaPiezas() {
 		String sql = "CREATE TABLE IF NOT EXISTS PIEZA (" + " id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -275,6 +278,30 @@ public class PanelAlmacen extends JPanel {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+	}
+
+	private List<Pieza> cargarBD() {
+		String sql = "SELECT * FROM Pieza";
+		try {
+			Statement st = DeustoTaller.getCon().createStatement();
+			ResultSet resultado = st.executeQuery(sql);
+			ArrayList<Pieza> lPiezas = new ArrayList<Pieza>();
+			lPiezas.add(
+					new Pieza(resultado.getInt("id"), resultado.getString("codigo"), resultado.getString("nombrePieza"),
+							resultado.getString("descripcion"), resultado.getString("fabricante"),
+							resultado.getFloat("precio"), resultado.getInt("cantidadAlmacen")));
+			resultado.next();
+			while (resultado.next()) {
+				lPiezas.add(new Pieza(resultado.getInt("id"), resultado.getString("codigo"),
+						resultado.getString("nombrePieza"), resultado.getString("descripcion"),
+						resultado.getString("fabricante"), resultado.getFloat("precio"),
+						resultado.getInt("cantidadAlmacen")));
+			}
+			return lPiezas;
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(this, "Error al obtener la base de datos"+e.getLocalizedMessage());
+			return null;
 		}
 	}
 
