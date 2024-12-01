@@ -340,25 +340,29 @@ public class VentanaGrafica extends JFrame {
 		cargarNombres(cbTipo);
 		;// MouseListener
 		tabla.addMouseListener(new MouseAdapter() {
+			
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int selec= tabla.getSelectedRow();
-				if(selec!=-1) {
-					int id= (int) tabla.getValueAt(selec, 0);
-					String codigo=tabla.getValueAt(selec, 1).toString();
-					String nombrePieza=tabla.getValueAt(selec, 2).toString();
-					String descripcion=tabla.getValueAt(selec, 3).toString();
-					String fabricante=tabla.getValueAt(selec, 4).toString();
-					float precio=(float) tabla.getValueAt(selec, 5);
-					int cantidadAlmacen=(int) tabla.getValueAt(selec, 6);
-					
-					Pieza p= new Pieza(id, codigo, nombrePieza, descripcion, fabricante, precio, cantidadAlmacen);
-					new EspecificacionesPieza(p);
-					
-					
+				if (e.getClickCount()==2) {
+					int selec= tabla.getSelectedRow();
+					if(selec!=-1) {
+						int id= (int) tabla.getValueAt(selec, 0);
+						String codigo=tabla.getValueAt(selec, 1).toString();
+						String nombrePieza=tabla.getValueAt(selec, 2).toString();
+						String descripcion=tabla.getValueAt(selec, 3).toString();
+						String fabricante=tabla.getValueAt(selec, 4).toString();
+						float precio=(float) tabla.getValueAt(selec, 5);
+						int cantidadAlmacen=(int) tabla.getValueAt(selec, 6);
+						
+						Pieza p= new Pieza(id, codigo, nombrePieza, descripcion, fabricante, precio, cantidadAlmacen);
+						new EspecificacionesPieza(p);
+						
+						
+					}
 					
 				}
+				
 			}
 			
 		});
