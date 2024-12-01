@@ -49,22 +49,21 @@ public class PanelServicios extends JPanel {
 		// Para los servicios
 		listaDeServiciosDisponibles = new ArrayList<ServicioDisponible>();
 		cargarServicios(listaDeServiciosDisponibles);
-		
+
 		System.out.println("\n--Visualizando las listas de servicios disponibles--\n");
 		System.out.println(listaDeServiciosDisponibles.size());
-		
 
 		// Lista de pedidos de servicios que ha hecho el cliente en durante esta sesion
 		listaPedidoServicios = new ArrayList<PedidoServicios>();
 
 		// Servicios disponibles
 		serviciosDisponiblesNombre = new ArrayList<String>();
-		
-		for(ServicioDisponible servicioDisponible : listaDeServiciosDisponibles) {
-			serviciosDisponiblesNombre.add(servicioDisponible.getNom_ser());	
+
+		for (ServicioDisponible servicioDisponible : listaDeServiciosDisponibles) {
+			serviciosDisponiblesNombre.add(servicioDisponible.getNom_ser());
 		}
-		
-		//Datos de prueba
+
+		// Datos de prueba
 //		serviciosDisponiblesNombre.add("Cambio de aceite y filtro");
 //		serviciosDisponiblesNombre.add("Revisión y reparación del sistema de frenos");
 //		serviciosDisponiblesNombre.add("Reparación de sistemas de suspensión y dirección");
@@ -75,8 +74,6 @@ public class PanelServicios extends JPanel {
 //		serviciosDisponiblesNombre.add("Reparación de sistemas de transmisión");
 //		serviciosDisponiblesNombre.add("Reemplazo y reparación de sistemas de iluminación");
 //		serviciosDisponiblesNombre.add("Servicio de mantenimiento preventivo");
-		
-		
 
 		JPanel panelDerechoServicios = new JPanel();
 		panelDerechoServicios.setLayout(new BorderLayout());
@@ -195,13 +192,13 @@ public class PanelServicios extends JPanel {
 						panelPiezas.setLayout(new BorderLayout());
 						JPanel pCentro = new JPanel(new GridLayout(2, 1));
 						panelPiezas.add(pCentro, BorderLayout.CENTER);
-						JPanel panel1= new PanelAlmacen();
+						PanelAlmacen panel1 = new PanelAlmacen();
 
 						ArrayList<Pieza> compra = new ArrayList<Pieza>();
 						modeloPiezasUsuario = new ModeloAlmacen(compra);
 						JTable tablaUsuario = new JTable(modeloPiezasUsuario);
 						JScrollPane scrollUsuario = new JScrollPane(tablaUsuario);
-						JTable tabla= ((PanelAlmacen) panel1).getTabla();
+						JTable tabla = ((PanelAlmacen) panel1).getTabla();
 						pCentro.add(panel1);
 						pCentro.add(scrollUsuario);
 
@@ -260,6 +257,8 @@ public class PanelServicios extends JPanel {
 							while (i < compra.size()) {
 								Pieza p = compra.get(i);
 								precioTotal = precioTotal + (p.getPrecio() * p.getCantidadAlmacen());
+								panel1.updateBD(p);
+								panel1.refrescar();
 								compra.remove(i);
 
 							}
@@ -285,11 +284,10 @@ public class PanelServicios extends JPanel {
 		}
 
 	}
-	
-	
-	private static void cargarServicios(ArrayList<ServicioDisponible> listaServiciosDisponibles){
+
+	private static void cargarServicios(ArrayList<ServicioDisponible> listaServiciosDisponibles) {
 		String sql = "SELECT * FROM SERVICIOS_DISPONIBLES";
-		
+
 		try {
 			Connection conn = DeustoTaller.getCon();
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -300,7 +298,7 @@ public class PanelServicios extends JPanel {
 				String nomb_ser = rs.getString("NOM_SER");
 				String descripcion = rs.getString("DESCRIPCION");
 				listaServiciosDisponibles.add(new ServicioDisponible(cod_ser, nomb_ser, descripcion));
-			
+
 			}
 			System.out.println("\n--Esto es de panel de servicios--\n");
 			System.out.println("Servicios cargados exitosamente ");
@@ -309,7 +307,7 @@ public class PanelServicios extends JPanel {
 			System.out.println("Error en cargar datos");
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 }
