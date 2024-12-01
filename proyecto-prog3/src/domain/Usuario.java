@@ -20,6 +20,7 @@ public class Usuario {
 	protected String apellido;
 	protected LocalDateTime hUltimaSesion;
 	protected ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();
+	protected HashSet<String> matriculas = new HashSet<String>();
 
 	public static Usuario fromDB(String username) {
 		try {
@@ -38,17 +39,20 @@ public class Usuario {
 			st.setString(1, username);
 			resultado = st.executeQuery();
 			ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();
+			HashSet<String> matriculas = new HashSet<String>();
 			try {
 				vehiculos.add(Vehiculo.fromResultSet(resultado));
+				matriculas.add(Vehiculo.fromResultSet(resultado).getMatricula());
 				resultado.next();
 				while (resultado.next()) {
 					vehiculos.add(Vehiculo.fromResultSet(resultado));
+					matriculas.add(Vehiculo.fromResultSet(resultado).getMatricula());
 				}
 			} catch (NullPointerException e) {
 				// No hace nada
 			}
 
-			return new Usuario(nom, usernom, apellido, hora, vehiculos);
+			return new Usuario(nom, usernom, apellido, hora, vehiculos,matriculas);
 
 		} catch (SQLException e) {
 			System.out.println("Error al obtener usuario" + e);
@@ -56,6 +60,14 @@ public class Usuario {
 			throw new ClassCastException();
 		}
 
+	}
+
+	public HashSet<String> getMatriculas() {
+		return matriculas;
+	}
+
+	private void setMatriculas(HashSet<String> matriculas) {
+		this.matriculas = matriculas;
 	}
 
 	public String getUsername() {
@@ -110,6 +122,17 @@ public class Usuario {
 		this.sethUltimaSesion(hUltimaSesion);
 		this.vehiculos = vehiculos;
 	}
+	
+	public Usuario(String username, String nombre, String apellido, LocalDateTime hUltimaSesion,
+			ArrayList<Vehiculo> vehiculos,HashSet<String> licenses) {
+		this.setUsername(username);
+		this.setNombre(nombre);
+		this.setApellido(apellido);
+		this.sethUltimaSesion(hUltimaSesion);
+		this.vehiculos = vehiculos;
+		setMatriculas(licenses);
+	}
+	
 
 	public ArrayList<Vehiculo> getVehiculos() {
 		return vehiculos;

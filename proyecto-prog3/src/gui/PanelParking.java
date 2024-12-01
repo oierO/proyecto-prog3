@@ -2,6 +2,8 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -12,6 +14,7 @@ import java.util.List;
 import javax.swing.*;
 
 import domain.*;
+import main.DeustoTaller;
 
 public class PanelParking extends JPanel {
 
@@ -31,6 +34,9 @@ public class PanelParking extends JPanel {
 	private JTextField trest;
 	private ButtonGroup grupoBotones;
 	private String splazaSeleccion;
+	private JButton bLiberar;
+	private PlazaParking plazaSel;
+	private DateTimeFormatter formateador = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	protected static HashMap<String, HashMap<String, PlazaParking>> mapaParkings = new HashMap<String, HashMap<String, PlazaParking>>();
 	static ArrayList<JToggleButton> plazasGraficas = new ArrayList<>();
 	private static final List<String> plantasParking = List.of("Planta 1", "Planta 2", "Planta 3");
@@ -71,6 +77,21 @@ public class PanelParking extends JPanel {
 		JPanel trestPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		trestPanel.add(new JLabel("Tiempo restante: "));
 		trest = new JTextField("N/A");
+
+		bLiberar = new JButton("Liberar plaza");
+		Image img = new ImageIcon("resources/images/cancelar.png").getImage();
+		img = img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+		bLiberar.setIcon(new ImageIcon(img));
+		bLiberar.setVisible(false);
+		bLiberar.addActionListener(e -> {
+			int res = JOptionPane.showConfirmDialog(this, "¿Quiere liberar la plaza reservada seleccionada?");
+			if (res == JOptionPane.YES_OPTION) {
+				liberarPlaza();
+				cambioSeleccionPl(plazaSel.getIdentificador());
+				actBotones();
+				repaint();
+			}
+		});
 		bReservar = new JButton("Reservar");
 		bReservar.setIcon(new ImageIcon("resources/images/calendar-icon.png"));
 		bReservar.setEnabled(false);
@@ -83,6 +104,7 @@ public class PanelParking extends JPanel {
 		informacion.add(trestPanel);
 		informacion.add(tfinPanel);
 		informacion.add(bReservar);
+		informacion.add(bLiberar);
 		plantas.addActionListener(new AbstractAction() {
 
 			/**
@@ -94,15 +116,11 @@ public class PanelParking extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getActionCommand().equals("comboBoxChanged")) {
 					cambioSeleccionPl(splazaSeleccion);
-					Enumeration<AbstractButton> eBotones = grupoBotones.getElements();
-					while (eBotones.hasMoreElements()) {
-						JToggleButton bTemp = (JToggleButton) eBotones.nextElement();
-						bTemp.setBackground(fondoBoton(bTemp.getText()));
-					}
-
+					actBotones();
 				}
 
 			}
+
 		});
 		setFocusable(false);
 		grupoBotones = new ButtonGroup();
@@ -130,7 +148,7 @@ public class PanelParking extends JPanel {
 	}
 
 	public void cambioSeleccionPl(String codPlaza) {
-		PlazaParking plazaSel = RendererParking.plazafromBD(codPlaza, (String) plantas.getSelectedItem());
+		plazaSel = RendererParking.plazafromBD(codPlaza, (String) plantas.getSelectedItem());
 		if (plazaSel != null) {
 			matricula.setText(plazaSel.getVehiculo().getMatricula());
 			estado.setText("Ocupado");
@@ -142,7 +160,13 @@ public class PanelParking extends JPanel {
 					((segundos % 5184000) % 3600) / 60, ((segundos % 5184000) % 3600) % 60));
 			bReservar.setEnabled(false);
 			bReservar.setToolTipText("Plaza no disponible para la reserva");
+			if (DeustoTaller.getSesion().getMatriculas().contains(matricula.getText())) {
+				bLiberar.setVisible(true);
+			} else {
+				bLiberar.setVisible(false);
+			}
 		} else {
+			bLiberar.setVisible(false);
 			matricula.setText("#########");
 			estado.setText("Libre");
 			estado.setBackground(Color.GREEN);
@@ -166,6 +190,28 @@ public class PanelParking extends JPanel {
 
 	public static List<String> getPlantasparking() {
 		return plantasParking;
+	}
+
+	public void actBotones() {
+		Enumeration<AbstractButton> eBotones = grupoBotones.getElements();
+		while (eBotones.hasMoreElements()) {
+			JToggleButton bTemp = (JToggleButton) eBotones.nextElement();
+			bTemp.setBackground(fondoBoton(bTemp.getText()));
+		}
+	}
+
+	private void liberarPlaza() {
+		try {
+			String sql = "DELETE FROM RESERVA_PARKING WHERE planta=? AND identificador=? AND caducidad=?";
+			PreparedStatement stmt = DeustoTaller.getCon().prepareStatement(sql);
+			stmt.setString(1, plazaSel.getPlanta());
+			stmt.setString(2, plazaSel.getIdentificador());
+			stmt.setString(3, plazaSel.getFechaCaducidad().format(formateador));
+			stmt.executeUpdate();
+			JOptionPane.showMessageDialog(this, "Plaza liberada");
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(this, "Ha ocurrido un error al liberar la plaza" + e.getLocalizedMessage());
+		}
 	}
 
 }

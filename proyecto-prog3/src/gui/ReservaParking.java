@@ -63,6 +63,7 @@ public class ReservaParking extends JDialog {
 				reservarPlazaBD();
 				panel.cambioSeleccionPl(plaza);
 				this.getContentPane().repaint();
+				panel.actBotones();
 				dispose();
 			}
 		});
