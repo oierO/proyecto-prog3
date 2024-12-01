@@ -5,7 +5,6 @@ import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.nio.channels.NonWritableChannelException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,7 +32,6 @@ public class PanelServicios extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private ModeloAlmacen modeloPiezasUsuario;
-	private JTable tabla;
 	protected JTable tablaPreguntas;
 	private ArrayList<String> serviciosDisponiblesNombre;
 	private ArrayList<ServicioDisponible> listaDeServiciosDisponibles;
@@ -197,13 +195,14 @@ public class PanelServicios extends JPanel {
 						panelPiezas.setLayout(new BorderLayout());
 						JPanel pCentro = new JPanel(new GridLayout(2, 1));
 						panelPiezas.add(pCentro, BorderLayout.CENTER);
+						JPanel panel1= new PanelAlmacen();
 
 						ArrayList<Pieza> compra = new ArrayList<Pieza>();
 						modeloPiezasUsuario = new ModeloAlmacen(compra);
 						JTable tablaUsuario = new JTable(modeloPiezasUsuario);
 						JScrollPane scrollUsuario = new JScrollPane(tablaUsuario);
-						JScrollPane scrollTotal = new JScrollPane(tabla);
-						pCentro.add(scrollTotal);
+						JTable tabla= ((PanelAlmacen) panel1).getTabla();
+						pCentro.add(panel1);
 						pCentro.add(scrollUsuario);
 
 						JPanel panelBotones = new JPanel();

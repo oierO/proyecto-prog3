@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -16,7 +17,7 @@ public class Vehiculo {
 	protected String marca;
 	protected String modelo;
 	protected Integer anoModelo;
-	protected LocalDate fMatricula;
+	protected List<ServicioDisponible>serviciosContratados;
 
 	protected void setMatricula(String matricula) {
 		if (matricula != null) {
@@ -42,10 +43,10 @@ public class Vehiculo {
 	protected void setAnoModelo(Integer anoModelo) {
 		this.anoModelo = anoModelo;
 	}
-
-	protected void setfMatricula(LocalDate fMatricula) {
-		this.fMatricula = fMatricula;
+	public void setServiciosContratados(List<ServicioDisponible> serviciosContratados) {
+		this.serviciosContratados = serviciosContratados;
 	}
+
 
 	public String getMarca() {
 		return marca;
@@ -59,13 +60,17 @@ public class Vehiculo {
 		return anoModelo;
 	}
 
-	public LocalDate getfMatricula() {
-		return fMatricula;
-	}
 
 	public String getMatricula() {
 		return matricula;
 	}
+	
+
+	public List<ServicioDisponible> getServiciosContratados() {
+		return serviciosContratados;
+	}
+
+	
 
 	public static Vehiculo fromResultSet(ResultSet resultado) {
 		try {
@@ -90,7 +95,7 @@ public class Vehiculo {
 		this.setMarca(marca);
 		this.setModelo(modelo);
 		this.setAnoModelo(anoModelo);
-		this.setfMatricula(fMatricula);
+		this.setServiciosContratados(serviciosContratados);
 	}
 
 	@Override
