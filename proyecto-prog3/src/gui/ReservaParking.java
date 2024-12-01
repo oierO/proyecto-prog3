@@ -29,6 +29,7 @@ public class ReservaParking extends JDialog {
 	private JComboBox<Vehiculo> listaVehiculos;
 	private DateTimePicker selectorFecha;
 	private static final long serialVersionUID = 1L;
+	@SuppressWarnings("unused")
 	private static final double TARIFA_HORA = 5.5;
 
 	public ReservaParking(String planta, String plaza, PanelParking panel) {
