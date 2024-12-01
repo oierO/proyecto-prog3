@@ -16,12 +16,9 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -39,11 +36,10 @@ import domain.PedidoServicios;
 import domain.Pieza;
 import main.DeustoTaller;
 
-
 public class VentanaGrafica extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private ModeloAlmacen modeloTabla,modeloPiezasUsuario;
+	private ModeloAlmacen modeloTabla, modeloPiezasUsuario;
 	private JTable tabla;
 	private JTextField txtFiltro;
 	private JComboBox<String> cbTipo, cbFabricante;
@@ -63,7 +59,7 @@ public class VentanaGrafica extends JFrame {
 		this.usuario = usuario;
 
 		// Pestaña Servicios
-		String[] lServicios = new String[] { "Taller", "Comprar Piezas"};
+		String[] lServicios = new String[] { "Taller", "Comprar Piezas" };
 		JPanel pServicios = new JPanel();
 		pServicios.setLayout(new BorderLayout());
 		JPanel botones = new JPanel();
@@ -73,10 +69,10 @@ public class VentanaGrafica extends JFrame {
 
 		// Para los servicios
 
-		//Lista de pedidos de servicios que ha hecho el cliente	en durante esta sesion					
+		// Lista de pedidos de servicios que ha hecho el cliente en durante esta sesion
 		listaPedidoServicios = new ArrayList<PedidoServicios>();
-				
-		//Servicios disponibles 
+
+		// Servicios disponibles
 		serviciosDisponibles = new ArrayList<String>();
 		serviciosDisponibles.add("Cambio de aceite y filtro");
 		serviciosDisponibles.add("Revisión y reparación del sistema de frenos");
@@ -88,7 +84,7 @@ public class VentanaGrafica extends JFrame {
 		serviciosDisponibles.add("Reparación de sistemas de transmisión");
 		serviciosDisponibles.add("Reemplazo y reparación de sistemas de iluminación");
 		serviciosDisponibles.add("Servicio de mantenimiento preventivo");
-				
+
 		JPanel panelDerechoServicios = new JPanel();
 		panelDerechoServicios.setLayout(new BorderLayout());
 		pServicios.add(panelDerechoServicios);
@@ -102,62 +98,59 @@ public class VentanaGrafica extends JFrame {
 					panelDerechoServicios.removeAll();
 
 					if (operacion.equals("Taller")) {
-				
+
 						// Panel para servicios disponibles
-						
 
 						JPanel PanelServiciosDisponibles = new JPanel();
 						JPanel panelCentro = new JPanel();
-
 
 						PanelServiciosDisponibles.setLayout(new BorderLayout());
 						Border panelDiagnosticoBorder = BorderFactory.createTitledBorder("¿Qué necesitas?");
 						PanelServiciosDisponibles.setBorder(panelDiagnosticoBorder);
 						PanelServiciosDisponibles.add(panelCentro, BorderLayout.CENTER);
-						
-						
-						
-						panelCentro.setLayout(new GridLayout(serviciosDisponibles.size(),1));
-						
-						//Añadir los servicios disponibles al panel del centro
-						for(int i=0;i<serviciosDisponibles.size();i++) {
-							JCheckBox jcheckBox = new JCheckBox(serviciosDisponibles.get(i),false);
+
+						panelCentro.setLayout(new GridLayout(serviciosDisponibles.size(), 1));
+
+						// Añadir los servicios disponibles al panel del centro
+						for (int i = 0; i < serviciosDisponibles.size(); i++) {
+							JCheckBox jcheckBox = new JCheckBox(serviciosDisponibles.get(i), false);
 							panelCentro.add(jcheckBox);
-							
+
 						}
-				
-						//Eligo un idioma 
+
+						// Eligo un idioma
 						idioma = "Español";
-						
-			
-						//Panel para los botones 
+
+						// Panel para los botones
 						JPanel panelBotonesServicio = new JPanel();
-					
-						//Boton de reservar 
-						//Si el usuario pulsa este boton dependiendo de si ha elegido algún servicio o no
-						//aparece un formulario 
+
+						// Boton de reservar
+						// Si el usuario pulsa este boton dependiendo de si ha elegido algún servicio o
+						// no
+						// aparece un formulario
 						JButton botonReservar = new JButton("RESERVAR CITA");
 						botonReservar.addActionListener(new ActionListener() {
 							@Override
 							public void actionPerformed(ActionEvent e) {
 								ArrayList<String> listaServiciosSeleccionados = new ArrayList<String>();
-								for(Component componente : panelCentro.getComponents()) {
-									if(componente instanceof JCheckBox) {
+								for (Component componente : panelCentro.getComponents()) {
+									if (componente instanceof JCheckBox) {
 										JCheckBox jCheckBox = (JCheckBox) componente;
-										if(jCheckBox.isSelected()) {
+										if (jCheckBox.isSelected()) {
 											listaServiciosSeleccionados.add(jCheckBox.getText());
-										
+
 										}
-									}									
+									}
 								}
-					
+
 								if (!listaServiciosSeleccionados.isEmpty()) {
 									System.out.println("\n---Esto es de panel de servicios---\n");
-									System.out.println("El usuario " + usuario +" ha seleccionado estos servicios: ");
+									System.out.println("El usuario " + usuario + " ha seleccionado estos servicios: ");
 									for (String diagnostico : listaServiciosSeleccionados) {
-										System.out.println("- "+diagnostico);
+										System.out.println("- " + diagnostico);
 									}
-									new VentanaPedidoServicios(usuario,listaPedidoServicios,listaServiciosSeleccionados,idioma);
+									new VentanaPedidoServicios(usuario, listaPedidoServicios,
+											listaServiciosSeleccionados, idioma);
 									// Refrescar el panel
 									PanelServiciosDisponibles.revalidate();
 									PanelServiciosDisponibles.repaint();
@@ -166,130 +159,125 @@ public class VentanaGrafica extends JFrame {
 									System.out.println("El usuario " + usuario + " no ha seleccionado ningún servicio");
 								}
 
-
 							}
 						});
-						
+
 						panelBotonesServicio.add(botonReservar);
-						
-						//Boton para visualizar pedidos del usuario
-						JButton botonVisualizarPedidos = new JButton("Visualizar Pedidos"); 
-						
+
+						// Boton para visualizar pedidos del usuario
+						JButton botonVisualizarPedidos = new JButton("Visualizar Pedidos");
+
 						botonVisualizarPedidos.addActionListener(new ActionListener() {
-							
+
 							@Override
 							public void actionPerformed(ActionEvent e) {
-								if(listaPedidoServicios.isEmpty()) {
+								if (listaPedidoServicios.isEmpty()) {
 									System.out.println("\n---Esto es de panel de servicios---\n");
-									System.out.println("El usuario "+ usuario + " no tiene ningún pedido.");
+									System.out.println("El usuario " + usuario + " no tiene ningún pedido.");
 								} else {
 									System.out.println("\n---Esto es de panel de servicios---\n");
 									System.out.println("El usuario " + usuario + "ha hecho estos pedidos: ");
-									for(PedidoServicios pedido : listaPedidoServicios ) {
-										System.out.println(pedido);										
+									for (PedidoServicios pedido : listaPedidoServicios) {
+										System.out.println(pedido);
 									}
 								}
-								
+
 							}
 						});
-						
+
 						panelBotonesServicio.add(botonVisualizarPedidos);
 
 						panelDerechoServicios.add(PanelServiciosDisponibles, BorderLayout.CENTER);
 						panelDerechoServicios.add(panelBotonesServicio, BorderLayout.SOUTH);
 
 					} else if (operacion.equals("Comprar Piezas")) {
-						JOptionPane.showMessageDialog(null, "Bienvenido a la ventana de compras de piezas", "Venta de peizas", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Bienvenido a la ventana de compras de piezas",
+								"Venta de peizas", JOptionPane.INFORMATION_MESSAGE);
 
 						// Panel para piezas
 						JPanel panelPiezas = new JPanel();
 						panelPiezas.setLayout(new BorderLayout());
-						JPanel pCentro= new JPanel(new GridLayout(2, 1));
-						panelPiezas.add(pCentro,BorderLayout.CENTER);
-						
-						ArrayList<Pieza>compra= new ArrayList<Pieza>();
-						modeloPiezasUsuario= new ModeloAlmacen(compra);
-						JTable tablaUsuario= new JTable(modeloPiezasUsuario);
-						JScrollPane scrollUsuario= new JScrollPane(tablaUsuario);
-						JScrollPane scrollTotal= new JScrollPane(tabla);
+						JPanel pCentro = new JPanel(new GridLayout(2, 1));
+						panelPiezas.add(pCentro, BorderLayout.CENTER);
+
+						ArrayList<Pieza> compra = new ArrayList<Pieza>();
+						modeloPiezasUsuario = new ModeloAlmacen(compra);
+						JTable tablaUsuario = new JTable(modeloPiezasUsuario);
+						JScrollPane scrollUsuario = new JScrollPane(tablaUsuario);
+						JScrollPane scrollTotal = new JScrollPane(tabla);
 						pCentro.add(scrollTotal);
 						pCentro.add(scrollUsuario);
-						
+
 						JPanel panelBotones = new JPanel();
 						JButton botonComprar = new JButton("Comprar Piezas");
-						JButton botonQuitarProducto= new JButton("Quitar pieza");
-						JButton botonFinalizar= new JButton("Finalizar Compra");
-						
+						JButton botonQuitarProducto = new JButton("Quitar pieza");
+						JButton botonFinalizar = new JButton("Finalizar Compra");
+
 						panelBotones.add(botonComprar);
 						panelBotones.add(botonQuitarProducto);
 						panelBotones.add(botonFinalizar);
-						
 
-						botonComprar.addActionListener(c ->{
-							int fila= tabla.getSelectedRow();
-							if(fila==-1) {
-								JOptionPane.showMessageDialog(null, "Primero debes seleccionado una fila", "ERROR EN SELECCIÓN", JOptionPane.ERROR_MESSAGE);
-								
-							}else {
-								String cantidad= JOptionPane.showInputDialog(null, "¿Cuantas piezas desea comprar?", "Cantidad piezas", JOptionPane.QUESTION_MESSAGE);
-								int id= (int) tabla.getValueAt(fila, 0);
-								String codigo= (String) tabla.getValueAt(fila, 1);
-								String nombrePieza= (String) tabla.getValueAt(fila, 2);
-								String descripcion= (String) tabla.getValueAt(fila, 3);
-								String fabricante= (String) tabla.getValueAt(fila, 4);
-								float precio= (float) tabla.getValueAt(fila, 5);
-								
-								
-								
-								compra.add(new Pieza(id, codigo, nombrePieza, descripcion, fabricante, precio, Integer.parseInt(cantidad)));
-								
-								
-								
-								
-								modeloPiezasUsuario= new ModeloAlmacen(compra);
+						botonComprar.addActionListener(c -> {
+							int fila = tabla.getSelectedRow();
+							if (fila == -1) {
+								JOptionPane.showMessageDialog(null, "Primero debes seleccionado una fila",
+										"ERROR EN SELECCIÓN", JOptionPane.ERROR_MESSAGE);
+
+							} else {
+								String cantidad = JOptionPane.showInputDialog(null, "¿Cuantas piezas desea comprar?",
+										"Cantidad piezas", JOptionPane.QUESTION_MESSAGE);
+								int id = (int) tabla.getValueAt(fila, 0);
+								String codigo = (String) tabla.getValueAt(fila, 1);
+								String nombrePieza = (String) tabla.getValueAt(fila, 2);
+								String descripcion = (String) tabla.getValueAt(fila, 3);
+								String fabricante = (String) tabla.getValueAt(fila, 4);
+								float precio = (float) tabla.getValueAt(fila, 5);
+
+								compra.add(new Pieza(id, codigo, nombrePieza, descripcion, fabricante, precio,
+										Integer.parseInt(cantidad)));
+
+								modeloPiezasUsuario = new ModeloAlmacen(compra);
 								tablaUsuario.setModel(modeloPiezasUsuario);
-										
-								
+
 							}
-							
+
 						});
-						botonQuitarProducto.addActionListener(c->{
-							int fila= tablaUsuario.getSelectedRow();
-							if(fila==-1) {
-								JOptionPane.showMessageDialog(null, "Primero debes seleccionado una fila", "ERROR EN SELECCIÓN", JOptionPane.ERROR_MESSAGE);
-								
-							}else {
+						botonQuitarProducto.addActionListener(c -> {
+							int fila = tablaUsuario.getSelectedRow();
+							if (fila == -1) {
+								JOptionPane.showMessageDialog(null, "Primero debes seleccionado una fila",
+										"ERROR EN SELECCIÓN", JOptionPane.ERROR_MESSAGE);
+
+							} else {
 								compra.remove(fila);
-								modeloPiezasUsuario= new ModeloAlmacen(compra);
+								modeloPiezasUsuario = new ModeloAlmacen(compra);
 								tablaUsuario.setModel(modeloPiezasUsuario);
-								JOptionPane.showMessageDialog(null, "Producto eliminado de la compra", "COMPRA", JOptionPane.INFORMATION_MESSAGE);
+								JOptionPane.showMessageDialog(null, "Producto eliminado de la compra", "COMPRA",
+										JOptionPane.INFORMATION_MESSAGE);
 							}
-							
-							
-							
+
 						});
-						botonFinalizar.addActionListener(c->{
-							int i=0;
-							float precioTotal=0;
-							while(i<compra.size()) {
-								Pieza p= compra.get(i);
-								precioTotal= precioTotal+(p.getPrecio()*p.getCantidadAlmacen());
+						botonFinalizar.addActionListener(c -> {
+							int i = 0;
+							float precioTotal = 0;
+							while (i < compra.size()) {
+								Pieza p = compra.get(i);
+								precioTotal = precioTotal + (p.getPrecio() * p.getCantidadAlmacen());
 								compra.remove(i);
-								
+
 							}
-							modeloPiezasUsuario= new ModeloAlmacen(compra);
+							modeloPiezasUsuario = new ModeloAlmacen(compra);
 							tablaUsuario.setModel(modeloPiezasUsuario);
-							JOptionPane.showMessageDialog(null, precioTotal+"€", "El precio total es", JOptionPane.INFORMATION_MESSAGE);
-							
+							JOptionPane.showMessageDialog(null, precioTotal + "€", "El precio total es",
+									JOptionPane.INFORMATION_MESSAGE);
+
 						});
-						
+
 						panelPiezas.add(panelBotones, BorderLayout.SOUTH);
 
 						panelDerechoServicios.add(panelPiezas);
-						
-						
 
-					} 
+					}
 
 					// Refrescar el panel
 					panelDerechoServicios.revalidate();
@@ -306,29 +294,27 @@ public class VentanaGrafica extends JFrame {
 		lbltxtFiltro = new JLabel("Filtro por título: ");
 		panelFiltro.add(lbltxtFiltro);
 		txtFiltro = new JTextField(5);
-				panelFiltro.add(txtFiltro);
+		panelFiltro.add(txtFiltro);
 
 		lblcbTipo = new JLabel("Filtro por tipo: ");
 		panelFiltro.add(lblcbTipo);
-		
-		
 
 		// Creando combobox
 		cbTipo = new JComboBox<String>();
-		
+
 		cbFabricante = new JComboBox<String>();
 
 //		for(String f: fabricantes) {
 //			cbFabricante.addItem(f);
 //		}
-		
+
 		panelFiltro.add(cbTipo);
 
 		lblcbFabricante = new JLabel("Filtro por fabricante: ");
 		panelFiltro.add(lblcbFabricante);
 
 		panelFiltro.add(cbFabricante);
-		JButton botonBorrarFiltrado= new JButton("Borrar filtrado");
+		JButton botonBorrarFiltrado = new JButton("Borrar filtrado");
 		panelFiltro.add(botonBorrarFiltrado);
 		modeloTabla = new ModeloAlmacen(null);
 		tabla = new JTable(modeloTabla);
@@ -341,37 +327,30 @@ public class VentanaGrafica extends JFrame {
 		cargarNombres(cbTipo);
 		;// MouseListener
 		tabla.addMouseListener(new MouseAdapter() {
-			
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (e.getClickCount()==2) {
-					int selec= tabla.getSelectedRow();
-					if(selec!=-1) {
-						int id= (int) tabla.getValueAt(selec, 0);
-						String codigo=tabla.getValueAt(selec, 1).toString();
-						String nombrePieza=tabla.getValueAt(selec, 2).toString();
-						String descripcion=tabla.getValueAt(selec, 3).toString();
-						String fabricante=tabla.getValueAt(selec, 4).toString();
-						float precio=(float) tabla.getValueAt(selec, 5);
-						int cantidadAlmacen=(int) tabla.getValueAt(selec, 6);
-						
-						Pieza p= new Pieza(id, codigo, nombrePieza, descripcion, fabricante, precio, cantidadAlmacen);
+				if (e.getClickCount() == 2) {
+					int selec = tabla.getSelectedRow();
+					if (selec != -1) {
+						int id = (int) tabla.getValueAt(selec, 0);
+						String codigo = tabla.getValueAt(selec, 1).toString();
+						String nombrePieza = tabla.getValueAt(selec, 2).toString();
+						String descripcion = tabla.getValueAt(selec, 3).toString();
+						String fabricante = tabla.getValueAt(selec, 4).toString();
+						float precio = (float) tabla.getValueAt(selec, 5);
+						int cantidadAlmacen = (int) tabla.getValueAt(selec, 6);
+
+						Pieza p = new Pieza(id, codigo, nombrePieza, descripcion, fabricante, precio, cantidadAlmacen);
 						new EspecificacionesPieza(p);
-						
-						
+
 					}
-					
+
 				}
-				
+
 			}
-			
+
 		});
-		
-		
-		
-	
-		
 
 		pAlmacen.add(panelFiltro, BorderLayout.NORTH);
 		pAlmacen.add(pInfor, BorderLayout.SOUTH);
@@ -460,35 +439,34 @@ public class VentanaGrafica extends JFrame {
 
 			}
 		});
-		cbFabricante.addActionListener((e)->{
-			String fabricanteSeleccion =(String) cbFabricante.getSelectedItem();
-			ArrayList<Pieza>lp= new ArrayList<Pieza>();
-			for(Pieza p: cargarTabla()) {
-				if(p.getFabricante().equals(fabricanteSeleccion)) {
+		cbFabricante.addActionListener((e) -> {
+			String fabricanteSeleccion = (String) cbFabricante.getSelectedItem();
+			ArrayList<Pieza> lp = new ArrayList<Pieza>();
+			for (Pieza p : cargarTabla()) {
+				if (p.getFabricante().equals(fabricanteSeleccion)) {
 					lp.add(p);
 				}
 			}
-			modeloTabla= new ModeloAlmacen(lp);
+			modeloTabla = new ModeloAlmacen(lp);
 			tabla.setModel(modeloTabla);
-			
-			
+
 		});
-		cbTipo.addActionListener((e)->{
-			String tipoSeleccion= (String) cbTipo.getSelectedItem();
-			ArrayList<Pieza>lp= new ArrayList<Pieza>();
-			for(Pieza p:cargarTabla()) {
-				if(p.getNombrePieza().equals(tipoSeleccion)) {
+		cbTipo.addActionListener((e) -> {
+			String tipoSeleccion = (String) cbTipo.getSelectedItem();
+			ArrayList<Pieza> lp = new ArrayList<Pieza>();
+			for (Pieza p : cargarTabla()) {
+				if (p.getNombrePieza().equals(tipoSeleccion)) {
 					lp.add(p);
 				}
 			}
-			modeloTabla= new ModeloAlmacen(lp);
+			modeloTabla = new ModeloAlmacen(lp);
 			tabla.setModel(modeloTabla);
-			
+
 		});
-		botonBorrarFiltrado.addActionListener((e)->{
-			modeloTabla= new ModeloAlmacen(cargarTabla());
+		botonBorrarFiltrado.addActionListener((e) -> {
+			modeloTabla = new ModeloAlmacen(cargarTabla());
 			tabla.setModel(modeloTabla);
-			
+
 		});
 
 		// Pestaña Parking
@@ -901,8 +879,8 @@ public class VentanaGrafica extends JFrame {
 				+ " codigo TEXT NOT NULL," + " nombrePieza TEXT NOT NULL," + " descripcion TEXT,"
 				+ " fabricante TEXT NOT NULL," + " precio REAL NOT NULL," + " cantidadAlmacen INTEGER NOT NULL" + ");";
 		try (PreparedStatement ps = DeustoTaller.getCon().prepareStatement(sql)) {
-			ps.executeUpdate(); 
-			
+			ps.executeUpdate();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -919,7 +897,7 @@ public class VentanaGrafica extends JFrame {
 				ps.setString(4, pieza.getFabricante());
 				ps.setFloat(5, pieza.getPrecio());
 				ps.setInt(6, pieza.getCantidadAlmacen());
-				ps.executeUpdate(); 
+				ps.executeUpdate();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -960,25 +938,25 @@ public class VentanaGrafica extends JFrame {
 	}
 
 	private void filtrarPiezas() {
-		//modeloTabla.setRowCount(0);
+		// modeloTabla.setRowCount(0);
 
-		
-		  /*cargarTabla().forEach(c -> { if
-		  (c.getNombrePieza().contains(txtFiltro.getText())) {
-		  modeloTabla.addRow(new Object[] { c.getId(), c.getCodigo(),
-		  c.getNombrePieza(), c.getDescripcion(), c.getFabricante(), c.getPrecio(),
-		  c.getCantidadAlmacen() }); } });
-		 tabla.setModel(modeloTabla);*/
-		
+		/*
+		 * cargarTabla().forEach(c -> { if
+		 * (c.getNombrePieza().contains(txtFiltro.getText())) { modeloTabla.addRow(new
+		 * Object[] { c.getId(), c.getCodigo(), c.getNombrePieza(), c.getDescripcion(),
+		 * c.getFabricante(), c.getPrecio(), c.getCantidadAlmacen() }); } });
+		 * tabla.setModel(modeloTabla);
+		 */
+
 		ArrayList<Pieza> lp = (ArrayList<Pieza>) cargarTabla();
-		if(txtFiltro.getText().equals("")) {
+		if (txtFiltro.getText().equals("")) {
 			modeloTabla = new ModeloAlmacen(lp);
-			
-		}else {
-		
+
+		} else {
+
 			ArrayList<Pieza> lpFiltradas = new ArrayList<Pieza>();
-			for(Pieza p: lp) {
-				if(p.getDescripcion().contains(txtFiltro.getText())) {
+			for (Pieza p : lp) {
+				if (p.getDescripcion().contains(txtFiltro.getText())) {
 					lpFiltradas.add(p);
 				}
 			}
@@ -987,35 +965,37 @@ public class VentanaGrafica extends JFrame {
 		tabla.setModel(modeloTabla);
 
 	}
-	
-	
-    private static void cargarFabricantes(JComboBox<String> comboBox) {
-        String sql = "SELECT DISTINCT fabricante FROM Pieza"; // Consulta SQL
 
-        try {Connection conn = DeustoTaller.getCon(); // Obtenemos conexión
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery();  // Ejecutamos la consulta
+	private static void cargarFabricantes(JComboBox<String> comboBox) {
+		String sql = "SELECT DISTINCT fabricante FROM Pieza"; // Consulta SQL
 
-            while (rs.next()) { // Iteramos por los resultados
-                String fabricante = rs.getString("fabricante"); // Obtenemos cada fabricante
-                comboBox.addItem(fabricante); // Lo añadimos al JComboBox
-            }
+		try {
+			Connection conn = DeustoTaller.getCon(); // Obtenemos conexión
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery(); // Ejecutamos la consulta
 
-            System.out.println("Fabricantes cargados exitosamente.");
+			while (rs.next()) { // Iteramos por los resultados
+				String fabricante = rs.getString("fabricante"); // Obtenemos cada fabricante
+				comboBox.addItem(fabricante); // Lo añadimos al JComboBox
+			}
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    private static void cargarNombres(JComboBox<String>combobox) {
-    	String sql = "SELECT DISTINCT nombrePieza FROM Pieza"; // Consulta SQL
-    	
-    	try {Connection conn= DeustoTaller.getCon();
-			PreparedStatement ps= conn.prepareStatement(sql);
-			ResultSet rs=ps.executeQuery();
-			
-			while(rs.next()) {
-				String nombre= rs.getString("nombrePieza");
+			System.out.println("Fabricantes cargados exitosamente.");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void cargarNombres(JComboBox<String> combobox) {
+		String sql = "SELECT DISTINCT nombrePieza FROM Pieza"; // Consulta SQL
+
+		try {
+			Connection conn = DeustoTaller.getCon();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String nombre = rs.getString("nombrePieza");
 				combobox.addItem(nombre);
 			}
 			System.out.println("Nombres cargados exitosamente ");
@@ -1023,7 +1003,7 @@ public class VentanaGrafica extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
-    }
+
+	}
 
 }

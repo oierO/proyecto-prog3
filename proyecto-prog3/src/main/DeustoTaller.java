@@ -41,7 +41,7 @@ public class DeustoTaller {
 		try {
 			con = DriverManager.getConnection(locDB);
 		} catch (SQLException e) {
-			
+
 			JOptionPane.showMessageDialog(VSesion, "Error al cargar la base de datos:\n" + e, "Error de Inicialización",
 					JOptionPane.ERROR_MESSAGE);
 			System.exit(0);
@@ -91,8 +91,8 @@ public class DeustoTaller {
 		return usuarioSesion;
 	}
 
-	//Devuelve 
+	// Devuelve
 	public static Timestamp toTimeStamp(LocalDateTime fecha) {
-		return new Timestamp(fecha.toInstant(ZoneOffset.ofTotalSeconds(3600)).toEpochMilli()); 
+		return new Timestamp(fecha.toInstant(ZoneOffset.ofTotalSeconds(3600)).toEpochMilli());
 	}
 }

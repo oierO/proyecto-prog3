@@ -10,7 +10,6 @@ import java.util.*;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.JToggleButton.ToggleButtonModel;
 
 import domain.*;
 
@@ -75,7 +74,7 @@ public class PanelParking extends JPanel {
 		bReservar = new JButton("Reservar");
 		bReservar.setIcon(new ImageIcon("resources/images/calendar-icon.png"));
 		bReservar.setEnabled(false);
-		bReservar.addActionListener(e -> new ReservaParking((String) plantas.getSelectedItem(), splazaSeleccion,this));
+		bReservar.addActionListener(e -> new ReservaParking((String) plantas.getSelectedItem(), splazaSeleccion, this));
 		trest.setEditable(false);
 		trestPanel.add(trest);
 		nomvehiculoPanel.add(matricula);

@@ -1,23 +1,17 @@
 package gui;
 
-import java.awt.Color;
 import java.awt.FlowLayout;
 
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.Date;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
 import javax.swing.*;
-import javax.swing.JFormattedTextField.AbstractFormatter;
-import javax.swing.JFormattedTextField.AbstractFormatterFactory;
-import javax.swing.text.DefaultFormatterFactory;
 
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import com.github.lgooddatepicker.components.DateTimePicker;
@@ -37,7 +31,7 @@ public class ReservaParking extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private static final double TARIFA_HORA = 5.5;
 
-	public ReservaParking(String planta, String plaza,PanelParking panel) {
+	public ReservaParking(String planta, String plaza, PanelParking panel) {
 		this.planta = planta;
 		this.plaza = plaza;
 		Font fuente = new Font("Bahnschrift", Font.BOLD, 15);
@@ -60,9 +54,11 @@ public class ReservaParking extends JDialog {
 		JCheckBox conformidad = new JCheckBox("Acepto los terminos y condiciones");
 		pConformidad.add(conformidad);
 		conformidad.setFont(fuenteTexto);
-		bReservar.addActionListener(e->{
+		bReservar.addActionListener(e -> {
 			if (!conformidad.isSelected()) {
-				JOptionPane.showMessageDialog(this.getContentPane(),"No has aceptados los terminos y condiciones del servicio", "Conformidad", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this.getContentPane(),
+						"No has aceptados los terminos y condiciones del servicio", "Conformidad",
+						JOptionPane.INFORMATION_MESSAGE);
 			} else {
 				reservarPlazaBD();
 				panel.cambioSeleccionPl(plaza);
@@ -72,21 +68,21 @@ public class ReservaParking extends JDialog {
 		});
 		bCancelar.addActionListener(e -> dispose());
 		pFecha.add(new JLabel("Fecha"));
-		
+
 		pVehiculo.add(textVehiculo);
 		ComboBoxModel<Vehiculo> modeloVehiculos = new DefaultComboBoxModel<Vehiculo>(DeustoTaller.getSesion()
 				.getVehiculos().toArray(new Vehiculo[DeustoTaller.getSesion().getVehiculos().size()]));
 		listaVehiculos = new JComboBox<Vehiculo>(modeloVehiculos);
 		pVehiculo.add(listaVehiculos);
-		selectorFecha= new DateTimePicker();
-		
+		selectorFecha = new DateTimePicker();
+
 		selectorFecha.setDateTimePermissive(LocalDateTime.now().plusHours(1));
 		DatePickerSettings confSelectorFecha = new DatePickerSettings();
 		selectorFecha.getDatePicker().setSettings(confSelectorFecha);
 		confSelectorFecha.setDateRangeLimits(LocalDate.now(), LocalDate.now().plusYears(1));
 		JPanel pTitulo = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JLabel titulo = new JLabel(String.format("Reservar plaza %s en la %s", plaza, planta));
-		
+
 		JPanel pBotones = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		titulo.setFont(fuente);
 		pFecha.add(selectorFecha);
@@ -112,24 +108,24 @@ public class ReservaParking extends JDialog {
 		});
 
 	}
-	
+
 	private void reservarPlazaBD() {
 		String sql = "INSERT INTO RESERVA_PARKING VALUES(?,?,?,?)";
 		try {
 			PreparedStatement stmt = DeustoTaller.getCon().prepareStatement(sql);
-			stmt.setString(1,planta);
-			stmt.setString(2,plaza);
+			stmt.setString(1, planta);
+			stmt.setString(2, plaza);
 			Vehiculo coche = (Vehiculo) listaVehiculos.getSelectedItem();
-			stmt.setString(3,coche.getMatricula());
+			stmt.setString(3, coche.getMatricula());
 			DateTimeFormatter formateador = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 			stmt.setString(4, selectorFecha.getDateTimeStrict().format(formateador));
 			stmt.execute();
 			stmt.close();
 			JOptionPane.showMessageDialog(this.getContentPane(), "Reserva realizada correctamente");
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(this.getContentPane(),
-					"Ha ocurrido un error al procesar la reserva\n" + e,"Error",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this.getContentPane(), "Ha ocurrido un error al procesar la reserva\n" + e,
+					"Error", JOptionPane.ERROR_MESSAGE);
 		}
-		
+
 	}
 }

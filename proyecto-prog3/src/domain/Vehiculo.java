@@ -66,12 +66,13 @@ public class Vehiculo {
 	public String getMatricula() {
 		return matricula;
 	}
-	
+
 	public static Vehiculo fromResultSet(ResultSet resultado) {
 		try {
 			Date formateador = (new SimpleDateFormat("yyyy-MM-dd")).parse(resultado.getString("fmatricula"));
 			Vehiculo vehicle = new Vehiculo(resultado.getString("matricula"), resultado.getString("marca"),
-					resultado.getString("modelo"), resultado.getInt("ano"), LocalDate.ofEpochDay(formateador.toInstant().getEpochSecond()/86400));
+					resultado.getString("modelo"), resultado.getInt("ano"),
+					LocalDate.ofEpochDay(formateador.toInstant().getEpochSecond() / 86400));
 			return vehicle;
 		} catch (ParseException e) {
 			JOptionPane.showMessageDialog(DeustoTaller.getVSesion().getContentPane(),
@@ -94,9 +95,7 @@ public class Vehiculo {
 
 	@Override
 	public String toString() {
-		return String.format("%s ~ %s %s", getMatricula(),getMarca(),getModelo());
+		return String.format("%s ~ %s %s", getMatricula(), getMarca(), getModelo());
 	}
-	
-	
 
 }

@@ -45,9 +45,9 @@ public class Usuario {
 					vehiculos.add(Vehiculo.fromResultSet(resultado));
 				}
 			} catch (NullPointerException e) {
-				//No hace nada
+				// No hace nada
 			}
-			
+
 			return new Usuario(nom, usernom, apellido, hora, vehiculos);
 
 		} catch (SQLException e) {

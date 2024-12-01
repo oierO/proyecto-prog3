@@ -31,7 +31,7 @@ public class VentanaInicioSesion extends JFrame {
 	/**
 	 * 
 	 */
-	
+
 	private static final long serialVersionUID = 1L;
 	private JPanel pCentro, pSur, pNorte, pEste, pOeste, ptextUsuario, pTextContrasenia;
 	private JButton btnIniciarSesion, btnCerrarSesion, btnRegistrarse;
@@ -248,7 +248,7 @@ public class VentanaInicioSesion extends JFrame {
 
 				new VentanaGrafica(usuario);
 			});
-			
+
 		});
 
 		cargarHilo.start();
@@ -258,7 +258,7 @@ public class VentanaInicioSesion extends JFrame {
 	public int getProgreso() {
 		return progreso;
 	}
-	
+
 	public static Thread getCargarHilo() {
 		return cargarHilo;
 	}
