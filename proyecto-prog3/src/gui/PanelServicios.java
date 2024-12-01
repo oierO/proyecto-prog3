@@ -197,12 +197,14 @@ public class PanelServicios extends JPanel {
 						panelPiezas.setLayout(new BorderLayout());
 						JPanel pCentro = new JPanel(new GridLayout(2, 1));
 						panelPiezas.add(pCentro, BorderLayout.CENTER);
+						JPanel panel1= new PanelAlmacen();
 
 						ArrayList<Pieza> compra = new ArrayList<Pieza>();
 						modeloPiezasUsuario = new ModeloAlmacen(compra);
 						JTable tablaUsuario = new JTable(modeloPiezasUsuario);
 						JScrollPane scrollUsuario = new JScrollPane(tablaUsuario);
-						pCentro.add(new PanelAlmacen());
+						JTable tabla= ((PanelAlmacen) panel1).getTabla();
+						pCentro.add(panel1);
 						pCentro.add(scrollUsuario);
 
 						JPanel panelBotones = new JPanel();

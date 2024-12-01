@@ -242,9 +242,12 @@ public class PanelAlmacen extends JPanel {
 		return tabla;
 	}
 
-	public void setTabla(JTable tabla) {
-		this.tabla = tabla;
+	
+
+	public ModeloAlmacen getModeloTabla() {
+		return modeloTabla;
 	}
+
 
 	private void creartablaPiezas() {
 		String sql = "CREATE TABLE IF NOT EXISTS PIEZA (" + " id INTEGER PRIMARY KEY AUTOINCREMENT,"
