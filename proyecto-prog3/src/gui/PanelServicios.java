@@ -5,7 +5,6 @@ import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.nio.channels.NonWritableChannelException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,7 +32,6 @@ public class PanelServicios extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private ModeloAlmacen modeloPiezasUsuario;
-	private JTable tabla;
 	protected JTable tablaPreguntas;
 	private ArrayList<String> serviciosDisponiblesNombre;
 	private ArrayList<ServicioDisponible> listaDeServiciosDisponibles;

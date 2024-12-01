@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
 
-import domain.Pieza;
 import domain.Vehiculo;
 
 public class ModeloVehiculos extends DefaultTableModel {

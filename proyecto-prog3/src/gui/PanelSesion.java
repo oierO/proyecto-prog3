@@ -7,8 +7,6 @@ import java.time.format.FormatStyle;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.table.TableCellRenderer;
-
 import domain.Usuario;
 import domain.Vehiculo; // Importa la clase Vehiculo
 import main.DeustoTaller;
