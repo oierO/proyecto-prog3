@@ -75,7 +75,7 @@ public class PanelParking extends JPanel {
 		bReservar = new JButton("Reservar");
 		bReservar.setIcon(new ImageIcon("resources/images/calendar-icon.png"));
 		bReservar.setEnabled(false);
-		bReservar.addActionListener(e -> new ReservaParking((String) plantas.getSelectedItem(), splazaSeleccion));
+		bReservar.addActionListener(e -> new ReservaParking((String) plantas.getSelectedItem(), splazaSeleccion,this));
 		trest.setEditable(false);
 		trestPanel.add(trest);
 		nomvehiculoPanel.add(matricula);
@@ -105,35 +105,7 @@ public class PanelParking extends JPanel {
 
 			}
 		});
-		setFocusable(false);// addKeyListener(new KeyAdapter() {
-//
-//			@Override
-//			public void keyTyped(KeyEvent e) {
-//				if (e.getKeyCode() == KeyEvent.VK_E) {
-//					System.out.println("e type");
-//				}
-//				super.keyTyped(e);
-//			}
-//
-//			@Override
-//			public void keyPressed(KeyEvent e) {
-//				if (e.getModifiersEx()==KeyEvent.CTRL_DOWN_MASK && e.getKeyCode() == KeyEvent.VK_E) {
-//					System.out.println("e");
-//				}
-//				super.keyPressed(e);
-//			}
-//
-//			@Override
-//			public void keyReleased(KeyEvent e) {
-//				if (e.equals(KeyEvent.VK_E)) {
-//					System.out.println("e rele");
-//				}
-//				super.keyReleased(e);
-//			}
-//			
-//		});
-
-		// Creacion de grid de botones
+		setFocusable(false);
 		grupoBotones = new ButtonGroup();
 		plazas.setLayout(new GridLayout(FILAS_PARKING, COLUMNAS_PARKING, 10, 10));
 		plazas.setBorder(BorderFactory.createTitledBorder("PLAZAS"));
@@ -158,7 +130,7 @@ public class PanelParking extends JPanel {
 
 	}
 
-	private void cambioSeleccionPl(String codPlaza) {
+	public void cambioSeleccionPl(String codPlaza) {
 		PlazaParking plazaSel = RendererParking.plazafromBD(codPlaza, (String) plantas.getSelectedItem());
 		if (plazaSel != null) {
 			matricula.setText(plazaSel.getVehiculo().getMatricula());

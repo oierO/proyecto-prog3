@@ -1,20 +1,26 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
+
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.text.ParseException;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.GregorianCalendar;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.*;
 import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JFormattedTextField.AbstractFormatterFactory;
 import javax.swing.text.DefaultFormatterFactory;
 
-import org.jdatepicker.JDatePicker;
+import com.github.lgooddatepicker.components.DatePickerSettings;
+import com.github.lgooddatepicker.components.DateTimePicker;
 
 import domain.*;
 import main.DeustoTaller;
@@ -24,86 +30,74 @@ public class ReservaParking extends JDialog {
 	/**
 	 * 
 	 */
+	private String planta;
+	private String plaza;
+	private JComboBox<Vehiculo> listaVehiculos;
+	private DateTimePicker selectorFecha;
 	private static final long serialVersionUID = 1L;
-	private LocalDate fReserva;
+	private static final double TARIFA_HORA = 5.5;
 
-	public ReservaParking(String planta, String plaza) {
-		System.out.println(plaza);
+	public ReservaParking(String planta, String plaza,PanelParking panel) {
+		this.planta = planta;
+		this.plaza = plaza;
+		Font fuente = new Font("Bahnschrift", Font.BOLD, 15);
+		Font fuenteTexto = new Font("Bahnschrift", Font.BOLD, 13);
 		setModal(true);
 		setTitle("Reservar plaza");
 		this.setIconImage(new ImageIcon("resources/calendar-icon.png").getImage());
-		setSize(400, 400);
+		setSize(300, 300);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 		JPanel pVehiculo = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel textVehiculo = new JLabel("Vehiculo");
 		JPanel pFecha = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel pConformidad = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JButton bReservar = new JButton("Reservar");
-
+		bReservar.setFont(fuenteTexto);
+		JButton bCancelar = new JButton("Cancelar");
+		bCancelar.setFont(fuenteTexto);
+		JCheckBox conformidad = new JCheckBox("Acepto los terminos y condiciones");
+		pConformidad.add(conformidad);
+		conformidad.setFont(fuenteTexto);
+		bReservar.addActionListener(e->{
+			if (!conformidad.isSelected()) {
+				JOptionPane.showMessageDialog(this.getContentPane(),"No has aceptados los terminos y condiciones del servicio", "Conformidad", JOptionPane.INFORMATION_MESSAGE);
+			} else {
+				reservarPlazaBD();
+				panel.cambioSeleccionPl(plaza);
+				this.getContentPane().repaint();
+				dispose();
+			}
+		});
+		bCancelar.addActionListener(e -> dispose());
 		pFecha.add(new JLabel("Fecha"));
-
+		
 		pVehiculo.add(textVehiculo);
 		ComboBoxModel<Vehiculo> modeloVehiculos = new DefaultComboBoxModel<Vehiculo>(DeustoTaller.getSesion()
 				.getVehiculos().toArray(new Vehiculo[DeustoTaller.getSesion().getVehiculos().size()]));
-		JComboBox<Vehiculo> listaVehiculos = new JComboBox<Vehiculo>(modeloVehiculos);
+		listaVehiculos = new JComboBox<Vehiculo>(modeloVehiculos);
 		pVehiculo.add(listaVehiculos);
-		JDatePicker selector = new JDatePicker();
-		LocalDate currentDate = LocalDate.now();
-		selector.getModel().setDate(currentDate.getYear(), currentDate.getMonthValue() - 1,
-				currentDate.getDayOfMonth());
-		selector.getModel().setSelected(true);
-
-		selector.getFormattedTextField().setFormatterFactory(new AbstractFormatterFactory() {
-
-			@Override
-			public AbstractFormatter getFormatter(JFormattedTextField tf) {
-				AbstractFormatter pr = new AbstractFormatter() {
-
-					/**
-					 * 
-					 */
-					private static final long serialVersionUID = 1L;
-
-					@Override
-					public Object stringToValue(String text) throws ParseException {
-						String[] split = text.split("-");
-						GregorianCalendar cal = new GregorianCalendar(Integer.parseInt(split[0]),Integer.parseInt(split[1]),Integer.parseInt(split[2]));
-						return cal;
-					}
-
-					@Override
-					public String valueToString(Object value) throws ParseException {
-						GregorianCalendar cal = (GregorianCalendar) value;
-						String st = String.format("%s-%s-%s", cal.toZonedDateTime().getYear(),
-								cal.toZonedDateTime().getMonthValue(), cal.toZonedDateTime().getDayOfMonth());
-						return st;
-					}
-
-				};
-				return pr;
-			}
-
-		});
-		GregorianCalendar calendar = (GregorianCalendar) selector.getModel().getValue();
-		fReserva = calendar.toZonedDateTime().toLocalDate();
-
-		// selector.addActionListener(e ->
-		// System.out.println(selector.getFormattedTextField().getText()));
-		JPanel pTitulo = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel titulo = new JLabel(String.format("Reservar plaza %s-%s...", plaza, planta));
-		Font fuente = new Font("Consolas", Font.BOLD, 15);
+		selectorFecha= new DateTimePicker();
+		
+		selectorFecha.setDateTimePermissive(LocalDateTime.now().plusHours(1));
+		DatePickerSettings confSelectorFecha = new DatePickerSettings();
+		selectorFecha.getDatePicker().setSettings(confSelectorFecha);
+		confSelectorFecha.setDateRangeLimits(LocalDate.now(), LocalDate.now().plusYears(1));
+		JPanel pTitulo = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JLabel titulo = new JLabel(String.format("Reservar plaza %s en la %s", plaza, planta));
+		
+		JPanel pBotones = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		titulo.setFont(fuente);
-		pFecha.add(selector);
+		pFecha.add(selectorFecha);
 		pTitulo.add(titulo);
 		add(pTitulo);
-		add(Box.createVerticalStrut(5));
 		add(pVehiculo);
-		add(Box.createVerticalStrut(5));
 		add(pFecha);
-		add(Box.createVerticalStrut(5));
-		add(bReservar);
-		add(Box.createVerticalStrut(5));
+		pBotones.add(bCancelar);
+		pBotones.add(bReservar);
+		add(pConformidad);
+		add(pBotones);
 		setVisible(true);
 		setFocusable(true);
 		addKeyListener(new KeyAdapter() {
@@ -117,5 +111,25 @@ public class ReservaParking extends JDialog {
 
 		});
 
+	}
+	
+	private void reservarPlazaBD() {
+		String sql = "INSERT INTO RESERVA_PARKING VALUES(?,?,?,?)";
+		try {
+			PreparedStatement stmt = DeustoTaller.getCon().prepareStatement(sql);
+			stmt.setString(1,planta);
+			stmt.setString(2,plaza);
+			Vehiculo coche = (Vehiculo) listaVehiculos.getSelectedItem();
+			stmt.setString(3,coche.getMatricula());
+			DateTimeFormatter formateador = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			stmt.setString(4, selectorFecha.getDateTimeStrict().format(formateador));
+			stmt.execute();
+			stmt.close();
+			JOptionPane.showMessageDialog(this.getContentPane(), "Reserva realizada correctamente");
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(this.getContentPane(),
+					"Ha ocurrido un error al procesar la reserva\n" + e,"Error",JOptionPane.ERROR_MESSAGE);
+		}
+		
 	}
 }
