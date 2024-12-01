@@ -405,5 +405,24 @@ public class PanelAlmacen extends JPanel {
 			e.printStackTrace();
 		}
 	}
+	
+	public void updateBD(Pieza pieza) {
+		String sql = String.format("UPDATE Pieza SET cantidadAlmacen=cantidadAlmacen-%s WHERE codigo='%s'",pieza.getCantidadAlmacen(),pieza.getCodigo());
+		try {
+			Statement st = DeustoTaller.getCon().createStatement();
+			st.executeUpdate(sql);
+			st.close();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(this, "Error al modificar el valor del almacen."+e.getLocalizedMessage());
+		}
+	}
+	
+	public void refrescar() {
+		cbTipo.setSelectedIndex(-1);
+		cbFabricante.setSelectedIndex(-1);
+		txtFiltro.setText("");
+		modeloTabla = new ModeloAlmacen(cargarBD());
+		tabla.setModel(modeloTabla);
+	}
 
 }
