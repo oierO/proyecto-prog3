@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 
@@ -22,12 +23,13 @@ public class EspecificacionesPieza extends JDialog {
 		super();
 		setTitle("Especificaciones de las piezas");
 		setModal(true);
-		setSize(800, 800);
+		setSize(600,600);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
+		setBackground(Color.WHITE);
 		JPanel panel = new JPanel(new GridLayout(7, 3));
-		ImageIcon imagen = new ImageIcon("resources/images/FlechaCoche.png");
-		Image cambio = imagen.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+		Image imagen = new ImageIcon("resources/images/FlechaCoche.png").getImage();
+		Image cambio = imagen.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 		ImageIcon ajustada = new ImageIcon(cambio);
 		panel.add(new JLabel("ID:"));
 		panel.add(new JLabel(ajustada));
@@ -40,7 +42,9 @@ public class EspecificacionesPieza extends JDialog {
 		panel.add(new JLabel(p.getNombrePieza()));
 		panel.add(new JLabel("DESCRIPCION"));
 		panel.add(new JLabel(ajustada));
-		panel.add(new JLabel(p.getDescripcion()));
+		JLabel desc = new JLabel(p.getDescripcion());
+		desc.setToolTipText(p.getDescripcion());
+		panel.add(desc);
 		panel.add(new JLabel("FABRICANTE"));
 		panel.add(new JLabel(ajustada));
 		panel.add(new JLabel(p.getFabricante()));
@@ -50,7 +54,6 @@ public class EspecificacionesPieza extends JDialog {
 		panel.add(new JLabel("CANTIDAD EN ALMACEN:"));
 		panel.add(new JLabel(ajustada));
 		panel.add(new JLabel(String.format("%d", p.getCantidadAlmacen())));
-
 		getContentPane().add(panel, BorderLayout.CENTER);
 
 		setVisible(true);
