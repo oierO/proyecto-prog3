@@ -7,6 +7,7 @@ import java.time.format.FormatStyle;
 import java.util.List;
 
 import javax.swing.*;
+import javax.swing.table.TableCellRenderer;
 
 import domain.Usuario;
 import domain.Vehiculo; // Importa la clase Vehiculo
@@ -114,17 +115,21 @@ public class PanelSesion extends JPanel {
 		    sinVehiculos.setFont(new Font("Arial", Font.PLAIN, 18));
 		    panelCentral.add(sinVehiculos);
 		} else {
-		    for (Vehiculo vehiculo : vehiculos) {
-		        JPanel panelVehiculo = new JPanel();
-		        panelVehiculo.setLayout(new BoxLayout(panelVehiculo, BoxLayout.X_AXIS));
+			JPanel panelVehiculo = new JPanel();
+	        /*panelVehiculo.setLayout(new BoxLayout(panelVehiculo, BoxLayout.X_AXIS));
 
-		        JLabel labelVehiculoInfo = new JLabel("- " + vehiculo.getModelo() + " (" + vehiculo.getMarca() + ", "
-		                + vehiculo.getMatricula() + ")");
-		        labelVehiculoInfo.setFont(new Font("Arial", Font.PLAIN, 18));
-		        panelVehiculo.add(labelVehiculoInfo);
-
-		        panelCentral.add(panelVehiculo);
-		    }
+	        JLabel labelVehiculoInfo = new JLabel("- " + vehiculo.getModelo() + " (" + vehiculo.getMarca() + ", "
+	                + vehiculo.getMatricula() + ")");
+	        labelVehiculoInfo.setFont(new Font("Arial", Font.PLAIN, 18));
+	        panelVehiculo.add(labelVehiculoInfo);
+	        */
+	        ModeloVehiculos modelo= new ModeloVehiculos(vehiculos);
+	        JTable tablaVehiculos= new JTable(modelo);
+	        JScrollPane scroll= new JScrollPane(tablaVehiculos);
+	        panelVehiculo.add(scroll);
+	        
+	        panelCentral.add(panelVehiculo);
+		    
 		}
 
 		// Agregar el panel central al área CENTER
