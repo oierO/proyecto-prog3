@@ -201,10 +201,9 @@ public class PanelAlmacen extends JPanel {
 		});
 		cbFabricante.addActionListener((e) -> {
 			String fabricanteSeleccion = (String) cbFabricante.getSelectedItem();
-			String tipoSeleccion = (String) cbFabricante.getSelectedItem();
 			ArrayList<Pieza> lp = new ArrayList<Pieza>();
 			for (Pieza p : cargarTabla()) {
-				if (p.getFabricante().equals(fabricanteSeleccion)&& p.getNombrePieza().equals(tipoSeleccion)) {
+				if (p.getFabricante().equals(fabricanteSeleccion)) {
 					lp.add(p);
 				}
 			}
@@ -214,10 +213,9 @@ public class PanelAlmacen extends JPanel {
 		});
 		cbTipo.addActionListener((e) -> {
 			String tipoSeleccion = (String) cbTipo.getSelectedItem();
-			String fabricanteSeleccion = (String) cbTipo.getSelectedItem();
 			ArrayList<Pieza> lp = new ArrayList<Pieza>();
 			for (Pieza p : cargarTabla()) {
-				if (p.getNombrePieza().equals(tipoSeleccion)&&p.getFabricante().equals(fabricanteSeleccion)) {
+				if (p.getNombrePieza().equals(tipoSeleccion)) {
 					lp.add(p);
 				}
 			}
