@@ -226,10 +226,21 @@ public class PanelServicios extends JPanel {
 								String descripcion = (String) tabla.getValueAt(fila, 3);
 								String fabricante = (String) tabla.getValueAt(fila, 4);
 								float precio = (float) tabla.getValueAt(fila, 5);
-
-								compra.add(new Pieza(id, codigo, nombrePieza, descripcion, fabricante, precio,
-										Integer.parseInt(cantidad)));
-
+								try {
+									if (Integer.parseInt(cantidad) <= 0) {
+										JOptionPane.showMessageDialog(DeustoTaller.getVSesion(),
+												"No puedes realizar una compra de estas unidades.");
+									} else if (Integer.parseInt(cantidad) > (Integer) tabla.getValueAt(fila, 6)) {
+										JOptionPane.showMessageDialog(DeustoTaller.getVSesion(),
+												"No hay suficientes unidades disponibles para realizar esta transaccion.");
+									} else {
+										compra.add(new Pieza(id, codigo, nombrePieza, descripcion, fabricante, precio,
+												Integer.parseInt(cantidad)));
+									}
+								} catch (NumberFormatException e2) {
+									JOptionPane.showMessageDialog(DeustoTaller.getVSesion(), "El dato introducido no es un valor valido.");
+								}
+								
 								modeloPiezasUsuario = new ModeloAlmacen(compra);
 								tablaUsuario.setModel(modeloPiezasUsuario);
 
