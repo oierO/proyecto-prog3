@@ -274,7 +274,10 @@ public class PanelAlmacen extends JPanel {
 				ps.setString(4, pieza.getFabricante());
 				ps.setFloat(5, pieza.getPrecio());
 				ps.setInt(6, pieza.getCantidadAlmacen());
-				ps.executeUpdate();
+				try {
+					ps.executeUpdate();
+				} catch (SQLException e) {
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -300,7 +303,7 @@ public class PanelAlmacen extends JPanel {
 			}
 			return lPiezas;
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(this, "Error al obtener la base de datos"+e.getLocalizedMessage());
+			JOptionPane.showMessageDialog(this, "Error al obtener la base de datos" + e.getLocalizedMessage());
 			return null;
 		}
 	}
@@ -405,18 +408,19 @@ public class PanelAlmacen extends JPanel {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void updateBD(Pieza pieza) {
-		String sql = String.format("UPDATE Pieza SET cantidadAlmacen=cantidadAlmacen-%s WHERE codigo='%s'",pieza.getCantidadAlmacen(),pieza.getCodigo());
+		String sql = String.format("UPDATE Pieza SET cantidadAlmacen=cantidadAlmacen-%s WHERE codigo='%s'",
+				pieza.getCantidadAlmacen(), pieza.getCodigo());
 		try {
 			Statement st = DeustoTaller.getCon().createStatement();
 			st.executeUpdate(sql);
 			st.close();
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(this, "Error al modificar el valor del almacen."+e.getLocalizedMessage());
+			JOptionPane.showMessageDialog(this, "Error al modificar el valor del almacen." + e.getLocalizedMessage());
 		}
 	}
-	
+
 	public void refrescar() {
 		cbTipo.setSelectedIndex(-1);
 		cbFabricante.setSelectedIndex(-1);
