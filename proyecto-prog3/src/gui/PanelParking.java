@@ -35,6 +35,7 @@ public class PanelParking extends JPanel {
 	private ButtonGroup grupoBotones;
 	private String splazaSeleccion;
 	private JButton bLiberar;
+	private JButton bModificar;
 	private PlazaParking plazaSel;
 	private DateTimeFormatter formateador = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	protected static HashMap<String, HashMap<String, PlazaParking>> mapaParkings = new HashMap<String, HashMap<String, PlazaParking>>();
@@ -77,12 +78,17 @@ public class PanelParking extends JPanel {
 		JPanel trestPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		trestPanel.add(new JLabel("Tiempo restante: "));
 		trest = new JTextField("N/A");
-
+		bModificar = new JButton("Modificar");
+		bModificar.setVisible(false);
+		Image img = new ImageIcon("resources/images/modificar.png").getImage();
+		img = img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+		bModificar.setIcon(new ImageIcon(img));
 		bLiberar = new JButton("Liberar plaza");
-		Image img = new ImageIcon("resources/images/cancelar.png").getImage();
+		img = new ImageIcon("resources/images/cancelar.png").getImage();
 		img = img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		bLiberar.setIcon(new ImageIcon(img));
 		bLiberar.setVisible(false);
+
 		bLiberar.addActionListener(e -> {
 			int res = JOptionPane.showConfirmDialog(this, "¿Quiere liberar la plaza reservada seleccionada?");
 			if (res == JOptionPane.YES_OPTION) {
@@ -104,6 +110,7 @@ public class PanelParking extends JPanel {
 		informacion.add(trestPanel);
 		informacion.add(tfinPanel);
 		informacion.add(bReservar);
+		informacion.add(bModificar);
 		informacion.add(bLiberar);
 		plantas.addActionListener(new AbstractAction() {
 
@@ -162,8 +169,10 @@ public class PanelParking extends JPanel {
 			bReservar.setToolTipText("Plaza no disponible para la reserva");
 			if (DeustoTaller.getSesion().getMatriculas().contains(matricula.getText())) {
 				bLiberar.setVisible(true);
+				bModificar.setVisible(true);
 			} else {
 				bLiberar.setVisible(false);
+				bModificar.setVisible(false);
 			}
 		} else {
 			bLiberar.setVisible(false);
