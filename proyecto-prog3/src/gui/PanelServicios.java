@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.TableCellRenderer;
@@ -282,6 +283,29 @@ public class PanelServicios extends JPanel {
 									JOptionPane.INFORMATION_MESSAGE);
 
 						});
+						JLabel precio= new JLabel();
+						panelBotones.add(precio);
+						
+						Thread t= new Thread(new Runnable() {
+							float sumatorio=0;
+							
+							@Override
+							public void run() {
+								for(Pieza p:compra) {
+									sumatorio+=sumatorio+ p.getCantidadAlmacen()*p.getPrecio();
+								}
+								SwingUtilities.invokeLater(()->{
+									precio.setText("El precio total es de:" +sumatorio);
+									
+								});
+								
+								
+								
+							}
+							
+						});
+						t.start();
+						
 						tablaUsuario.getTableHeader().setDefaultRenderer(new TableCellRenderer() {
 							
 							@Override
