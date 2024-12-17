@@ -20,7 +20,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.TableCellRenderer;
@@ -41,8 +40,10 @@ public class PanelServicios extends JPanel {
 	private ArrayList<ServicioDisponible> listaDeServiciosDisponibles;
 	private ArrayList<PedidoServicios> listaPedidoServicios;
 	private String idioma;
-
+	private JLabel lblPrecio;
+	private float totalLblPrecio;
 	public PanelServicios() {
+		totalLblPrecio = 0;
 		String[] lServicios = new String[] { "Taller", "Comprar Piezas" };
 		this.setLayout(new BorderLayout());
 		JPanel botones = new JPanel();
@@ -240,6 +241,14 @@ public class PanelServicios extends JPanel {
 									} else {
 										compra.add(new Pieza(id, codigo, nombrePieza, descripcion, fabricante, precio,
 												Integer.parseInt(cantidad)));
+										try {
+											float total = precio * Integer.parseInt(cantidad);
+											totalLblPrecio = totalLblPrecio + total;
+											lblPrecio.setText(String.format("El precio total es de: %.2f €",totalLblPrecio));	
+										}catch(NumberFormatException ex) {
+											JOptionPane.showMessageDialog(DeustoTaller.getVSesion(),
+													"La cantidad introducida no tiene el formato adecuado.");
+										}
 									}
 								} catch (NumberFormatException e2) {
 									JOptionPane.showMessageDialog(DeustoTaller.getVSesion(), "El dato introducido no es un valor valido.");
@@ -258,11 +267,19 @@ public class PanelServicios extends JPanel {
 										"ERROR EN SELECCIÓN", JOptionPane.ERROR_MESSAGE);
 
 							} else {
+								float precio= (float) tablaUsuario.getValueAt(fila, 5);
+								int cantidad= (int) tablaUsuario.getValueAt(fila, 6);
+								float total= precio*cantidad;
+								System.out.println(total);
+								totalLblPrecio=totalLblPrecio-total;
+								lblPrecio.setText(String.format("El precio total es de: %.2f €",totalLblPrecio));
 								compra.remove(fila);
 								modeloPiezasUsuario = new ModeloAlmacen(compra);
 								tablaUsuario.setModel(modeloPiezasUsuario);
 								JOptionPane.showMessageDialog(null, "Producto eliminado de la compra", "COMPRA",
 										JOptionPane.INFORMATION_MESSAGE);
+								
+								
 							}
 
 						});
@@ -283,29 +300,9 @@ public class PanelServicios extends JPanel {
 									JOptionPane.INFORMATION_MESSAGE);
 
 						});
-						JLabel precio= new JLabel();
-						panelBotones.add(precio);
-						
-						Thread t= new Thread(new Runnable() {
-							float sumatorio=0;
+						lblPrecio= new JLabel();
+						panelBotones.add(lblPrecio);
 							
-							@Override
-							public void run() {
-								for(Pieza p:compra) {
-									sumatorio+=sumatorio+ p.getCantidadAlmacen()*p.getPrecio();
-								}
-								SwingUtilities.invokeLater(()->{
-									precio.setText("El precio total es de:" +sumatorio);
-									
-								});
-								
-								
-								
-							}
-							
-						});
-						t.start();
-						
 						tablaUsuario.getTableHeader().setDefaultRenderer(new TableCellRenderer() {
 							
 							@Override
