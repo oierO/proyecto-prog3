@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -211,10 +212,14 @@ public class PanelServicios extends JPanel {
 						JButton botonComprar = new JButton("Comprar Piezas");
 						JButton botonQuitarProducto = new JButton("Quitar pieza");
 						JButton botonFinalizar = new JButton("Finalizar Compra");
+						JButton botonRecursivad= new JButton("Piezas recursivas");
+						lblPrecio= new JLabel();
 
 						panelBotones.add(botonComprar);
 						panelBotones.add(botonQuitarProducto);
 						panelBotones.add(botonFinalizar);
+						panelBotones.add(botonRecursivad);
+						panelBotones.add(lblPrecio);
 
 						botonComprar.addActionListener(c -> {
 							int fila = tabla.getSelectedRow();
@@ -272,7 +277,7 @@ public class PanelServicios extends JPanel {
 								float total= precio*cantidad;
 								System.out.println(total);
 								totalLblPrecio=totalLblPrecio-total;
-								lblPrecio.setText(String.format("El precio total es de: %.2f €",totalLblPrecio));
+								lblPrecio.setText(String.format("Precio total: %.2f €",totalLblPrecio));
 								compra.remove(fila);
 								modeloPiezasUsuario = new ModeloAlmacen(compra);
 								tablaUsuario.setModel(modeloPiezasUsuario);
@@ -300,8 +305,12 @@ public class PanelServicios extends JPanel {
 									JOptionPane.INFORMATION_MESSAGE);
 
 						});
-						lblPrecio= new JLabel();
-						panelBotones.add(lblPrecio);
+						
+						
+						botonRecursivad.addActionListener(c->{
+							
+							
+						});
 							
 						tablaUsuario.getTableHeader().setDefaultRenderer(new TableCellRenderer() {
 							
@@ -392,5 +401,8 @@ public class PanelServicios extends JPanel {
 		}
 
 	}
-
+	private static List<List<Pieza>>combinaciones(List<Pieza>piezas,double importe){
+		List<List<Pieza>>result= new ArrayList<List<Pieza>>();
+		return result;
+	}
 }
