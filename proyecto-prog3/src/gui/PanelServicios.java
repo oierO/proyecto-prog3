@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -209,9 +210,9 @@ public class PanelServicios extends JPanel {
 						pCentro.add(scrollUsuario);
 
 						JPanel panelBotones = new JPanel();
-						JButton botonComprar = new JButton("Comprar Piezas");
-						JButton botonQuitarProducto = new JButton("Quitar pieza");
-						JButton botonFinalizar = new JButton("Finalizar Compra");
+						JButton botonComprar = new JButton("Comprar ");
+						JButton botonQuitarProducto = new JButton("Quitar ");
+						JButton botonFinalizar = new JButton("Finalizar");
 						JButton botonRecursivad= new JButton("Piezas recursivas");
 						lblPrecio= new JLabel();
 
@@ -308,6 +309,16 @@ public class PanelServicios extends JPanel {
 						
 						
 						botonRecursivad.addActionListener(c->{
+						double presupuesto= Double.parseDouble(JOptionPane.showInputDialog(null, "Inserte el prupuesto", "Presupuesto", JOptionPane.QUESTION_MESSAGE));
+						PanelAlmacen p1= panel1;
+						List<Pieza>piezas= p1.cargarTabla();
+						System.out.println(piezas);
+						combinaciones(piezas, presupuesto);
+						int posicion= Integer.parseInt(JOptionPane.showInputDialog(null, "Introduzca un numero", "Numero al azar para que aparezcan las piezas", JOptionPane.PLAIN_MESSAGE));
+						List<Pieza>pi= combinaciones(p1.cargarTabla(), presupuesto).get(posicion);
+						System.out.println(pi);
+						modeloPiezasUsuario= new ModeloAlmacen(pi);
+						tablaUsuario.setModel(modeloPiezasUsuario);
 							
 							
 						});
@@ -403,6 +414,34 @@ public class PanelServicios extends JPanel {
 	}
 	private static List<List<Pieza>>combinaciones(List<Pieza>piezas,double importe){
 		List<List<Pieza>>result= new ArrayList<List<Pieza>>();
+		combinacionesR(piezas, importe, 0, new ArrayList<Pieza>(), result);
+		
+		
 		return result;
+	}
+	
+	private static void combinacionesR(List<Pieza>piezas,double importe,double suma,List<Pieza>temp,List<List<Pieza>>result) {
+		if(suma>importe) {
+			return;
+		}
+		else if(suma>=importe) {
+			List<Pieza> copia= new ArrayList<Pieza>(temp);
+			if(!result.contains(copia)) {
+				result.add(new ArrayList<Pieza>(temp));
+			}
+		}else {
+			for(int i=0;i<piezas.size();i++) {
+				suma=0;
+				suma= suma+piezas.get(i).getPrecio();
+				temp.add(piezas.get(i));
+				combinacionesR(piezas, importe, suma, temp, result);
+				int pos= temp.size()-1;
+				suma=suma-piezas.get(pos).getPrecio();
+				temp.remove(temp.size()-1);
+				
+			}
+		}
+		
+		
 	}
 }

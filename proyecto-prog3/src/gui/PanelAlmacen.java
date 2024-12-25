@@ -308,7 +308,7 @@ public class PanelAlmacen extends JPanel {
 		}
 	}
 
-	private List<Pieza> cargarTabla() {
+	public  List<Pieza> cargarTabla() {
 		File f = new File("piezas_coche_almacen_1000.csv");
 		List<Pieza> lp = new ArrayList<Pieza>();
 		try {
