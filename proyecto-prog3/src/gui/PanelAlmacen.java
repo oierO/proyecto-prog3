@@ -370,7 +370,7 @@ public class PanelAlmacen extends JPanel {
 
 	}
 
-	private static void cargarFabricantes(JComboBox<String> comboBox) {
+	public static void cargarFabricantes(JComboBox<String> comboBox) {
 		String sql = "SELECT DISTINCT fabricante FROM Pieza"; // Consulta SQL
 
 		try {

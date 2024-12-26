@@ -17,6 +17,7 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -311,11 +312,15 @@ public class PanelServicios extends JPanel {
 						botonRecursivad.addActionListener(c->{
 						double presupuesto= Double.parseDouble(JOptionPane.showInputDialog(null, "Inserte el prupuesto", "Presupuesto", JOptionPane.QUESTION_MESSAGE));
 						PanelAlmacen p1= panel1;
-						List<Pieza>piezas= p1.cargarTabla();
-						System.out.println(piezas);
-						combinaciones(piezas, presupuesto);
+						JComboBox<String>fa= new JComboBox<String>();
+						PanelAlmacen.cargarFabricantes(fa);
+						JOptionPane.showConfirmDialog(null, fa, "Elija un fabricante", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+						String sefa= (String) fa.getSelectedItem();
+						//List<Pieza>piezas= p1.cargarTabla();
+						//System.out.println(piezas);
+						combinaciones(compra, presupuesto,sefa);
 						int posicion= Integer.parseInt(JOptionPane.showInputDialog(null, "Introduzca un numero", "Numero al azar para que aparezcan las piezas", JOptionPane.PLAIN_MESSAGE));
-						List<Pieza>pi= combinaciones(p1.cargarTabla(), presupuesto).get(posicion);
+						List<Pieza>pi= combinaciones(p1.cargarTabla(), presupuesto, sefa).get(posicion);
 						System.out.println(pi);
 						modeloPiezasUsuario= new ModeloAlmacen(pi);
 						tablaUsuario.setModel(modeloPiezasUsuario);
@@ -412,32 +417,32 @@ public class PanelServicios extends JPanel {
 		}
 
 	}
-	private static List<List<Pieza>>combinaciones(List<Pieza>piezas,double importe){
+	private static List<List<Pieza>>combinaciones(List<Pieza>compra,double importe,String fabricante){
 		List<List<Pieza>>result= new ArrayList<List<Pieza>>();
-		combinacionesR(piezas, importe, 0, new ArrayList<Pieza>(), result);
+		combinacionesR(compra, importe, 0, new ArrayList<Pieza>(), result,fabricante);
 		
 		
 		return result;
 	}
 	
-	private static void combinacionesR(List<Pieza>piezas,double importe,double suma,List<Pieza>temp,List<List<Pieza>>result) {
-		if(suma>importe) {
-			return;
-		}
-		else if(suma>=importe) {
+	private static void combinacionesR(List<Pieza>compra,double importe,double suma,List<Pieza>temp,List<List<Pieza>>result,String fabricante) {
+		 if(suma>=importe&&temp.size()==5) {
 			List<Pieza> copia= new ArrayList<Pieza>(temp);
 			if(!result.contains(copia)) {
 				result.add(new ArrayList<Pieza>(temp));
 			}
 		}else {
-			for(int i=0;i<piezas.size();i++) {
+			for(int i=0;i<compra.size();i++) {
 				suma=0;
-				suma= suma+piezas.get(i).getPrecio();
-				temp.add(piezas.get(i));
-				combinacionesR(piezas, importe, suma, temp, result);
-				int pos= temp.size()-1;
-				suma=suma-piezas.get(pos).getPrecio();
-				temp.remove(temp.size()-1);
+				suma= suma+compra.get(i).getPrecio();
+				if(compra.get(i).getFabricante().equals(fabricante)) {
+					temp.add(compra.get(i));
+					combinacionesR(compra, importe, suma, temp, result,fabricante);
+					int pos= temp.size()-1;
+					suma=suma-compra.get(pos).getPrecio();
+					temp.remove(temp.size()-1);
+					
+				}
 				
 			}
 		}
