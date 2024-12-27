@@ -28,6 +28,9 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
 
 import domain.Pieza;
 import main.DeustoTaller;
@@ -367,7 +370,51 @@ public class PanelAlmacen extends JPanel {
 			modeloTabla = new ModeloAlmacen(lpFiltradas);
 		}
 		tabla.setModel(modeloTabla);
+		configurarRendererResaltado();
 
+	}
+	
+	private void configurarRendererResaltado() {
+	    String filtro = txtFiltro.getText().toLowerCase();
+
+	    tabla.getColumnModel().getColumn(3).setCellRenderer((table, value, isSelected, hasFocus, row, column) -> {
+	        JLabel label = new JLabel();
+	        label.setOpaque(true);
+
+	        // Configurar colores de fondo/selección
+	        if (isSelected) {
+	            label.setBackground(table.getSelectionBackground());
+	            label.setForeground(table.getSelectionForeground());
+	        } else {
+	            label.setBackground(table.getBackground());
+	            label.setForeground(table.getForeground());
+	        }
+
+	        // Resaltar texto si hay coincidencias
+	        if (value != null && !filtro.isEmpty()) {
+	            String descripcion = value.toString();
+	            int index = descripcion.toLowerCase().indexOf(filtro);
+	            if (index != -1) {
+	                // Crear HTML para resaltar coincidencias
+	                StringBuilder sb = new StringBuilder("<html>");
+	                for (int i = 0; i < descripcion.length(); i++) {
+	                    if (i >= index && i < index + filtro.length()) {
+	                        sb.append("<span style='color:red;'>").append(descripcion.charAt(i)).append("</span>");
+	                    } else {
+	                        sb.append(descripcion.charAt(i));
+	                    }
+	                }
+	                sb.append("</html>");
+	                label.setText(sb.toString());
+	            } else {
+	                label.setText(descripcion);
+	            }
+	        } else {
+	            label.setText(value != null ? value.toString() : "");
+	        }
+
+	        return label;
+	    });
 	}
 
 	public static void cargarFabricantes(JComboBox<String> comboBox) {
