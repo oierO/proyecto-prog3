@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -313,14 +314,11 @@ public class PanelServicios extends JPanel {
 						PanelAlmacen.cargarFabricantes(fa);
 						JOptionPane.showConfirmDialog(null, fa, "Elija un fabricante", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 						String sefa= (String) fa.getSelectedItem();
-						//List<Pieza>piezas= p1.cargarTabla();
-						//System.out.println(piezas);
-						combinaciones(compra, presupuesto,sefa);
-						int posicion= Integer.parseInt(JOptionPane.showInputDialog(null, "Introduzca un numero", "Numero al azar para que aparezcan las piezas", JOptionPane.PLAIN_MESSAGE));
-						List<Pieza>pi= combinaciones(p1.cargarTabla(), presupuesto, sefa).get(posicion);
+						List<Pieza>piezas= p1.cargarTabla();
+						System.out.println(piezas);
+						//int posicion= Integer.parseInt(JOptionPane.showInputDialog(null, "Introduzca un numero", "Numero al azar para que aparezcan las piezas", JOptionPane.PLAIN_MESSAGE));
+						List<List<Pieza>>pi= combinaciones(piezas, presupuesto, sefa);
 						System.out.println(pi);
-						modeloPiezasUsuario= new ModeloAlmacen(pi);
-						tablaUsuario.setModel(modeloPiezasUsuario);
 							
 							
 						});
@@ -414,32 +412,47 @@ public class PanelServicios extends JPanel {
 		}
 
 	}
-	private static List<List<Pieza>>combinaciones(List<Pieza>compra,double importe,String fabricante){
-		List<List<Pieza>>result= new ArrayList<List<Pieza>>();
-		combinacionesR(compra, importe, 0, new ArrayList<Pieza>(), result,fabricante);
+	private static List<List<Pieza>>combinaciones(List<Pieza>piezas,double importe,String fabricante){
+		List<List<Pieza>>result= new ArrayList<>();
+		combinacionesR(piezas, importe, 0, new ArrayList<>(), result,fabricante);
 		
 		
 		return result;
 	}
 	
-	private static void combinacionesR(List<Pieza>compra,double importe,double suma,List<Pieza>temp,List<List<Pieza>>result,String fabricante) {
-		 if(suma>=importe&&temp.size()==5) {
-			List<Pieza> copia= new ArrayList<Pieza>(temp);
-			if(!result.contains(copia)) {
-				result.add(new ArrayList<Pieza>(temp));
-			}
-		}else {
-			for(int i=0;i<compra.size();i++) {
-				suma=0;
-				suma= suma+compra.get(i).getPrecio();
-				if(compra.get(i).getFabricante().equals(fabricante)) {
-					temp.add(compra.get(i));
-					combinacionesR(compra, importe, suma, temp, result,fabricante);
-					int pos= temp.size()-1;
-					suma=suma-compra.get(pos).getPrecio();
-					temp.remove(temp.size()-1);
-					
+	private static void combinacionesR(List<Pieza>piezasR,double importe,double suma,List<Pieza>temp,List<List<Pieza>>result,String fabricante) {
+		 if(temp.size()>5 ||suma>importe) {
+			 return;
+			
+			
+			 
+		}else if(suma>=importe-100 ||temp.size()<5){
+			Comparator<Pieza>c= new Comparator<Pieza>() {
+				
+				@Override
+				public int compare(Pieza o1, Pieza o2) {
+					return Integer.compare(o1.getId(), o2.getId());
 				}
+			};
+			List<Pieza>copia=new ArrayList<Pieza>(temp);
+			copia.sort(c);
+			if(!result.contains(copia)) {
+				result.add(new ArrayList<>(temp));
+			}
+			
+			
+		}
+		 else {
+			for(int i=0;i<piezasR.size();i++) {
+				System.out.println(piezasR.get(i));
+				suma=0;
+				suma= suma+piezasR.get(i).getPrecio();
+				temp.add(piezasR.get(i));
+				combinacionesR(piezasR, importe, suma, temp, result,fabricante);
+				int pos= temp.size()-1;
+				suma=suma-piezasR.get(pos).getPrecio();
+				temp.remove(temp.size()-1);
+				
 				
 			}
 		}
