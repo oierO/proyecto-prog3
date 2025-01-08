@@ -414,19 +414,27 @@ public class PanelServicios extends JPanel {
 	}
 	private static List<List<Pieza>>combinaciones(List<Pieza>piezas,double importe,String fabricante){
 		List<List<Pieza>>result= new ArrayList<>();
-		combinacionesR(piezas, importe, 0, new ArrayList<>(), result,fabricante);
-		
+		List<Pieza> l = new ArrayList<Pieza>();
+		for(Pieza p: piezas) {
+			if(p.getFabricante().equals(fabricante)) {
+				l.add(p);
+			}
+		}
+		//combinacionesR(piezas, importe, 0, new ArrayList<>(), result,fabricante);
+		combinacionesR(l, importe, 0, new ArrayList<>(), result,fabricante);
 		
 		return result;
 	}
 	
 	private static void combinacionesR(List<Pieza>piezasR,double importe,double suma,List<Pieza>temp,List<List<Pieza>>result,String fabricante) {
-		 if(temp.size()>5 ||suma>importe) {
+		 if(temp.size()>5 || suma>importe) {
+			 System.out.println("IF "+temp.size());
 			 return;
 			
 			
 			 
-		}else if(suma>=importe-100 ||temp.size()<5){
+		}else if(suma>=importe-100 || temp.size()<5){
+			System.out.println("ELSE IF "+temp.size());
 			Comparator<Pieza>c= new Comparator<Pieza>() {
 				
 				@Override
@@ -444,19 +452,28 @@ public class PanelServicios extends JPanel {
 		}
 		 else {
 			for(int i=0;i<piezasR.size();i++) {
-				System.out.println(piezasR.get(i));
-				suma=0;
-				suma= suma+piezasR.get(i).getPrecio();
+				/*if(piezasR.get(i).getFabricante().equals(fabricante)) {
+					//suma=0;
+					suma= suma+piezasR.get(i).getPrecio();
+					temp.add(piezasR.get(i));
+					combinacionesR(piezasR, importe, suma, temp, result,fabricante);
+					int pos= temp.size()-1;
+					suma=suma-piezasR.get(pos).getPrecio();
+					temp.remove(temp.size()-1);
+				}else {
+					combinacionesR(piezasR, importe, suma, temp, result,fabricante);
+					
+				}*/
+				
+				suma= suma + piezasR.get(i).getPrecio();
 				temp.add(piezasR.get(i));
 				combinacionesR(piezasR, importe, suma, temp, result,fabricante);
 				int pos= temp.size()-1;
 				suma=suma-piezasR.get(pos).getPrecio();
 				temp.remove(temp.size()-1);
-				
-				
 			}
 		}
 		
-		
+		 
 	}
 }
