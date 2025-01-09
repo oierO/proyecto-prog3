@@ -415,65 +415,54 @@ public class PanelServicios extends JPanel {
 	private static List<List<Pieza>>combinaciones(List<Pieza>piezas,double importe,String fabricante){
 		List<List<Pieza>>result= new ArrayList<>();
 		List<Pieza> l = new ArrayList<Pieza>();
-		for(Pieza p: piezas) {
+		for(int i=0;i<piezas.size() && l.size()<4;i++) {
+			Pieza p = piezas.get(i);
 			if(p.getFabricante().equals(fabricante)) {
 				l.add(p);
 			}
 		}
-		//combinacionesR(piezas, importe, 0, new ArrayList<>(), result,fabricante);
-		combinacionesR(l, importe, 0, new ArrayList<>(), result,fabricante);
 		
+		
+		combinacionesR2(l, importe, 0, new ArrayList<>(), result,fabricante);
+		for(List<Pieza> lista: result) {
+			System.out.print("[");
+			for(Pieza p: lista) {
+				System.out.print(p.getNombrePieza()+" ");
+			}
+			System.out.println("]");
+		}
 		return result;
 	}
 	
-	private static void combinacionesR(List<Pieza>piezasR,double importe,double suma,List<Pieza>temp,List<List<Pieza>>result,String fabricante) {
-		 if(temp.size()>5 || suma>importe) {
-			 System.out.println("IF "+temp.size());
-			 return;
-			
-			
-			 
-		}else if(suma>=importe-100 || temp.size()<5){
-			System.out.println("ELSE IF "+temp.size());
-			Comparator<Pieza>c= new Comparator<Pieza>() {
+	
+	private static void combinacionesR2(List<Pieza>piezasR,double importe,double suma,List<Pieza>temp,List<List<Pieza>>result,String fabricante) {
+		if(temp.size()>4 || suma > importe) 
+			return;
+		else if(temp.size()==4 || suma>importe-100){
+			Comparator<Pieza> c = new Comparator<Pieza>() {
 				
 				@Override
 				public int compare(Pieza o1, Pieza o2) {
 					return Integer.compare(o1.getId(), o2.getId());
 				}
 			};
-			List<Pieza>copia=new ArrayList<Pieza>(temp);
+			List<Pieza> copia = new ArrayList<Pieza>(temp);
 			copia.sort(c);
-			if(!result.contains(copia)) {
-				result.add(new ArrayList<>(temp));
-			}
-			
-			
-		}
-		 else {
-			for(int i=0;i<piezasR.size();i++) {
-				/*if(piezasR.get(i).getFabricante().equals(fabricante)) {
-					//suma=0;
-					suma= suma+piezasR.get(i).getPrecio();
-					temp.add(piezasR.get(i));
-					combinacionesR(piezasR, importe, suma, temp, result,fabricante);
-					int pos= temp.size()-1;
-					suma=suma-piezasR.get(pos).getPrecio();
-					temp.remove(temp.size()-1);
-				}else {
-					combinacionesR(piezasR, importe, suma, temp, result,fabricante);
-					
-				}*/
+			if(!result.contains(temp)) {
+				result.add(new ArrayList<Pieza>(temp));
 				
-				suma= suma + piezasR.get(i).getPrecio();
-				temp.add(piezasR.get(i));
-				combinacionesR(piezasR, importe, suma, temp, result,fabricante);
-				int pos= temp.size()-1;
-				suma=suma-piezasR.get(pos).getPrecio();
-				temp.remove(temp.size()-1);
+			}
+		}else {
+			for(int i=0;i<piezasR.size();i++) {
+				if(!temp.contains(piezasR.get(i))) {
+					temp.add(piezasR.get(i));
+					combinacionesR2(piezasR, importe, suma+piezasR.get(i).getPrecio(), temp, result, fabricante);
+					temp.remove(temp.size()-1);
+				}
 			}
 		}
-		
-		 
 	}
+	
+	
+	
 }

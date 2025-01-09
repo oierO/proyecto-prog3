@@ -211,11 +211,17 @@ public class PanelAlmacen extends JPanel {
 		});
 		cbFabricante.addActionListener((e) -> {
 			String fabricanteSeleccion = (String) cbFabricante.getSelectedItem();
-			String tipo = (String) cbTipo.getSelectedItem();
+			String tipo = null;
+			if(cbTipo.getSelectedIndex()!=-1)
+				tipo = (String) cbTipo.getSelectedItem();
 			ArrayList<Pieza> lp = new ArrayList<Pieza>();
 			for (Pieza p : cargarBD()) {
-				if (p.getFabricante().equals(fabricanteSeleccion) && p.getNombrePieza().equals(tipo)) {
-					lp.add(p);
+				if (p.getFabricante().equals(fabricanteSeleccion)) {
+					if(tipo==null) {
+						lp.add(p);
+					}else  if (p.getNombrePieza().equals(tipo)){
+						lp.add(p);
+					}
 				}
 			}
 			modeloTabla = new ModeloAlmacen(lp);
@@ -224,11 +230,18 @@ public class PanelAlmacen extends JPanel {
 		});
 		cbTipo.addActionListener((e) -> {
 			String tipoSeleccion = (String) cbTipo.getSelectedItem();
-			String fabricante = (String) cbFabricante.getSelectedItem();
+			String fabricante = null;
+			if(cbFabricante.getSelectedIndex() != -1) {
+				fabricante = (String) cbFabricante.getSelectedItem();
+			}
 			ArrayList<Pieza> lp = new ArrayList<Pieza>();
 			for (Pieza p : cargarBD()) {
-				if (p.getNombrePieza().equals(tipoSeleccion) && p.getFabricante().equals(fabricante)) {
-					lp.add(p);
+				if (p.getNombrePieza().equals(tipoSeleccion) ) {
+					if(fabricante == null) {
+						lp.add(p);
+					}else if(p.getFabricante().equals(fabricante)) {
+						lp.add(p);
+					}
 				}
 			}
 			modeloTabla = new ModeloAlmacen(lp);
@@ -259,7 +272,7 @@ public class PanelAlmacen extends JPanel {
 				+ " codigo TEXT NOT NULL," + " nombrePieza TEXT NOT NULL," + " descripcion TEXT,"
 				+ " fabricante TEXT NOT NULL," + " precio REAL NOT NULL," + " cantidadAlmacen INTEGER NOT NULL" + ");";
 		try (PreparedStatement ps = DeustoTaller.getCon().prepareStatement(sql)) {
-			ps.executeUpdate();
+			ps.execute();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -277,10 +290,10 @@ public class PanelAlmacen extends JPanel {
 				ps.setString(4, pieza.getFabricante());
 				ps.setFloat(5, pieza.getPrecio());
 				ps.setInt(6, pieza.getCantidadAlmacen());
-				try {
-					ps.executeUpdate();
-				} catch (SQLException e) {
-				}
+				//try {
+					ps.execute();
+				//} catch (SQLException e) {
+				//}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
