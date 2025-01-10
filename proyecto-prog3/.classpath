@@ -6,9 +6,11 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="resources/ResourceBundle/panelServicios"/>
+	<classpathentry kind="src" path="resources/ResourceBundle/ventanaGrafica"/>
 	<classpathentry kind="src" path="resources/ResourceBundle/ventanaRegistrarseBundle"/>
 	<classpathentry kind="src" path="resources/ResourceBundle/ventanaInicioSesionh"/>
-	<classpathentry excluding="VentanaInicioSesion/|ventanaInicioSesionh/|ventanaRegistrarseBundle/" kind="src" path="resources/ResourceBundle"/>
+	<classpathentry excluding="VentanaInicioSesion/|ventanaInicioSesionh/|ventanaRegistrarseBundle/|ventanaGrafica/|panelServicios/" kind="src" path="resources/ResourceBundle"/>
 	<classpathentry kind="lib" path="lib/sqlite-jdbc-3.47.0.0.jar"/>
 	<classpathentry kind="lib" path="lib/LGoodDatePicker-11.2.1.jar"/>
 	<classpathentry kind="output" path="bin"/>

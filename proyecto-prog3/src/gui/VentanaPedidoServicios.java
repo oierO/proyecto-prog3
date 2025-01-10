@@ -42,11 +42,11 @@ public class VentanaPedidoServicios extends JFrame {
 	private JLabel fechaDeRealizacionJLabel;
 	private JLabel informacionAdicionalJLabel;
 	private JButton botonCancelar;
-	private Locale locale;
+	private Locale curreLocale;
 	private ResourceBundle idiomaBundle;
 
 	public VentanaPedidoServicios(String usuario, ArrayList<PedidoServicios> listaServiciosPedidos,
-			ArrayList<String> serviciosElegidos, String idioma) {
+			ArrayList<String> serviciosElegidos, Locale locale) {
 
 		// Configuraciones de la ventana
 		setTitle("Reservar cita");
@@ -109,8 +109,8 @@ public class VentanaPedidoServicios extends JFrame {
         //Prueba bundle
         
 //      //Los labels
-      locale = Locale.getDefault();
-      idiomaBundle = ResourceBundle.getBundle("VentanaLabelBundle", locale);
+     curreLocale = locale;
+      idiomaBundle = ResourceBundle.getBundle("VentanaLabelBundle", curreLocale);
       
       	nombreJLabel = new JLabel(idiomaBundle.getString("nombreJLabel"));
 		telefonoJLabel = new JLabel(idiomaBundle.getString("telefonoJLabel"));
@@ -132,11 +132,11 @@ public class VentanaPedidoServicios extends JFrame {
                 System.out.println("Seleccionaste: " + seleccion);
                
                 if(seleccion.equals("Español")) {
-                	locale = Locale.getDefault();
+                	curreLocale = Locale.getDefault();
                 } else if (seleccion.equals("English")) {
-                	locale = new Locale.Builder().setLanguage("en").setRegion("US").build();
+                	curreLocale = new Locale.Builder().setLanguage("en").setRegion("US").build();
 				} else if (seleccion.equals("中文")) {
-					 locale = new Locale.Builder().setLanguage("zh").setRegion("ZH").build();
+					curreLocale = new Locale.Builder().setLanguage("zh").setRegion("ZH").build();
 				}
                 
                 updateTexts();
@@ -299,7 +299,7 @@ public class VentanaPedidoServicios extends JFrame {
 	}
 	
 	private void updateTexts() {
-		idiomaBundle = ResourceBundle.getBundle("VentanaLabelBundle", locale);
+		idiomaBundle = ResourceBundle.getBundle("VentanaLabelBundle", curreLocale);
 		nombreJLabel.setText(idiomaBundle.getString("nombreJLabel"));
 		telefonoJLabel.setText(idiomaBundle.getString("telefonoJLabel"));
 		fechaDePedidoJLabel.setText(idiomaBundle.getString("fechaDePedidoJLabel"));
@@ -335,9 +335,10 @@ public class VentanaPedidoServicios extends JFrame {
 		String idioma3 = "Chino";
 
 		System.out.println(pedidoServicios);
+		Locale locale = Locale.getDefault();
 
 		// Probando con cada idioma
-		new VentanaPedidoServicios("Usuario", pedidoServicios, servicios, idioma1);
+		new VentanaPedidoServicios("Usuario", pedidoServicios, servicios, locale);
 //		new VentanaPedidoServicios("Usuario",pedidoServicios,servicios,idioma2);
 //		new VentanaPedidoServicios("Usuario",pedidoServicios,servicios,idioma3);
 

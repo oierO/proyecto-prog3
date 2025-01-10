@@ -308,7 +308,7 @@ public class VentanaInicioSesion extends JFrame {
 				JOptionPane.showMessageDialog(null,
 						String.format("%s, Has iniciado sesión correctamente", DeustoTaller.getSesion().getNombre()));
 
-				new VentanaGrafica(usuario);
+				new VentanaGrafica(usuario,currentLocale);
 			});
 
 		});

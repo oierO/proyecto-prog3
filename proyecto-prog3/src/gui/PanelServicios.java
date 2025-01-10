@@ -13,6 +13,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.Set;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -23,6 +27,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.TableCellRenderer;
@@ -42,16 +47,79 @@ public class PanelServicios extends JPanel {
 	private ArrayList<ServicioDisponible> listaDeServiciosDisponibles;
 	private ArrayList<PedidoServicios> listaPedidoServicios;
 	private ArrayList<Pieza> compra;
-	private String idioma;
 	private JLabel lblPrecio;
 	private float totalLblPrecio;
-	public PanelServicios() {
+	private Locale currentLocale;
+	private ResourceBundle bundle;
+	private String[] lServicios;
+	private String sTaller,sComprarPieazas,sOperaciones;
+	private String sElUsuario,sHaSeleccionado,sNoHaSeleccionado,sNoPedido,sPedido;
+	private JButton botonVisualizarPedidos;
+	private JButton  botonReservar;
+	private String sNecesitas;
+	private String sBienvenidos;
+	private String sVentaDePiezas;
+	private JButton botonComprar,botonQuitarProducto,botonFinalizar,botonRecursivad;
+	private String sPrimeroDebesFila,sErrorEnSeleccion,sCuantasComprar,sCantidadPiezas;
+	private String sNoPuedesUnidades,sNoSuficiente,sPrecioTotal,sCantidadFormato,sDatoInvalido;
+	private String sProductoEliminado,sCompra,sPrimeroDebesProducto,sError,sInsertPresupuesto,sPresupuesto;
+	private String sSi,sNo,sCancelar,sOk;
+	private String sEligaFabricante,sElNPiezas,sElijaNumero,sEleccion;
+	
+	public PanelServicios(Locale locale) {
+		//Idioma 
+		currentLocale = locale;
+		bundle = ResourceBundle.getBundle("panelServiciosBundle",currentLocale);
+		sTaller = bundle.getString("sTaller");
+		sComprarPieazas = bundle.getString("sComprarPieazas");
+		sOperaciones = bundle.getString("sOperaciones");
+		sElUsuario = bundle.getString("sElUsuario");
+		sHaSeleccionado = bundle.getString("sHaSeleccionado");
+		sNoHaSeleccionado = bundle.getString("sNoHaSeleccionado");
+		sNecesitas = bundle.getString("sNecesitas");
+		sPedido = bundle.getString("sPedido");
+		sNoPedido = bundle.getString("sNoPedido");
+		sBienvenidos = bundle.getString("sBienvenidos");
+		sVentaDePiezas = bundle.getString("sVentaDePiezas");
+		sPrimeroDebesFila = bundle.getString("sPrimeroDebesFila");
+		sErrorEnSeleccion = bundle.getString("sErrorEnSeleccion");
+		sCuantasComprar = bundle.getString("sCuantasComprar");
+		sCantidadPiezas = bundle.getString("sCantidadPiezas");
+		sNoPuedesUnidades = bundle.getString("sNoPuedesUnidades");
+		sNoSuficiente = bundle.getString("sNoSuficiente");
+		sPrecioTotal = bundle.getString("sPrecioTotal"); 
+		sCantidadFormato = bundle.getString("sCantidadFormato"); 
+		sDatoInvalido = bundle.getString("sDatoInvalido"); 
+		sProductoEliminado = bundle.getString("sProductoEliminado"); 
+		sCompra = bundle.getString("sCompra"); 
+		sPrimeroDebesProducto = bundle.getString("sPrimeroDebesProducto"); 
+		sError = bundle.getString("sError"); 
+		sInsertPresupuesto = bundle.getString("sInsertPresupuesto");
+		sPresupuesto =  bundle.getString("sPresupuesto");
+		sEligaFabricante = bundle.getString("sEligaFabricante");
+		sElNPiezas = bundle.getString("sElNPiezas");
+		sSi = bundle.getString("sSi");
+		sNo = bundle.getString("sNo");
+		sCancelar = bundle.getString("sCancelar");
+		sOk = bundle.getString("sOk");
+		sElijaNumero = bundle.getString("sElijaNumero");
+		sEleccion = bundle.getString("sEleccion");
+		
+		//cambiar el texto de los botones de JOptionPane
+		 UIManager.put("OptionPane.yesButtonText", sSi);
+	     UIManager.put("OptionPane.noButtonText", sNo);
+	     UIManager.put("OptionPane.cancelButtonText", sCancelar);
+	     UIManager.put("OptionPane.okButtonText", sOk);
+	    
+		
+		
+		
 		totalLblPrecio = 0;
-		String[] lServicios = new String[] { "Taller", "Comprar Piezas" };
+		lServicios = new String[] { sTaller, sComprarPieazas };
 		this.setLayout(new BorderLayout());
 		JPanel botones = new JPanel();
 		botones.setLayout(new GridLayout(lServicios.length, 1));
-		botones.setBorder(new TitledBorder("Operaciones"));
+		botones.setBorder(new TitledBorder(sOperaciones));
 		this.add(botones, BorderLayout.WEST);
 
 		// Para los servicios
@@ -96,7 +164,7 @@ public class PanelServicios extends JPanel {
 					String operacion = boton.getText();
 					panelDerechoServicios.removeAll();
 
-					if (operacion.equals("Taller")) {
+					if (operacion.equals(lServicios[0])) {
 
 						// Panel para servicios disponibles
 
@@ -104,7 +172,7 @@ public class PanelServicios extends JPanel {
 						JPanel panelCentro = new JPanel();
 
 						PanelServiciosDisponibles.setLayout(new BorderLayout());
-						Border panelDiagnosticoBorder = BorderFactory.createTitledBorder("¿Qué necesitas?");
+						Border panelDiagnosticoBorder = BorderFactory.createTitledBorder(sNecesitas);
 						PanelServiciosDisponibles.setBorder(panelDiagnosticoBorder);
 						PanelServiciosDisponibles.add(panelCentro, BorderLayout.CENTER);
 
@@ -117,9 +185,6 @@ public class PanelServicios extends JPanel {
 
 						}
 
-						// Eligo un idioma
-						idioma = "Español";
-
 						// Panel para los botones
 						JPanel panelBotonesServicio = new JPanel();
 
@@ -127,7 +192,7 @@ public class PanelServicios extends JPanel {
 						// Si el usuario pulsa este boton dependiendo de si ha elegido algún servicio o
 						// no
 						// aparece un formulario
-						JButton botonReservar = new JButton("RESERVAR CITA");
+						JButton botonReservar = new JButton(bundle.getString("botonReservar"));
 						botonReservar.addActionListener(new ActionListener() {
 							@Override
 							public void actionPerformed(ActionEvent e) {
@@ -144,20 +209,24 @@ public class PanelServicios extends JPanel {
 
 								if (!listaServiciosSeleccionados.isEmpty()) {
 									System.out.println("\n---Esto es de panel de servicios---\n");
-									System.out.println("El usuario " + VentanaGrafica.getUsuario()
-											+ " ha seleccionado estos servicios: ");
+//									System.out.println("El usuario " + VentanaGrafica.getUsuario()
+//											+ " ha seleccionado estos servicios: ");
+									System.out.printf("%s %s %s", sElUsuario, VentanaGrafica.getUsuario(),sHaSeleccionado);
+									
 									for (String diagnostico : listaServiciosSeleccionados) {
-										System.out.println("- " + diagnostico);
+										System.out.println("- " + diagnostico);	 	
 									}
 									new VentanaPedidoServicios(VentanaGrafica.getUsuario(), listaPedidoServicios,
-											listaServiciosSeleccionados, idioma);
+											listaServiciosSeleccionados, locale);
 									// Refrescar el panel
 									PanelServiciosDisponibles.revalidate();
 									PanelServiciosDisponibles.repaint();
 								} else {
 									System.out.println("\n---Esto es de panel de servicios---\n");
-									System.out.println("El usuario " + VentanaGrafica.getUsuario()
-											+ " no ha seleccionado ningún servicio");
+//									System.out.println("El usuario " + VentanaGrafica.getUsuario()
+//											+ " no ha seleccionado ningún servicio");
+									System.out.printf("%s %s %s", sElUsuario, VentanaGrafica.getUsuario(),sNoHaSeleccionado);
+
 								}
 
 							}
@@ -166,7 +235,7 @@ public class PanelServicios extends JPanel {
 						panelBotonesServicio.add(botonReservar);
 
 						// Boton para visualizar pedidos del usuario
-						JButton botonVisualizarPedidos = new JButton("Visualizar Pedidos");
+						botonVisualizarPedidos = new JButton(bundle.getString("botonVisualizarPedidos"));
 
 						botonVisualizarPedidos.addActionListener(new ActionListener() {
 
@@ -174,12 +243,16 @@ public class PanelServicios extends JPanel {
 							public void actionPerformed(ActionEvent e) {
 								if (listaPedidoServicios.isEmpty()) {
 									System.out.println("\n---Esto es de panel de servicios---\n");
-									System.out.println(
-											"El usuario " + VentanaGrafica.getUsuario() + " no tiene ningún pedido.");
+//									System.out.println(
+//											"El usuario " + VentanaGrafica.getUsuario() + " no tiene ningún pedido.");
+									System.out.printf("%s %s %s", sElUsuario, VentanaGrafica.getUsuario(),sNoPedido);
+
 								} else {
 									System.out.println("\n---Esto es de panel de servicios---\n");
-									System.out.println(
-											"El usuario " + VentanaGrafica.getUsuario() + "ha hecho estos pedidos: ");
+//									System.out.println(
+//											"El usuario " + VentanaGrafica.getUsuario() + "ha hecho estos pedidos: ");
+									System.out.printf("%s %s %s", sElUsuario, VentanaGrafica.getUsuario(),sPedido);
+
 									for (PedidoServicios pedido : listaPedidoServicios) {
 										System.out.println(pedido);
 									}
@@ -193,9 +266,9 @@ public class PanelServicios extends JPanel {
 						panelDerechoServicios.add(PanelServiciosDisponibles, BorderLayout.CENTER);
 						panelDerechoServicios.add(panelBotonesServicio, BorderLayout.SOUTH);
 
-					} else if (operacion.equals("Comprar Piezas")) {
-						JOptionPane.showMessageDialog(null, "Bienvenido a la ventana de compras de piezas",
-								"Venta de peizas", JOptionPane.INFORMATION_MESSAGE);
+					} else if (operacion.equals(lServicios[1])) {
+						JOptionPane.showMessageDialog(null, sBienvenidos,
+								sVentaDePiezas, JOptionPane.INFORMATION_MESSAGE);
 						// Panel para piezas
 						JPanel panelPiezas = new JPanel();
 						panelPiezas.setLayout(new BorderLayout());
@@ -212,10 +285,10 @@ public class PanelServicios extends JPanel {
 						pCentro.add(scrollUsuario);
 
 						JPanel panelBotones = new JPanel();
-						JButton botonComprar = new JButton("Comprar ");
-						JButton botonQuitarProducto = new JButton("Quitar ");
-						JButton botonFinalizar = new JButton("Finalizar");
-						JButton botonRecursivad= new JButton("Piezas recursivas");
+						botonComprar = new JButton(bundle.getString("botonComprar"));
+						botonQuitarProducto = new JButton(bundle.getString("botonQuitarProducto"));
+						botonFinalizar = new JButton(bundle.getString("botonFinalizar"));
+						botonRecursivad= new JButton(bundle.getString("botonRecursivad"));
 						lblPrecio= new JLabel();
 
 						panelBotones.add(botonComprar);
@@ -227,12 +300,12 @@ public class PanelServicios extends JPanel {
 						botonComprar.addActionListener(c -> {
 							int fila = tabla.getSelectedRow();
 							if (fila == -1) {
-								JOptionPane.showMessageDialog(null, "Primero debes seleccionado una fila",
-										"ERROR EN SELECCIÓN", JOptionPane.ERROR_MESSAGE);
+								JOptionPane.showMessageDialog(null, sPrimeroDebesFila,
+										sErrorEnSeleccion, JOptionPane.ERROR_MESSAGE);
 
 							} else {
-								String cantidad = JOptionPane.showInputDialog(null, "¿Cuantas piezas desea comprar?",
-										"Cantidad piezas", JOptionPane.QUESTION_MESSAGE);
+								String cantidad = JOptionPane.showInputDialog(null, sCuantasComprar,
+										sCantidadPiezas, JOptionPane.QUESTION_MESSAGE);
 								int id = (int) tabla.getValueAt(fila, 0);
 								String codigo = (String) tabla.getValueAt(fila, 1);
 								String nombrePieza = (String) tabla.getValueAt(fila, 2);
@@ -242,24 +315,24 @@ public class PanelServicios extends JPanel {
 								try {
 									if (Integer.parseInt(cantidad) <= 0) {
 										JOptionPane.showMessageDialog(DeustoTaller.getVSesion(),
-												"No puedes realizar una compra de estas unidades.");
+												sNoPuedesUnidades);
 									} else if (Integer.parseInt(cantidad) > (Integer) tabla.getValueAt(fila, 6)) {
 										JOptionPane.showMessageDialog(DeustoTaller.getVSesion(),
-												"No hay suficientes unidades disponibles para realizar esta transaccion.");
+												sNoSuficiente);
 									} else {
 										compra.add(new Pieza(id, codigo, nombrePieza, descripcion, fabricante, precio,
 												Integer.parseInt(cantidad)));
 										try {
 											float total = precio * Integer.parseInt(cantidad);
 											totalLblPrecio = totalLblPrecio + total;
-											lblPrecio.setText(String.format("El precio total es de: %.2f €",totalLblPrecio));	
+											lblPrecio.setText(String.format("%s %.2f €",sPrecioTotal,totalLblPrecio));	
 										}catch(NumberFormatException ex) {
 											JOptionPane.showMessageDialog(DeustoTaller.getVSesion(),
-													"La cantidad introducida no tiene el formato adecuado.");
+													sCantidadFormato);
 										}
 									}
 								} catch (NumberFormatException e2) {
-									JOptionPane.showMessageDialog(DeustoTaller.getVSesion(), "El dato introducido no es un valor valido.");
+									JOptionPane.showMessageDialog(DeustoTaller.getVSesion(), "");
 								}
 								
 								modeloPiezasUsuario = new ModeloAlmacen(compra);
@@ -271,8 +344,8 @@ public class PanelServicios extends JPanel {
 						botonQuitarProducto.addActionListener(c -> {
 							int fila = tablaUsuario.getSelectedRow();
 							if (fila == -1) {
-								JOptionPane.showMessageDialog(null, "Primero debes seleccionado una fila",
-										"ERROR EN SELECCIÓN", JOptionPane.ERROR_MESSAGE);
+								JOptionPane.showMessageDialog(null, sPrimeroDebesFila,
+										sErrorEnSeleccion, JOptionPane.ERROR_MESSAGE);
 
 							} else {
 								float precio= (float) tablaUsuario.getValueAt(fila, 5);
@@ -280,11 +353,11 @@ public class PanelServicios extends JPanel {
 								float total= precio*cantidad;
 								System.out.println(total);
 								totalLblPrecio=totalLblPrecio-total;
-								lblPrecio.setText(String.format("Precio total: %.2f €",totalLblPrecio));
+								lblPrecio.setText(String.format("%s %.2f €",sPrecioTotal,totalLblPrecio));
 								compra.remove(fila);
 								modeloPiezasUsuario = new ModeloAlmacen(compra);
 								tablaUsuario.setModel(modeloPiezasUsuario);
-								JOptionPane.showMessageDialog(null, "Producto eliminado de la compra", "COMPRA",
+								JOptionPane.showMessageDialog(null, sProductoEliminado, sCompra,
 										JOptionPane.INFORMATION_MESSAGE);
 								
 								
@@ -296,12 +369,12 @@ public class PanelServicios extends JPanel {
 								modeloPiezasUsuario = new ModeloAlmacen(compra);
 								tablaUsuario.setModel(modeloPiezasUsuario);
 								System.out.println(lblPrecio.getText());
-								JOptionPane.showMessageDialog(null, lblPrecio.getText() + "€", "El precio total es",
+								JOptionPane.showMessageDialog(null, lblPrecio.getText() + "€", sPrecioTotal,
 										JOptionPane.INFORMATION_MESSAGE);
 								new Recibo_Compra(compra);
 								
 							}else {
-								JOptionPane.showMessageDialog(null, "Primero debe seleccionar las piezas", "Error", JOptionPane.WARNING_MESSAGE);
+								JOptionPane.showMessageDialog(null, sPrimeroDebesProducto, sError, JOptionPane.WARNING_MESSAGE);
 							}
 							
 				
@@ -312,18 +385,18 @@ public class PanelServicios extends JPanel {
 						
 						
 						botonRecursivad.addActionListener(c->{
-						double presupuesto= Double.parseDouble(JOptionPane.showInputDialog(null, "Inserte el prupuesto", "Presupuesto", JOptionPane.QUESTION_MESSAGE));
+						double presupuesto= Double.parseDouble(JOptionPane.showInputDialog(null, sInsertPresupuesto, sPresupuesto, JOptionPane.QUESTION_MESSAGE));
 						PanelAlmacen p1= panel1;
 						JComboBox<String>fa= new JComboBox<String>();
 						PanelAlmacen.cargarFabricantes(fa);
-						JOptionPane.showConfirmDialog(null, fa, "Elija un fabricante", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+						JOptionPane.showConfirmDialog(null, fa, sEligaFabricante, JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 						String sefa= (String) fa.getSelectedItem();
 						List<Pieza>piezas= p1.cargarTabla();
 						System.out.println(piezas);
 						//int posicion= Integer.parseInt(JOptionPane.showInputDialog(null, "Introduzca un numero", "Numero al azar para que aparezcan las piezas", JOptionPane.PLAIN_MESSAGE));
 						List<List<Pieza>>pi= combinaciones(piezas, presupuesto, sefa);
-						System.out.println( "El numero de piezas que hay son "+pi.size());
-						int pos=Integer.parseInt(JOptionPane.showInputDialog(null, "Elija un numero entre 0 y "+ pi.size(), "Eleccion",JOptionPane.PLAIN_MESSAGE ));
+						System.out.println( sElNPiezas+pi.size());
+						int pos=Integer.parseInt(JOptionPane.showInputDialog(null, sElijaNumero+ pi.size(), sEleccion,JOptionPane.PLAIN_MESSAGE ));
 						System.out.println(pos);
 						List<Pieza>compra= pi.get(pos);
 						System.out.println(compra);
@@ -333,7 +406,7 @@ public class PanelServicios extends JPanel {
 							totalLblPrecio= totalLblPrecio+compra.get(i).getPrecio();
 							
 						}
-						lblPrecio.setText(String.format("El precio total es de: %.2f €",totalLblPrecio));
+						lblPrecio.setText(String.format("%s %.2f €",sPrecioTotal,totalLblPrecio));
 							
 							
 						});

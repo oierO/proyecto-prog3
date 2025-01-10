@@ -15,6 +15,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.Set;
+
 import javax.swing.*;
 
 import javax.swing.border.TitledBorder;
@@ -25,6 +29,12 @@ public class VentanaGrafica extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private static String usuario;
+	private static Locale currentLocale;
+	private static ResourceBundle bundle;
+	private static String sTitulo;
+	private static String sNotificaciones,sHistorial,sValoraciones,sSoporte;
+	private static String[] lPreferencias;
+	private static String sOperaciones;
 
 	public static String getUsuario() {
 		return usuario;
@@ -36,27 +46,55 @@ public class VentanaGrafica extends JFrame {
 
 	protected JTable tablaPreguntas;
 
-	public VentanaGrafica(String usuario) {
+	public VentanaGrafica(String usuario,Locale locale) {
 		setSize(800, 500);
 		setLocationRelativeTo(null);
+		
 		setTitle("DeustoTaller");
 		JTabbedPane menuPestanas = new JTabbedPane();
 
 		setUsuario(usuario);
+		
+		// Idioma
+		currentLocale = locale;
+		bundle = ResourceBundle.getBundle("VentanaGraficaBundle",currentLocale);
+		System.out.println("---Bundle:---\n");
+		System.out.println(bundle);
+		Set<String> keys = bundle.keySet();
+		for (String key : keys) {
+		    String value = bundle.getString(key);
+		    System.out.println(key + " = " + value);
+		}
+
 
 		// Pestaña Parking
 		JPanel pParking = new PanelParking();
 		JPanel pUsuario = new PanelSesion(this); // Pasamos la referencia de la ventana gráfica
-
+		
 		// Pestaña Preferencias
-		String[] lPreferencias = new String[] { "Notificaciones", "Historial", "Valoraciones", "Soporte" };
+		try {
+			sNotificaciones = bundle.getString("sNotificaciones");
+		} catch (Exception e) {
+			System.out.println("Error");
+			sNotificaciones = "Notificaciones";
+		}
+		
+		sHistorial = "Historial";
+		sValoraciones = "Valoraciones";
+		sSoporte = "Soporte";
+		
+		lPreferencias = new String[] { sNotificaciones, sHistorial, sValoraciones, sSoporte };
+		
+		
 		JPanel pSettings = new JPanel();
 		pSettings.setLayout(new BorderLayout());
 
 		// Panel de botones de la izquierda
 		JPanel botonesPrefer = new JPanel();
 		botonesPrefer.setLayout(new GridLayout(lPreferencias.length, 1));
-		botonesPrefer.setBorder(new TitledBorder("Operaciones"));
+		
+		sOperaciones = "Operaciones";
+		botonesPrefer.setBorder(new TitledBorder(sOperaciones));
 		pSettings.add(botonesPrefer, BorderLayout.WEST);
 
 		// Panel derecho
@@ -70,7 +108,7 @@ public class VentanaGrafica extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					String operacion = botonPref.getText();
 					panelDerechoPreferencias.removeAll();
-					if (operacion.equals("Valoraciones")) {
+					if (operacion.equals(lPreferencias[2])) {
 						// Pestañas de Valoracion
 						JTabbedPane pestanaValoracion = new JTabbedPane();
 
@@ -160,7 +198,7 @@ public class VentanaGrafica extends JFrame {
 
 						panelDerechoPreferencias.add(pestanaValoracion);
 
-					} else if (operacion.equals("Soporte")) {
+					} else if (operacion.equals(lPreferencias[3])) {
 						// Panel para la sección de Soporte
 						JTabbedPane pestanaSoporte = new JTabbedPane();
 
@@ -340,7 +378,7 @@ public class VentanaGrafica extends JFrame {
 			botonesPrefer.add(botonPref);
 		}
 
-		menuPestanas.add("Servicios", new PanelServicios());
+		menuPestanas.add("Servicios", new PanelServicios(currentLocale));
 		menuPestanas.add("Almacen", new PanelAlmacen());
 		menuPestanas.add("Parking", pParking);
 		menuPestanas.add("Preferencias", pSettings);
