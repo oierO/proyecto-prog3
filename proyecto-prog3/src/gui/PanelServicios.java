@@ -17,6 +17,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -40,6 +41,7 @@ public class PanelServicios extends JPanel {
 	private ArrayList<String> serviciosDisponiblesNombre;
 	private ArrayList<ServicioDisponible> listaDeServiciosDisponibles;
 	private ArrayList<PedidoServicios> listaPedidoServicios;
+	private ArrayList<Pieza> compra;
 	private String idioma;
 	private JLabel lblPrecio;
 	private float totalLblPrecio;
@@ -68,6 +70,7 @@ public class PanelServicios extends JPanel {
 		for (ServicioDisponible servicioDisponible : listaDeServiciosDisponibles) {
 			serviciosDisponiblesNombre.add(servicioDisponible.getNom_ser());
 		}
+		
 
 		// Datos de prueba
 //		serviciosDisponiblesNombre.add("Cambio de aceite y filtro");
@@ -200,7 +203,7 @@ public class PanelServicios extends JPanel {
 						panelPiezas.add(pCentro, BorderLayout.CENTER);
 						PanelAlmacen panel1 = new PanelAlmacen();
 
-						ArrayList<Pieza> compra = new ArrayList<Pieza>();
+						compra = new ArrayList<Pieza>();
 						modeloPiezasUsuario = new ModeloAlmacen(compra);
 						JTable tablaUsuario = new JTable(modeloPiezasUsuario);
 						JScrollPane scrollUsuario = new JScrollPane(tablaUsuario);
@@ -289,20 +292,21 @@ public class PanelServicios extends JPanel {
 
 						});
 						botonFinalizar.addActionListener(c -> {
-							int i = 0;
-							float precioTotal = 0;
-							while (i < compra.size()) {
-								Pieza p = compra.get(i);
-								precioTotal = precioTotal + (p.getPrecio() * p.getCantidadAlmacen());
-								panel1.updateBD(p);
-								panel1.refrescar();
-								compra.remove(i);
-
+							if(!compra.isEmpty()) {
+								modeloPiezasUsuario = new ModeloAlmacen(compra);
+								tablaUsuario.setModel(modeloPiezasUsuario);
+								System.out.println(lblPrecio.getText());
+								JOptionPane.showMessageDialog(null, lblPrecio.getText() + "€", "El precio total es",
+										JOptionPane.INFORMATION_MESSAGE);
+								new Recibo_Compra(compra);
+								
+							}else {
+								JOptionPane.showMessageDialog(null, "Primero debe seleccionar las piezas", "Error", JOptionPane.WARNING_MESSAGE);
 							}
-							modeloPiezasUsuario = new ModeloAlmacen(compra);
-							tablaUsuario.setModel(modeloPiezasUsuario);
-							JOptionPane.showMessageDialog(null, precioTotal + "€", "El precio total es",
-									JOptionPane.INFORMATION_MESSAGE);
+							
+				
+							
+							
 
 						});
 						
@@ -318,7 +322,18 @@ public class PanelServicios extends JPanel {
 						System.out.println(piezas);
 						//int posicion= Integer.parseInt(JOptionPane.showInputDialog(null, "Introduzca un numero", "Numero al azar para que aparezcan las piezas", JOptionPane.PLAIN_MESSAGE));
 						List<List<Pieza>>pi= combinaciones(piezas, presupuesto, sefa);
-						System.out.println(pi);
+						System.out.println( "El numero de piezas que hay son "+pi.size());
+						int pos=Integer.parseInt(JOptionPane.showInputDialog(null, "Elija un numero entre 0 y "+ pi.size(), "Eleccion",JOptionPane.PLAIN_MESSAGE ));
+						System.out.println(pos);
+						List<Pieza>compra= pi.get(pos);
+						System.out.println(compra);
+						modeloPiezasUsuario= new ModeloAlmacen(compra);
+						tablaUsuario.setModel(modeloPiezasUsuario);
+						for(int i=0;i<compra.size();i++) {
+							totalLblPrecio= totalLblPrecio+compra.get(i).getPrecio();
+							
+						}
+						lblPrecio.setText(String.format("El precio total es de: %.2f €",totalLblPrecio));
 							
 							
 						});
