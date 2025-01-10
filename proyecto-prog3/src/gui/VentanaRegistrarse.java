@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.Locale;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -33,8 +34,10 @@ public class VentanaRegistrarse extends JFrame {
 	private JLabel lblTitulo, lblNombre, lblApellido, lblDni, lblUsuario, lblContrasenia;
 	private JTextField textNombre, textApellido, textDni, textUsuario;
 	private JPasswordField textContrasenia;
-
-	public VentanaRegistrarse() {
+	private Locale locale;
+	
+	public VentanaRegistrarse(Locale localeRecibido) {
+		locale = localeRecibido;
 		pCentro = new JPanel(new GridLayout(5, 1));
 		pSur = new JPanel();
 		pNorte = new JPanel();

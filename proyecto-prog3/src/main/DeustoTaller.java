@@ -21,6 +21,7 @@ public class DeustoTaller {
 	private static VentanaInicioSesion VSesion;
 	public static Boolean debug;
 
+	
 	public static void main(String[] args) {
 		System.out.println(toTimeStamp(LocalDateTime.now()));
 		try {
@@ -56,6 +57,8 @@ public class DeustoTaller {
 		};
 		comprobarBD.start();
 		SwingUtilities.invokeLater(() -> VSesion = new VentanaInicioSesion());
+		
+		
 	}
 
 	private static void conectarBD() {

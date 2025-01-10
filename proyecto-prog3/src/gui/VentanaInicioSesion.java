@@ -6,15 +6,21 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -35,7 +41,7 @@ public class VentanaInicioSesion extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel pCentro, pSur, pNorte, pEste, pOeste, ptextUsuario, pTextContrasenia;
 	private JButton btnIniciarSesion, btnCerrarSesion, btnRegistrarse;
-	private JLabel lblTitulo, lblUsuario, lblContrasenia;
+	private JLabel lblTitulo, lblUsuario, lblContrasenia,lblIdioma;
 	public static Font fuenteTitulo = new Font("Bahnschrift", Font.BOLD, 30);
 	private JTextField textUsuario;
 	private JPasswordField textContrasenia;
@@ -43,9 +49,15 @@ public class VentanaInicioSesion extends JFrame {
 	public static Thread cargarHilo;
 	private JDialog progressDialog;
 	private int progreso;
+	
+	 private ResourceBundle bundle;
+	   private Locale currentLocale;
 
-	public VentanaInicioSesion() {
-
+	public VentanaInicioSesion() {	
+		//idioma por defecto
+		currentLocale = Locale.getDefault();
+		bundle= ResourceBundle.getBundle("VentanaInicioSesionBundle", currentLocale);
+	
 		pCentro = new JPanel(new GridLayout(4, 1));
 		pSur = new JPanel();
 		pNorte = new JPanel();
@@ -54,34 +66,71 @@ public class VentanaInicioSesion extends JFrame {
 		ptextUsuario = new JPanel(new GridLayout(2, 1));
 		pTextContrasenia = new JPanel(new GridLayout(2, 1));
 
-		lblTitulo = new JLabel("DeustoTaller");
+		// labels 
+		lblTitulo = new JLabel(bundle.getString("lblTitulo"));
+		lblUsuario = new JLabel(bundle.getString("lblUsuario"));
+		lblContrasenia = new JLabel(bundle.getString("lblContrasenia"));
+		lblIdioma = new JLabel(bundle.getString("lblIdioma"));
+		
+	//Opciones del idioma
+
+		String[] idiomas = {"Español","English","中文" };
+        
+        JComboBox<String> comboBox = new JComboBox<>(idiomas);
+        
+        comboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtener la opción seleccionada
+                String seleccion = (String) comboBox.getSelectedItem();
+                System.out.println("Seleccionaste: " + seleccion);
+               
+                if(seleccion.equals("Español")) {
+                	currentLocale = Locale.getDefault();
+                } else if (seleccion.equals("English")) {
+                	currentLocale = new Locale.Builder().setLanguage("en").setRegion("US").build();
+				} else if (seleccion.equals("中文")) {
+					currentLocale = new Locale.Builder().setLanguage("zh").setRegion("ZH").build();
+				}
+                
+                updateTexts();
+                
+            }
+        });
+        
+		
 		lblTitulo.setIcon(new ImageIcon("resources/images/app-icon.png"));
-		lblUsuario = new JLabel("Usuario");
+		
 		Image img = new ImageIcon("resources/images/user.png").getImage();
 		img = img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		lblUsuario.setIcon(new ImageIcon(img));
-		lblContrasenia = new JLabel("Contraseña");
+
 		img = new ImageIcon("resources/images/pass.png").getImage();
 		img = img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		lblContrasenia.setIcon(new ImageIcon(img));
-
-		btnCerrarSesion = new JButton("Cerrar sesion");
-		btnIniciarSesion = new JButton("Iniciar sesion");
-		btnRegistrarse = new JButton("Registrarse");
+		
+		//Botones
+		btnCerrarSesion = new JButton(bundle.getString("btnCerrarSesion"));
+		btnIniciarSesion = new JButton(bundle.getString("btnIniciarSesion"));
+		btnRegistrarse = new JButton(bundle.getString("btnRegistrarse"));
 
 		lblTitulo.setFont(fuenteTitulo);
 		lblTitulo.setOpaque(true);
 		lblTitulo.setBackground(new Color(136, 174, 208));
 		lblTitulo.setBorder(BorderFactory.createRaisedBevelBorder());
 		pNorte.add(lblTitulo);
+		pNorte.add(lblIdioma);
+		pNorte.add(comboBox);
 
-		Font fuentebtn = new Font("Bahnschrift", Font.BOLD, 16);
-		lblUsuario.setFont(fuentebtn);
-		lblContrasenia.setFont(fuentebtn);
-		btnCerrarSesion.setFont(fuentebtn);
-		btnCerrarSesion.setVisible(false);
-		btnIniciarSesion.setFont(fuentebtn);
-		btnRegistrarse.setFont(fuentebtn);
+		//Al poner funte no entra las letras en chino 
+		
+//		Font fuentebtn = new Font("Bahnschrift", Font.BOLD, 16);
+//		lblUsuario.setFont(fuentebtn);
+//		lblContrasenia.setFont(fuentebtn);
+//		btnCerrarSesion.setFont(fuentebtn);
+//		btnCerrarSesion.setVisible(false);
+//		btnIniciarSesion.setFont(fuentebtn);
+//		btnRegistrarse.setFont(fuentebtn);
 
 		getContentPane().add(pCentro, BorderLayout.CENTER);
 		getContentPane().add(pSur, BorderLayout.SOUTH);
@@ -125,7 +174,8 @@ public class VentanaInicioSesion extends JFrame {
 
 		pSur.add(btnRegistrarse);
 		btnRegistrarse.addActionListener((e) -> {
-			new VentanaRegistrarse();
+			new VentanaRegistrarse(currentLocale);
+			System.out.println(currentLocale);
 			dispose();
 
 		});
@@ -262,4 +312,15 @@ public class VentanaInicioSesion extends JFrame {
 	public static Thread getCargarHilo() {
 		return cargarHilo;
 	}
+	
+	private void updateTexts() {
+		bundle= ResourceBundle.getBundle("VentanaInicioSesionBundle", currentLocale);
+		lblTitulo.setText(bundle.getString("lblTitulo"));
+		lblIdioma.setText(bundle.getString("lblIdioma"));
+		lblUsuario.setText(bundle.getString("lblUsuario"));
+		lblContrasenia.setText(bundle.getString("lblContrasenia"));
+		btnCerrarSesion.setText(bundle.getString("btnCerrarSesion"));
+		btnIniciarSesion.setText(bundle.getString("btnIniciarSesion"));
+		btnRegistrarse.setText(bundle.getString("btnRegistrarse"));
+    }
 }
