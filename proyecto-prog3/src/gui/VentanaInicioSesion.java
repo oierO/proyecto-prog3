@@ -51,11 +51,11 @@ public class VentanaInicioSesion extends JFrame {
 	private int progreso;
 	
 	 private ResourceBundle bundle;
-	   private Locale currentLocale;
+	  private Locale currentLocale;
 
-	public VentanaInicioSesion() {	
+	public VentanaInicioSesion(Locale locale) {	
 		//idioma por defecto
-		currentLocale = Locale.getDefault();
+		currentLocale = locale;
 		bundle= ResourceBundle.getBundle("VentanaInicioSesionBundle", currentLocale);
 	
 		pCentro = new JPanel(new GridLayout(4, 1));
@@ -76,13 +76,13 @@ public class VentanaInicioSesion extends JFrame {
 
 		String[] idiomas = {"Español","English","中文" };
         
-        JComboBox<String> comboBox = new JComboBox<>(idiomas);
+        JComboBox<String> idiomaBox = new JComboBox<>(idiomas);
         
-        comboBox.addActionListener(new ActionListener() {
+        idiomaBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Obtener la opción seleccionada
-                String seleccion = (String) comboBox.getSelectedItem();
+                String seleccion = (String) idiomaBox.getSelectedItem();
                 System.out.println("Seleccionaste: " + seleccion);
                
                 if(seleccion.equals("Español")) {
@@ -92,13 +92,16 @@ public class VentanaInicioSesion extends JFrame {
 				} else if (seleccion.equals("中文")) {
 					currentLocale = new Locale.Builder().setLanguage("zh").setRegion("ZH").build();
 				}
-                
+                System.out.println(currentLocale);
+                System.out.println("Idioma: "+ currentLocale.getLanguage());
+                System.out.println("Pais: "+ currentLocale.getCountry());
                 updateTexts();
                 
             }
         });
         
-		
+
+        
 		lblTitulo.setIcon(new ImageIcon("resources/images/app-icon.png"));
 		
 		Image img = new ImageIcon("resources/images/user.png").getImage();
@@ -113,6 +116,15 @@ public class VentanaInicioSesion extends JFrame {
 		btnCerrarSesion = new JButton(bundle.getString("btnCerrarSesion"));
 		btnIniciarSesion = new JButton(bundle.getString("btnIniciarSesion"));
 		btnRegistrarse = new JButton(bundle.getString("btnRegistrarse"));
+		
+		//Cuando se cierra VentanaRegistrarse esta ventana queda con el idoma que estaba seleccionado
+		if(currentLocale.getLanguage().equals("es")) {
+			idiomaBox.setSelectedItem("Español");
+		} else if (currentLocale.getLanguage().equals("en")) {
+			idiomaBox.setSelectedItem("English");
+		} else if (currentLocale.getLanguage().equals("zh")) {
+			idiomaBox.setSelectedItem("中文");
+		}
 
 		lblTitulo.setFont(fuenteTitulo);
 		lblTitulo.setOpaque(true);
@@ -120,7 +132,7 @@ public class VentanaInicioSesion extends JFrame {
 		lblTitulo.setBorder(BorderFactory.createRaisedBevelBorder());
 		pNorte.add(lblTitulo);
 		pNorte.add(lblIdioma);
-		pNorte.add(comboBox);
+		pNorte.add(idiomaBox);
 
 		//Al poner funte no entra las letras en chino 
 		

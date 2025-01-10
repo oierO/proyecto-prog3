@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -34,10 +35,11 @@ public class VentanaRegistrarse extends JFrame {
 	private JLabel lblTitulo, lblNombre, lblApellido, lblDni, lblUsuario, lblContrasenia;
 	private JTextField textNombre, textApellido, textDni, textUsuario;
 	private JPasswordField textContrasenia;
-	private Locale locale;
+	private Locale currentLocale;
+	private ResourceBundle bundle;
 	
-	public VentanaRegistrarse(Locale localeRecibido) {
-		locale = localeRecibido;
+	public VentanaRegistrarse(Locale locale) {
+		
 		pCentro = new JPanel(new GridLayout(5, 1));
 		pSur = new JPanel();
 		pNorte = new JPanel();
@@ -48,21 +50,29 @@ public class VentanaRegistrarse extends JFrame {
 		ptextDni = new JPanel(new GridLayout(2, 1));
 		ptextUsuario = new JPanel(new GridLayout(2, 1));
 		pTextContrasenia = new JPanel(new GridLayout(2, 1));
-
-		lblTitulo = new JLabel("DEUSTO TALLER");
+		
+		//Idioma
+		currentLocale = locale;
+		bundle = ResourceBundle.getBundle("VentanaRegistrarseBundle",currentLocale);
+		
+		// labels
+		lblTitulo = new JLabel(bundle.getString("lblTitulo"));
+		lblNombre = new JLabel(bundle.getString("lblNombre"));
+		lblApellido = new JLabel(bundle.getString("lblApellido"));
+		lblDni = new JLabel(bundle.getString("lblDni"));
+		lblUsuario = new JLabel(bundle.getString("lblUsuario"));
+		lblContrasenia = new JLabel(bundle.getString("lblContrasenia"));
+		
+		//Botones
+		btnRegistrar = new JButton(bundle.getString("btnRegistrar"));
+		btnCancelar = new JButton(bundle.getString("btnCancelar"));
+		
+		
 		lblTitulo.setIcon(new ImageIcon("resources/images/app-icon.png"));
 		lblTitulo.setFont(VentanaInicioSesion.fuenteTitulo);
 		lblTitulo.setOpaque(true);
 		lblTitulo.setBackground(new Color(136, 174, 208));
 		lblTitulo.setBorder(BorderFactory.createRaisedBevelBorder());
-		lblNombre = new JLabel("Nombre:");
-		lblApellido = new JLabel("Apellido:");
-		lblDni = new JLabel("Dni:");
-		lblUsuario = new JLabel("Usuario:");
-		lblContrasenia = new JLabel("Contraseña:");
-
-		btnRegistrar = new JButton("Registrar");
-		btnCancelar = new JButton("Cancelar");
 
 		textNombre = new JTextField();
 		textApellido = new JTextField();
@@ -106,7 +116,7 @@ public class VentanaRegistrarse extends JFrame {
 		pCentro.add(pTextContrasenia);
 
 		btnCancelar.addActionListener((e) -> {
-			new VentanaInicioSesion();
+			new VentanaInicioSesion(currentLocale);
 			dispose();
 		});
 

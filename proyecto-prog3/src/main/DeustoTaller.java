@@ -20,7 +20,7 @@ public class DeustoTaller {
 	private static String locDB;
 	private static VentanaInicioSesion VSesion;
 	public static Boolean debug;
-
+	private static Locale locale;
 	
 	public static void main(String[] args) {
 		System.out.println(toTimeStamp(LocalDateTime.now()));
@@ -56,7 +56,8 @@ public class DeustoTaller {
 
 		};
 		comprobarBD.start();
-		SwingUtilities.invokeLater(() -> VSesion = new VentanaInicioSesion());
+		locale = Locale.getDefault();
+		SwingUtilities.invokeLater(() -> VSesion = new VentanaInicioSesion(locale));
 		
 		
 	}
