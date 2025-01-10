@@ -69,7 +69,7 @@ public class VentanaGrafica extends JFrame {
 
 		// Pestaña Parking
 		JPanel pParking = new PanelParking();
-		JPanel pUsuario = new PanelSesion(this); // Pasamos la referencia de la ventana gráfica
+		JPanel pUsuario = new PanelSesion(this,currentLocale); // Pasamos la referencia de la ventana gráfica
 		
 		// Pestaña Preferencias
 		try {

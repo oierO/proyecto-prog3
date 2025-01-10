@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
@@ -17,10 +19,20 @@ import main.DeustoTaller;
 
 public class PanelSesion extends JPanel {
 	private static final long serialVersionUID = 1L;
-
-	public PanelSesion(JFrame ventanaGrafica) {
+	private Locale currentLocale;
+	private ResourceBundle bundle;	
+	private JLabel saludo,ultimaSesion,labelUsernameTitulo,labelNombreTitulo,labelApellidoTitulo;
+	private JLabel labelVehiculosTitulo,sinVehiculos;
+	private JButton botonGestor;
+	
+	
+	public PanelSesion(JFrame ventanaGrafica,Locale locale) {
+		//Idioma
+		currentLocale = locale;
+		bundle = ResourceBundle.getBundle("PanelSesionBundle",currentLocale);
+		
 		// Fuente grande para todo el texto
-		Font fuenteGrande = new Font("Arial", Font.PLAIN, 18);
+//		Font fuenteGrande = new Font("Arial", Font.PLAIN, 18);
 
 		// Configurar el diseño principal como BorderLayout
 		setLayout(new BorderLayout());
@@ -31,20 +43,20 @@ public class PanelSesion extends JPanel {
 		// **Parte superior (NORTH): Saludo, última sesión y botón**
 		JPanel panelSuperior = new JPanel();
 		panelSuperior.setLayout(new BoxLayout(panelSuperior, BoxLayout.Y_AXIS)); // Apilado vertical
-		JLabel saludo = new JLabel("¡Hola, " + usuario.getNombre() + "!");
-		saludo.setFont(fuenteGrande);
+		saludo = new JLabel(bundle.getString("saludo") + usuario.getNombre() + "!");
+//		saludo.setFont(fuenteGrande);
 		saludo.setAlignmentX(CENTER_ALIGNMENT);
 		panelSuperior.add(saludo);
 
 		String ultimaSesionTexto = usuario.gethUltimaSesion()
 				.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
-		JLabel ultimaSesion = new JLabel("Último inicio de sesión: " + ultimaSesionTexto);
-		ultimaSesion.setFont(fuenteGrande);
+		ultimaSesion = new JLabel(bundle.getString("ultimaSesion") + ultimaSesionTexto);
+//		ultimaSesion.setFont(fuenteGrande);
 		ultimaSesion.setAlignmentX(CENTER_ALIGNMENT);
 		panelSuperior.add(ultimaSesion);
 
-		JButton botonGestor = new JButton("Acceder al gestor de sesión");
-		botonGestor.setFont(fuenteGrande);
+		botonGestor = new JButton(bundle.getString("botonGestor"));
+//		botonGestor.setFont(fuenteGrande);
 		botonGestor.setAlignmentX(CENTER_ALIGNMENT);
 		botonGestor.addActionListener(e -> {
 			DeustoTaller.getVSesion().openGestor(); // Abrir el gestor
@@ -63,11 +75,11 @@ public class PanelSesion extends JPanel {
 		JPanel panelUsername = new JPanel();
 		panelUsername.setLayout(new BoxLayout(panelUsername, BoxLayout.X_AXIS)); // Diseño horizontal
 
-		JLabel labelUsernameTitulo = new JLabel("Username: "); // Etiqueta del título
-		labelUsernameTitulo.setFont(new Font("Arial", Font.BOLD, 18)); // Fuente en negrita
+		labelUsernameTitulo = new JLabel(bundle.getString("labelUsernameTitulo")); // Etiqueta del título
+//		labelUsernameTitulo.setFont(new Font("Arial", Font.BOLD, 18)); // Fuente en negrita
 
 		JLabel labelUsernameValor = new JLabel(usuario.getUsername()); // Etiqueta del valor
-		labelUsernameValor.setFont(new Font("Arial", Font.PLAIN, 18)); // Fuente normal
+//		labelUsernameValor.setFont(new Font("Arial", Font.PLAIN, 18)); // Fuente normal
 
 		panelUsername.add(labelUsernameTitulo);
 		panelUsername.add(labelUsernameValor);
@@ -77,11 +89,11 @@ public class PanelSesion extends JPanel {
 		JPanel panelNombre = new JPanel();
 		panelNombre.setLayout(new BoxLayout(panelNombre, BoxLayout.X_AXIS));
 
-		JLabel labelNombreTitulo = new JLabel("Nombre: ");
-		labelNombreTitulo.setFont(new Font("Arial", Font.BOLD, 18));
+		labelNombreTitulo = new JLabel(bundle.getString("labelNombreTitulo"));
+//		labelNombreTitulo.setFont(new Font("Arial", Font.BOLD, 18));
 
 		JLabel labelNombreValor = new JLabel(usuario.getNombre());
-		labelNombreValor.setFont(new Font("Arial", Font.PLAIN, 18));
+//		labelNombreValor.setFont(new Font("Arial", Font.PLAIN, 18));
 
 		panelNombre.add(labelNombreTitulo);
 		panelNombre.add(labelNombreValor);
@@ -91,11 +103,11 @@ public class PanelSesion extends JPanel {
 		JPanel panelApellido = new JPanel();
 		panelApellido.setLayout(new BoxLayout(panelApellido, BoxLayout.X_AXIS));
 
-		JLabel labelApellidoTitulo = new JLabel("Apellido: ");
-		labelApellidoTitulo.setFont(new Font("Arial", Font.BOLD, 18));
+		labelApellidoTitulo = new JLabel(bundle.getString("labelApellidoTitulo"));
+//		labelApellidoTitulo.setFont(new Font("Arial", Font.BOLD, 18));
 
 		JLabel labelApellidoValor = new JLabel(usuario.getApellido());
-		labelApellidoValor.setFont(new Font("Arial", Font.PLAIN, 18));
+//		labelApellidoValor.setFont(new Font("Arial", Font.PLAIN, 18));
 
 		panelApellido.add(labelApellidoTitulo);
 		panelApellido.add(labelApellidoValor);
@@ -105,16 +117,16 @@ public class PanelSesion extends JPanel {
 		JPanel panelVehiculosTitulo = new JPanel();
 		panelVehiculosTitulo.setLayout(new BoxLayout(panelVehiculosTitulo, BoxLayout.X_AXIS));
 
-		JLabel labelVehiculosTitulo = new JLabel("Vehículos: ");
-		labelVehiculosTitulo.setFont(new Font("Arial", Font.BOLD, 18));
+		labelVehiculosTitulo = new JLabel(bundle.getString("labelVehiculosTitulo"));
+//		labelVehiculosTitulo.setFont(new Font("Arial", Font.BOLD, 18));
 		panelVehiculosTitulo.add(labelVehiculosTitulo);
 		panelCentral.add(panelVehiculosTitulo);
 
 		// Listar los vehículos
 		List<Vehiculo> vehiculos = usuario.getVehiculos();
 		if (vehiculos.isEmpty()) {
-		    JLabel sinVehiculos = new JLabel("No hay vehículos registrados.");
-		    sinVehiculos.setFont(new Font("Arial", Font.PLAIN, 18));
+		    sinVehiculos = new JLabel(bundle.getString("sinVehiculos"));
+//		    sinVehiculos.setFont(new Font("Arial", Font.PLAIN, 18));
 		    panelCentral.add(sinVehiculos);
 		} else {
 			JPanel panelVehiculo = new JPanel();
