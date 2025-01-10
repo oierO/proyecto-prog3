@@ -15,6 +15,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import javax.swing.JButton;
@@ -43,18 +45,25 @@ public class PanelAlmacen extends JPanel {
 	private JTextField txtFiltro;
 	private JComboBox<String> cbTipo, cbFabricante;
 	private JLabel lbltxtFiltro, lblcbTipo, lblcbFabricante;
-
-	public PanelAlmacen() {
+	private Locale currentLocale;
+	private ResourceBundle bundle;
+	private JButton botonBorrarFiltrado;
+	
+	public PanelAlmacen(Locale locale) {
 		this.setLayout(new BorderLayout());
 		JPanel pTabla = new JPanel();
 		JPanel panelFiltro = new JPanel(new FlowLayout());
+		
+		//Idioma
+		currentLocale = locale;
+		bundle = ResourceBundle.getBundle("PanelAlmacenBundle",currentLocale);
 
-		lbltxtFiltro = new JLabel("Descripción: ");
+		lbltxtFiltro = new JLabel(bundle.getString("lbltxtFiltro"));
 		panelFiltro.add(lbltxtFiltro);
 		txtFiltro = new JTextField(5);
 		panelFiltro.add(txtFiltro);
 
-		lblcbTipo = new JLabel("Tipo: ");
+		lblcbTipo = new JLabel(bundle.getString("lblcbTipo"));
 		panelFiltro.add(lblcbTipo);
 
 		// Creando combobox
@@ -68,11 +77,11 @@ public class PanelAlmacen extends JPanel {
 
 		panelFiltro.add(cbTipo);
 
-		lblcbFabricante = new JLabel("Fabricante: ");
+		lblcbFabricante = new JLabel(bundle.getString("lblcbFabricante"));
 		panelFiltro.add(lblcbFabricante);
 
 		panelFiltro.add(cbFabricante);
-		JButton botonBorrarFiltrado = new JButton("Borrar filtrado");
+		botonBorrarFiltrado = new JButton(bundle.getString("botonBorrarFiltrado"));
 		panelFiltro.add(botonBorrarFiltrado);
 		modeloTabla = new ModeloAlmacen(null);
 		tabla = new JTable(modeloTabla);

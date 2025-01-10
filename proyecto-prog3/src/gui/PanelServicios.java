@@ -274,7 +274,7 @@ public class PanelServicios extends JPanel {
 						panelPiezas.setLayout(new BorderLayout());
 						JPanel pCentro = new JPanel(new GridLayout(2, 1));
 						panelPiezas.add(pCentro, BorderLayout.CENTER);
-						PanelAlmacen panel1 = new PanelAlmacen();
+						PanelAlmacen panel1 = new PanelAlmacen(currentLocale);
 
 						compra = new ArrayList<Pieza>();
 						modeloPiezasUsuario = new ModeloAlmacen(compra);

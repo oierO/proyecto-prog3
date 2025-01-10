@@ -379,7 +379,7 @@ public class VentanaGrafica extends JFrame {
 		}
 
 		menuPestanas.add("Servicios", new PanelServicios(currentLocale));
-		menuPestanas.add("Almacen", new PanelAlmacen());
+		menuPestanas.add("Almacen", new PanelAlmacen(currentLocale));
 		menuPestanas.add("Parking", pParking);
 		menuPestanas.add("Preferencias", pSettings);
 		menuPestanas.add("Sesión", pUsuario);
