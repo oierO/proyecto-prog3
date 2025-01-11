@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.swing.*;
 
+import db.ConsultasParking;
 import domain.*;
 import main.DeustoTaller;
 
@@ -36,15 +37,14 @@ public class PanelParking extends JPanel {
 	private String splazaSeleccion;
 	private JButton bLiberar;
 	private JButton bModificar;
-	private PlazaParking plazaSel;
-	private DateTimeFormatter formateador = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	private static PlazaParking plazaSel;
 	protected static HashMap<String, HashMap<String, PlazaParking>> mapaParkings = new HashMap<String, HashMap<String, PlazaParking>>();
 	static ArrayList<JToggleButton> plazasGraficas = new ArrayList<>();
 	private static final List<String> plantasParking = List.of("P1", "P2", "P3");
 	private Locale currentLocale;
-	private ResourceBundle bundle;
+	private static ResourceBundle bundle;
 	private JLabel estadoLabel,plantaLabel,plazaLabel,matriculaLabel,finLabel,tiempoLabel;
-	private String sLibre,sPlaza,sLibre2,sOcupado,sPlazaNoDisp,sReservar,sPlazaLiberada,sErrorLiberar,sSi,sNo,sCancelar,sOk;
+	private static String sLibre,sPlaza,sLibre2,sOcupado,sPlazaNoDisp,sReservar,sSi,sNo,sCancelar,sOk;
 
 	public PanelParking(Locale locale) {
 		for (String planta : getPlantasparking()) {
@@ -67,8 +67,6 @@ public class PanelParking extends JPanel {
 		sOcupado = bundle.getString("sOcupado");
 		sPlazaNoDisp = bundle.getString("sPlazaNoDisp");
 		sReservar = bundle.getString("sReservar");
-		sPlazaLiberada = bundle.getString("sPlazaLiberada");
-		sErrorLiberar = bundle.getString("sErrorLiberar");
 		sSi = bundle.getString("sSi");
 		sNo = bundle.getString("sNo");
 		sCancelar = bundle.getString("sCancelar");
@@ -187,6 +185,9 @@ public class PanelParking extends JPanel {
 		add(informacion, BorderLayout.WEST);
 
 	}
+	public static String getLocalized(String texto) {
+		return bundle.getString(texto);
+		}
 
 	public void cambioSeleccionPl(String codPlaza) {
 		plazaSel = RendererParking.plazafromBD(codPlaza, (String) plantas.getSelectedItem());
@@ -243,18 +244,12 @@ public class PanelParking extends JPanel {
 		}
 	}
 
+	public static PlazaParking getPlazaSel() { 
+		return plazaSel;
+	}
+	
 	private void liberarPlaza() {
-		try {
-			String sql = "DELETE FROM RESERVA_PARKING WHERE planta=? AND identificador=? AND caducidad=?";
-			PreparedStatement stmt = DeustoTaller.getCon().prepareStatement(sql);
-			stmt.setString(1, plazaSel.getPlanta());
-			stmt.setString(2, plazaSel.getIdentificador());
-			stmt.setString(3, plazaSel.getFechaCaducidad().format(formateador));
-			stmt.executeUpdate();
-			JOptionPane.showMessageDialog(this, sPlazaLiberada);
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(this, sErrorLiberar + e.getLocalizedMessage());
-		}
+		ConsultasParking.liberarPlaza();
 	}
 
 }
