@@ -2,14 +2,10 @@ package gui;
 
 import java.awt.FlowLayout;
 
-import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -39,7 +35,7 @@ public class ReservaParking extends JDialog {
 	private static final double TARIFA_HORA = 5.5;
 	private Locale currentLocale;
 	private static ResourceBundle bundle;
-	private String sTitulo,sNoAcept,sConfirmidad,sReserPlaza,sEnLa,sRerserBien,sReserMal,sError;
+	private String sTitulo,sNoAcept,sConfirmidad,sReserPlaza,sEnLa;
 	private JLabel textVehiculo,fechaLabel;
 	private JButton bReservar,bCancelar;
 	private JCheckBox conformidad;
@@ -55,9 +51,6 @@ public class ReservaParking extends JDialog {
 		fechaLabel = new JLabel(bundle.getString("fechaLabel"));
 		sReserPlaza = bundle.getString("sReserPlaza");
 		sEnLa = bundle.getString("sEnLa");
-		sRerserBien = bundle.getString("sRerserBien");
-		sReserMal = bundle.getString("sReserMal");
-		sError = bundle.getString("sError");
 		
 		ReservaParking.planta = plantarec;
 		ReservaParking.plaza = plazarec;

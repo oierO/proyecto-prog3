@@ -1,11 +1,15 @@
 package db;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.format.DateTimeFormatter;
 
 import javax.swing.JOptionPane;
 
+import domain.PlazaParking;
 import domain.Vehiculo;
 import main.DeustoTaller;
 import gui.PanelParking;
@@ -47,5 +51,42 @@ public class ConsultasParking {
 					ReservaParking.getLocalized("sError"), JOptionPane.ERROR_MESSAGE);
 		}
 
+	}
+	
+	public static ResultSet obtenerResultPlaza(String plaza, String planta) {
+		try {
+			String sql = String.format("SELECT * FROM RESERVAS_VIGENTES WHERE planta='%s' AND identificador='%s'",
+					planta, plaza);
+			Connection con = DeustoTaller.getCon();
+			Statement stm = con.createStatement();
+			ResultSet resultado = stm.executeQuery(sql);
+			return resultado;
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(DeustoTaller.getVSesion().getContentPane(),
+					"Ha ocurrido un error al acceder a la base de datos\n" + e);
+			return null;
+		}
+	}
+	
+	public static PlazaParking plazafromBD(String plaza, String planta) {
+		ResultSet resultado = obtenerResultPlaza(plaza, planta);
+		try {
+			String sql1 = "SELECT * FROM VEHICULO WHERE matricula=?";
+			PreparedStatement stmt = DeustoTaller.getCon().prepareStatement(sql1);
+			stmt.setString(1, resultado.getString("vehiculo"));
+			ResultSet vResult = stmt.executeQuery();
+			Vehiculo vehicle = Vehiculo.fromResultSet(vResult);
+			PlazaParking pParking = new PlazaParking(planta, plaza, vehicle,
+					resultado.getTimestamp("caducidad").toLocalDateTime());
+			resultado.getStatement().close();
+			stmt.close();
+			return pParking;
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(DeustoTaller.getVSesion().getContentPane(),
+					"Ha ocurrido un error al tratar la base de datos\n" + e);
+			return null;
+		} catch (NullPointerException e) {
+			return null;
+		}
 	}
 }
