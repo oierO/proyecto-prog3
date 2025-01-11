@@ -30,6 +30,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 import main.DeustoTaller;
 
@@ -49,15 +50,40 @@ public class VentanaInicioSesion extends JFrame {
 	public static Thread cargarHilo;
 	private JDialog progressDialog;
 	private int progreso;
+	private ResourceBundle bundle;
+	private Locale currentLocale;
+	private static String sErrorConect,sDatoInicioMal,sGestorSesion,sCerrar,sSeguroCerrar,sErrorConecBD,sCargarDatos;
+	private static String sCargarinfo,sHasIniciado,sSi,sNo,sCancelar,sOk;
 	
-	 private ResourceBundle bundle;
-	  private Locale currentLocale;
 
 	public VentanaInicioSesion(Locale locale) {	
 		//idioma por defecto
 		currentLocale = locale;
 		bundle= ResourceBundle.getBundle("VentanaInicioSesionBundle", currentLocale);
-	
+		
+		sErrorConect = bundle.getString("sErrorConect");
+		sDatoInicioMal = bundle.getString("sDatoInicioMal");
+		sGestorSesion = bundle.getString("sGestorSesion");
+		String gestorDeSesion = String.format("DeustoTaller - %s", sGestorSesion);
+		sSeguroCerrar =  bundle.getString("sSeguroCerrar");
+		sCerrar =  bundle.getString("sCerrar");
+		sErrorConecBD = bundle.getString("sErrorConecBD");
+		sCargarDatos = bundle.getString("sCargarDatos");
+		sCargarinfo = bundle.getString("sCargarinfo");
+		sHasIniciado = bundle.getString("sHasIniciado");
+		
+		sSi = bundle.getString("sSi");
+		sNo = bundle.getString("sNo");
+		sCancelar = bundle.getString("sCancelar");
+		sOk = bundle.getString("sOk");
+		
+		//cambiar el texto de los botones de JOptionPane
+		 UIManager.put("OptionPane.yesButtonText", sSi);
+	     UIManager.put("OptionPane.noButtonText", sNo);
+	     UIManager.put("OptionPane.cancelButtonText", sCancelar);
+	     UIManager.put("OptionPane.okButtonText", sOk);
+		
+		//Configuraciones
 		pCentro = new JPanel(new GridLayout(4, 1));
 		pSur = new JPanel();
 		pNorte = new JPanel();
@@ -65,6 +91,8 @@ public class VentanaInicioSesion extends JFrame {
 		pOeste = new JPanel();
 		ptextUsuario = new JPanel(new GridLayout(2, 1));
 		pTextContrasenia = new JPanel(new GridLayout(2, 1));
+		
+		
 
 		// labels 
 		lblTitulo = new JLabel(bundle.getString("lblTitulo"));
@@ -173,8 +201,8 @@ public class VentanaInicioSesion extends JFrame {
 			} else {
 				Toolkit.getDefaultToolkit().beep();
 				JOptionPane.showMessageDialog(null,
-						"Los datos de inicio de sesión no son correctos\n Por favor, intentelo de nuevo.",
-						"Error al conectar con DeustoTaller", JOptionPane.WARNING_MESSAGE);
+						sDatoInicioMal,
+						sErrorConect, JOptionPane.WARNING_MESSAGE);
 			}
 		});
 
@@ -227,7 +255,7 @@ public class VentanaInicioSesion extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(600, 400);
 		setLocationRelativeTo(null);
-		setTitle("DeustoTaller - Gestor de Sesión");
+		setTitle(gestorDeSesion);
 		setIconImage(new ImageIcon("resources/images/credential-icon.png").getImage());
 		setVisible(true);
 	}
@@ -238,14 +266,14 @@ public class VentanaInicioSesion extends JFrame {
 	}
 
 	public static void logout() {
-		int confirmacion = JOptionPane.showInternalConfirmDialog(null, "¿Seguro que quieres cerrar sesión?",
-				"Cerrar Sesión", JOptionPane.YES_NO_OPTION);
+		int confirmacion = JOptionPane.showInternalConfirmDialog(null, sSeguroCerrar,
+				sCerrar, JOptionPane.YES_NO_OPTION);
 		switch (confirmacion) {
 		case JOptionPane.YES_OPTION:
 			try {
 				DeustoTaller.getCon().close();
 			} catch (SQLException e) {
-				System.out.println("Error al conectarse a la base de datos" + e.getErrorCode());
+				System.out.println(sErrorConecBD + e.getErrorCode());
 			}
 			System.exit(0);
 		default:
@@ -254,7 +282,7 @@ public class VentanaInicioSesion extends JFrame {
 
 	private void cargaVentana(String usuario) {
 
-		progressDialog = new JDialog(this, "Cargando información", true);
+		progressDialog = new JDialog(this, sCargarinfo, true);
 		progressDialog.setSize(300, 100);
 		progressDialog.setLocationRelativeTo(this);
 		progressDialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
@@ -278,8 +306,8 @@ public class VentanaInicioSesion extends JFrame {
 			}
 		});
 
-		JLabel lblCargando = new JLabel("Cargando datos, por favor espere...");
-		lblCargando.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
+		JLabel lblCargando = new JLabel(sCargarDatos);
+//		lblCargando.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
 		lblCargando.setHorizontalAlignment(JLabel.CENTER);
 
 		JPanel panel = new JPanel(new BorderLayout());
@@ -306,7 +334,7 @@ public class VentanaInicioSesion extends JFrame {
 			});
 			SwingUtilities.invokeLater(() -> {
 				JOptionPane.showMessageDialog(null,
-						String.format("%s, Has iniciado sesión correctamente", DeustoTaller.getSesion().getNombre()));
+						String.format("%s, %s", DeustoTaller.getSesion().getNombre(),sHasIniciado));
 
 				new VentanaGrafica(usuario,currentLocale);
 			});
@@ -334,5 +362,18 @@ public class VentanaInicioSesion extends JFrame {
 		btnCerrarSesion.setText(bundle.getString("btnCerrarSesion"));
 		btnIniciarSesion.setText(bundle.getString("btnIniciarSesion"));
 		btnRegistrarse.setText(bundle.getString("btnRegistrarse"));
+		sErrorConect = bundle.getString("sErrorConect");
+		sDatoInicioMal = bundle.getString("sDatoInicioMal");
+		sGestorSesion = bundle.getString("sGestorSesion");
+		sSeguroCerrar =  bundle.getString("sSeguroCerrar");
+		sCerrar =  bundle.getString("sCerrar");
+		sErrorConecBD = bundle.getString("sErrorConecBD");
+		sCargarDatos = bundle.getString("sCargarDatos");
+		sCargarinfo = bundle.getString("sCargarinfo");
+		sHasIniciado = bundle.getString("sHasIniciado");
+		sSi = bundle.getString("sSi");
+		sNo = bundle.getString("sNo");
+		sCancelar = bundle.getString("sCancelar");
+		sOk = bundle.getString("sOk");
     }
 }
