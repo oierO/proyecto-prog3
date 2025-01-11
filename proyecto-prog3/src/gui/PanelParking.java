@@ -40,57 +40,91 @@ public class PanelParking extends JPanel {
 	private DateTimeFormatter formateador = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	protected static HashMap<String, HashMap<String, PlazaParking>> mapaParkings = new HashMap<String, HashMap<String, PlazaParking>>();
 	static ArrayList<JToggleButton> plazasGraficas = new ArrayList<>();
-	private static final List<String> plantasParking = List.of("Planta 1", "Planta 2", "Planta 3");
+	private static final List<String> plantasParking = List.of("P1", "P2", "P3");
+	private Locale currentLocale;
+	private ResourceBundle bundle;
+	private JLabel estadoLabel,plantaLabel,plazaLabel,matriculaLabel,finLabel,tiempoLabel;
+	private String sLibre,sPlaza,sLibre2,sOcupado,sPlazaNoDisp,sReservar,sPlazaLiberada,sErrorLiberar,sSi,sNo,sCancelar,sOk;
 
-	public PanelParking() {
+	public PanelParking(Locale locale) {
 		for (String planta : getPlantasparking()) {
 			mapaParkings.put(planta, new HashMap<String, PlazaParking>());
 		}
 		;
-
+		
+		//Idioma
+		currentLocale = locale;
+		bundle = ResourceBundle.getBundle("PanelParkingBundle",currentLocale);
+		estadoLabel = new JLabel(bundle.getString("estadoLabel"));
+		plantaLabel = new JLabel(bundle.getString("plantaLabel"));
+		plazaLabel = new JLabel(bundle.getString("plazaLabel"));
+		sLibre = bundle.getString("sLibre");
+		sPlaza = bundle.getString("sPlaza");
+		matriculaLabel = new JLabel(bundle.getString("matriculaLabel"));
+		finLabel = new JLabel(bundle.getString("finLabel"));
+		tiempoLabel = new JLabel(bundle.getString("tiempoLabel"));
+		sLibre2  = bundle.getString("sLibre2");
+		sOcupado = bundle.getString("sOcupado");
+		sPlazaNoDisp = bundle.getString("sPlazaNoDisp");
+		sReservar = bundle.getString("sReservar");
+		sPlazaLiberada = bundle.getString("sPlazaLiberada");
+		sErrorLiberar = bundle.getString("sErrorLiberar");
+		sSi = bundle.getString("sSi");
+		sNo = bundle.getString("sNo");
+		sCancelar = bundle.getString("sCancelar");
+		sOk = bundle.getString("sOk");
+		
+		
+		//cambiar el texto de los botones de JOptionPane
+		 UIManager.put("OptionPane.yesButtonText", sSi);
+	     UIManager.put("OptionPane.noButtonText", sNo);
+	     UIManager.put("OptionPane.cancelButtonText", sCancelar);
+	     UIManager.put("OptionPane.okButtonText", sOk);
+		
+		
 		plazas = new JPanel();
 		JPanel informacion = new JPanel();
 		plazas.setBackground(Color.WHITE);
 		informacion.setLayout(new BoxLayout(informacion, BoxLayout.Y_AXIS));
-		informacion.add(new JLabel("ESTADO DEL PARKING"));
+		informacion.add(estadoLabel);
 		String[] arrayPlantas = getPlantasparking().toArray(new String[getPlantasparking().size()]);
 		ComboBoxModel<String> modeloPlantas = new DefaultComboBoxModel<>(arrayPlantas);
 		plantas = new JComboBox<>(modeloPlantas);
 		JPanel setplantaPanel = new JPanel();
 		setplantaPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		setplantaPanel.add(new JLabel("Planta: "));
+		setplantaPanel.add(plantaLabel);
 		setplantaPanel.add(plantas);
 		informacion.add(setplantaPanel);
 		informacion.add(new JSeparator());
-		informacion.add(new JLabel("PLAZA SELECCIONADA"));
-		estado = new JTextField("¿Libre?");
+		informacion.add(plazaLabel);
+		estado = new JTextField(sLibre);
 		estado.setEditable(false);
 		estado.setHorizontalAlignment(JTextField.CENTER);
 		JPanel nomvehiculoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		nomvehiculoPanel.add(new JLabel("Matricula: "));
+		nomvehiculoPanel.add(matriculaLabel);
 		matricula = new JTextField("#########", JTextField.CENTER);
 		matricula.setEditable(false);
 		JPanel tfinPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		tfinPanel.add(new JLabel("Fin reserva: "));
+		tfinPanel.add(finLabel);
 		tfin = new JTextField("N/A");
 		tfin.setEditable(false);
 		tfinPanel.add(tfin);
 		JPanel trestPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		trestPanel.add(new JLabel("Tiempo restante: "));
+		trestPanel.add(tiempoLabel);
 		trest = new JTextField("N/A");
-		bModificar = new JButton("Modificar");
+		bModificar = new JButton(bundle.getString("bModificar"));
 		bModificar.setVisible(false);
 		Image img = new ImageIcon("resources/images/modificar.png").getImage();
 		img = img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		bModificar.setIcon(new ImageIcon(img));
-		bLiberar = new JButton("Liberar plaza");
+		bLiberar = new JButton(bundle.getString("bModificar"));
 		img = new ImageIcon("resources/images/cancelar.png").getImage();
 		img = img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		bLiberar.setIcon(new ImageIcon(img));
 		bLiberar.setVisible(false);
 
 		bLiberar.addActionListener(e -> {
-			int res = JOptionPane.showConfirmDialog(this, "¿Quiere liberar la plaza reservada seleccionada?");
+			int res = JOptionPane.showConfirmDialog(this, sPlaza);
 			if (res == JOptionPane.YES_OPTION) {
 				liberarPlaza();
 				cambioSeleccionPl(plazaSel.getIdentificador());
@@ -98,10 +132,10 @@ public class PanelParking extends JPanel {
 				repaint();
 			}
 		});
-		bReservar = new JButton("Reservar");
+		bReservar = new JButton(bundle.getString("bReservar"));
 		bReservar.setIcon(new ImageIcon("resources/images/calendar-icon.png"));
 		bReservar.setEnabled(false);
-		bReservar.addActionListener(e -> new ReservaParking((String) plantas.getSelectedItem(), splazaSeleccion, this));
+		bReservar.addActionListener(e -> new ReservaParking((String) plantas.getSelectedItem(), splazaSeleccion, this,currentLocale));
 		trest.setEditable(false);
 		trestPanel.add(trest);
 		nomvehiculoPanel.add(matricula);
@@ -132,7 +166,7 @@ public class PanelParking extends JPanel {
 		setFocusable(false);
 		grupoBotones = new ButtonGroup();
 		plazas.setLayout(new GridLayout(FILAS_PARKING, COLUMNAS_PARKING, 10, 10));
-		plazas.setBorder(BorderFactory.createTitledBorder("PLAZAS"));
+		plazas.setBorder(BorderFactory.createTitledBorder(sPlaza));
 		for (int i = 0; i <= FILAS_PARKING - 1; i++) {
 			for (int t = 0; t <= COLUMNAS_PARKING - 1; t++) {
 				JToggleButton boton = new JToggleButton(String.format("%s%s", (char) (t + 65), i));
@@ -158,7 +192,7 @@ public class PanelParking extends JPanel {
 		plazaSel = RendererParking.plazafromBD(codPlaza, (String) plantas.getSelectedItem());
 		if (plazaSel != null) {
 			matricula.setText(plazaSel.getVehiculo().getMatricula());
-			estado.setText("Ocupado");
+			estado.setText(sOcupado);
 			estado.setBackground(Color.RED);
 			tfin.setText(
 					plazaSel.getFechaCaducidad().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
@@ -166,7 +200,7 @@ public class PanelParking extends JPanel {
 			trest.setText(String.format("%sD,%sH,%sM,%sS", segundos / 5184000, (segundos % 5184000) / 3600,
 					((segundos % 5184000) % 3600) / 60, ((segundos % 5184000) % 3600) % 60));
 			bReservar.setEnabled(false);
-			bReservar.setToolTipText("Plaza no disponible para la reserva");
+			bReservar.setToolTipText(sPlazaNoDisp);
 			if (DeustoTaller.getSesion().getMatriculas().contains(matricula.getText())) {
 				bLiberar.setVisible(true);
 				bModificar.setVisible(true);
@@ -177,12 +211,12 @@ public class PanelParking extends JPanel {
 		} else {
 			bLiberar.setVisible(false);
 			matricula.setText("#########");
-			estado.setText("Libre");
+			estado.setText(sLibre2);
 			estado.setBackground(Color.GREEN);
 			tfin.setText("N/A");
 			trest.setText("N/A");
 			bReservar.setEnabled(true);
-			bReservar.setToolTipText("Reservar plaza");
+			bReservar.setToolTipText(sReservar);
 
 		}
 		revalidate();
@@ -217,9 +251,9 @@ public class PanelParking extends JPanel {
 			stmt.setString(2, plazaSel.getIdentificador());
 			stmt.setString(3, plazaSel.getFechaCaducidad().format(formateador));
 			stmt.executeUpdate();
-			JOptionPane.showMessageDialog(this, "Plaza liberada");
+			JOptionPane.showMessageDialog(this, sPlazaLiberada);
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(this, "Ha ocurrido un error al liberar la plaza" + e.getLocalizedMessage());
+			JOptionPane.showMessageDialog(this, sErrorLiberar + e.getLocalizedMessage());
 		}
 	}
 

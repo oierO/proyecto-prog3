@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.*;
 
@@ -31,34 +33,54 @@ public class ReservaParking extends JDialog {
 	private static final long serialVersionUID = 1L;
 	@SuppressWarnings("unused")
 	private static final double TARIFA_HORA = 5.5;
-
-	public ReservaParking(String planta, String plaza, PanelParking panel) {
+	private Locale currentLocale;
+	private ResourceBundle bundle;
+	private String sTitulo,sNoAcept,sConfirmidad,sReserPlaza,sEnLa,sRerserBien,sReserMal,sError;
+	private JLabel textVehiculo,fechaLabel;
+	private JButton bReservar,bCancelar;
+	private JCheckBox conformidad;
+	
+	
+	public ReservaParking(String planta, String plaza, PanelParking panel,Locale locale) {
+		//Idioma
+		currentLocale = locale;
+		bundle = ResourceBundle.getBundle("ReservaParkingBundle",currentLocale);
+		sTitulo = bundle.getString("sTitulo");
+		sNoAcept = bundle.getString("sNoAcept");
+		sConfirmidad = bundle.getString("sConfirmidad");
+		fechaLabel = new JLabel(bundle.getString("fechaLabel"));
+		sReserPlaza = bundle.getString("sReserPlaza");
+		sEnLa = bundle.getString("sEnLa");
+		sRerserBien = bundle.getString("sRerserBien");
+		sReserMal = bundle.getString("sReserMal");
+		sError = bundle.getString("sError");
+		
 		this.planta = planta;
 		this.plaza = plaza;
-		Font fuente = new Font("Bahnschrift", Font.BOLD, 15);
-		Font fuenteTexto = new Font("Bahnschrift", Font.BOLD, 13);
+//		Font fuente = new Font("Bahnschrift", Font.BOLD, 15);
+//		Font fuenteTexto = new Font("Bahnschrift", Font.BOLD, 13);
 		setModal(true);
-		setTitle("Reservar plaza");
+		setTitle(sTitulo);
 		this.setIconImage(new ImageIcon("resources/calendar-icon.png").getImage());
 		setSize(300, 300);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 		JPanel pVehiculo = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel textVehiculo = new JLabel("Vehiculo");
+		textVehiculo = new JLabel(bundle.getString("textVehiculo"));
 		JPanel pFecha = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JPanel pConformidad = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JButton bReservar = new JButton("Reservar");
-		bReservar.setFont(fuenteTexto);
-		JButton bCancelar = new JButton("Cancelar");
-		bCancelar.setFont(fuenteTexto);
-		JCheckBox conformidad = new JCheckBox("Acepto los terminos y condiciones");
+		bReservar = new JButton(bundle.getString("bReservar"));
+//		bReservar.setFont(fuenteTexto);
+		bCancelar = new JButton(bundle.getString("bCancelar"));
+//		bCancelar.setFont(fuenteTexto);
+		conformidad = new JCheckBox(bundle.getString("conformidad"));
 		pConformidad.add(conformidad);
-		conformidad.setFont(fuenteTexto);
+//		conformidad.setFont(fuenteTexto);
 		bReservar.addActionListener(e -> {
 			if (!conformidad.isSelected()) {
 				JOptionPane.showMessageDialog(this.getContentPane(),
-						"No has aceptados los terminos y condiciones del servicio", "Conformidad",
+						sNoAcept, sConfirmidad,
 						JOptionPane.INFORMATION_MESSAGE);
 			} else {
 				reservarPlazaBD();
@@ -69,7 +91,7 @@ public class ReservaParking extends JDialog {
 			}
 		});
 		bCancelar.addActionListener(e -> dispose());
-		pFecha.add(new JLabel("Fecha"));
+		pFecha.add(fechaLabel);
 
 		pVehiculo.add(textVehiculo);
 		ComboBoxModel<Vehiculo> modeloVehiculos = new DefaultComboBoxModel<Vehiculo>(DeustoTaller.getSesion()
@@ -83,10 +105,10 @@ public class ReservaParking extends JDialog {
 		selectorFecha.getDatePicker().setSettings(confSelectorFecha);
 		confSelectorFecha.setDateRangeLimits(LocalDate.now(), LocalDate.now().plusYears(1));
 		JPanel pTitulo = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		JLabel titulo = new JLabel(String.format("Reservar plaza %s en la %s", plaza, planta));
+		JLabel titulo = new JLabel(String.format("%s %s %s %s", sReserPlaza,plaza, sEnLa,planta));
 
 		JPanel pBotones = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		titulo.setFont(fuente);
+//		titulo.setFont(fuente);
 		pFecha.add(selectorFecha);
 		pTitulo.add(titulo);
 		add(pTitulo);
@@ -123,10 +145,10 @@ public class ReservaParking extends JDialog {
 			stmt.setString(4, selectorFecha.getDateTimeStrict().format(formateador));
 			stmt.execute();
 			stmt.close();
-			JOptionPane.showMessageDialog(this.getContentPane(), "Reserva realizada correctamente");
+			JOptionPane.showMessageDialog(this.getContentPane(), sRerserBien);
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(this.getContentPane(), "Ha ocurrido un error al procesar la reserva\n" + e,
-					"Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this.getContentPane(), sReserMal + e,
+					sError, JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
