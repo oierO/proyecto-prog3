@@ -31,11 +31,14 @@ public class VentanaGrafica extends JFrame {
 	private static String usuario;
 	private static Locale currentLocale;
 	private static ResourceBundle bundle;
-	private static String sTitulo;
-	private static String sNotificaciones,sHistorial,sValoraciones,sSoporte;
+	private static String sTitulo,sComAd,sSelCal,sVEnviBien,sVEnviMal,sValoracion;
+	private static String sNotificaciones,sHistorial,sValoraciones,sSoporte,sEstadis,sCorreoElectronico,sCorreo;
 	private static String[] lPreferencias;
-	private static String sOperaciones;
-
+	private static String sOperaciones,sTelefono,sTelN,sContacto,sPreFre,sAdmPre,sUsuario,sPregunta,sResBien;
+	private static JButton botonEnviar,btnContactarDirectamente,btnEnviarRespuesta;
+	private static JLabel noPreLabel,noValLabel;
+	private static String sResVacia,sSelctPre,sServicios,sAlmacen,sParking,sPreferencias,sSesion,sCalificacion,sComentario;
+	
 	public static String getUsuario() {
 		return usuario;
 	}
@@ -50,7 +53,7 @@ public class VentanaGrafica extends JFrame {
 		setSize(800, 500);
 		setLocationRelativeTo(null);
 		
-		setTitle("DeustoTaller");
+		
 		JTabbedPane menuPestanas = new JTabbedPane();
 
 		setUsuario(usuario);
@@ -58,30 +61,55 @@ public class VentanaGrafica extends JFrame {
 		// Idioma
 		currentLocale = locale;
 		bundle = ResourceBundle.getBundle("VentanaGraficaBundle",currentLocale);
-		System.out.println("---Bundle:---\n");
-		System.out.println(bundle);
-		Set<String> keys = bundle.keySet();
-		for (String key : keys) {
-		    String value = bundle.getString(key);
-		    System.out.println(key + " = " + value);
-		}
-
-
+		sTitulo =  bundle.getString("sTitulo");
+		setTitle(sTitulo);
+		sHistorial = bundle.getString("sHistorial");
+		sValoraciones = bundle.getString("sValoraciones");
+		sSoporte = bundle.getString("sSoporte");
+		sOperaciones = bundle.getString("sOperaciones");
+		sComAd = bundle.getString("sComAd");
+		sSelCal = bundle.getString("sSelCal"); 
+		sVEnviBien = bundle.getString("sVEnviBien"); 
+		sVEnviMal = bundle.getString("sVEnviMal"); 
+		sValoracion = bundle.getString("sValoracion"); 
+		sEstadis = bundle.getString("sEstadis"); 
+		sCorreoElectronico = bundle.getString("sCorreoElectronico"); 
+		sCorreo = bundle.getString("sCorreo"); 
+		String correo = String.format("%s %s", sCorreoElectronico,sCorreo);
+		sTelefono = bundle.getString("sTelefono"); 
+		sTelN = bundle.getString("sTelN"); 
+		String telefono = String.format("%s %s", sTelefono,sTelN);
+		sContacto = bundle.getString("sContacto"); 
+		sPreFre = bundle.getString("sPreFre"); 
+		sAdmPre = bundle.getString("sAdmPre"); 
+		noPreLabel = new JLabel(bundle.getString("noPreLabel"));
+		sPregunta = bundle.getString("sPregunta"); 
+		sUsuario = bundle.getString("sUsuario"); 
+		sResBien = bundle.getString("sResBien"); 
+		sResVacia = bundle.getString("sResVacia"); 
+		sSelctPre = bundle.getString("sSelctPre"); 
+		sServicios = bundle.getString("sServicios"); 
+		sAlmacen = bundle.getString("sAlmacen"); 
+		sParking = bundle.getString("sParking"); 
+		sPreferencias = bundle.getString("sPreferencias"); 
+		sSesion = bundle.getString("sSesion"); 
+		noValLabel = new JLabel(bundle.getString("noValLabel"));
+		sCalificacion = bundle.getString("sCalificacion"); 
+		sComentario = bundle.getString("sComentario"); 
+		
+		
+		
+		
 		// Pestaña Parking
 		JPanel pParking = new PanelParking(currentLocale);
 		JPanel pUsuario = new PanelSesion(this,currentLocale); // Pasamos la referencia de la ventana gráfica
 		
 		// Pestaña Preferencias
-		try {
+	
 			sNotificaciones = bundle.getString("sNotificaciones");
-		} catch (Exception e) {
-			System.out.println("Error");
-			sNotificaciones = "Notificaciones";
-		}
 		
-		sHistorial = "Historial";
-		sValoraciones = "Valoraciones";
-		sSoporte = "Soporte";
+		
+		
 		
 		lPreferencias = new String[] { sNotificaciones, sHistorial, sValoraciones, sSoporte };
 		
@@ -93,7 +121,7 @@ public class VentanaGrafica extends JFrame {
 		JPanel botonesPrefer = new JPanel();
 		botonesPrefer.setLayout(new GridLayout(lPreferencias.length, 1));
 		
-		sOperaciones = "Operaciones";
+		
 		botonesPrefer.setBorder(new TitledBorder(sOperaciones));
 		pSettings.add(botonesPrefer, BorderLayout.WEST);
 
@@ -128,7 +156,7 @@ public class VentanaGrafica extends JFrame {
 
 						// Panel de comentario adicional
 						JPanel panelComentario = new JPanel(new BorderLayout());
-						panelComentario.setBorder(new TitledBorder("Comentario Adicional"));
+						panelComentario.setBorder(new TitledBorder(sComAd));
 						JTextArea campoComentario = new JTextArea(5, 20);
 						campoComentario.setLineWrap(true);
 						campoComentario.setWrapStyleWord(true);
@@ -137,7 +165,7 @@ public class VentanaGrafica extends JFrame {
 						panelValoraciones.add(panelComentario, BorderLayout.CENTER);
 
 						// Botón de enviar
-						JButton botonEnviar = new JButton("Enviar");
+						botonEnviar = new JButton(bundle.getString("botonEnviar"));
 						JPanel panelEnviar = new JPanel();
 						panelEnviar.add(botonEnviar);
 						panelValoraciones.add(panelEnviar, BorderLayout.SOUTH);
@@ -164,7 +192,7 @@ public class VentanaGrafica extends JFrame {
 
 								if (valoracion == -1) {
 									JOptionPane.showMessageDialog(panelDerechoPreferencias,
-											"Por favor, seleccione una calificación.");
+											sSelCal);
 									return;
 								}
 								// Insertar la valoración y el comentario en la base de datos
@@ -179,21 +207,21 @@ public class VentanaGrafica extends JFrame {
 										stmt.setString(3, usuario);
 										stmt.executeUpdate();
 										JOptionPane.showMessageDialog(panelDerechoPreferencias,
-												"¡Valoración enviada con éxito!");
+												sVEnviBien);
 									} catch (SQLException e2) {
 										throw new SQLException(e2);
 									}
 								} catch (SQLException ex) {
 									ex.printStackTrace();
 									JOptionPane.showMessageDialog(panelDerechoPreferencias,
-											"Error al enviar la valoración. Intente nuevamente.");
+											sVEnviMal);
 								}
 							}
 						});
 						// Agregar panel de Valoraciones al panel derecho de preferencias
-						pestanaValoracion.add("Valoracion", panelValoraciones);
+						pestanaValoracion.add(sValoracion, panelValoraciones);
 						if (usuario.equals("deustotaller")) {
-							pestanaValoracion.add("Estadisticas de Valoracion", crearPanelValoraciones());
+							pestanaValoracion.add(sEstadis, crearPanelValoraciones());
 						}
 
 						panelDerechoPreferencias.add(pestanaValoracion);
@@ -280,9 +308,9 @@ public class VentanaGrafica extends JFrame {
 
 						// Pestaña de Contacto
 						JPanel panelContacto = new JPanel(new BorderLayout());
-						JLabel lblEmail = new JLabel("Correo electrónico: contacto@taller.com");
-						JLabel lblTelefono = new JLabel("Teléfono: 123-456-789");
-						JButton btnContactarDirectamente = new JButton("Contactar Directamente");
+						JLabel lblEmail = new JLabel(correo);
+						JLabel lblTelefono = new JLabel(telefono);
+						btnContactarDirectamente = new JButton(bundle.getString("btnContactarDirectamente"));
 						btnContactarDirectamente.addActionListener(new ActionListener() {
 							@Override
 							public void actionPerformed(ActionEvent e) {
@@ -300,12 +328,12 @@ public class VentanaGrafica extends JFrame {
 
 						// Añadir este panel a la pestaña de soporte
 						JTabbedPane tabbedPane = new JTabbedPane();
-						tabbedPane.add("Contacto", panelContacto);
-						pestanaSoporte.addTab("Preguntas Frecuentes", scrollPane);
-						pestanaSoporte.addTab("Contacto", panelContacto);
+						tabbedPane.add(sContacto, panelContacto);
+						pestanaSoporte.addTab(sPreFre, scrollPane);
+						pestanaSoporte.addTab(sContacto, panelContacto);
 
 						if (usuario.equals("deustotaller")) {
-							pestanaSoporte.add("Administrar Preguntas", crearPanelAdministrarPreguntas());
+							pestanaSoporte.add(sAdmPre, crearPanelAdministrarPreguntas());
 						}
 
 						// Agregar panel de Soporte al panel derecho de preferencias
@@ -322,11 +350,11 @@ public class VentanaGrafica extends JFrame {
 					String[][] preguntas = getPreguntasUsuarios();
 					// Si no hay preguntas, mostrar un mensaje
 					if (preguntas == null || preguntas.length == 0) {
-						panelAdmin.add(new JLabel("No hay preguntas pendientes."), BorderLayout.CENTER);
+						panelAdmin.add(noPreLabel, BorderLayout.CENTER);
 						return panelAdmin;
 					}
 					// Crear la tabla para mostrar las preguntas
-					String[] columnNames = { "ID", "Pregunta", "Usuario" };
+					String[] columnNames = { "ID", sPregunta, sUsuario };
 					DefaultTableModel model = new DefaultTableModel(preguntas, columnNames);
 
 					tablaPreguntas = new JTable(model);
@@ -340,7 +368,7 @@ public class VentanaGrafica extends JFrame {
 					JScrollPane scrollRespuesta = new JScrollPane(areaRespuesta);
 					panelAdmin.add(scrollRespuesta, BorderLayout.SOUTH);
 					// Botón para enviar respuesta
-					JButton btnEnviarRespuesta = new JButton("Responder");
+					btnEnviarRespuesta = new JButton(bundle.getString("btnEnviarRespuesta"));
 					btnEnviarRespuesta.addActionListener(e -> {
 						int filaSeleccionada = tablaPreguntas.getSelectedRow();
 						if (filaSeleccionada != -1) {
@@ -348,13 +376,13 @@ public class VentanaGrafica extends JFrame {
 							String respuesta = areaRespuesta.getText();
 							if (!respuesta.isEmpty()) {
 								responderPregunta(idPregunta, respuesta); // Guardar respuesta en la base de datos
-								JOptionPane.showMessageDialog(null, "Respuesta enviada correctamente.");
+								JOptionPane.showMessageDialog(null,sResBien );
 								areaRespuesta.setText(""); // Limpiar el área de respuesta
 							} else {
-								JOptionPane.showMessageDialog(null, "La respuesta no puede estar vacía.");
+								JOptionPane.showMessageDialog(null,sResVacia );
 							}
 						} else {
-							JOptionPane.showMessageDialog(null, "Debe seleccionar una pregunta.");
+							JOptionPane.showMessageDialog(null,sSelctPre );
 						}
 					});
 					panelAdmin.add(btnEnviarRespuesta, BorderLayout.NORTH);
@@ -378,11 +406,11 @@ public class VentanaGrafica extends JFrame {
 			botonesPrefer.add(botonPref);
 		}
 
-		menuPestanas.add("Servicios", new PanelServicios(currentLocale));
-		menuPestanas.add("Almacen", new PanelAlmacen(currentLocale));
-		menuPestanas.add("Parking", pParking);
-		menuPestanas.add("Preferencias", pSettings);
-		menuPestanas.add("Sesión", pUsuario);
+		menuPestanas.add(sServicios, new PanelServicios(currentLocale));
+		menuPestanas.add(sAlmacen, new PanelAlmacen(currentLocale));
+		menuPestanas.add(sParking, pParking);
+		menuPestanas.add(sPreferencias, pSettings);
+		menuPestanas.add(sSesion, pUsuario);
 		add(menuPestanas);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
@@ -435,11 +463,11 @@ public class VentanaGrafica extends JFrame {
 		String[][] valoraciones = getValoracionesUsuarios();
 		// Si no hay valoraciones, mostrar un mensaje
 		if (valoraciones == null || valoraciones.length == 0) {
-			panelAdmin.add(new JLabel("No hay valoraciones registradas."), BorderLayout.CENTER);
+			panelAdmin.add(noValLabel, BorderLayout.CENTER);
 			return panelAdmin;
 		}
 		// Crear las columnas de la tabla
-		String[] columnNames = { "Calificación", "Comentario", "Usuario" };
+		String[] columnNames = { sCalificacion, sComentario, sUsuario };
 		// Crear el modelo de la tabla con los datos de las valoraciones
 		DefaultTableModel model = new DefaultTableModel(valoraciones, columnNames) {
 			/**

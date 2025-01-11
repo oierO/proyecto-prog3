@@ -44,12 +44,24 @@ public class VentanaPedidoServicios extends JFrame {
 	private JButton botonCancelar;
 	private Locale curreLocale;
 	private ResourceBundle idiomaBundle;
+	private String sTitulo;
 
 	public VentanaPedidoServicios(String usuario, ArrayList<PedidoServicios> listaServiciosPedidos,
 			ArrayList<String> serviciosElegidos, Locale locale) {
 
+//      //Los labels
+		curreLocale = locale;
+		idiomaBundle = ResourceBundle.getBundle("VentanaLabelBundle", curreLocale);
+      
+      	nombreJLabel = new JLabel(idiomaBundle.getString("nombreJLabel"));
+		telefonoJLabel = new JLabel(idiomaBundle.getString("telefonoJLabel"));
+		fechaDePedidoJLabel = new JLabel(idiomaBundle.getString("fechaDePedidoJLabel"));
+		fechaDeRealizacionJLabel = new JLabel(idiomaBundle.getString("fechaDeRealizacionJLabel"));
+		informacionAdicionalJLabel = new JLabel(idiomaBundle.getString("informacionAdicionalJLabel"));
+		sTitulo = idiomaBundle.getString("sTitulo");
+		
 		// Configuraciones de la ventana
-		setTitle("Reservar cita");
+		setTitle(sTitulo);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(500, 600);
 		setLocationRelativeTo(null);
@@ -57,66 +69,9 @@ public class VentanaPedidoServicios extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(7, 2));
 
-//		if (idioma.equals("Español")) {
-//			nombreJLabel = new JLabel("Nombre: ");
-//			telefonoJLabel = new JLabel("Telefono: ");
-//			fechaDePedidoJLabel = new JLabel("Fecha de pedido: ");
-//			fechaDeRealizacionJLabel = new JLabel("Fecha(DD/MM/AAAA) : ");
-//			informacionAdicionalJLabel = new JLabel("Información adicional: ");
-//		} else if (idioma.equals("Ingles")) {
-//			nombreJLabel = new JLabel("Name: ");
-//			telefonoJLabel = new JLabel("Phone number: ");
-//			fechaDePedidoJLabel = new JLabel("Order date: ");
-//			fechaDeRealizacionJLabel = new JLabel("Date(DD/MM/YYYY) : ");
-//			informacionAdicionalJLabel = new JLabel("Additional information: ");
-//		} else if (idioma.equals("Chino")) {
-//			nombreJLabel = new JLabel("名字: ");
-//			telefonoJLabel = new JLabel("电话号码: ");
-//			fechaDePedidoJLabel = new JLabel("订单日期: ");
-//			fechaDeRealizacionJLabel = new JLabel("日期(日/月/年) : ");
-//			informacionAdicionalJLabel = new JLabel("补充: ");
-//		}
-		
-		// Español 
-		try {
-			Locale defaultLocale = Locale.getDefault();
-	        System.out.println("Default Locale: " + defaultLocale);
-	        ResourceBundle spanishBundle = ResourceBundle.getBundle("VentanaLabelBundle", defaultLocale);
 
-	        System.out.println("nombreJLabel" + spanishBundle.getString("nombreJLabel"));
-	        System.out.println("fechaDeRealizacionJLabel" + spanishBundle.getString("fechaDeRealizacionJLabel"));
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Error ");
-		}
-		
-        //Chino
         
-        try {
-        	Locale zhLocale = new Locale.Builder().setLanguage("zh").setRegion("ZH").build();
-            ResourceBundle zhBundle = ResourceBundle.getBundle("VentanaLabelBundle", zhLocale);
-            
-            System.out.println("nombreJLabel" + zhBundle.getString("nombreJLabel"));
-            System.out.println("fechaDeRealizacionJLabel" + zhBundle.getString("fechaDeRealizacionJLabel"));
-    		
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Error ");
-		}
-        
-        
-        //Prueba bundle
-        
-//      //Los labels
-     curreLocale = locale;
-      idiomaBundle = ResourceBundle.getBundle("VentanaLabelBundle", curreLocale);
-      
-      	nombreJLabel = new JLabel(idiomaBundle.getString("nombreJLabel"));
-		telefonoJLabel = new JLabel(idiomaBundle.getString("telefonoJLabel"));
-		fechaDePedidoJLabel = new JLabel(idiomaBundle.getString("fechaDePedidoJLabel"));
-		fechaDeRealizacionJLabel = new JLabel(idiomaBundle.getString("fechaDeRealizacionJLabel"));
-		informacionAdicionalJLabel = new JLabel(idiomaBundle.getString("informacionAdicionalJLabel"));
+
         
         JPanel panelIdiomaJPanel = new JPanel();
         
