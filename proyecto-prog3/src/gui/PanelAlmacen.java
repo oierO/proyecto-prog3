@@ -111,7 +111,7 @@ public class PanelAlmacen extends JPanel {
 						int cantidadAlmacen = (int) tabla.getValueAt(selec, 6);
 
 						Pieza p = new Pieza(id, codigo, nombrePieza, descripcion, fabricante, precio, cantidadAlmacen);
-						new EspecificacionesPieza(p);
+						new EspecificacionesPieza(p,currentLocale);
 
 					}
 
