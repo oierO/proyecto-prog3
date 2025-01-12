@@ -10,13 +10,13 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import main.DeustoTaller;
 import java.util.ResourceBundle;
-public class PanelPreferencia extends JPanel {
+public class PanelPreferencias extends JPanel {
    private static final long serialVersionUID = 1L;
    private ResourceBundle bundle; // Uso de ResourceBundle ayudado por ChatGPT
    private String[] lPreferencias;
    private String usuario;
    private JTabbedPane pestañas;
-   public PanelPreferencia(ResourceBundle bundle, String usuario) {
+   public PanelPreferencias(ResourceBundle bundle, String usuario) {
        this.bundle = bundle; // Uso de ResourceBundle ayudado por ChatGPT
        this.usuario = usuario;
        this.lPreferencias = new String[] {
