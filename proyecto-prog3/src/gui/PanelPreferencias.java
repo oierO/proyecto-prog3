@@ -5,17 +5,22 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import main.DeustoTaller;
 import java.util.ResourceBundle;
 public class PanelPreferencias extends JPanel {
+	
+	
    private static final long serialVersionUID = 1L;
    private ResourceBundle bundle; // Uso de ResourceBundle ayudado por ChatGPT
    private String[] lPreferencias;
    private String usuario;
    private JTabbedPane pestañas;
+   
+   
    public PanelPreferencias(ResourceBundle bundle, String usuario) {
        this.bundle = bundle; // Uso de ResourceBundle ayudado por ChatGPT
        this.usuario = usuario;
@@ -26,13 +31,16 @@ public class PanelPreferencias extends JPanel {
            bundle.getString("sSoporte")
        };
        setLayout(new BorderLayout());
+       
        // Panel izquierdo con botones de preferencias
        JPanel botonesPrefer = new JPanel(new GridLayout(lPreferencias.length, 1));
        botonesPrefer.setBorder(new TitledBorder(bundle.getString("sOperaciones")));
        add(botonesPrefer, BorderLayout.WEST);
+       
        // Panel derecho con pestañas
        pestañas = new JTabbedPane();
        add(pestañas, BorderLayout.CENTER);
+       
        for (String pref : lPreferencias) {
            JButton botonPref = new JButton(pref);
            botonPref.addActionListener(new ActionListener() {
@@ -44,6 +52,7 @@ public class PanelPreferencias extends JPanel {
            botonesPrefer.add(botonPref);
        }
    }
+   
    private void manejarPreferencia(String pref) {
        pestañas.removeAll(); // Limpiar todas las pestañas
        if (pref.equals(bundle.getString("sNotificaciones"))) {
@@ -59,6 +68,7 @@ public class PanelPreferencias extends JPanel {
            pestañas.addTab("Soporte", crearPanelSoporte());
        }
    }
+   
    // Método para actualizar el contenido dinámicamente
    public void actualizarContenido() {
        pestañas.removeAll(); // Limpiar todas las pestañas existentes
@@ -107,6 +117,7 @@ public class PanelPreferencias extends JPanel {
        }
        return -1;
    }
+   
    private JPanel crearPanelSoporte() {
        JPanel panelSoporte = new JPanel(new BorderLayout());
        JLabel lblEmail = new JLabel(bundle.getString("sCorreoElectronico") + " " + bundle.getString("sCorreo"));
@@ -147,7 +158,11 @@ public class PanelPreferencias extends JPanel {
                    JOptionPane.showMessageDialog(panel, "Por favor, completa todos los campos.");
                }
            }
+
+           
        });
+       
+       
        JPanel panelFormulario = new JPanel(new GridLayout(3, 2));
        panelFormulario.add(lblTitulo);
        panelFormulario.add(tfTitulo);
@@ -176,13 +191,38 @@ public class PanelPreferencias extends JPanel {
        JPanel panelHistorial = new JPanel(new BorderLayout());
        // Datos simulados para el historial (sin notificaciones leídas)
        String[] columnas = {"Fecha", "Actividad"};
-       String[][] datos = {
-           {"2025-01-10", "Revisión del coche"},
-           {"2025-01-08", "Cambio de aceite"}
-       };
+       String[][] datos;
+       
+       try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + DeustoTaller.getLocDB())) {
+           String sql = "SELECT fecha, actividad FROM Historial WHERE usuario = ?";
+           try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+               pstmt.setString(1, usuario);
+               try (ResultSet rs = pstmt.executeQuery()) {
+                   datos = cargarDatosDesdeResultSet(rs);
+               }
+           }
+       } catch (SQLException e) {
+           e.printStackTrace();
+           datos = new String[][] {{"Error", "No se pudieron cargar los datos"}};
+       }
+       
        JTable tablaHistorial = new JTable(datos, columnas);
        JScrollPane scrollTabla = new JScrollPane(tablaHistorial);
        panelHistorial.add(scrollTabla, BorderLayout.CENTER);
        return panelHistorial;
+   }
+   
+   private String[][] cargarDatosDesdeResultSet(ResultSet rs) throws SQLException {
+       rs.last(); // Ir al final para contar filas
+       int numFilas = rs.getRow();
+       rs.beforeFirst(); // Volver al inicio
+       String[][] datos = new String[numFilas][2];
+       int i = 0;
+       while (rs.next()) {
+           datos[i][0] = rs.getString("fecha");
+           datos[i][1] = rs.getString("actividad");
+           i++;
+       }
+       return datos;
    }
 }

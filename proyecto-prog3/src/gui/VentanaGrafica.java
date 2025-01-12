@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -104,6 +105,23 @@ public class VentanaGrafica extends JFrame {
 	        menuPestanas.add(sPreferencias, panelPreferencias); // Añadir a las pestañas
 	        menuPestanas.add(sSesion, pUsuario);
 	        add(menuPestanas);
+	        
+	     // Panel superior con botones circulares
+	        JPanel panelSuperior = new JPanel();
+	        panelSuperior.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+	        // Botón Usuario con imagen
+	        BotonCircular botonUsuario = new BotonCircular("C:\\Users\\diaz.inigo\\git\\proyecto-prog3\\proyecto-prog3\\resources\\images\\user.png", 20);
+	        botonUsuario.addActionListener(e -> new VentanaUsuario());
+	        panelSuperior.add(botonUsuario);
+
+	        // Botón Ajustes sin imagen
+	        BotonCircular botonAjustes = new BotonCircular("C:\\Users\\diaz.inigo\\git\\proyecto-prog3\\proyecto-prog3\\resources\\images\\app-icon.png", 20);
+	        botonAjustes.addActionListener(e -> new VentanaAjustes(this));
+	        panelSuperior.add(botonAjustes);
+
+	        add(panelSuperior, BorderLayout.NORTH);
+
 
 	        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 	        addWindowListener(new WindowAdapter() {
