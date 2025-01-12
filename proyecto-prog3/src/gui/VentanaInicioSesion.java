@@ -32,6 +32,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import db.ConsultasMain;
 import main.DeustoTaller;
 
 public class VentanaInicioSesion extends JFrame {
@@ -182,7 +183,7 @@ public class VentanaInicioSesion extends JFrame {
 		btnIniciarSesion.addActionListener((e) -> {
 			String usuario = textUsuario.getText();
 			String contrasenia = String.valueOf(textContrasenia.getPassword());
-			if (DeustoTaller.login(usuario, contrasenia)) {
+			if (ConsultasMain.login(usuario, contrasenia)) {
 				cargaVentana(usuario);
 				textUsuario.setEditable(false);
 				textContrasenia.setEditable(false);

@@ -190,7 +190,7 @@ public class PanelParking extends JPanel {
 		}
 
 	public void cambioSeleccionPl(String codPlaza) {
-		plazaSel = RendererParking.plazafromBD(codPlaza, (String) plantas.getSelectedItem());
+		plazaSel = ConsultasParking.plazafromBD(codPlaza, (String) plantas.getSelectedItem());
 		if (plazaSel != null) {
 			matricula.setText(plazaSel.getVehiculo().getMatricula());
 			estado.setText(sOcupado);
