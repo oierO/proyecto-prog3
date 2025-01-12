@@ -17,7 +17,7 @@
 	<classpathentry kind="src" path="resources/ResourceBundle/ventanaRegistrarseBundle"/>
 	<classpathentry kind="src" path="resources/ResourceBundle/ventanaInicioSesionh"/>
 	<classpathentry excluding="VentanaInicioSesion/|ventanaInicioSesionh/|ventanaRegistrarseBundle/|ventanaGrafica/|panelServicios/|panelAlmacen/|panelSesion/|especificacionesPieza/|panelParking/|reservaParking/|ventanaInicioSesion/" kind="src" path="resources/ResourceBundle"/>
-	<classpathentry kind="lib" path="lib/sqlite-jdbc-3.47.0.0.jar"/>
 	<classpathentry kind="lib" path="lib/LGoodDatePicker-11.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diaz.inigo/Downloads/sqlite-jdbc-3.47.0.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
