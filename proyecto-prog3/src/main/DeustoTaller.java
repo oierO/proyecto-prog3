@@ -11,6 +11,7 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import db.ConsultasMain;
 import domain.Usuario;
 import gui.VentanaInicioSesion;
 
@@ -34,15 +35,15 @@ public class DeustoTaller {
 		} catch (IOException e) {
 			System.out.println("Error al cargar el fichero de propiedades.");
 		}
-		conectarBD();
-		Thread comprobarBD = new Thread() {
+		ConsultasMain.conectarBD();
+		Thread comprobarBD = new Thread() { //Hilo comprobación estado de la BD (Evitar cierre conexiones)
 
 			@Override
 			public void run() {
 				while (!Thread.interrupted()) {
 					try {
 						if (DeustoTaller.getCon().isClosed()) {
-							conectarBD();
+							ConsultasMain.conectarBD();
 						}
 						System.out.println("A dormir");
 						Thread.sleep(30000);
@@ -62,61 +63,35 @@ public class DeustoTaller {
 		
 	}
 
-	private static void conectarBD() {
-		try {
-			con = DriverManager.getConnection(locDB);
-		} catch (SQLException e) {
-
-			JOptionPane.showMessageDialog(VSesion, "Error al cargar la base de datos:\n" + e, "Error de Inicialización",
-					JOptionPane.ERROR_MESSAGE);
-			System.exit(0);
-		}
+	public static String getLocDB() {
+		return locDB;
 	}
 
-	public static boolean login(String username, String password) {
-		try {
-			String sql = "SELECT password FROM CREDENCIALES WHERE username=?;";
-			PreparedStatement st = con.prepareStatement(sql);
-			st.setString(1, username);
-			ResultSet passCred = st.executeQuery();
-			if (passCred.getString("password").equals(password)) {
-				setUsuarioSesion(Usuario.fromDB(username));
-				return true;
-			} else {
-				return false;
-			}
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(VSesion, e);
-			return false;
-		} catch (NullPointerException e) {
-			return false;
-		}
-
+	public static void setCon(Connection con) {
+		DeustoTaller.con = con;
 	}
 
 	public static Connection getCon() {
 		return con;
 	}
 
-	protected static Usuario getUsuarioSesion() {
-		return usuarioSesion;
-	}
 
 	public static VentanaInicioSesion getVSesion() {
 		return VSesion;
 	}
 
-	protected static void setUsuarioSesion(Usuario usuarioSesion) {
+	public static void setUsuarioSesion(Usuario usuarioSesion) {
 		DeustoTaller.usuarioSesion = usuarioSesion;
 		usuarioSesion.sethUltimaSesion(LocalDateTime.now());
 
 	}
 
+	//Devuelve el objeto del Usuario cuya sesión esta iniciada
 	public static Usuario getSesion() {
 		return usuarioSesion;
 	}
 
-	// Devuelve
+	// Devuelve el Timestamp de un LocalDateTime que reciba (Necesario para BD) 
 	public static Timestamp toTimeStamp(LocalDateTime fecha) {
 		return new Timestamp(fecha.toInstant(ZoneOffset.ofTotalSeconds(3600)).toEpochMilli());
 	}
