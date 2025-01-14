@@ -53,7 +53,7 @@ public class VentanaGrafica extends JFrame {
 	    protected JTable tablaPreguntas;
 
 	    public VentanaGrafica(String usuario, Locale locale) {
-	        setSize(800, 500);
+	        setSize(800, 600);
 	        setLocationRelativeTo(null);
 
 	        JTabbedPane menuPestanas = new JTabbedPane();
