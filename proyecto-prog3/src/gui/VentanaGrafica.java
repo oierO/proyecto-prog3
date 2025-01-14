@@ -111,12 +111,12 @@ public class VentanaGrafica extends JFrame {
 	        panelSuperior.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
 	        // Botón Usuario con imagen
-	        BotonCircular botonUsuario = new BotonCircular("C:\\Users\\diaz.inigo\\git\\proyecto-prog3\\proyecto-prog3\\resources\\images\\user.png", 20);
+	        BotonCircular botonUsuario = new BotonCircular("resources/images/user.png", 20);
 	        botonUsuario.addActionListener(e -> new VentanaUsuario());
 	        panelSuperior.add(botonUsuario);
 
 	        // Botón Ajustes sin imagen
-	        BotonCircular botonAjustes = new BotonCircular("C:\\Users\\diaz.inigo\\git\\proyecto-prog3\\proyecto-prog3\\resources\\images\\app-icon.png", 20);
+	        BotonCircular botonAjustes = new BotonCircular("resources/images/app-icon.png", 20);
 	        botonAjustes.addActionListener(e -> new VentanaAjustes(this));
 	        panelSuperior.add(botonAjustes);
 

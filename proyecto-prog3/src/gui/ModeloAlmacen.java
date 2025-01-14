@@ -2,6 +2,8 @@ package gui;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -15,12 +17,28 @@ public class ModeloAlmacen extends DefaultTableModel {
 	private static final long serialVersionUID = 1L;
 
 	private List<Pieza> lPiezas;
-	private List<String> lTitulos = Arrays.asList("ID", "Código de Pieza", "Nombre de Pieza", "Descripción",
-			"Fabricante", "Precio (€)", "Cantidad en Almacén");
-
-	public ModeloAlmacen(List<Pieza> lPiezas) {
+	private List<String> lTitulos;
+	private Locale currentLocale;
+	private ResourceBundle bundle;
+	private String sID,sCod,sNom,sDes,sFab,sPre,sCant;
+	
+	
+	
+	public ModeloAlmacen(List<Pieza> lPiezas,Locale locale) {
 		super();
 		this.lPiezas = lPiezas;
+		currentLocale = locale;
+		bundle = ResourceBundle.getBundle("ModeloAlmacenBundle",currentLocale);
+		sID =  bundle.getString("sID");
+		sCod =  bundle.getString("sCod");
+		sNom =  bundle.getString("sNom");
+		sDes =  bundle.getString("sDes");
+		sFab =  bundle.getString("sFab");
+		sPre =  bundle.getString("sPre");
+		sCant =  bundle.getString("sCant");
+		lTitulos = Arrays.asList(sID, sCod, sNom, sDes,
+				sFab, sPre,sCant );
+		
 	}
 
 	@Override

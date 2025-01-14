@@ -2,6 +2,8 @@ package gui;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -15,6 +17,8 @@ public class ModeloVehiculos extends DefaultTableModel {
 	private static final long serialVersionUID = 1L;
 	private List<Vehiculo>lVehiculos;
 	private List<String>lTitulos= Arrays.asList("Matricula","Marca","Modelo","Año Modelo");
+	private Locale currentLocale;
+	private ResourceBundle bundle;
 	
 	public ModeloVehiculos(List<Vehiculo> lVehiculos) {
 		super();

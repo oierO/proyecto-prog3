@@ -144,7 +144,8 @@ public class VentanaPedidoServicios extends JFrame {
 
 		// Para la fecha del pedido
 		LocalDate fechaActual = LocalDate.now();
-		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		System.out.println(fechaActual);
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 		String fechaFormateado = fechaActual.format(formato);
 		fechaDePedido = new JFormattedTextField();
 		fechaDePedido.setText("" + fechaFormateado);
@@ -272,11 +273,11 @@ public class VentanaPedidoServicios extends JFrame {
 
 		ArrayList<PedidoServicios> pedidoServicios = new ArrayList<PedidoServicios>();
 		PedidoServicios pedido1 = new PedidoServicios("nombre1", 111111111, LocalDate.now(),
-				convertirTextoALocalDate("01/12/2024", "dd/MM/yyyy"), servicios, "Infromación adicinal 1");
+				convertirTextoALocalDate("01/12/2024", "yyyy/MM/dd"), servicios, "Infromación adicinal 1");
 		PedidoServicios pedido2 = new PedidoServicios("nombre2", 222222222, LocalDate.now(),
-				convertirTextoALocalDate("12/12/2024", "dd/MM/yyyy"), servicios, "Infromación adicinal 2");
+				convertirTextoALocalDate("2024/12/12", "yyyy/MM/dd"), servicios, "Infromación adicinal 2");
 		PedidoServicios pedido3 = new PedidoServicios("nombre3", 333333333, LocalDate.now(),
-				convertirTextoALocalDate("25/12/2025", "dd/MM/yyyy"), servicios, "Infromación adicinal 3");
+				convertirTextoALocalDate("2025/12/15", "yyyy/MM/dd"), servicios, "Infromación adicinal 3");
 
 		pedidoServicios.add(pedido1);
 		pedidoServicios.add(pedido2);

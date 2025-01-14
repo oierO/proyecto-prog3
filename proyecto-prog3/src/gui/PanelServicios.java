@@ -277,7 +277,7 @@ public class PanelServicios extends JPanel {
 						PanelAlmacen panel1 = new PanelAlmacen(currentLocale);
 
 						compra = new ArrayList<Pieza>();
-						modeloPiezasUsuario = new ModeloAlmacen(compra);
+						modeloPiezasUsuario = new ModeloAlmacen(compra,locale);
 						JTable tablaUsuario = new JTable(modeloPiezasUsuario);
 						JScrollPane scrollUsuario = new JScrollPane(tablaUsuario);
 						JTable tabla = ((PanelAlmacen) panel1).getTabla();
@@ -335,7 +335,7 @@ public class PanelServicios extends JPanel {
 									JOptionPane.showMessageDialog(DeustoTaller.getVSesion(), "");
 								}
 								
-								modeloPiezasUsuario = new ModeloAlmacen(compra);
+								modeloPiezasUsuario = new ModeloAlmacen(compra,locale);
 								tablaUsuario.setModel(modeloPiezasUsuario);
 
 							}
@@ -355,7 +355,7 @@ public class PanelServicios extends JPanel {
 								totalLblPrecio=totalLblPrecio-total;
 								lblPrecio.setText(String.format("%s %.2f €",sPrecioTotal,totalLblPrecio));
 								compra.remove(fila);
-								modeloPiezasUsuario = new ModeloAlmacen(compra);
+								modeloPiezasUsuario = new ModeloAlmacen(compra,locale);
 								tablaUsuario.setModel(modeloPiezasUsuario);
 								JOptionPane.showMessageDialog(null, sProductoEliminado, sCompra,
 										JOptionPane.INFORMATION_MESSAGE);
@@ -366,7 +366,7 @@ public class PanelServicios extends JPanel {
 						});
 						botonFinalizar.addActionListener(c -> {
 							if(!compra.isEmpty()) {
-								modeloPiezasUsuario = new ModeloAlmacen(compra);
+								modeloPiezasUsuario = new ModeloAlmacen(compra,locale);
 								tablaUsuario.setModel(modeloPiezasUsuario);
 								System.out.println(lblPrecio.getText());
 								JOptionPane.showMessageDialog(null, lblPrecio.getText() + "€", sPrecioTotal,
@@ -400,7 +400,7 @@ public class PanelServicios extends JPanel {
 						System.out.println(pos);
 						List<Pieza>compra= pi.get(pos);
 						System.out.println(compra);
-						modeloPiezasUsuario= new ModeloAlmacen(compra);
+						modeloPiezasUsuario= new ModeloAlmacen(compra,locale);
 						tablaUsuario.setModel(modeloPiezasUsuario);
 						for(int i=0;i<compra.size();i++) {
 							totalLblPrecio= totalLblPrecio+compra.get(i).getPrecio();

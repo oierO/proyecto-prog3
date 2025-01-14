@@ -39,7 +39,7 @@ public class PedidoServicios {
 		this.fechaDePedido = fechaDePedido;
 	}
 
-	public LocalDate fechaDeRealizacion() {
+	public LocalDate getfechaDeRealizacion() {
 		return fechaDeRealizacion;
 	}
 
