@@ -83,7 +83,7 @@ public class PanelAlmacen extends JPanel {
 		panelFiltro.add(cbFabricante);
 		botonBorrarFiltrado = new JButton(bundle.getString("botonBorrarFiltrado"));
 		panelFiltro.add(botonBorrarFiltrado);
-		modeloTabla = new ModeloAlmacen(null);
+		modeloTabla = new ModeloAlmacen(null, locale);
 		tabla = new JTable(modeloTabla);
 		JScrollPane scroll = new JScrollPane(tabla);
 		pTabla.add(scroll);
