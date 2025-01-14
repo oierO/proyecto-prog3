@@ -403,6 +403,7 @@ public class PanelServicios extends JPanel {
 						modeloPiezasUsuario= new ModeloAlmacen(compra,locale);
 						tablaUsuario.setModel(modeloPiezasUsuario);
 						for(int i=0;i<compra.size();i++) {
+							compra.get(i).setCantidadAlmacen(1);
 							totalLblPrecio= totalLblPrecio+compra.get(i).getPrecio();
 							
 						}
