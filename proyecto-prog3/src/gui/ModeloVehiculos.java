@@ -20,6 +20,8 @@ public class ModeloVehiculos extends DefaultTableModel {
 	private Locale currentLocale;
 	private ResourceBundle bundle;
 	
+	
+	
 	public ModeloVehiculos(List<Vehiculo> lVehiculos) {
 		super();
 		this.lVehiculos = lVehiculos;
