@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -42,19 +43,37 @@ public class VentanaVisualiazarPedidos extends JFrame {
 		setLocationRelativeTo(null);
 		
 		JScrollPane panelCentral = new JScrollPane();
+		JPanel panelBotones = new JPanel();
 		//Tablas
 		this.listaServiciosPedidos = listaServiciosPedidos;
 		modeloVisualizarPedidos = new ModeloVisualizarPedidos(this.listaServiciosPedidos, locale);
 		tablaPedidos = new JTable(modeloVisualizarPedidos);
 		
 		
+		//Botones
+		botonGuardar = new JButton(bundle.getString("botonGuardar"));
+		botonBorrar = new JButton(bundle.getString("botonBorrar"));
+		
 		panelCentral.add(tablaPedidos);
+		panelBotones.add(botonGuardar);
+		panelBotones.add(botonBorrar);
+		
 		
 		this.add(panelCentral);
+		this.add(panelBotones,BorderLayout.SOUTH);
 		this.setVisible(true);
 		
 		
 		
 		
 	}
+	
+	
+	public static void main(String[] args) {
+		
+		Locale cuLocale=Locale.getDefault();
+		
+		new VentanaVisualiazarPedidos("Patata", null, cuLocale );
+	}
+	
 }
