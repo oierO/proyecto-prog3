@@ -30,8 +30,10 @@ public class ConsultasMain {
 			ResultSet passCred = st.executeQuery();
 			if (passCred.getString("password").equals(password)) {
 				DeustoTaller.setUsuarioSesion(Usuario.fromDB(username));
+				passCred.close();
 				return true;
 			} else {
+				passCred.close();
 				return false;
 			}
 		} catch (SQLException e) {
