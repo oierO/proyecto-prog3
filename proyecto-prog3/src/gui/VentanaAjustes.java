@@ -4,8 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 public class VentanaAjustes extends JFrame {
 
@@ -15,22 +17,35 @@ public class VentanaAjustes extends JFrame {
     private final String CONFIG_FILE = "config.properties"; // Ruta del archivo de configuración
     private JCheckBox chkModoOscuro;
     private Map<Component, Color[]> coloresPredeterminados; // Map para guardar los colores originales
-
-    public VentanaAjustes(JFrame ventanaPrincipal) {
+    private Locale currentLocale;
+    private ResourceBundle bundle;
+    private String sTitulo,sModOs,sDesNot,sNotDes,sNotHab;
+    
+    public VentanaAjustes(JFrame ventanaPrincipal,Locale locale) {
         this.ventanaPrincipal = ventanaPrincipal;
         config = new Properties();
         coloresPredeterminados = new HashMap<>();
-
+        
+        
+        //Idioma 
+        currentLocale = locale;
+        bundle = ResourceBundle.getBundle("VentanaAjustesBundle",currentLocale);
+        sTitulo = bundle.getString("sTitulo");
+        sModOs = bundle.getString("sModOs");
+        sDesNot = bundle.getString("sDesNot");
+        sNotDes = bundle.getString("sNotDes");
+        sNotHab = bundle.getString("sNotHab");
+        
         // Cargar configuración
         boolean modoOscuro = cargarConfiguracion();
 
-        setTitle("Ajustes de Personalización");
+        setTitle(sTitulo);
         setSize(300, 200);
         setLocationRelativeTo(null);
         setLayout(new GridLayout(2, 1));
 
         // Checkbox para activar/desactivar el modo oscuro
-        chkModoOscuro = new JCheckBox("Modo Oscuro", modoOscuro);
+        chkModoOscuro = new JCheckBox(sModOs, modoOscuro);
         chkModoOscuro.addActionListener(e -> {
             boolean activar = chkModoOscuro.isSelected();
             aplicarModoOscuro(activar);
@@ -38,12 +53,12 @@ public class VentanaAjustes extends JFrame {
         });
 
         // Checkbox para habilitar/deshabilitar notificaciones
-        JCheckBox chkNotificaciones = new JCheckBox("Deshabilitar Notificaciones");
+        JCheckBox chkNotificaciones = new JCheckBox(sDesNot);
         chkNotificaciones.addActionListener(e -> {
             if (chkNotificaciones.isSelected()) {
-                JOptionPane.showMessageDialog(null, "Notificaciones deshabilitadas.");
+                JOptionPane.showMessageDialog(null, sNotDes);
             } else {
-                JOptionPane.showMessageDialog(null, "Notificaciones habilitadas.");
+                JOptionPane.showMessageDialog(null, sNotHab);
             }
         });
 
