@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -23,23 +25,37 @@ public class Recibo_Compra extends JDialog{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private Locale currentLocale;
+	private ResourceBundle bundle;
+	private String sNombre,sApellido,sFecha,sCodigoPostal,sInfo,sPiezasCom,sCerrar;
+	
 
-	public Recibo_Compra(ArrayList<Pieza>compra) {
+	public Recibo_Compra(ArrayList<Pieza>compra,Locale locale) {
+		currentLocale = locale;
+		bundle = ResourceBundle.getBundle("ReciboCompraBundle",currentLocale);
+		sNombre = bundle.getString("sNombre");
+		sApellido = bundle.getString("sApellido");
+		sFecha = bundle.getString("sFecha");
+		sCodigoPostal = bundle.getString("sCodigoPostal");
+		sInfo = bundle.getString("sInfo");
+		sPiezasCom = bundle.getString("sPiezasCom");
+		sCerrar = bundle.getString("sCerrar");
+		
 		JPanel clientePanel = new JPanel(new GridLayout(4, 2, 5, 5));
-        clientePanel.setBorder(BorderFactory.createTitledBorder("Información del Cliente"));
+        clientePanel.setBorder(BorderFactory.createTitledBorder(sInfo));
         
-        clientePanel.add(new JLabel("Nombre:"));
+        clientePanel.add(new JLabel(sNombre));
         clientePanel.add(new JLabel());
-        clientePanel.add(new JLabel("Apellidos:"));
+        clientePanel.add(new JLabel(sApellido));
         clientePanel.add(new JLabel());
-        clientePanel.add(new JLabel("Fecha:"));
+        clientePanel.add(new JLabel(sFecha));
         clientePanel.add(new JLabel());
-        clientePanel.add(new JLabel("Código Postal:"));
+        clientePanel.add(new JLabel(sCodigoPostal));
         clientePanel.add(new JLabel());
 
         // Panel central con la lista de piezas compradas
         JPanel piezasPanel = new JPanel(new BorderLayout());
-        piezasPanel.setBorder(BorderFactory.createTitledBorder("Piezas Compradas"));
+        piezasPanel.setBorder(BorderFactory.createTitledBorder(sPiezasCom));
         
         DefaultListModel<String> piezasModel = new DefaultListModel<>();
         for (Pieza pieza : compra) {
@@ -51,7 +67,7 @@ public class Recibo_Compra extends JDialog{
         piezasPanel.add(scrollPane, BorderLayout.CENTER);
 
         // Botón de cierre
-        JButton cerrarButton = new JButton("Cerrar");
+        JButton cerrarButton = new JButton(sCerrar);
         cerrarButton.addActionListener(e -> dispose());
 
         // Agregar componentes al JDialog
@@ -63,7 +79,9 @@ public class Recibo_Compra extends JDialog{
 	}
 	
 	public static void main(String[] args) {
-		new Recibo_Compra(null);
+		Locale curLocale= Locale.getDefault();
+		
+		new Recibo_Compra(null,curLocale);
 	}
 }
 

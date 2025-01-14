@@ -371,7 +371,7 @@ public class PanelServicios extends JPanel {
 								System.out.println(lblPrecio.getText());
 								JOptionPane.showMessageDialog(null, lblPrecio.getText() + "€", sPrecioTotal,
 										JOptionPane.INFORMATION_MESSAGE);
-								new Recibo_Compra(compra);
+								new Recibo_Compra(compra,currentLocale);
 								
 							}else {
 								JOptionPane.showMessageDialog(null, sPrimeroDebesProducto, sError, JOptionPane.WARNING_MESSAGE);
