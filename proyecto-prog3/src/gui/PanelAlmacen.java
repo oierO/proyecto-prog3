@@ -129,7 +129,7 @@ public class PanelAlmacen extends JPanel {
 			insertarPiezas(cargarTabla());
 			cont++;
 		} else {
-			ModeloAlmacen modeloTabla = new ModeloAlmacen(cargarBD());
+			ModeloAlmacen modeloTabla = new ModeloAlmacen(cargarBD(),currentLocale);
 			tabla.setModel(modeloTabla);
 		}
 		tabla.getTableHeader().setReorderingAllowed(false);// Para que no se puedan mover las columnas
@@ -233,7 +233,7 @@ public class PanelAlmacen extends JPanel {
 					}
 				}
 			}
-			modeloTabla = new ModeloAlmacen(lp);
+			modeloTabla = new ModeloAlmacen(lp,currentLocale);
 			tabla.setModel(modeloTabla);
 
 		});
@@ -253,7 +253,7 @@ public class PanelAlmacen extends JPanel {
 					}
 				}
 			}
-			modeloTabla = new ModeloAlmacen(lp);
+			modeloTabla = new ModeloAlmacen(lp,currentLocale);
 			tabla.setModel(modeloTabla);
 
 		});
@@ -262,7 +262,7 @@ public class PanelAlmacen extends JPanel {
 			cbTipo.setSelectedIndex(-1);
 			cbFabricante.setSelectedIndex(-1);
 			txtFiltro.setText("");
-			modeloTabla = new ModeloAlmacen(cargarBD());
+			modeloTabla = new ModeloAlmacen(cargarBD(),currentLocale);
 			tabla.setModel(modeloTabla);
 
 		});
@@ -352,7 +352,7 @@ public class PanelAlmacen extends JPanel {
 					Pieza p = new Pieza(id, codigo, nombre, descripcion, fabricante, precio, cantidad);
 					lp.add(p);
 
-					modeloTabla = new ModeloAlmacen(lp);
+					modeloTabla = new ModeloAlmacen(lp,currentLocale);
 					tabla.setModel(modeloTabla);
 				} catch (NumberFormatException e) {
 					e.printStackTrace();
@@ -379,7 +379,7 @@ public class PanelAlmacen extends JPanel {
 
 		ArrayList<Pieza> lp = (ArrayList<Pieza>) cargarTabla();
 		if (txtFiltro.getText().equals("")) {
-			modeloTabla = new ModeloAlmacen(lp);
+			modeloTabla = new ModeloAlmacen(lp,currentLocale);
 
 		} else {
 
@@ -389,7 +389,7 @@ public class PanelAlmacen extends JPanel {
 					lpFiltradas.add(p);
 				}
 			}
-			modeloTabla = new ModeloAlmacen(lpFiltradas);
+			modeloTabla = new ModeloAlmacen(lpFiltradas,currentLocale);
 		}
 		tabla.setModel(modeloTabla);
 		configurarRendererResaltado();
@@ -494,7 +494,7 @@ public class PanelAlmacen extends JPanel {
 		cbTipo.setSelectedIndex(-1);
 		cbFabricante.setSelectedIndex(-1);
 		txtFiltro.setText("");
-		modeloTabla = new ModeloAlmacen(cargarBD());
+		modeloTabla = new ModeloAlmacen(cargarBD(),currentLocale);
 		tabla.setModel(modeloTabla);
 	}
 

@@ -137,7 +137,7 @@ public class PanelSesion extends JPanel {
 	        labelVehiculoInfo.setFont(new Font("Arial", Font.PLAIN, 18));
 	        panelVehiculo.add(labelVehiculoInfo);
 	        */
-	        ModeloVehiculos modelo= new ModeloVehiculos(vehiculos);
+	        ModeloVehiculos modelo= new ModeloVehiculos(vehiculos,currentLocale);
 	        JTable tablaVehiculos= new JTable(modelo);
 	        JScrollPane scroll= new JScrollPane(tablaVehiculos);
 	        panelVehiculo.add(scroll);
