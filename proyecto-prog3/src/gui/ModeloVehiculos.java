@@ -16,15 +16,27 @@ public class ModeloVehiculos extends DefaultTableModel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private List<Vehiculo>lVehiculos;
-	private List<String>lTitulos= Arrays.asList("Matricula","Marca","Modelo","Año Modelo");
+	private List<String>lTitulos;
 	private Locale currentLocale;
 	private ResourceBundle bundle;
+	private String sMatricula,sMarca,sModelo,sAM;
 	
-	
-	
-	public ModeloVehiculos(List<Vehiculo> lVehiculos) {
+	public ModeloVehiculos(List<Vehiculo> lVehiculos,Locale locale) {
 		super();
 		this.lVehiculos = lVehiculos;
+		
+		//idioma 
+		currentLocale = locale;
+		bundle = ResourceBundle.getBundle("ModeloVehiculosBundle", currentLocale);
+		sMatricula = bundle.getString("sMatricula");
+		sMarca = bundle.getString("sMarca");
+		sModelo = bundle.getString("sModelo");
+		sAM = bundle.getString("sAM");
+		
+		lTitulos= Arrays.asList(sMatricula,sMarca,sModelo,sAM);
+		
+		
+		
 	}
 	@Override
 	public void addRow(Object[] rowData) {

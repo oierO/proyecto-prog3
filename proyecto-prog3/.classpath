@@ -6,6 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="resources/ResourceBundle/modeloVehiculos"/>
 	<classpathentry kind="src" path="resources/ResourceBundle/modeloAlmacen"/>
 	<classpathentry kind="src" path="resources/ResourceBundle/ventanaVisualizarPedidos"/>
 	<classpathentry kind="src" path="resources/ResourceBundle/ventanaInicioSesion"/>
@@ -17,7 +18,7 @@
 	<classpathentry kind="src" path="resources/ResourceBundle/panelServicios"/>
 	<classpathentry kind="src" path="resources/ResourceBundle/ventanaGrafica"/>
 	<classpathentry kind="src" path="resources/ResourceBundle/ventanaRegistrarseBundle"/>
-	<classpathentry excluding="VentanaInicioSesion/|ventanaInicioSesionh/|ventanaRegistrarseBundle/|ventanaGrafica/|panelServicios/|panelAlmacen/|panelSesion/|especificacionesPieza/|panelParking/|reservaParking/|ventanaInicioSesion/|ventanaVisualizarPedidos/|modeloAlmacen/" kind="src" path="resources/ResourceBundle"/>
+	<classpathentry excluding="VentanaInicioSesion/|ventanaInicioSesionh/|ventanaRegistrarseBundle/|ventanaGrafica/|panelServicios/|panelAlmacen/|panelSesion/|especificacionesPieza/|panelParking/|reservaParking/|ventanaInicioSesion/|ventanaVisualizarPedidos/|modeloAlmacen/|modeloVehiculos/" kind="src" path="resources/ResourceBundle"/>
 	<classpathentry kind="lib" path="lib/LGoodDatePicker-11.2.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/diaz.inigo/Downloads/sqlite-jdbc-3.47.0.0.jar"/>
 	<classpathentry kind="lib" path="lib/sqlite-jdbc-3.46.1.3.jar"/>
