@@ -117,7 +117,7 @@ public class VentanaGrafica extends JFrame {
 
 	        // Botón Ajustes sin imagen
 	        BotonCircular botonAjustes = new BotonCircular("resources/images/app-icon.png", 20);
-	        botonAjustes.addActionListener(e -> new VentanaAjustes(this));
+	        botonAjustes.addActionListener(e -> new VentanaAjustes(this,currentLocale));
 	        panelSuperior.add(botonAjustes);
 
 	        add(panelSuperior, BorderLayout.NORTH);

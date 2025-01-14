@@ -44,7 +44,7 @@ public class VentanaPedidoServicios extends JFrame {
 	private JButton botonCancelar;
 	private Locale curreLocale;
 	private ResourceBundle idiomaBundle;
-	private String sTitulo;
+	private String sTitulo,sBotonCancelar,sBotonReservar,sErrorFechTel,sErrorTel,sErrorFech;
 
 	public VentanaPedidoServicios(String usuario, ArrayList<PedidoServicios> listaServiciosPedidos,
 			ArrayList<String> serviciosElegidos, Locale locale) {
@@ -58,7 +58,12 @@ public class VentanaPedidoServicios extends JFrame {
 		fechaDePedidoJLabel = new JLabel(idiomaBundle.getString("fechaDePedidoJLabel"));
 		fechaDeRealizacionJLabel = new JLabel(idiomaBundle.getString("fechaDeRealizacionJLabel"));
 		informacionAdicionalJLabel = new JLabel(idiomaBundle.getString("informacionAdicionalJLabel"));
-		sTitulo = idiomaBundle.getString("sTitulo");
+		sTitulo = idiomaBundle.getString("sTitulo");	
+		sBotonCancelar = idiomaBundle.getString("sBotonCancelar");
+		sBotonReservar= idiomaBundle.getString("sBotonReservar");
+		sErrorFechTel = idiomaBundle.getString("sErrorFechTel");
+		sErrorTel = idiomaBundle.getString("sErrorTel");
+		sErrorFech = idiomaBundle.getString("sErrorFech");
 		
 		// Configuraciones de la ventana
 		setTitle(sTitulo);
@@ -129,7 +134,7 @@ public class VentanaPedidoServicios extends JFrame {
 				}
 
 				if (text.length() > 9) {
-					throw new ParseException("El telefono introducido no es correcto", 0);
+					throw new ParseException(sErrorTel, 0);
 				}
 				return super.stringToValue(text);
 			}
@@ -154,7 +159,7 @@ public class VentanaPedidoServicios extends JFrame {
 		panel.add(fechaDePedido);
 
 		// Para la fecha de realización
-		fechaDeRealizacion = crearFechaFormateado("##/##/####");
+		fechaDeRealizacion = crearFechaFormateado("####/##/##");
 		panel.add(fechaDeRealizacionJLabel);
 		panel.add(fechaDeRealizacion);
 
@@ -168,7 +173,7 @@ public class VentanaPedidoServicios extends JFrame {
 		panel.add(informacionAdicional);
 
 		// para reservar
-		botonReservar = new JButton("Reservar");
+		botonReservar = new JButton(sBotonReservar);
 		botonReservar.addActionListener(new ActionListener() {
 			// Esto no cambia según el idioma
 			// Solo estoy sacando por consola lo que ha rellenado el usuario en el
@@ -182,7 +187,7 @@ public class VentanaPedidoServicios extends JFrame {
 				System.out.println("Fecha de realización: " + fechaDeRealizacion.getText());
 				System.out.println("Información adicional: " + informacionAdicional.getText());
 
-				LocalDate fecha1 = convertirTextoALocalDate(fechaDeRealizacion.getText(), "dd/MM/yyyy");
+				LocalDate fecha1 = convertirTextoALocalDate(fechaDeRealizacion.getText(), "yyyy/MM/dd");
 
 				// Compruebo si los campos importantes están rellenados
 				if (nombre.getText().isEmpty() || telefono.getText().isEmpty()
@@ -194,16 +199,16 @@ public class VentanaPedidoServicios extends JFrame {
 				} else if (fecha1.isBefore(fechaActual)
 						&& (telefono.getText().length() < 9 || telefono.getText().charAt(0) != '6')) {
 					System.out.println("\n--Mensaje de error--\n");
-					System.out.println("Error: La fecha y el telefono introducidos no son correctos.");
+					System.out.println(sErrorFechTel);
 
 					// Compruebo si el telefono introducido es correcto
 				} else if (telefono.getText().length() < 9 || telefono.getText().charAt(0) != '6') {
 					System.out.println("\n--Mensaje de error--\n");
-					System.out.println("Error: El telefono introducido no es válido.");
+					System.out.println(sErrorTel);
 
 				} else if (fecha1.isBefore(fechaActual)) {
 					System.out.println("\n--Mensaje de error--\n");
-					System.out.println("Error: La fecha introducida no es válida.");
+					System.out.println(sErrorFech);
 
 				} else {
 					PedidoServicios pedido = new PedidoServicios(nombre.getText(), Integer.parseInt(telefono.getText()),
@@ -219,7 +224,7 @@ public class VentanaPedidoServicios extends JFrame {
 		panel.add(botonReservar);
 
 		// boton cancelar
-		botonCancelar = new JButton("Cancelar");
+		botonCancelar = new JButton(sBotonCancelar);
 		botonCancelar.addActionListener(e -> dispose());
 
 		panel.add(botonCancelar);
@@ -261,6 +266,12 @@ public class VentanaPedidoServicios extends JFrame {
 		fechaDePedidoJLabel.setText(idiomaBundle.getString("fechaDePedidoJLabel"));
 		fechaDeRealizacionJLabel.setText(idiomaBundle.getString("fechaDeRealizacionJLabel"));
 		informacionAdicionalJLabel.setText(idiomaBundle.getString("informacionAdicionalJLabel"));
+		botonCancelar.setText(idiomaBundle.getString("sBotonCancelar")); 
+		botonReservar.setText(idiomaBundle.getString("sBotonReservar"));
+		sErrorFechTel = idiomaBundle.getString("sErrorFechTel");
+		sErrorTel = idiomaBundle.getString("sErrorTel");
+		sErrorFech = idiomaBundle.getString("sErrorFech");
+		
     }
 
 	public static void main(String[] args) {
@@ -273,7 +284,7 @@ public class VentanaPedidoServicios extends JFrame {
 
 		ArrayList<PedidoServicios> pedidoServicios = new ArrayList<PedidoServicios>();
 		PedidoServicios pedido1 = new PedidoServicios("nombre1", 111111111, LocalDate.now(),
-				convertirTextoALocalDate("01/12/2024", "yyyy/MM/dd"), servicios, "Infromación adicinal 1");
+				convertirTextoALocalDate("2024/12/01", "yyyy/MM/dd"), servicios, "Infromación adicinal 1");
 		PedidoServicios pedido2 = new PedidoServicios("nombre2", 222222222, LocalDate.now(),
 				convertirTextoALocalDate("2024/12/12", "yyyy/MM/dd"), servicios, "Infromación adicinal 2");
 		PedidoServicios pedido3 = new PedidoServicios("nombre3", 333333333, LocalDate.now(),

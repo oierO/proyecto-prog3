@@ -1,6 +1,11 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -9,12 +14,15 @@ import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.plaf.basic.BasicTreeUI.TreeCancelEditingAction;
 
+
 import domain.PedidoServicios;
+import main.DeustoTaller;
 
 public class VentanaVisualiazarPedidos extends JFrame {	
 	/**
@@ -27,8 +35,9 @@ public class VentanaVisualiazarPedidos extends JFrame {
 	private Locale currentLocale;
 	private ResourceBundle bundle;
 	private JButton botonGuardar,botonBorrar;
-	private JTable tablaPedidos;
+	private static JTable tablaPedidos;
 	private ModeloVisualizarPedidos modeloVisualizarPedidos;
+	private static String sSeguro,sConfi,sPrimeroDebesFila,sErrorEnSeleccion;
 	
 
 	public VentanaVisualiazarPedidos (String usuario, ArrayList<PedidoServicios> listaServiciosPedidos,
@@ -38,7 +47,10 @@ public class VentanaVisualiazarPedidos extends JFrame {
 		currentLocale = locale;
 		bundle = ResourceBundle.getBundle("VentanaVisualizarPedidosBundle", currentLocale);
 		pedidosActuales = bundle.getString("pedidosActuales");
-
+		sSeguro = bundle.getString("sSeguro");
+		sConfi = bundle.getString("sConfi");
+		sPrimeroDebesFila = bundle.getString("sPrimeroDebesFila");
+		sErrorEnSeleccion = bundle.getString("sErrorEnSeleccion");
 		
 		this.list = listaServiciosPedidos;
 		
@@ -48,7 +60,7 @@ public class VentanaVisualiazarPedidos extends JFrame {
 		setSize(800, 600);
 		setLocationRelativeTo(null);
 		
-		JScrollPane panelCentral = new JScrollPane();
+
 		JPanel panelBotones = new JPanel();
 		//Tablas
 
@@ -57,9 +69,39 @@ public class VentanaVisualiazarPedidos extends JFrame {
 		tablaPedidos = new JTable(modeloVisualizarPedidos);
 		
 		
+
+		
 		//Botones
 		botonGuardar = new JButton(bundle.getString("botonGuardar"));
 		botonBorrar = new JButton(bundle.getString("botonBorrar"));
+		
+		botonBorrar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int confirmacion = JOptionPane.showConfirmDialog(null, sSeguro,
+						sConfi, JOptionPane.YES_NO_OPTION);
+				if(confirmacion==JOptionPane.YES_OPTION) {
+					borrarDeLaLista(list);
+					repaint();
+				} 
+				
+			}
+		});
+		
+		botonGuardar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int confirmacion = JOptionPane.showConfirmDialog(null, sSeguro,
+						sConfi, JOptionPane.YES_NO_OPTION);
+				if(confirmacion==JOptionPane.YES_OPTION) {
+					System.out.println("Guardar");
+				} 
+				
+			}
+		});
+		
 		
 		this.add(tablaPedidos,BorderLayout.CENTER);
 		panelBotones.add(botonGuardar);
@@ -72,6 +114,41 @@ public class VentanaVisualiazarPedidos extends JFrame {
 		
 	}
 	
+	
+	private static void borrarDeLaLista(ArrayList<PedidoServicios> listaServiciosPedidos) {
+		int fila = tablaPedidos.getSelectedRow();
+		if(fila==-1) {
+			JOptionPane.showMessageDialog(null, sPrimeroDebesFila,
+					sErrorEnSeleccion, JOptionPane.ERROR_MESSAGE);
+		} else {
+			listaServiciosPedidos.remove(fila);
+		}
+		
+	}
+	
+	private static void guardarLaLista(ArrayList<PedidoServicios> listaServiciosPedidos) {
+		
+		try {
+			Connection conn = DeustoTaller.getCon();
+			String insertSQL = "INSERT INTO PEDIDOS VALUES (?,?,?,?,?)";
+			
+			
+			PreparedStatement preparedStmt = conn.prepareStatement(insertSQL);
+			for(PedidoServicios p:listaServiciosPedidos) {
+				
+		   
+			}
+			
+			
+		} catch (Exception e) {
+			
+			System.out.println("Error en guardar la lista");
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
 	
 	private static LocalDate convertirTextoALocalDate(String fechaEnTexto, String forma) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(forma);
