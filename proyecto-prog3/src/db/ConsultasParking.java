@@ -27,7 +27,6 @@ public class ConsultasParking {
 			stmt.setString(2, PanelParking.getPlazaSel().getIdentificador());
 			stmt.setString(3, PanelParking.getPlazaSel().getFechaCaducidad().format(formateador));
 			stmt.executeUpdate();
-			stmt.close();
 			JOptionPane.showMessageDialog(DeustoTaller.getVSesion(), PanelParking.getLocalized("sPlazaLiberada"));
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(DeustoTaller.getVSesion(), PanelParking.getLocalized("sErrorLiberar") + e.getLocalizedMessage());
@@ -61,7 +60,6 @@ public class ConsultasParking {
 			Connection con = DeustoTaller.getCon();
 			Statement stm = con.createStatement();
 			ResultSet resultado = stm.executeQuery(sql);
-			resultado.close();
 			return resultado;
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(DeustoTaller.getVSesion().getContentPane(),
