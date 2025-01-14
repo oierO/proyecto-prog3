@@ -115,7 +115,7 @@ public class PanelParking extends JPanel {
 		Image img = new ImageIcon("resources/images/modificar.png").getImage();
 		img = img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		bModificar.setIcon(new ImageIcon(img));
-		bLiberar = new JButton(bundle.getString("bModificar"));
+		bLiberar = new JButton(bundle.getString("bLiberar"));
 		img = new ImageIcon("resources/images/cancelar.png").getImage();
 		img = img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		bLiberar.setIcon(new ImageIcon(img));
@@ -164,7 +164,7 @@ public class PanelParking extends JPanel {
 		setFocusable(false);
 		grupoBotones = new ButtonGroup();
 		plazas.setLayout(new GridLayout(FILAS_PARKING, COLUMNAS_PARKING, 10, 10));
-		plazas.setBorder(BorderFactory.createTitledBorder(sPlaza));
+		plazas.setBorder(BorderFactory.createTitledBorder(estadoLabel.getText()));
 		for (int i = 0; i <= FILAS_PARKING - 1; i++) {
 			for (int t = 0; t <= COLUMNAS_PARKING - 1; t++) {
 				JToggleButton boton = new JToggleButton(String.format("%s%s", (char) (t + 65), i));
@@ -211,6 +211,7 @@ public class PanelParking extends JPanel {
 			}
 		} else {
 			bLiberar.setVisible(false);
+			bModificar.setVisible(false);
 			matricula.setText("#########");
 			estado.setText(sLibre2);
 			estado.setBackground(Color.GREEN);
