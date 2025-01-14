@@ -61,12 +61,9 @@ public class VentanaVisualiazarPedidos extends JFrame {
 		botonGuardar = new JButton(bundle.getString("botonGuardar"));
 		botonBorrar = new JButton(bundle.getString("botonBorrar"));
 		
-		panelCentral.add(tablaPedidos);
+		this.add(tablaPedidos,BorderLayout.CENTER);
 		panelBotones.add(botonGuardar);
 		panelBotones.add(botonBorrar);
-		
-		
-		this.add(panelCentral,BorderLayout.CENTER);
 		this.add(panelBotones,BorderLayout.SOUTH);
 		this.setVisible(true);
 		
