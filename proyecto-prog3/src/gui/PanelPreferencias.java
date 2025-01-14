@@ -19,6 +19,7 @@ public class PanelPreferencias extends JPanel {
    private String[] lPreferencias;
    private String usuario;
    private JTabbedPane pestañas;
+   private String sValEnvi,sComent,sAreaNotificaciones,sTituNoti,sMesNot,sEnNot,sNotEnviUser,sCompleta;
    
    
    public PanelPreferencias(ResourceBundle bundle, String usuario) {
@@ -30,6 +31,15 @@ public class PanelPreferencias extends JPanel {
            bundle.getString("sValoraciones"),
            bundle.getString("sSoporte")
        };
+       
+       sValEnvi = bundle.getString("sValEnvi");
+       sComent = bundle.getString("sComent");
+       sAreaNotificaciones = bundle.getString("sAreaNotificaciones");
+       sTituNoti = bundle.getString("sTituNoti");
+       sMesNot = bundle.getString("sMesNot");
+       sEnNot = bundle.getString("sEnNot");
+       sNotEnviUser = bundle.getString("sNotEnviUser");
+       sCompleta = bundle.getString("sCompleta");
        setLayout(new BorderLayout());
        
        // Panel izquierdo con botones de preferencias
@@ -56,25 +66,25 @@ public class PanelPreferencias extends JPanel {
    private void manejarPreferencia(String pref) {
        pestañas.removeAll(); // Limpiar todas las pestañas
        if (pref.equals(bundle.getString("sNotificaciones"))) {
-           pestañas.addTab("Leer Notificaciones", crearPanelLeerNotificaciones());
+           pestañas.addTab(bundle.getString("sLeerNoti"), crearPanelLeerNotificaciones());
            if (usuario.equals("deustotaller")) {
-               pestañas.addTab("Enviar Notificaciones", crearPanelEnviarNotificaciones());
+               pestañas.addTab(bundle.getString("sEnviarNoti"), crearPanelEnviarNotificaciones());
            }
        } else if (pref.equals(bundle.getString("sHistorial"))) {
-           pestañas.addTab("Historial", crearPanelHistorial());
+           pestañas.addTab(bundle.getString("sHistorial"), crearPanelHistorial());
        } else if (pref.equals(bundle.getString("sValoraciones"))) {
-           pestañas.addTab("Valoraciones", crearPanelValoraciones());
+           pestañas.addTab(bundle.getString("sValoraciones"), crearPanelValoraciones());
        } else if (pref.equals(bundle.getString("sSoporte"))) {
-           pestañas.addTab("Soporte", crearPanelSoporte());
+           pestañas.addTab(bundle.getString("sSoporte"), crearPanelSoporte());
        }
    }
    
    // Método para actualizar el contenido dinámicamente
    public void actualizarContenido() {
        pestañas.removeAll(); // Limpiar todas las pestañas existentes
-       pestañas.addTab("Notificaciones", crearPanelLeerNotificaciones());
+       pestañas.addTab(bundle.getString("sNotificaciones"), crearPanelLeerNotificaciones());
        if (usuario.equals("deustotaller")) {
-           pestañas.addTab("Enviar Notificaciones", crearPanelEnviarNotificaciones());
+           pestañas.addTab(bundle.getString("sEnviarNoti"), crearPanelEnviarNotificaciones());
        }
    }
    private JPanel crearPanelValoraciones() {
@@ -100,7 +110,7 @@ public class PanelPreferencias extends JPanel {
                    JOptionPane.showMessageDialog(panelValoraciones, bundle.getString("sSelCal"));
                    return;
                }
-               JOptionPane.showMessageDialog(panelValoraciones, "Valoración enviada: " + valoracion + "\nComentario: " + comentario);
+               JOptionPane.showMessageDialog(panelValoraciones, sValEnvi + valoracion + sComent + comentario);
            }
        });
        panelValoraciones.add(botonEnviar, BorderLayout.SOUTH);
@@ -131,7 +141,7 @@ public class PanelPreferencias extends JPanel {
        JPanel panel = new JPanel(new BorderLayout());
        JTextArea areaNotificaciones = new JTextArea(10, 30);
        areaNotificaciones.setEditable(false);
-       areaNotificaciones.setText("1. Bienvenido a DeustoTaller\n2. Descuento del 10% en revisiones\n3. Aviso: Mantenimiento del sistema el 20/01/2025");
+       areaNotificaciones.setText(sAreaNotificaciones);
        JScrollPane scroll = new JScrollPane(areaNotificaciones);
        panel.add(scroll, BorderLayout.CENTER);
        return panel;
@@ -139,13 +149,13 @@ public class PanelPreferencias extends JPanel {
    // Método para enviar notificaciones
    private JPanel crearPanelEnviarNotificaciones() {
        JPanel panel = new JPanel(new BorderLayout());
-       JLabel lblTitulo = new JLabel("Título de la notificación:");
+       JLabel lblTitulo = new JLabel(sTituNoti);
        JTextField tfTitulo = new JTextField(20);
-       JLabel lblMensaje = new JLabel("Mensaje de la notificación:");
+       JLabel lblMensaje = new JLabel(sMesNot);
        JTextArea taMensaje = new JTextArea(5, 30);
        taMensaje.setLineWrap(true);
        taMensaje.setWrapStyleWord(true);
-       JButton btnEnviar = new JButton("Enviar Notificación");
+       JButton btnEnviar = new JButton(sEnNot);
        btnEnviar.addActionListener(new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent e) {
@@ -153,9 +163,9 @@ public class PanelPreferencias extends JPanel {
                String mensaje = taMensaje.getText().trim();
                if (!titulo.isEmpty() && !mensaje.isEmpty()) {
                    enviarNotificacion(titulo, mensaje);
-                   JOptionPane.showMessageDialog(panel, "Notificación enviada a todos los usuarios.");
+                   JOptionPane.showMessageDialog(panel, sNotEnviUser);
                } else {
-                   JOptionPane.showMessageDialog(panel, "Por favor, completa todos los campos.");
+                   JOptionPane.showMessageDialog(panel, sCompleta);
                }
            }
 

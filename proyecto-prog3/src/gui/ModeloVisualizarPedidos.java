@@ -39,7 +39,7 @@ public class ModeloVisualizarPedidos  extends DefaultTableModel{
 		
 		titulo = Arrays.asList(sNombre,sTelefono,sFechaDePedido,sFechaDeRealizacion,sServiciosElegidos,sInfromacionAdicional);
 		this.listaServiciosPedidos = listaServiciosPedidos;
-		
+
 	}
 	
 	
