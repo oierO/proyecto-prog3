@@ -130,7 +130,7 @@ public class VentanaVisualiazarPedidos extends JFrame {
 		
 		try {
 			Connection conn = DeustoTaller.getCon();
-			String insertSQL = "INSERT INTO PEDIDOS VALUES (?,?,?,?,?)";
+			String insertSQL = "INSERT INTO PEDIDOS () VALUES (?,?,?,?,?)";
 			
 			
 			PreparedStatement preparedStmt = conn.prepareStatement(insertSQL);
