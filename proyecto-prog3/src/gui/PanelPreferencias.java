@@ -25,7 +25,6 @@ public class PanelPreferencias extends JPanel {
 
         this.lPreferencias = new String[]{
             bundle.getString("sNotificaciones"),
-            bundle.getString("sHistorial"),
             bundle.getString("sValoraciones"),
             bundle.getString("sSoporte")
         };
@@ -68,7 +67,7 @@ public class PanelPreferencias extends JPanel {
                 pestañas.addTab(bundle.getString("sEnviarNoti"), crearPanelEnviarNotificaciones());
             }
         } else if (pref.equals(bundle.getString("sHistorial"))) {
-            pestañas.addTab(bundle.getString("sHistorial"), crearPanelHistorial());
+           // pestañas.addTab(bundle.getString("sHistorial"), crearPanelHistorial());
         } else if (pref.equals(bundle.getString("sValoraciones"))) {
             pestañas.addTab(bundle.getString("sValoraciones"), crearPanelValoraciones());
         } else if (pref.equals(bundle.getString("sSoporte"))) {
@@ -180,14 +179,14 @@ public class PanelPreferencias extends JPanel {
     }
 
 
-    private JPanel crearPanelHistorial() {
-        JPanel panelHistorial = new JPanel(new BorderLayout());
-         String[] columnas = {"Fecha", "Actividad"};
-        String[][] datos = consulta.cargarDatosHistorial(usuario);
-       
-        JTable tablaHistorial = new JTable(datos, columnas);
-        JScrollPane scrollTabla = new JScrollPane(tablaHistorial);
-        panelHistorial.add(scrollTabla, BorderLayout.CENTER);
-        return panelHistorial;
-    }
+//    private JPanel crearPanelHistorial() {
+//        JPanel panelHistorial = new JPanel(new BorderLayout());
+//         String[] columnas = {"Fecha", "Actividad"};
+//        String[][] datos = consulta.cargarDatosHistorial(usuario);
+//       
+//        JTable tablaHistorial = new JTable(datos, columnas);
+//        JScrollPane scrollTabla = new JScrollPane(tablaHistorial);
+//        panelHistorial.add(scrollTabla, BorderLayout.CENTER);
+//        return panelHistorial;
+//    }
 }
