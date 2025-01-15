@@ -22,6 +22,9 @@ public class PanelPreferencias extends JPanel {
    private String sValEnvi,sComent,sAreaNotificaciones,sTituNoti,sMesNot,sEnNot,sNotEnviUser,sCompleta;
    
    
+   // CONSULTA BD
+   
+   
    public PanelPreferencias(ResourceBundle bundle, String usuario) {
        this.bundle = bundle; // Uso de ResourceBundle ayudado por ChatGPT
        this.usuario = usuario;

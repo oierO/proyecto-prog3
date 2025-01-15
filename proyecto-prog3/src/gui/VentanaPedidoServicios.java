@@ -295,6 +295,7 @@ public class VentanaPedidoServicios extends JFrame {
 		pedidoServicios.add(pedido3);
 
 		// Idioma
+		@SuppressWarnings("unused")
 		String idioma1 = "Español";
 		@SuppressWarnings("unused")
 		String idioma2 = "Ingles";

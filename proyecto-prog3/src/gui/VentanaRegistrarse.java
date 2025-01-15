@@ -4,13 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,8 +16,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import db.ConsultasRegistrarse;
 import domain.Usuario;
-import main.DeustoTaller;
 
 public class VentanaRegistrarse extends JFrame {
 
@@ -37,9 +33,9 @@ public class VentanaRegistrarse extends JFrame {
 	private JPasswordField textContrasenia;
 	private Locale currentLocale;
 	private ResourceBundle bundle;
-	
+
 	public VentanaRegistrarse(Locale locale) {
-		
+
 		pCentro = new JPanel(new GridLayout(5, 1));
 		pSur = new JPanel();
 		pNorte = new JPanel();
@@ -50,11 +46,11 @@ public class VentanaRegistrarse extends JFrame {
 		ptextDni = new JPanel(new GridLayout(2, 1));
 		ptextUsuario = new JPanel(new GridLayout(2, 1));
 		pTextContrasenia = new JPanel(new GridLayout(2, 1));
-		
-		//Idioma
+
+		// Idioma
 		currentLocale = locale;
-		bundle = ResourceBundle.getBundle("VentanaRegistrarseBundle",currentLocale);
-		
+		bundle = ResourceBundle.getBundle("VentanaRegistrarseBundle", currentLocale);
+
 		// labels
 		lblTitulo = new JLabel(bundle.getString("lblTitulo"));
 		lblNombre = new JLabel(bundle.getString("lblNombre"));
@@ -62,12 +58,11 @@ public class VentanaRegistrarse extends JFrame {
 		lblDni = new JLabel(bundle.getString("lblDni"));
 		lblUsuario = new JLabel(bundle.getString("lblUsuario"));
 		lblContrasenia = new JLabel(bundle.getString("lblContrasenia"));
-		
-		//Botones
+
+		// Botones
 		btnRegistrar = new JButton(bundle.getString("btnRegistrar"));
 		btnCancelar = new JButton(bundle.getString("btnCancelar"));
-		
-		
+
 		lblTitulo.setIcon(new ImageIcon("resources/images/app-icon.png"));
 		lblTitulo.setFont(VentanaInicioSesion.fuenteTitulo);
 		lblTitulo.setOpaque(true);
@@ -130,10 +125,10 @@ public class VentanaRegistrarse extends JFrame {
 			if (nombre.isEmpty() || apellido.isEmpty() || dni.isEmpty() || usuario.isEmpty() || contrasenia.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Por favor, completa todos los campos.");
 			} else {
-				if (this.existeUsuario(usuario.toString()) == false) {
+				if (ConsultasRegistrarse.existeUsuario(usuario.toString()) == false) {
 					Usuario user = new Usuario(usuario, nombre, apellido, LocalDateTime.now());
-					guardarUsuario(user);
-					guardarCredenciales(usuario, contrasenia);
+					ConsultasRegistrarse.guardarUsuario(user);
+					ConsultasRegistrarse.guardarCredenciales(usuario, contrasenia);
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Usuario ya registrado");
@@ -150,55 +145,4 @@ public class VentanaRegistrarse extends JFrame {
 		setVisible(true);
 	}
 
-	public void guardarUsuario(Usuario usuario) {
-		String sql = "INSERT INTO USUARIO (username, nombre, apellido, hUltimaSesion) VALUES (?,?,?,?)";
-		try {
-			PreparedStatement ps = DeustoTaller.getCon().prepareStatement(sql);
-			ps.setString(1, usuario.getUsername());
-			ps.setString(2, usuario.getNombre());
-			ps.setString(3, usuario.getApellido());
-			ps.setString(4, DeustoTaller.toTimeStamp(usuario.gethUltimaSesion()).toString());
-			ps.execute();
-			ps.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	public boolean existeUsuario(String username) {
-		boolean existe = false;
-		String sql = "SELECT * FROM USUARIO WHERE username = ?";
-		PreparedStatement ps = null;
-		try {
-			ps = DeustoTaller.getCon().prepareStatement(sql);
-			ps.setString(1, username);
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				existe = true;
-			}
-			rs.close();
-			ps.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return existe;
-	}
-
-	public void guardarCredenciales(String username, String password) {
-		String sql = "INSERT INTO CREDENCIALES (username, password) VALUES (?,?)";
-		try {
-			PreparedStatement ps = DeustoTaller.getCon().prepareStatement(sql);
-			ps.setString(1, username);
-			ps.setString(2, password);
-			ps.execute();
-			ps.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-	}
 }

@@ -9,6 +9,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import main.DeustoTaller;
+
+
+//CONSULTA BD
+
+
+
 public class VentanaPregunta extends JFrame {
    private static final long serialVersionUID = 1L;
    private String usuario;

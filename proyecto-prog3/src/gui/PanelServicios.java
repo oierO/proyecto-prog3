@@ -15,13 +15,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -31,10 +29,17 @@ import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.TableCellRenderer;
+
+import db.ConsultasAlmacen;
 import domain.PedidoServicios;
 import domain.Pieza;
 import domain.ServicioDisponible;
 import main.DeustoTaller;
+
+
+
+//CONSULTA BD
+
 
 public class PanelServicios extends JPanel {
 	/**
@@ -389,7 +394,7 @@ public class PanelServicios extends JPanel {
 						double presupuesto= Double.parseDouble(JOptionPane.showInputDialog(null, sInsertPresupuesto, sPresupuesto, JOptionPane.QUESTION_MESSAGE));
 						PanelAlmacen p1= panel1;
 						JComboBox<String>fa= new JComboBox<String>();
-						PanelAlmacen.cargarFabricantes(fa);
+						ConsultasAlmacen.cargarFabricantes(fa);
 						JOptionPane.showConfirmDialog(null, fa, sEligaFabricante, JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 						String sefa= (String) fa.getSelectedItem();
 						List<Pieza>piezas= p1.cargarTabla();

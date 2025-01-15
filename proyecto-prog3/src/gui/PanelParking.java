@@ -2,8 +2,6 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
