@@ -12,7 +12,8 @@ public class ConsultasPanelPreferencias {
 
     public synchronized void enviarNotificacion(String titulo, String mensaje, Object frame) {
         String sql = "INSERT INTO NOTIFICACIONES (titulo, mensaje, fecha) VALUES (?, ?, datetime('now'))";
-       try (Connection connection = DeustoTaller.getCon();
+        Connection connection = DeustoTaller.getCon();
+       try (
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
              insertarNotificacion(pstmt, titulo, mensaje);
               JOptionPane.showMessageDialog((java.awt.Frame) frame, "Notificacion enviada correctamente.");
@@ -32,7 +33,8 @@ public class ConsultasPanelPreferencias {
     public String[][] cargarDatosHistorial(String usuario) {
         String sql = "SELECT fecha, actividad FROM Historial WHERE usuario = ?";
         String[][] datos = null;
-      try(Connection connection = DeustoTaller.getCon();
+        Connection connection = DeustoTaller.getCon();
+      try(
            PreparedStatement pstmt = connection.prepareStatement(sql)){
           
           datos = obtenerDatosHistorial(pstmt, usuario);

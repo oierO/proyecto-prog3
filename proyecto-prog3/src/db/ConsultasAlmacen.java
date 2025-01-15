@@ -1,5 +1,6 @@
 package db;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,25 +15,28 @@ import gui.PanelAlmacen;
 import main.DeustoTaller;
 
 public class ConsultasAlmacen {
-	
-	public ConsultasAlmacen() {}
-	
+
+	public ConsultasAlmacen() {
+	}
+
 	public void crearTablaPiezas() {
+		Connection conn = DeustoTaller.getCon();
 		String sql = "CREATE TABLE IF NOT EXISTS PIEZA (" + " id INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ " codigo TEXT NOT NULL," + " nombrePieza TEXT NOT NULL," + " descripcion TEXT,"
 				+ " fabricante TEXT NOT NULL," + " precio REAL NOT NULL," + " cantidadAlmacen INTEGER NOT NULL" + ");";
-		try (PreparedStatement ps = DeustoTaller.getCon().prepareStatement(sql)) {
+		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.execute();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void insertarPiezas(List<Pieza> listaPiezas) {
 		String sql = "INSERT INTO Pieza (codigo, nombrePieza, descripcion, fabricante, precio, cantidadAlmacen) "
 				+ "VALUES (?, ?, ?, ?, ?, ?)";
-		try (PreparedStatement ps = DeustoTaller.getCon().prepareStatement(sql)) {
+		Connection conn = DeustoTaller.getCon();
+		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 			for (Pieza pieza : listaPiezas) {
 				ps.setString(1, pieza.getCodigo());
 				ps.setString(2, pieza.getNombrePieza());
@@ -40,38 +44,39 @@ public class ConsultasAlmacen {
 				ps.setString(4, pieza.getFabricante());
 				ps.setFloat(5, pieza.getPrecio());
 				ps.setInt(6, pieza.getCantidadAlmacen());
-				//try {
-					ps.execute();
-				//} catch (SQLException e) {
-				//}
+				// try {
+				ps.execute();
+				// } catch (SQLException e) {
+				// }
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public List<Pieza> cargarBD() {
 		String sql = "SELECT * FROM Pieza";
 		try {
 			Statement st = DeustoTaller.getCon().createStatement();
 			ResultSet resultado = st.executeQuery(sql);
 			ArrayList<Pieza> lPiezas = new ArrayList<Pieza>();
-			
-			// Verificar si el ResultSet tiene al menos un registro
-	        if (resultado.next()) {
-	            // Añadir el primer registro
-	            lPiezas.add(new Pieza(resultado.getInt("id"), resultado.getString("codigo"), resultado.getString("nombrePieza"),
-	                    resultado.getString("descripcion"), resultado.getString("fabricante"),
-	                    resultado.getFloat("precio"), resultado.getInt("cantidadAlmacen")));
 
-	            // Continuar con el resto de los registros (si los hay)
-	            while (resultado.next()) {
-	                lPiezas.add(new Pieza(resultado.getInt("id"), resultado.getString("codigo"),
-	                        resultado.getString("nombrePieza"), resultado.getString("descripcion"),
-	                        resultado.getString("fabricante"), resultado.getFloat("precio"),
-	                        resultado.getInt("cantidadAlmacen")));
-	            }
-	        }
+			// Verificar si el ResultSet tiene al menos un registro
+			if (resultado.next()) {
+				// Añadir el primer registro
+				lPiezas.add(new Pieza(resultado.getInt("id"), resultado.getString("codigo"),
+						resultado.getString("nombrePieza"), resultado.getString("descripcion"),
+						resultado.getString("fabricante"), resultado.getFloat("precio"),
+						resultado.getInt("cantidadAlmacen")));
+
+				// Continuar con el resto de los registros (si los hay)
+				while (resultado.next()) {
+					lPiezas.add(new Pieza(resultado.getInt("id"), resultado.getString("codigo"),
+							resultado.getString("nombrePieza"), resultado.getString("descripcion"),
+							resultado.getString("fabricante"), resultado.getFloat("precio"),
+							resultado.getInt("cantidadAlmacen")));
+				}
+			}
 
 			return lPiezas;
 		} catch (SQLException e) {
@@ -79,7 +84,7 @@ public class ConsultasAlmacen {
 			return null;
 		}
 	}
-	
+
 	public void updateBD(Pieza pieza) {
 		String sql = String.format("UPDATE Pieza SET cantidadAlmacen=cantidadAlmacen-%s WHERE codigo='%s'",
 				pieza.getCantidadAlmacen(), pieza.getCodigo());
@@ -92,7 +97,7 @@ public class ConsultasAlmacen {
 			JOptionPane.showMessageDialog(null, "Error al modificar el valor del almacen." + e.getLocalizedMessage());
 		}
 	}
-	
+
 	public static void cargarFabricantes(javax.swing.JComboBox<String> comboBox) {
 		String sql = "SELECT DISTINCT fabricante FROM Pieza"; // Consulta SQL
 
@@ -112,7 +117,7 @@ public class ConsultasAlmacen {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void cargarNombres(javax.swing.JComboBox<String> combobox) {
 		String sql = "SELECT DISTINCT nombrePieza FROM Pieza"; // Consulta SQL
 
@@ -131,6 +136,5 @@ public class ConsultasAlmacen {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 }

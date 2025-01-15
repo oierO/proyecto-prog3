@@ -11,7 +11,8 @@ public class ConsultasVentanaUsuario {
 	// Método para actualizar el nombre de usuario en la base de datos
 	public static boolean actualizarNombreUsuario(String nuevoNombre) {
 		String sql = "UPDATE USUARIO SET nombre =? WHERE username=?";
-		try (Connection conn = DeustoTaller.getCon(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+		Connection conn = DeustoTaller.getCon();
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, nuevoNombre);
 			pstmt.setString(2, DeustoTaller.getSesion().getUsername()); // Usamos el username como identificador
 			return pstmt.executeUpdate() > 0;

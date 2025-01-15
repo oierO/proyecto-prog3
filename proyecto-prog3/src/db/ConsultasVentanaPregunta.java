@@ -16,7 +16,7 @@ public class ConsultasVentanaPregunta {
         String sql = "INSERT INTO PREGUNTAS (tema, pregunta, usuario) VALUES (?, ?, ?)";
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection(DB_PATH);
+            connection = DeustoTaller.getCon();
             configurarConexion(connection);
 
             insertarPregunta(connection, sql, tema, pregunta, usuario);
@@ -27,7 +27,7 @@ public class ConsultasVentanaPregunta {
             e.printStackTrace();
              JOptionPane.showMessageDialog((java.awt.Frame) frame, "Error al enviar la pregunta. La base de datos está bloqueada.");
         } finally {
-            cerrarConexion(connection);
+            //cerrarConexion(connection);
         }
     }
 
@@ -47,13 +47,13 @@ public class ConsultasVentanaPregunta {
         }
     }
 
-    private void cerrarConexion(Connection connection) {
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
+//    private void cerrarConexion(Connection connection) {
+//        if (connection != null) {
+//            try {
+//                connection.close();
+//            } catch (SQLException ex) {
+//                ex.printStackTrace();
+//            }
+//        }
+//    }
 }

@@ -11,17 +11,17 @@ import domain.Usuario;
 import main.DeustoTaller;
 
 public class ConsultasMain {
-	
+
 	public static void conectarBD() {
 		try {
 			DeustoTaller.setCon(DriverManager.getConnection(DeustoTaller.getLocDB()));
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(DeustoTaller.getVSesion(), "Error al cargar la base de datos:\n" + e, "Error de Inicialización",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(DeustoTaller.getVSesion(), "Error al cargar la base de datos:\n" + e,
+					"Error de Inicialización", JOptionPane.ERROR_MESSAGE);
 			System.exit(0);
 		}
 	}
-	
+
 	public static boolean login(String username, String password) {
 		try {
 			String sql = "SELECT password FROM CREDENCIALES WHERE username=?;";
