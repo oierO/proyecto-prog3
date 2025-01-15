@@ -2,8 +2,6 @@ package domain;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-
 public class PedidoServicios {
 
 	private String nombre;

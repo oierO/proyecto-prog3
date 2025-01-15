@@ -1,7 +1,6 @@
 package db;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,8 +8,6 @@ import javax.swing.JOptionPane;
 import main.DeustoTaller;
 
 public class ConsultasVentanaPregunta {
-
-    private static final String DB_PATH = DeustoTaller.getLocDB();
 
     public synchronized void enviarPregunta(String tema, String pregunta, String usuario, Object frame) {
         String sql = "INSERT INTO PREGUNTAS (tema, pregunta, usuario) VALUES (?, ?, ?)";

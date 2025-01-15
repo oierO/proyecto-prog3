@@ -11,7 +11,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import domain.Pieza;
-import gui.PanelAlmacen;
 import main.DeustoTaller;
 
 public class ConsultasAlmacen {
@@ -93,7 +92,6 @@ public class ConsultasAlmacen {
 			st.executeUpdate(sql);
 			st.close();
 		} catch (SQLException e) {
-			PanelAlmacen p = new PanelAlmacen(null);
 			JOptionPane.showMessageDialog(null, "Error al modificar el valor del almacen." + e.getLocalizedMessage());
 		}
 	}

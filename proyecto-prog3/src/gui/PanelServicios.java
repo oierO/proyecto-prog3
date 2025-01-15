@@ -56,12 +56,10 @@ public class PanelServicios extends JPanel {
 	private String sVentaDePiezas;
 	private JButton botonComprar, botonQuitarProducto, botonFinalizar, botonRecursivad;
 	private String sPrimeroDebesFila, sErrorEnSeleccion, sCuantasComprar, sCantidadPiezas;
-	private String sNoPuedesUnidades, sNoSuficiente, sPrecioTotal, sCantidadFormato, sDatoInvalido;
+	private String sNoPuedesUnidades, sNoSuficiente, sPrecioTotal, sCantidadFormato;
 	private String sProductoEliminado, sCompra, sPrimeroDebesProducto, sError, sInsertPresupuesto, sPresupuesto;
 	private String sSi, sNo, sCancelar, sOk;
 	private String sEligaFabricante, sElNPiezas, sElijaNumero, sEleccion;
-	private VentanaVisualiazarPedidos ventanaVisualiazarPedidos;
-
 	public PanelServicios(String usuario, Locale locale) {
 		// Idioma
 		currentLocale = locale;
@@ -85,7 +83,7 @@ public class PanelServicios extends JPanel {
 		sNoSuficiente = bundle.getString("sNoSuficiente");
 		sPrecioTotal = bundle.getString("sPrecioTotal");
 		sCantidadFormato = bundle.getString("sCantidadFormato");
-		sDatoInvalido = bundle.getString("sDatoInvalido");
+		bundle.getString("sDatoInvalido");
 		sProductoEliminado = bundle.getString("sProductoEliminado");
 		sCompra = bundle.getString("sCompra");
 		sPrimeroDebesProducto = bundle.getString("sPrimeroDebesProducto");
@@ -251,7 +249,7 @@ public class PanelServicios extends JPanel {
 										System.out.println(pedido);
 									}
 								}
-								ventanaVisualiazarPedidos = new VentanaVisualiazarPedidos(usuario, listaPedidoServicios,
+								new VentanaVisualiazarPedidos(usuario, listaPedidoServicios,
 										currentLocale);
 							}
 						});
@@ -469,9 +467,9 @@ public class PanelServicios extends JPanel {
 
 	}
 
-	private static void cargarServicios(ArrayList<ServicioDisponible> listaServiciosDisponibles) {
-		ConsultasPanelServicios.cargarServicios(listaServiciosDisponibles);
-	}
+//	private static void cargarServicios(ArrayList<ServicioDisponible> listaServiciosDisponibles) {
+//		ConsultasPanelServicios.cargarServicios(listaServiciosDisponibles);
+//	}
 
 	private static List<List<Pieza>> combinaciones(List<Pieza> piezas, double importe, String fabricante) {
 		List<List<Pieza>> result = new ArrayList<>();
