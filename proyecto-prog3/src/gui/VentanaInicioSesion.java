@@ -43,7 +43,7 @@ public class VentanaInicioSesion extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel pCentro, pSur, pNorte, pEste, pOeste, ptextUsuario, pTextContrasenia;
 	private JButton btnIniciarSesion, btnCerrarSesion, btnRegistrarse;
-	private JLabel lblTitulo, lblUsuario, lblContrasenia,lblIdioma;
+	private JLabel lblTitulo, lblUsuario, lblContrasenia, lblIdioma;
 	public static Font fuenteTitulo = new Font("Bahnschrift", Font.BOLD, 30);
 	private JTextField textUsuario;
 	private JPasswordField textContrasenia;
@@ -53,38 +53,38 @@ public class VentanaInicioSesion extends JFrame {
 	private int progreso;
 	private ResourceBundle bundle;
 	private Locale currentLocale;
-	private static String sErrorConect,sDatoInicioMal,sGestorSesion,sCerrar,sSeguroCerrar,sErrorConecBD,sCargarDatos;
-	private static String sCargarinfo,sHasIniciado,sSi,sNo,sCancelar,sOk;
-	
+	private static String sErrorConect, sDatoInicioMal, sGestorSesion, sCerrar, sSeguroCerrar, sErrorConecBD,
+			sCargarDatos;
+	private static String sCargarinfo, sHasIniciado, sSi, sNo, sCancelar, sOk;
 
-	public VentanaInicioSesion(Locale locale) {	
-		//idioma por defecto
+	public VentanaInicioSesion(Locale locale) {
+		// idioma por defecto
 		currentLocale = locale;
-		bundle= ResourceBundle.getBundle("VentanaInicioSesionBundle", currentLocale);
-		
+		bundle = ResourceBundle.getBundle("VentanaInicioSesionBundle", currentLocale);
+
 		sErrorConect = bundle.getString("sErrorConect");
 		sDatoInicioMal = bundle.getString("sDatoInicioMal");
 		sGestorSesion = bundle.getString("sGestorSesion");
 		String gestorDeSesion = String.format("DeustoTaller - %s", sGestorSesion);
-		sSeguroCerrar =  bundle.getString("sSeguroCerrar");
-		sCerrar =  bundle.getString("sCerrar");
+		sSeguroCerrar = bundle.getString("sSeguroCerrar");
+		sCerrar = bundle.getString("sCerrar");
 		sErrorConecBD = bundle.getString("sErrorConecBD");
 		sCargarDatos = bundle.getString("sCargarDatos");
 		sCargarinfo = bundle.getString("sCargarinfo");
 		sHasIniciado = bundle.getString("sHasIniciado");
-		
+
 		sSi = bundle.getString("sSi");
 		sNo = bundle.getString("sNo");
 		sCancelar = bundle.getString("sCancelar");
 		sOk = bundle.getString("sOk");
-		
-		//cambiar el texto de los botones de JOptionPane
-		 UIManager.put("OptionPane.yesButtonText", sSi);
-	     UIManager.put("OptionPane.noButtonText", sNo);
-	     UIManager.put("OptionPane.cancelButtonText", sCancelar);
-	     UIManager.put("OptionPane.okButtonText", sOk);
-		
-		//Configuraciones
+
+		// cambiar el texto de los botones de JOptionPane
+		UIManager.put("OptionPane.yesButtonText", sSi);
+		UIManager.put("OptionPane.noButtonText", sNo);
+		UIManager.put("OptionPane.cancelButtonText", sCancelar);
+		UIManager.put("OptionPane.okButtonText", sOk);
+
+		// Configuraciones
 		pCentro = new JPanel(new GridLayout(4, 1));
 		pSur = new JPanel();
 		pNorte = new JPanel();
@@ -92,47 +92,43 @@ public class VentanaInicioSesion extends JFrame {
 		pOeste = new JPanel();
 		ptextUsuario = new JPanel(new GridLayout(2, 1));
 		pTextContrasenia = new JPanel(new GridLayout(2, 1));
-		
-		
 
-		// labels 
+		// labels
 		lblTitulo = new JLabel(bundle.getString("lblTitulo"));
 		lblUsuario = new JLabel(bundle.getString("lblUsuario"));
 		lblContrasenia = new JLabel(bundle.getString("lblContrasenia"));
 		lblIdioma = new JLabel(bundle.getString("lblIdioma"));
-		
-	//Opciones del idioma
 
-		String[] idiomas = {"Español","English","中文" };
-        
-        JComboBox<String> idiomaBox = new JComboBox<>(idiomas);
-        
-        idiomaBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Obtener la opción seleccionada
-                String seleccion = (String) idiomaBox.getSelectedItem();
-                System.out.println("Seleccionaste: " + seleccion);
-               
-                if(seleccion.equals("Español")) {
-                	currentLocale = Locale.getDefault();
-                } else if (seleccion.equals("English")) {
-                	currentLocale = new Locale.Builder().setLanguage("en").setRegion("US").build();
+		// Opciones del idioma
+
+		String[] idiomas = { "Español", "English", "中文" };
+
+		JComboBox<String> idiomaBox = new JComboBox<>(idiomas);
+
+		idiomaBox.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Obtener la opción seleccionada
+				String seleccion = (String) idiomaBox.getSelectedItem();
+				System.out.println("Seleccionaste: " + seleccion);
+
+				if (seleccion.equals("Español")) {
+					currentLocale = Locale.getDefault();
+				} else if (seleccion.equals("English")) {
+					currentLocale = new Locale.Builder().setLanguage("en").setRegion("US").build();
 				} else if (seleccion.equals("中文")) {
 					currentLocale = new Locale.Builder().setLanguage("zh").setRegion("ZH").build();
 				}
-                System.out.println(currentLocale);
-                System.out.println("Idioma: "+ currentLocale.getLanguage());
-                System.out.println("Pais: "+ currentLocale.getCountry());
-                updateTexts();
-                
-            }
-        });
-        
+				System.out.println(currentLocale);
+				System.out.println("Idioma: " + currentLocale.getLanguage());
+				System.out.println("Pais: " + currentLocale.getCountry());
+				updateTexts();
 
-        
+			}
+		});
+
 		lblTitulo.setIcon(new ImageIcon("resources/images/app-icon.png"));
-		
+
 		Image img = new ImageIcon("resources/images/user.png").getImage();
 		img = img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		lblUsuario.setIcon(new ImageIcon(img));
@@ -140,14 +136,15 @@ public class VentanaInicioSesion extends JFrame {
 		img = new ImageIcon("resources/images/pass.png").getImage();
 		img = img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		lblContrasenia.setIcon(new ImageIcon(img));
-		
-		//Botones
+
+		// Botones
 		btnCerrarSesion = new JButton(bundle.getString("btnCerrarSesion"));
 		btnIniciarSesion = new JButton(bundle.getString("btnIniciarSesion"));
 		btnRegistrarse = new JButton(bundle.getString("btnRegistrarse"));
-		
-		//Cuando se cierra VentanaRegistrarse esta ventana queda con el idoma que estaba seleccionado
-		if(currentLocale.getLanguage().equals("es")) {
+
+		// Cuando se cierra VentanaRegistrarse esta ventana queda con el idoma que
+		// estaba seleccionado
+		if (currentLocale.getLanguage().equals("es")) {
 			idiomaBox.setSelectedItem("Español");
 		} else if (currentLocale.getLanguage().equals("en")) {
 			idiomaBox.setSelectedItem("English");
@@ -163,8 +160,8 @@ public class VentanaInicioSesion extends JFrame {
 		pNorte.add(lblIdioma);
 		pNorte.add(idiomaBox);
 
-		//Al poner funte no entra las letras en chino 
-		
+		// Al poner funte no entra las letras en chino
+
 //		Font fuentebtn = new Font("Bahnschrift", Font.BOLD, 16);
 //		lblUsuario.setFont(fuentebtn);
 //		lblContrasenia.setFont(fuentebtn);
@@ -201,9 +198,7 @@ public class VentanaInicioSesion extends JFrame {
 
 			} else {
 				Toolkit.getDefaultToolkit().beep();
-				JOptionPane.showMessageDialog(null,
-						sDatoInicioMal,
-						sErrorConect, JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, sDatoInicioMal, sErrorConect, JOptionPane.WARNING_MESSAGE);
 			}
 		});
 
@@ -267,8 +262,8 @@ public class VentanaInicioSesion extends JFrame {
 	}
 
 	public static void logout() {
-		int confirmacion = JOptionPane.showInternalConfirmDialog(null, sSeguroCerrar,
-				sCerrar, JOptionPane.YES_NO_OPTION);
+		int confirmacion = JOptionPane.showInternalConfirmDialog(null, sSeguroCerrar, sCerrar,
+				JOptionPane.YES_NO_OPTION);
 		switch (confirmacion) {
 		case JOptionPane.YES_OPTION:
 			try {
@@ -335,9 +330,9 @@ public class VentanaInicioSesion extends JFrame {
 			});
 			SwingUtilities.invokeLater(() -> {
 				JOptionPane.showMessageDialog(null,
-						String.format("%s, %s", DeustoTaller.getSesion().getNombre(),sHasIniciado));
+						String.format("%s, %s", DeustoTaller.getSesion().getNombre(), sHasIniciado));
 
-				new VentanaGrafica(usuario,currentLocale);
+				new VentanaGrafica(usuario, currentLocale);
 			});
 
 		});
@@ -353,9 +348,9 @@ public class VentanaInicioSesion extends JFrame {
 	public static Thread getCargarHilo() {
 		return cargarHilo;
 	}
-	
+
 	private void updateTexts() {
-		bundle= ResourceBundle.getBundle("VentanaInicioSesionBundle", currentLocale);
+		bundle = ResourceBundle.getBundle("VentanaInicioSesionBundle", currentLocale);
 		lblTitulo.setText(bundle.getString("lblTitulo"));
 		lblIdioma.setText(bundle.getString("lblIdioma"));
 		lblUsuario.setText(bundle.getString("lblUsuario"));
@@ -366,8 +361,8 @@ public class VentanaInicioSesion extends JFrame {
 		sErrorConect = bundle.getString("sErrorConect");
 		sDatoInicioMal = bundle.getString("sDatoInicioMal");
 		sGestorSesion = bundle.getString("sGestorSesion");
-		sSeguroCerrar =  bundle.getString("sSeguroCerrar");
-		sCerrar =  bundle.getString("sCerrar");
+		sSeguroCerrar = bundle.getString("sSeguroCerrar");
+		sCerrar = bundle.getString("sCerrar");
 		sErrorConecBD = bundle.getString("sErrorConecBD");
 		sCargarDatos = bundle.getString("sCargarDatos");
 		sCargarinfo = bundle.getString("sCargarinfo");
@@ -376,5 +371,5 @@ public class VentanaInicioSesion extends JFrame {
 		sNo = bundle.getString("sNo");
 		sCancelar = bundle.getString("sCancelar");
 		sOk = bundle.getString("sOk");
-    }
+	}
 }

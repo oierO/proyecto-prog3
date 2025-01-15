@@ -6,6 +6,8 @@ import java.util.*;
 import java.sql.*;
 
 public class Usuario {
+	
+	//CONSULTA BD
 
 	public LocalDateTime gethUltimaSesion() {
 		return hUltimaSesion;

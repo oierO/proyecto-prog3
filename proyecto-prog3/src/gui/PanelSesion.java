@@ -19,17 +19,16 @@ import main.DeustoTaller;
 public class PanelSesion extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private Locale currentLocale;
-	private ResourceBundle bundle;	
-	private JLabel saludo,ultimaSesion,labelUsernameTitulo,labelNombreTitulo,labelApellidoTitulo;
-	private JLabel labelVehiculosTitulo,sinVehiculos;
+	private ResourceBundle bundle;
+	private JLabel saludo, ultimaSesion, labelUsernameTitulo, labelNombreTitulo, labelApellidoTitulo;
+	private JLabel labelVehiculosTitulo, sinVehiculos;
 	private JButton botonGestor;
-	
-	
-	public PanelSesion(JFrame ventanaGrafica,Locale locale) {
-		//Idioma
+
+	public PanelSesion(JFrame ventanaGrafica, Locale locale) {
+		// Idioma
 		currentLocale = locale;
-		bundle = ResourceBundle.getBundle("PanelSesionBundle",currentLocale);
-		
+		bundle = ResourceBundle.getBundle("PanelSesionBundle", currentLocale);
+
 		// Fuente grande para todo el texto
 //		Font fuenteGrande = new Font("Arial", Font.PLAIN, 18);
 
@@ -124,31 +123,32 @@ public class PanelSesion extends JPanel {
 		// Listar los vehículos
 		List<Vehiculo> vehiculos = usuario.getVehiculos();
 		if (vehiculos.isEmpty()) {
-		    sinVehiculos = new JLabel(bundle.getString("sinVehiculos"));
+			sinVehiculos = new JLabel(bundle.getString("sinVehiculos"));
 //		    sinVehiculos.setFont(new Font("Arial", Font.PLAIN, 18));
-		    panelCentral.add(sinVehiculos);
+			panelCentral.add(sinVehiculos);
 		} else {
 			JPanel panelVehiculo = new JPanel();
-	        /*panelVehiculo.setLayout(new BoxLayout(panelVehiculo, BoxLayout.X_AXIS));
+			/*
+			 * panelVehiculo.setLayout(new BoxLayout(panelVehiculo, BoxLayout.X_AXIS));
+			 * 
+			 * JLabel labelVehiculoInfo = new JLabel("- " + vehiculo.getModelo() + " (" +
+			 * vehiculo.getMarca() + ", " + vehiculo.getMatricula() + ")");
+			 * labelVehiculoInfo.setFont(new Font("Arial", Font.PLAIN, 18));
+			 * panelVehiculo.add(labelVehiculoInfo);
+			 */
+			ModeloVehiculos modelo = new ModeloVehiculos(vehiculos, currentLocale);
+			JTable tablaVehiculos = new JTable(modelo);
+			JScrollPane scroll = new JScrollPane(tablaVehiculos);
+			panelVehiculo.add(scroll);
 
-	        JLabel labelVehiculoInfo = new JLabel("- " + vehiculo.getModelo() + " (" + vehiculo.getMarca() + ", "
-	                + vehiculo.getMatricula() + ")");
-	        labelVehiculoInfo.setFont(new Font("Arial", Font.PLAIN, 18));
-	        panelVehiculo.add(labelVehiculoInfo);
-	        */
-	        ModeloVehiculos modelo= new ModeloVehiculos(vehiculos,currentLocale);
-	        JTable tablaVehiculos= new JTable(modelo);
-	        JScrollPane scroll= new JScrollPane(tablaVehiculos);
-	        panelVehiculo.add(scroll);
-	        
-	        panelCentral.add(panelVehiculo);
-	        
-	        tablaVehiculos.getTableHeader().setDefaultRenderer(new TableCellRenderer() {
-				
+			panelCentral.add(panelVehiculo);
+
+			tablaVehiculos.getTableHeader().setDefaultRenderer(new TableCellRenderer() {
+
 				@Override
-				public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-						int row, int column) {
-					JLabel l= new JLabel(value.toString());
+				public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+						boolean hasFocus, int row, int column) {
+					JLabel l = new JLabel(value.toString());
 					l.setOpaque(true);
 					if (column == 0) {
 						l.setHorizontalAlignment(JLabel.CENTER);
@@ -162,26 +162,26 @@ public class PanelSesion extends JPanel {
 					} else if (column == 3) {
 						l.setHorizontalAlignment(JLabel.CENTER);
 						l.setBackground(Color.YELLOW);
-					
-				}
+
+					}
 					return l;
 				}
 			});
-	        tablaVehiculos.setDefaultRenderer(Object.class, new TableCellRenderer() {
-				
+			tablaVehiculos.setDefaultRenderer(Object.class, new TableCellRenderer() {
+
 				@Override
-				public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-						int row, int column) {
-					JLabel l= new JLabel(value.toString());
+				public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+						boolean hasFocus, int row, int column) {
+					JLabel l = new JLabel(value.toString());
 					l.setOpaque(true);
-					if(row%2==0) {
+					if (row % 2 == 0) {
 						l.setBackground(Color.CYAN);
 					}
-					
+
 					return l;
 				}
 			});
-		    
+
 		}
 
 		// Agregar el panel central al área CENTER
