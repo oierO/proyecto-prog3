@@ -99,7 +99,7 @@ public class VentanaGrafica extends JFrame {
 	        JPanel pUsuario = new PanelSesion(this, currentLocale);
 	        panelPreferencias = new PanelPreferencias(bundle, usuario); // Crear la instancia
 
-	        menuPestanas.add(sServicios, new PanelServicios(currentLocale));
+	        menuPestanas.add(sServicios, new PanelServicios(usuario,currentLocale));
 	        menuPestanas.add(sAlmacen, new PanelAlmacen(currentLocale));
 	        menuPestanas.add(sParking, pParking);
 	        menuPestanas.add(sPreferencias, panelPreferencias); // Añadir a las pestañas

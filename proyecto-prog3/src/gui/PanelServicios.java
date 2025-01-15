@@ -65,8 +65,9 @@ public class PanelServicios extends JPanel {
 	private String sProductoEliminado,sCompra,sPrimeroDebesProducto,sError,sInsertPresupuesto,sPresupuesto;
 	private String sSi,sNo,sCancelar,sOk;
 	private String sEligaFabricante,sElNPiezas,sElijaNumero,sEleccion;
+	private VentanaVisualiazarPedidos ventanaVisualiazarPedidos;
 	
-	public PanelServicios(Locale locale) {
+	public PanelServicios(String usuario,Locale locale) {
 		//Idioma 
 		currentLocale = locale;
 		bundle = ResourceBundle.getBundle("panelServiciosBundle",currentLocale);
@@ -257,7 +258,7 @@ public class PanelServicios extends JPanel {
 										System.out.println(pedido);
 									}
 								}
-
+								ventanaVisualiazarPedidos = new VentanaVisualiazarPedidos(usuario, listaPedidoServicios, currentLocale);
 							}
 						});
 
