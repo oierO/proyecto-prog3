@@ -3,6 +3,8 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
@@ -40,18 +42,18 @@ public class Recibo_Compra extends JDialog{
 		sInfo = bundle.getString("sInfo");
 		sPiezasCom = bundle.getString("sPiezasCom");
 		sCerrar = bundle.getString("sCerrar");
-		
+		setSize(400, 400);
 		JPanel clientePanel = new JPanel(new GridLayout(4, 2, 5, 5));
         clientePanel.setBorder(BorderFactory.createTitledBorder(sInfo));
         
         clientePanel.add(new JLabel(sNombre));
-        clientePanel.add(new JLabel());
+        clientePanel.add(new JLabel(VentanaGrafica.getUsuario()));
         clientePanel.add(new JLabel(sApellido));
-        clientePanel.add(new JLabel());
+        clientePanel.add(new JLabel("Proximamente"));
         clientePanel.add(new JLabel(sFecha));
-        clientePanel.add(new JLabel());
+        clientePanel.add(new JLabel(LocalDateTime.now().toString()));
         clientePanel.add(new JLabel(sCodigoPostal));
-        clientePanel.add(new JLabel());
+        clientePanel.add(new JLabel("48993"));
 
         // Panel central con la lista de piezas compradas
         JPanel piezasPanel = new JPanel(new BorderLayout());
@@ -59,7 +61,7 @@ public class Recibo_Compra extends JDialog{
         
         DefaultListModel<String> piezasModel = new DefaultListModel<>();
         for (Pieza pieza : compra) {
-            piezasModel.addAll((Collection<? extends String>) pieza);
+            piezasModel.addElement(pieza.toString());
         }
         JList<String> piezasList = new JList<>(piezasModel);
         JScrollPane scrollPane = new JScrollPane(piezasList);
