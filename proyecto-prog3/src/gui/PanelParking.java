@@ -111,7 +111,10 @@ public class PanelParking extends JPanel {
 		//bModificar = new JButton(bundle.getString("bModificar"));
 		//bModificar.setVisible(false);
 		Image img = new ImageIcon("resources/images/modificar.png").getImage();
-		img = img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+			////FUENTE-EXTERNA
+			//URL: https://stackoverflow.com/questions/5895829/resizing-image-in-java
+			//SEMIADAPTADO A LOS PARAMETROS DE IMAGEN DESEADOS
+		img = img.getScaledInstance(30, 30, Image.SCALE_SMOOTH); 
 		//bModificar.setIcon(new ImageIcon(img));
 		bLiberar = new JButton(bundle.getString("bLiberar"));
 		img = new ImageIcon("resources/images/cancelar.png").getImage();
