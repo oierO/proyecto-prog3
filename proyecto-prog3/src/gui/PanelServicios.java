@@ -193,7 +193,7 @@ public class PanelServicios extends JPanel {
 						// Si el usuario pulsa este boton dependiendo de si ha elegido algún servicio o
 						// no
 						// aparece un formulario
-						JButton botonReservar = new JButton(bundle.getString("botonReservar"));
+						botonReservar = new JButton(bundle.getString("botonReservar"));
 						botonReservar.addActionListener(new ActionListener() {
 							@Override
 							public void actionPerformed(ActionEvent e) {

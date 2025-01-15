@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -38,7 +39,7 @@ public class VentanaVisualiazarPedidos extends JFrame {
 	private static JTable tablaPedidos;
 	private ModeloVisualizarPedidos modeloVisualizarPedidos;
 	private static String sSeguro,sConfi,sPrimeroDebesFila,sErrorEnSeleccion;
-	
+	private static String username;
 
 	public VentanaVisualiazarPedidos (String usuario, ArrayList<PedidoServicios> listaServiciosPedidos,
 			 Locale locale) {
@@ -53,9 +54,10 @@ public class VentanaVisualiazarPedidos extends JFrame {
 		sErrorEnSeleccion = bundle.getString("sErrorEnSeleccion");
 		
 		this.list = listaServiciosPedidos;
+		username = usuario;
 		
 		// Configuraciones de la ventana
-		setTitle(pedidosActuales+usuario);
+		setTitle(pedidosActuales+username);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(800, 600);
 		setLocationRelativeTo(null);
@@ -97,6 +99,7 @@ public class VentanaVisualiazarPedidos extends JFrame {
 						sConfi, JOptionPane.YES_NO_OPTION);
 				if(confirmacion==JOptionPane.YES_OPTION) {
 					System.out.println("Guardar");
+					guardarLaLista(list);
 				} 
 				
 			}
@@ -127,18 +130,45 @@ public class VentanaVisualiazarPedidos extends JFrame {
 	}
 	
 	private static void guardarLaLista(ArrayList<PedidoServicios> listaServiciosPedidos) {
-		
+		String insertSQL1 = "INSERT INTO Pedido (username,tel,fecha_pedido,fecha_realizacion,informacion_adicional) VALUES (?,?,?,?,?)";
+		String insertSQL2 = "INSERT INTO CONTIENE (id_pedido,servicio) VALUES (?,?)";
 		try {
 			Connection conn = DeustoTaller.getCon();
-			String insertSQL = "INSERT INTO PEDIDOS () VALUES (?,?,?,?,?)";
+		
 			
-			
-			PreparedStatement preparedStmt = conn.prepareStatement(insertSQL);
+			PreparedStatement preparedStmt1 = conn.prepareStatement(insertSQL1);
+			PreparedStatement preparedStmt2 = conn.prepareStatement(insertSQL2);
 			for(PedidoServicios p:listaServiciosPedidos) {
+		
+		        LocalDate localDateFechPed = p.getfechaDePedido();
+		        LocalDate localDateFechRea = p.getfechaDeRealizacion();
+
+		        // Formatear la fecha como texto en formato ISO 8601
+		        String fechaTexto1 = localDateFechPed.format(DateTimeFormatter.ISO_DATE);
+		        String fechaTexto2 = localDateFechRea.format(DateTimeFormatter.ISO_DATE);
+		        
+				preparedStmt1.setString(1, p.getNombre());
+				preparedStmt1.setInt(2, p.getTelefono());
+				preparedStmt1.setString(3, fechaTexto1);
+				preparedStmt1.setString(4, fechaTexto2);
+				preparedStmt1.setString(5, p.getinformacionAdicional());
+				preparedStmt1.executeUpdate();
 				
+				 // Obtiene el ID del elemento insertado
+                ResultSet generatedKeys = preparedStmt1.getGeneratedKeys();
+                
+                if (generatedKeys.next()) {
+                    int idPrincipal = generatedKeys.getInt(1);
+
+                    // Inserta los atributos asociados
+                    for (String servicio : p.getServiciosElegidos()) {
+                    	preparedStmt2.setInt(1, idPrincipal);
+                    	preparedStmt2.setString(2, servicio);
+                    	preparedStmt2.executeUpdate();
+                    }
 		   
-			}
-			
+                }
+			}		
 			
 		} catch (Exception e) {
 			
