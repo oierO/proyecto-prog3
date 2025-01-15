@@ -187,9 +187,8 @@ public class PanelPreferencias extends JPanel {
        return panel;
    }
    private void enviarNotificacion(String titulo, String mensaje) {
-       String dbPath = "jdbc:sqlite:" + DeustoTaller.getLocDB();
        String sql = "INSERT INTO NOTIFICACIONES (titulo, mensaje, fecha) VALUES (?, ?, datetime('now'))";
-       try (Connection connection = DriverManager.getConnection(dbPath);
+       try (Connection connection = DeustoTaller.getCon();
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
            pstmt.setString(1, titulo);
            pstmt.setString(2, mensaje);
@@ -206,7 +205,7 @@ public class PanelPreferencias extends JPanel {
        String[] columnas = {"Fecha", "Actividad"};
        String[][] datos;
        
-       try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + DeustoTaller.getLocDB())) {
+       try (Connection connection = DeustoTaller.getCon()) {
            String sql = "SELECT fecha, actividad FROM Historial WHERE usuario = ?";
            try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
                pstmt.setString(1, usuario);
