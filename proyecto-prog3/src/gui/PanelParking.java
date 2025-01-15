@@ -34,7 +34,7 @@ public class PanelParking extends JPanel {
 	private ButtonGroup grupoBotones;
 	private String splazaSeleccion;
 	private JButton bLiberar;
-	private JButton bModificar;
+	//private JButton bModificar;
 	private static PlazaParking plazaSel;
 	protected static HashMap<String, HashMap<String, PlazaParking>> mapaParkings = new HashMap<String, HashMap<String, PlazaParking>>();
 	static ArrayList<JToggleButton> plazasGraficas = new ArrayList<>();
@@ -108,11 +108,11 @@ public class PanelParking extends JPanel {
 		JPanel trestPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		trestPanel.add(tiempoLabel);
 		trest = new JTextField("N/A");
-		bModificar = new JButton(bundle.getString("bModificar"));
-		bModificar.setVisible(false);
+		//bModificar = new JButton(bundle.getString("bModificar"));
+		//bModificar.setVisible(false);
 		Image img = new ImageIcon("resources/images/modificar.png").getImage();
 		img = img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-		bModificar.setIcon(new ImageIcon(img));
+		//bModificar.setIcon(new ImageIcon(img));
 		bLiberar = new JButton(bundle.getString("bLiberar"));
 		img = new ImageIcon("resources/images/cancelar.png").getImage();
 		img = img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
@@ -140,7 +140,7 @@ public class PanelParking extends JPanel {
 		informacion.add(trestPanel);
 		informacion.add(tfinPanel);
 		informacion.add(bReservar);
-		informacion.add(bModificar);
+		//informacion.add(bModificar);
 		informacion.add(bLiberar);
 		plantas.addActionListener(new AbstractAction() {
 
@@ -202,14 +202,14 @@ public class PanelParking extends JPanel {
 			bReservar.setToolTipText(sPlazaNoDisp);
 			if (DeustoTaller.getSesion().getMatriculas().contains(matricula.getText())) {
 				bLiberar.setVisible(true);
-				bModificar.setVisible(true);
+				//bModificar.setVisible(true);
 			} else {
 				bLiberar.setVisible(false);
-				bModificar.setVisible(false);
+				//bModificar.setVisible(false);
 			}
 		} else {
 			bLiberar.setVisible(false);
-			bModificar.setVisible(false);
+			//bModificar.setVisible(false);
 			matricula.setText("#########");
 			estado.setText(sLibre2);
 			estado.setBackground(Color.GREEN);
