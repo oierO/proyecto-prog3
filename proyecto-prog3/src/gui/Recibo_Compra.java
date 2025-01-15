@@ -2,10 +2,8 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Locale;
 import java.util.ResourceBundle;
 

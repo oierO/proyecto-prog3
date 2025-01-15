@@ -27,31 +27,32 @@ public class ReservaParking extends JDialog {
 	private static String plaza;
 	private static JComboBox<Vehiculo> listaVehiculos;
 	private static DateTimePicker selectorFecha;
+
 	public static DateTimePicker getSelectorFecha() {
 		return selectorFecha;
 	}
+
 	private static final long serialVersionUID = 1L;
 	@SuppressWarnings("unused")
 	private static final double TARIFA_HORA = 5.5;
 	private Locale currentLocale;
 	private static ResourceBundle bundle;
-	private String sTitulo,sNoAcept,sConfirmidad,sReserPlaza,sEnLa;
-	private JLabel textVehiculo,fechaLabel;
-	private JButton bReservar,bCancelar;
+	private String sTitulo, sNoAcept, sConfirmidad, sReserPlaza, sEnLa;
+	private JLabel textVehiculo, fechaLabel;
+	private JButton bReservar, bCancelar;
 	private JCheckBox conformidad;
-	
-	
-	public ReservaParking(String plantarec, String plazarec, PanelParking panel,Locale locale) {
-		//Idioma
+
+	public ReservaParking(String plantarec, String plazarec, PanelParking panel, Locale locale) {
+		// Idioma
 		currentLocale = locale;
-		bundle = ResourceBundle.getBundle("ReservaParkingBundle",currentLocale);
+		bundle = ResourceBundle.getBundle("ReservaParkingBundle", currentLocale);
 		sTitulo = bundle.getString("sTitulo");
 		sNoAcept = bundle.getString("sNoAcept");
 		sConfirmidad = bundle.getString("sConfirmidad");
 		fechaLabel = new JLabel(bundle.getString("fechaLabel"));
 		sReserPlaza = bundle.getString("sReserPlaza");
 		sEnLa = bundle.getString("sEnLa");
-		
+
 		ReservaParking.planta = plantarec;
 		ReservaParking.plaza = plazarec;
 //		Font fuente = new Font("Bahnschrift", Font.BOLD, 15);
@@ -76,8 +77,7 @@ public class ReservaParking extends JDialog {
 //		conformidad.setFont(fuenteTexto);
 		bReservar.addActionListener(e -> {
 			if (!conformidad.isSelected()) {
-				JOptionPane.showMessageDialog(this.getContentPane(),
-						sNoAcept, sConfirmidad,
+				JOptionPane.showMessageDialog(this.getContentPane(), sNoAcept, sConfirmidad,
 						JOptionPane.INFORMATION_MESSAGE);
 			} else {
 				ConsultasParking.reservarPlazaBD();
@@ -102,7 +102,7 @@ public class ReservaParking extends JDialog {
 		selectorFecha.getDatePicker().setSettings(confSelectorFecha);
 		confSelectorFecha.setDateRangeLimits(LocalDate.now(), LocalDate.now().plusYears(1));
 		JPanel pTitulo = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		JLabel titulo = new JLabel(String.format("%s %s %s %s", sReserPlaza,plazarec, sEnLa,plantarec));
+		JLabel titulo = new JLabel(String.format("%s %s %s %s", sReserPlaza, plazarec, sEnLa, plantarec));
 
 		JPanel pBotones = new JPanel(new FlowLayout(FlowLayout.CENTER));
 //		titulo.setFont(fuente);
@@ -129,15 +129,19 @@ public class ReservaParking extends JDialog {
 		});
 
 	}
+
 	public static JComboBox<Vehiculo> getlistaVehiculos() {
 		return listaVehiculos;
 	}
+
 	public static String getPlaza() {
 		return plaza;
 	}
+
 	public static String getPlanta() {
 		return planta;
 	}
+
 	public static String getLocalized(String texto) {
 		return bundle.getString(texto);
 	}

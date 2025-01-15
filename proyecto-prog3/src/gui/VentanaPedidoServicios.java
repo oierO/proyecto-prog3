@@ -44,7 +44,7 @@ public class VentanaPedidoServicios extends JFrame {
 	private JButton botonCancelar;
 	private Locale curreLocale;
 	private ResourceBundle idiomaBundle;
-	private String sTitulo,sBotonCancelar,sBotonReservar,sErrorFechTel,sErrorTel,sErrorFech;
+	private String sTitulo, sBotonCancelar, sBotonReservar, sErrorFechTel, sErrorTel, sErrorFech;
 
 	public VentanaPedidoServicios(String usuario, ArrayList<PedidoServicios> listaServiciosPedidos,
 			ArrayList<String> serviciosElegidos, Locale locale) {
@@ -52,19 +52,19 @@ public class VentanaPedidoServicios extends JFrame {
 //      //Los labels
 		curreLocale = locale;
 		idiomaBundle = ResourceBundle.getBundle("VentanaLabelBundle", curreLocale);
-      
-      	nombreJLabel = new JLabel(idiomaBundle.getString("nombreJLabel"));
+
+		nombreJLabel = new JLabel(idiomaBundle.getString("nombreJLabel"));
 		telefonoJLabel = new JLabel(idiomaBundle.getString("telefonoJLabel"));
 		fechaDePedidoJLabel = new JLabel(idiomaBundle.getString("fechaDePedidoJLabel"));
 		fechaDeRealizacionJLabel = new JLabel(idiomaBundle.getString("fechaDeRealizacionJLabel"));
 		informacionAdicionalJLabel = new JLabel(idiomaBundle.getString("informacionAdicionalJLabel"));
-		sTitulo = idiomaBundle.getString("sTitulo");	
+		sTitulo = idiomaBundle.getString("sTitulo");
 		sBotonCancelar = idiomaBundle.getString("sBotonCancelar");
-		sBotonReservar= idiomaBundle.getString("sBotonReservar");
+		sBotonReservar = idiomaBundle.getString("sBotonReservar");
 		sErrorFechTel = idiomaBundle.getString("sErrorFechTel");
 		sErrorTel = idiomaBundle.getString("sErrorTel");
 		sErrorFech = idiomaBundle.getString("sErrorFech");
-		
+
 		// Configuraciones de la ventana
 		setTitle(sTitulo);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -74,45 +74,38 @@ public class VentanaPedidoServicios extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(7, 2));
 
+		JPanel panelIdiomaJPanel = new JPanel();
 
-        
+		String[] idiomas = { "Español", "English", "中文" };
 
-        
-        JPanel panelIdiomaJPanel = new JPanel();
-        
-        String[] idiomas = {"Español","English","中文" };
-        
-        JComboBox<String> comboBox = new JComboBox<>(idiomas);
-        
-        comboBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Obtener la opción seleccionada
-                String seleccion = (String) comboBox.getSelectedItem();
-                System.out.println("Seleccionaste: " + seleccion);
-               
-                if(seleccion.equals("Español")) {
-                	curreLocale = Locale.getDefault();
-                } else if (seleccion.equals("English")) {
-                	curreLocale = new Locale.Builder().setLanguage("en").setRegion("US").build();
+		JComboBox<String> comboBox = new JComboBox<>(idiomas);
+
+		comboBox.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Obtener la opción seleccionada
+				String seleccion = (String) comboBox.getSelectedItem();
+				System.out.println("Seleccionaste: " + seleccion);
+
+				if (seleccion.equals("Español")) {
+					curreLocale = Locale.getDefault();
+				} else if (seleccion.equals("English")) {
+					curreLocale = new Locale.Builder().setLanguage("en").setRegion("US").build();
 				} else if (seleccion.equals("中文")) {
 					curreLocale = new Locale.Builder().setLanguage("zh").setRegion("ZH").build();
 				}
-                
-                updateTexts();
-                
-            }
-        });
-        
-        panelIdiomaJPanel.add(comboBox);
-        
-        panel.add(panelIdiomaJPanel);
-        JLabel labelVacio = new JLabel();
-        panel.add(labelVacio);
-        
 
-        
-        
+				updateTexts();
+
+			}
+		});
+
+		panelIdiomaJPanel.add(comboBox);
+
+		panel.add(panelIdiomaJPanel);
+		JLabel labelVacio = new JLabel();
+		panel.add(labelVacio);
+
 		// Para el nombre
 		nombre = new JTextField(usuario);
 		nombre.setEditable(false);
@@ -230,12 +223,8 @@ public class VentanaPedidoServicios extends JFrame {
 		panel.add(botonCancelar);
 
 		add(panel);
-		
-		
-		
+
 		setVisible(true);
-		
-		
 
 	}
 
@@ -258,7 +247,7 @@ public class VentanaPedidoServicios extends JFrame {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(forma);
 		return LocalDate.parse(fechaEnTexto, formatter);
 	}
-	
+
 	private void updateTexts() {
 		idiomaBundle = ResourceBundle.getBundle("VentanaLabelBundle", curreLocale);
 		nombreJLabel.setText(idiomaBundle.getString("nombreJLabel"));
@@ -266,13 +255,13 @@ public class VentanaPedidoServicios extends JFrame {
 		fechaDePedidoJLabel.setText(idiomaBundle.getString("fechaDePedidoJLabel"));
 		fechaDeRealizacionJLabel.setText(idiomaBundle.getString("fechaDeRealizacionJLabel"));
 		informacionAdicionalJLabel.setText(idiomaBundle.getString("informacionAdicionalJLabel"));
-		botonCancelar.setText(idiomaBundle.getString("sBotonCancelar")); 
+		botonCancelar.setText(idiomaBundle.getString("sBotonCancelar"));
 		botonReservar.setText(idiomaBundle.getString("sBotonReservar"));
 		sErrorFechTel = idiomaBundle.getString("sErrorFechTel");
 		sErrorTel = idiomaBundle.getString("sErrorTel");
 		sErrorFech = idiomaBundle.getString("sErrorFech");
-		
-    }
+
+	}
 
 	public static void main(String[] args) {
 
