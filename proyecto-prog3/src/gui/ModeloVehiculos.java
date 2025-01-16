@@ -27,7 +27,7 @@ public class ModeloVehiculos extends DefaultTableModel {
 		
 		//idioma 
 		currentLocale = locale;
-		bundle = ResourceBundle.getBundle("ModeloVehiculosBundle", currentLocale);
+		bundle = ResourceBundle.getBundle("modeloVehiculosBundle", currentLocale);
 		sMatricula = bundle.getString("sMatricula");
 		sMarca = bundle.getString("sMarca");
 		sModelo = bundle.getString("sModelo");
